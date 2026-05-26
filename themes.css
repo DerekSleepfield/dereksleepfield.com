@@ -502,51 +502,52 @@ hr {
   position: fixed;
   top: 5.5rem;
   right: 1.5rem;
-  width: 19rem;
-  max-height: calc(100vh - 9rem);
+  width: 26rem;
+  max-height: calc(100vh - 8rem);
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 1rem 1.1rem;
+  padding: 1.1rem 1.25rem 1.4rem;
   z-index: 10;
   background: var(--shelf-bg-soft);
   border: 1px solid var(--shelf-rule);
-  border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
 }
 
 .shelf-scene-label {
   font-variant: small-caps;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.18em;
   color: var(--shelf-sepia);
   font-size: 0.78rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
   border-bottom: 1px solid var(--shelf-rule);
-  padding-bottom: 0.35rem;
+  padding-bottom: 0.4rem;
+  text-align: center;
 }
 
 .shelf-scene-art {
   font-family: 'JetBrains Mono', 'Menlo', 'Consolas', 'Courier New', monospace !important;
-  font-size: 0.74rem;
-  line-height: 1.2;
+  font-size: 0.78rem;
+  line-height: 1.22;
   color: var(--shelf-ink-soft) !important;
   background: transparent !important;
   border: none !important;
   padding: 0 !important;
   margin: 0;
   white-space: pre;
-  overflow-x: auto;
+  overflow: visible;
+  text-align: left;
 }
 
 html[data-theme="highway-diner"] .shelf-scene-art {
   font-family: 'VT323', monospace !important;
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: var(--shelf-secondary) !important;
   text-shadow: 0 0 4px var(--shelf-secondary);
 }
 
-/* Hide on viewports too narrow to comfortably fit the column
-   next to the centered parable card. */
-@media (max-width: 1240px) {
+/* Hide on viewports too narrow to fit outline + parable + scene side-by-side */
+@media (max-width: 1320px) {
   .shelf-scene-fixed { display: none; }
 }
 
