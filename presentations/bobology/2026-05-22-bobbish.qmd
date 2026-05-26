@@ -1,0 +1,13 @@
+---
+title: "Lecture 4: Bobbish"
+date: "2026-05-22"
+order: 4
+description: "Slide-deck companion to Lesson 4 — a 20-slide tour of Bobbish: the five rules, the HK-47 modifier system, citation-as-vocabulary, and where the language sits typologically. For live delivery. Also available as a [long-form lecture in 4 voices](/bobbish-in-4-voices.html)."
+categories: [presentation, bobble, bobology, language, bobbish]
+path: /assets/bobbish.pdf
+---
+
+```{=html}
+<p>Opening <a href="/assets/bobbish.pdf">the slide deck (PDF)</a>… or switch to the <a href="/bobbish-in-4-voices.html">long-form lecture (4 voices)</a>.</p>
+<script>window.location.replace("/assets/bobbish.pdf");</script>
+```

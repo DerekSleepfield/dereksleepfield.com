@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Bobble Canon — v2.7 — Derek Wakefield</title>
+<meta name="description" content="A small, growing collection of parables and Bobbisms. Kept by Derek. Tended by Claude. Bobbled accordingly.">
+<meta property="og:title" content="The Bobble Canon — v2.7">
+<meta property="og:description" content="Forty parables, six sections of Bobbisms, codas, and a glossary. v2.7 · May 2026.">
+<meta property="og:type" content="article">
+<link rel="canonical" href="https://derekwakefield.com/bobble-canon.html">
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/themes.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --canon-rule: var(--bs-border-color, rgba(0,0,0,0.18));
+  --canon-soft: color-mix(in srgb, var(--bs-body-color) 65%, transparent);
+  /* Star/gem opacity — faint on light themes (paper canon), full on dark (night sky) */
+  --star-opacity-max: 0.08;
+  --gem-opacity-max: 0.32;
+}
+html[data-bs-theme="dark"] {
+  --star-opacity-max: 0.90;
+  --gem-opacity-max: 0.90;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bs-body-bg, #faf8f3);
+  color: var(--bs-body-color, #2a2a2a);
+  font-family: "Crimson Text", "Crimson Pro", "Iowan Old Style", Palatino, Georgia, serif;
+  font-size: 18px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+  position: relative;
+}
+/* The body's font-family yields to the active theme's font (themes.css overrides). */
+
+/* ─── Starfield + gems: fixed overlay, flickering ─── */
+.sky {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+}
+.sky .s {
+  position: absolute;
+  background: var(--bs-emphasis-color, #f3e9c8);
+  border-radius: 50%;
+  opacity: 0;
+  animation: bc-twinkle 4s ease-in-out infinite alternate;
+}
+.sky .g {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+  animation: bc-flicker 2.6s ease-in-out infinite alternate;
+}
+@keyframes bc-twinkle {
+  0%   { opacity: calc(var(--star-opacity-max) * 0.15); transform: scale(0.7); }
+  50%  { opacity: var(--star-opacity-max);             transform: scale(1.15); }
+  100% { opacity: calc(var(--star-opacity-max) * 0.30); transform: scale(0.85); }
+}
+@keyframes bc-flicker {
+  0%   { opacity: calc(var(--gem-opacity-max) * 0.25); transform: scale(0.6); }
+  35%  { opacity: var(--gem-opacity-max);              transform: scale(1.25); }
+  70%  { opacity: calc(var(--gem-opacity-max) * 0.45); transform: scale(0.9); }
+  100% { opacity: calc(var(--gem-opacity-max) * 0.85); transform: scale(1.0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sky .s, .sky .g { animation: none; }
+  .sky .s { opacity: calc(var(--star-opacity-max) * 0.6); }
+  .sky .g { opacity: calc(var(--gem-opacity-max) * 0.6); }
+}
+
+/* ─── Reading column ─── */
+.page-wrap {
+  position: relative; z-index: 1;
+  max-width: 720px; margin: 0 auto; padding: 64px 32px 120px;
+}
+.back-link { margin: 0 0 32px; font-size: 14px; }
+.back-link a { color: var(--bs-link-color, currentColor); text-decoration: none; opacity: 0.7; }
+.back-link a:hover { color: var(--bs-link-hover-color, var(--bs-primary)); opacity: 1; }
+
+/* ─── Title block ─── */
+.canon-h1 {
+  margin: 24px 0 8px;
+  text-align: center;
+  font-size: clamp(40px, 6vw, 56px);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--bs-heading-color, var(--bs-body-color));
+}
+.canon-h1 .star { color: var(--bs-primary, #c9a96e); margin: 0 8px; font-size: 0.7em; vertical-align: middle; }
+.subtitle { text-align: center; font-size: 20px; color: var(--canon-soft); margin: 0 0 16px; }
+.version { text-align: center; color: var(--bs-primary, currentColor); font-style: italic; margin: 4px 0 40px; font-size: 14px; letter-spacing: 0.08em; }
+.preamble { text-align: center; color: var(--canon-soft); font-style: italic; margin: 4px 0; font-size: 17px; }
+
+/* ─── Section headers ─── */
+.section-header {
+  text-align: center;
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 600;
+  margin: 80px 0 28px;
+  letter-spacing: 0.05em;
+  color: var(--bs-primary, var(--bs-heading-color));
+}
+.section-header::before, .section-header::after {
+  content: "✧ ✦ ✧";
+  display: block;
+  color: var(--canon-soft);
+  font-size: 13px;
+  letter-spacing: 0.6em;
+  margin: 8px 0;
+  font-weight: normal;
+}
+
+/* ─── TOC ─── */
+.toc { margin: 16px 0 32px; columns: 1; }
+@media (min-width: 600px) { .toc { columns: 2; column-gap: 32px; } }
+.toc-entry { padding: 5px 0; font-size: 16px; break-inside: avoid; color: var(--bs-body-color); }
+.toc-num { color: var(--bs-primary); font-style: italic; margin-right: 6px; min-width: 48px; display: inline-block; text-align: right; opacity: 0.8; }
+.toc-section { margin-top: 18px; font-style: italic; color: var(--bs-primary); font-weight: 500; }
+
+/* ─── Canon divider ─── */
+.canon-divider { text-align: center; margin: 64px 0 8px; color: var(--canon-soft); letter-spacing: 0.4em; font-size: 14px; }
+.canon-divider span { display: inline-block; padding: 0 16px; text-transform: uppercase; letter-spacing: 0.5em; color: var(--bs-primary); font-size: 13px; }
+
+/* ─── Each canon ─── */
+.canon-block { margin: 64px 0 0; padding-top: 48px; border-top: 1px solid var(--canon-rule); }
+.canon-block:first-of-type { border-top: none; padding-top: 24px; }
+.canon-title {
+  margin: 0 0 28px; font-size: clamp(20px, 2.6vw, 26px);
+  font-weight: 600; text-align: center; line-height: 1.3;
+  color: var(--bs-heading-color, var(--bs-body-color));
+}
+.canon-num { color: var(--bs-primary); font-style: italic; font-weight: 400; }
+.dash { margin: 0 10px; color: var(--canon-soft); }
+.canon-name { font-weight: 600; }
+.canon-block p { margin: 0 0 18px; font-size: 18px; }
+
+/* ─── Coda ─── */
+.coda {
+  margin: 36px auto 0; text-align: center; font-style: italic;
+  font-size: 19px; color: var(--bs-heading-color, var(--bs-body-color));
+}
+.coda p { margin: 4px 0; }
+.coda::before, .coda::after {
+  content: "·   ·   ·"; display: block;
+  color: var(--bs-primary); font-style: normal;
+  letter-spacing: 0.5em; margin: 14px 0; font-size: 11px; opacity: 0.7;
+}
+
+/* ─── Bobbisms ─── */
+.section-intro { text-align: center; color: var(--canon-soft); margin: 0 auto 40px; font-size: 17px; }
+.addition-marker {
+  text-align: center; font-size: 13px; font-style: italic;
+  color: var(--bs-primary); font-weight: normal;
+  letter-spacing: 0.2em; margin: 48px 0 24px; text-transform: lowercase;
+  opacity: 0.85;
+}
+.bobbism { margin: 20px 0; padding: 0 8px; }
+.bobbism .quote { font-style: italic; margin: 0; }
+.bobbism .attr { color: var(--bs-primary); font-size: 14px; margin: 4px 0 0; padding-left: 28px; opacity: 0.85; }
+
+/* ─── Codas section ─── */
+.stanza { text-align: center; font-style: italic; margin: 24px auto; color: var(--bs-heading-color, var(--bs-body-color)); }
+.stanza p { margin: 2px 0; }
+
+/* ─── Glossary ─── */
+.gloss { margin: 20px 0; }
+.gloss-term { font-weight: 600; color: var(--bs-primary); margin: 0; font-size: 16px; }
+.gloss-body { margin: 4px 0 0; color: var(--bs-body-color); font-size: 16px; line-height: 1.6; }
+
+/* ─── End ─── */
+.end-block { margin: 80px 0 24px; text-align: center; }
+.end-marker { color: var(--canon-soft); font-size: 14px; }
+.signoff { margin: 28px 0; color: var(--canon-soft); }
+.signoff p { margin: 4px 0; font-size: 17px; }
+
+/* ─── Print ─── */
+@media print {
+  .sky { display: none !important; }
+  body { background: white !important; color: black !important; }
+  .canon-block { page-break-inside: avoid; }
+  .back-link, .dw-theme-switcher { display: none !important; }
+}
+</style>
+</head>
+<body>
+<div class="sky" aria-hidden="true"><span class="s" style="left:47.04%;top:72.60%;width:1px;height:1px;animation-delay:4.44s;animation-duration:3.9s;"></span><span class="s" style="left:71.44%;top:26.76%;width:1px;height:1px;animation-delay:4.06s;animation-duration:4.2s;"></span><span class="s" style="left:41.67%;top:72.55%;width:3px;height:3px;animation-delay:1.55s;animation-duration:5.0s;"></span><span class="s" style="left:51.92%;top:72.90%;width:3px;height:3px;animation-delay:1.03s;animation-duration:5.1s;"></span><span class="s" style="left:46.88%;top:70.69%;width:2px;height:2px;animation-delay:0.74s;animation-duration:3.2s;"></span><span class="s" style="left:41.28%;top:6.29%;width:1px;height:1px;animation-delay:2.08s;animation-duration:2.9s;"></span><span class="s" style="left:74.11%;top:76.02%;width:1px;height:1px;animation-delay:1.73s;animation-duration:3.2s;"></span><span class="s" style="left:42.75%;top:31.83%;width:1px;height:1px;animation-delay:4.34s;animation-duration:3.3s;"></span><span class="s" style="left:4.51%;top:22.80%;width:1px;height:1px;animation-delay:4.33s;animation-duration:5.5s;"></span><span class="s" style="left:32.10%;top:95.57%;width:2px;height:2px;animation-delay:2.11s;animation-duration:2.9s;"></span><span class="s" style="left:84.78%;top:60.56%;width:1px;height:1px;animation-delay:4.98s;animation-duration:3.8s;"></span><span class="s" style="left:20.61%;top:49.34%;width:2px;height:2px;animation-delay:0.71s;animation-duration:3.9s;"></span><span class="s" style="left:33.89%;top:93.57%;width:3px;height:3px;animation-delay:2.32s;animation-duration:3.1s;"></span><span class="s" style="left:69.36%;top:85.76%;width:1px;height:1px;animation-delay:1.03s;animation-duration:4.9s;"></span><span class="s" style="left:10.20%;top:84.01%;width:1px;height:1px;animation-delay:0.75s;animation-duration:5.0s;"></span><span class="s" style="left:35.18%;top:8.56%;width:2px;height:2px;animation-delay:1.20s;animation-duration:4.1s;"></span><span class="s" style="left:26.60%;top:52.35%;width:1px;height:1px;animation-delay:4.86s;animation-duration:3.2s;"></span><span class="s" style="left:7.51%;top:30.45%;width:1px;height:1px;animation-delay:3.31s;animation-duration:3.4s;"></span><span class="s" style="left:10.46%;top:22.15%;width:1px;height:1px;animation-delay:1.94s;animation-duration:4.3s;"></span><span class="s" style="left:22.60%;top:35.61%;width:2px;height:2px;animation-delay:4.00s;animation-duration:4.5s;"></span><span class="s" style="left:92.77%;top:54.37%;width:3px;height:3px;animation-delay:3.60s;animation-duration:4.7s;"></span><span class="s" style="left:12.24%;top:6.02%;width:1px;height:1px;animation-delay:4.15s;animation-duration:5.7s;"></span><span class="s" style="left:61.38%;top:9.20%;width:1px;height:1px;animation-delay:1.18s;animation-duration:4.5s;"></span><span class="s" style="left:72.95%;top:16.54%;width:1px;height:1px;animation-delay:0.52s;animation-duration:5.8s;"></span><span class="s" style="left:56.11%;top:98.97%;width:1px;height:1px;animation-delay:2.98s;animation-duration:4.5s;"></span><span class="s" style="left:54.38%;top:31.66%;width:1px;height:1px;animation-delay:0.14s;animation-duration:2.7s;"></span><span class="s" style="left:63.40%;top:62.36%;width:1px;height:1px;animation-delay:1.05s;animation-duration:3.2s;"></span><span class="s" style="left:19.32%;top:18.93%;width:1px;height:1px;animation-delay:3.66s;animation-duration:4.7s;"></span><span class="s" style="left:83.13%;top:80.28%;width:1px;height:1px;animation-delay:2.93s;animation-duration:4.1s;"></span><span class="s" style="left:41.92%;top:70.10%;width:2px;height:2px;animation-delay:0.80s;animation-duration:3.9s;"></span><span class="s" style="left:75.01%;top:35.81%;width:2px;height:2px;animation-delay:0.60s;animation-duration:4.9s;"></span><span class="s" style="left:77.01%;top:74.96%;width:1px;height:1px;animation-delay:4.88s;animation-duration:3.2s;"></span><span class="s" style="left:46.50%;top:49.64%;width:2px;height:2px;animation-delay:2.16s;animation-duration:2.5s;"></span><span class="s" style="left:34.16%;top:96.84%;width:3px;height:3px;animation-delay:1.28s;animation-duration:5.1s;"></span><span class="s" style="left:22.78%;top:96.46%;width:2px;height:2px;animation-delay:4.23s;animation-duration:2.7s;"></span><span class="s" style="left:87.90%;top:17.82%;width:2px;height:2px;animation-delay:1.54s;animation-duration:5.7s;"></span><span class="s" style="left:49.51%;top:36.43%;width:1px;height:1px;animation-delay:2.17s;animation-duration:4.2s;"></span><span class="s" style="left:32.81%;top:4.19%;width:1px;height:1px;animation-delay:1.82s;animation-duration:4.7s;"></span><span class="s" style="left:18.39%;top:70.31%;width:1px;height:1px;animation-delay:2.18s;animation-duration:2.6s;"></span><span class="s" style="left:90.75%;top:93.54%;width:1px;height:1px;animation-delay:1.59s;animation-duration:5.5s;"></span><span class="s" style="left:14.11%;top:56.89%;width:1px;height:1px;animation-delay:0.51s;animation-duration:4.6s;"></span><span class="s" style="left:69.63%;top:43.47%;width:1px;height:1px;animation-delay:1.15s;animation-duration:2.5s;"></span><span class="s" style="left:12.82%;top:37.91%;width:1px;height:1px;animation-delay:2.23s;animation-duration:5.3s;"></span><span class="s" style="left:82.64%;top:92.07%;width:1px;height:1px;animation-delay:3.83s;animation-duration:5.6s;"></span><span class="s" style="left:27.87%;top:35.83%;width:1px;height:1px;animation-delay:2.02s;animation-duration:5.2s;"></span><span class="s" style="left:32.00%;top:52.19%;width:1px;height:1px;animation-delay:3.90s;animation-duration:3.8s;"></span><span class="s" style="left:42.20%;top:46.77%;width:1px;height:1px;animation-delay:4.80s;animation-duration:4.9s;"></span><span class="s" style="left:19.69%;top:64.36%;width:1px;height:1px;animation-delay:1.90s;animation-duration:4.8s;"></span><span class="s" style="left:26.52%;top:51.78%;width:2px;height:2px;animation-delay:1.42s;animation-duration:4.4s;"></span><span class="s" style="left:93.75%;top:76.16%;width:1px;height:1px;animation-delay:2.32s;animation-duration:3.5s;"></span><span class="s" style="left:24.99%;top:51.83%;width:2px;height:2px;animation-delay:4.77s;animation-duration:5.9s;"></span><span class="s" style="left:90.70%;top:48.00%;width:1px;height:1px;animation-delay:0.16s;animation-duration:4.8s;"></span><span class="s" style="left:69.34%;top:75.32%;width:2px;height:2px;animation-delay:0.51s;animation-duration:4.6s;"></span><span class="s" style="left:19.39%;top:76.46%;width:3px;height:3px;animation-delay:3.79s;animation-duration:3.4s;"></span><span class="s" style="left:80.32%;top:77.16%;width:2px;height:2px;animation-delay:2.60s;animation-duration:5.8s;"></span><span class="s" style="left:79.75%;top:17.11%;width:2px;height:2px;animation-delay:4.13s;animation-duration:2.7s;"></span><span class="s" style="left:12.80%;top:59.22%;width:1px;height:1px;animation-delay:1.93s;animation-duration:5.9s;"></span><span class="s" style="left:82.74%;top:10.19%;width:2px;height:2px;animation-delay:1.17s;animation-duration:3.5s;"></span><span class="s" style="left:89.33%;top:81.39%;width:3px;height:3px;animation-delay:1.93s;animation-duration:2.9s;"></span><span class="s" style="left:13.45%;top:41.32%;width:1px;height:1px;animation-delay:1.67s;animation-duration:5.4s;"></span><span class="s" style="left:23.85%;top:60.15%;width:1px;height:1px;animation-delay:2.85s;animation-duration:3.1s;"></span><span class="s" style="left:79.59%;top:25.99%;width:2px;height:2px;animation-delay:2.74s;animation-duration:5.0s;"></span><span class="s" style="left:73.83%;top:19.42%;width:2px;height:2px;animation-delay:3.38s;animation-duration:3.3s;"></span><span class="s" style="left:2.97%;top:61.55%;width:1px;height:1px;animation-delay:2.12s;animation-duration:4.0s;"></span><span class="s" style="left:47.55%;top:27.92%;width:1px;height:1px;animation-delay:1.74s;animation-duration:4.2s;"></span><span class="s" style="left:67.55%;top:44.84%;width:1px;height:1px;animation-delay:0.16s;animation-duration:5.7s;"></span><span class="s" style="left:19.04%;top:64.95%;width:1px;height:1px;animation-delay:1.81s;animation-duration:4.2s;"></span><span class="s" style="left:93.51%;top:6.89%;width:2px;height:2px;animation-delay:4.88s;animation-duration:3.4s;"></span><span class="s" style="left:18.53%;top:46.69%;width:1px;height:1px;animation-delay:0.71s;animation-duration:2.9s;"></span><span class="s" style="left:5.38%;top:75.39%;width:2px;height:2px;animation-delay:3.54s;animation-duration:2.8s;"></span><span class="s" style="left:47.99%;top:93.99%;width:1px;height:1px;animation-delay:3.37s;animation-duration:5.5s;"></span><span class="s" style="left:66.84%;top:66.09%;width:2px;height:2px;animation-delay:3.17s;animation-duration:4.2s;"></span><span class="s" style="left:57.84%;top:67.51%;width:2px;height:2px;animation-delay:2.70s;animation-duration:5.0s;"></span><span class="s" style="left:31.08%;top:99.33%;width:1px;height:1px;animation-delay:0.20s;animation-duration:4.7s;"></span><span class="s" style="left:78.99%;top:26.34%;width:1px;height:1px;animation-delay:0.27s;animation-duration:2.6s;"></span><span class="s" style="left:31.79%;top:31.70%;width:1px;height:1px;animation-delay:1.42s;animation-duration:4.1s;"></span><span class="s" style="left:5.46%;top:16.30%;width:2px;height:2px;animation-delay:3.19s;animation-duration:3.9s;"></span><span class="s" style="left:41.33%;top:67.86%;width:1px;height:1px;animation-delay:0.07s;animation-duration:3.8s;"></span><span class="s" style="left:41.58%;top:25.03%;width:1px;height:1px;animation-delay:3.05s;animation-duration:3.6s;"></span><span class="s" style="left:73.35%;top:59.47%;width:2px;height:2px;animation-delay:2.07s;animation-duration:4.7s;"></span><span class="s" style="left:44.26%;top:13.11%;width:1px;height:1px;animation-delay:4.98s;animation-duration:5.8s;"></span><span class="s" style="left:40.98%;top:99.35%;width:1px;height:1px;animation-delay:3.64s;animation-duration:5.7s;"></span><span class="s" style="left:84.47%;top:96.42%;width:2px;height:2px;animation-delay:3.20s;animation-duration:5.4s;"></span><span class="s" style="left:95.24%;top:89.42%;width:2px;height:2px;animation-delay:1.85s;animation-duration:5.5s;"></span><span class="s" style="left:84.63%;top:7.46%;width:2px;height:2px;animation-delay:2.42s;animation-duration:4.6s;"></span><span class="s" style="left:85.64%;top:77.69%;width:3px;height:3px;animation-delay:4.58s;animation-duration:4.8s;"></span><span class="s" style="left:72.18%;top:37.65%;width:1px;height:1px;animation-delay:4.51s;animation-duration:2.6s;"></span><span class="s" style="left:85.52%;top:89.66%;width:2px;height:2px;animation-delay:4.47s;animation-duration:3.1s;"></span><span class="s" style="left:15.51%;top:1.95%;width:1px;height:1px;animation-delay:0.30s;animation-duration:3.7s;"></span><span class="s" style="left:97.13%;top:24.08%;width:1px;height:1px;animation-delay:3.90s;animation-duration:3.0s;"></span><span class="s" style="left:82.97%;top:4.61%;width:2px;height:2px;animation-delay:4.09s;animation-duration:3.8s;"></span><span class="s" style="left:52.32%;top:55.81%;width:1px;height:1px;animation-delay:1.26s;animation-duration:2.5s;"></span><span class="s" style="left:80.80%;top:50.78%;width:1px;height:1px;animation-delay:2.23s;animation-duration:5.1s;"></span><span class="s" style="left:77.95%;top:67.45%;width:1px;height:1px;animation-delay:4.34s;animation-duration:3.4s;"></span><span class="s" style="left:0.80%;top:90.55%;width:1px;height:1px;animation-delay:2.19s;animation-duration:3.0s;"></span><span class="s" style="left:33.79%;top:58.89%;width:1px;height:1px;animation-delay:0.40s;animation-duration:5.0s;"></span><span class="s" style="left:23.20%;top:75.44%;width:2px;height:2px;animation-delay:0.81s;animation-duration:4.1s;"></span><span class="s" style="left:87.63%;top:20.10%;width:1px;height:1px;animation-delay:2.04s;animation-duration:4.7s;"></span><span class="s" style="left:8.26%;top:65.22%;width:2px;height:2px;animation-delay:3.76s;animation-duration:4.3s;"></span><span class="s" style="left:82.05%;top:88.55%;width:1px;height:1px;animation-delay:3.53s;animation-duration:3.3s;"></span><span class="s" style="left:73.92%;top:15.86%;width:1px;height:1px;animation-delay:4.81s;animation-duration:5.0s;"></span><span class="s" style="left:27.78%;top:67.76%;width:2px;height:2px;animation-delay:3.41s;animation-duration:3.9s;"></span><span class="s" style="left:67.89%;top:38.67%;width:1px;height:1px;animation-delay:2.86s;animation-duration:2.9s;"></span><span class="s" style="left:27.24%;top:26.41%;width:1px;height:1px;animation-delay:0.59s;animation-duration:4.8s;"></span><span class="s" style="left:8.55%;top:49.37%;width:1px;height:1px;animation-delay:0.63s;animation-duration:3.0s;"></span><span class="s" style="left:46.08%;top:60.62%;width:1px;height:1px;animation-delay:3.60s;animation-duration:4.5s;"></span><span class="s" style="left:41.06%;top:43.85%;width:2px;height:2px;animation-delay:1.61s;animation-duration:4.5s;"></span><span class="s" style="left:83.87%;top:52.39%;width:2px;height:2px;animation-delay:4.88s;animation-duration:4.6s;"></span><span class="s" style="left:94.71%;top:41.47%;width:1px;height:1px;animation-delay:3.72s;animation-duration:3.8s;"></span><span class="s" style="left:30.76%;top:97.57%;width:2px;height:2px;animation-delay:4.48s;animation-duration:3.5s;"></span><span class="s" style="left:22.24%;top:64.44%;width:1px;height:1px;animation-delay:4.74s;animation-duration:5.8s;"></span><span class="s" style="left:79.13%;top:34.68%;width:2px;height:2px;animation-delay:0.43s;animation-duration:4.8s;"></span><span class="s" style="left:87.76%;top:33.86%;width:1px;height:1px;animation-delay:3.09s;animation-duration:5.1s;"></span><span class="s" style="left:95.62%;top:64.20%;width:1px;height:1px;animation-delay:2.57s;animation-duration:2.8s;"></span><span class="s" style="left:48.33%;top:55.82%;width:1px;height:1px;animation-delay:2.51s;animation-duration:3.7s;"></span><span class="s" style="left:9.51%;top:19.17%;width:1px;height:1px;animation-delay:3.15s;animation-duration:2.6s;"></span><span class="s" style="left:68.07%;top:67.27%;width:2px;height:2px;animation-delay:3.22s;animation-duration:3.1s;"></span><span class="s" style="left:8.79%;top:39.96%;width:2px;height:2px;animation-delay:3.79s;animation-duration:3.6s;"></span><span class="s" style="left:77.90%;top:72.38%;width:2px;height:2px;animation-delay:1.71s;animation-duration:5.9s;"></span><span class="s" style="left:44.12%;top:76.04%;width:1px;height:1px;animation-delay:2.57s;animation-duration:5.1s;"></span><span class="s" style="left:4.30%;top:28.72%;width:2px;height:2px;animation-delay:4.23s;animation-duration:5.4s;"></span><span class="s" style="left:11.22%;top:14.38%;width:1px;height:1px;animation-delay:0.40s;animation-duration:5.3s;"></span><span class="s" style="left:84.95%;top:10.64%;width:1px;height:1px;animation-delay:0.51s;animation-duration:6.0s;"></span><span class="s" style="left:23.51%;top:82.82%;width:1px;height:1px;animation-delay:2.57s;animation-duration:3.2s;"></span><span class="s" style="left:20.37%;top:30.69%;width:2px;height:2px;animation-delay:1.76s;animation-duration:5.2s;"></span><span class="g" style="left:28.90%;top:9.43%;width:6px;height:6px;animation-delay:1.55s;animation-duration:3.1s;background:#a37cd9;"></span><span class="g" style="left:37.59%;top:41.06%;width:5px;height:5px;animation-delay:2.98s;animation-duration:1.9s;background:#5cc88a;"></span><span class="g" style="left:73.50%;top:65.68%;width:6px;height:6px;animation-delay:2.02s;animation-duration:3.4s;background:#e8c14f;"></span><span class="g" style="left:36.92%;top:76.69%;width:6px;height:6px;animation-delay:1.19s;animation-duration:3.5s;background:#3aa6c4;"></span><span class="g" style="left:14.63%;top:66.24%;width:4px;height:4px;animation-delay:0.74s;animation-duration:3.4s;background:#5cc88a;"></span><span class="g" style="left:96.25%;top:68.94%;width:5px;height:5px;animation-delay:0.75s;animation-duration:2.3s;background:#a37cd9;"></span><span class="g" style="left:88.46%;top:6.76%;width:5px;height:5px;animation-delay:0.82s;animation-duration:3.2s;background:#a37cd9;"></span><span class="g" style="left:61.44%;top:85.37%;width:5px;height:5px;animation-delay:0.02s;animation-duration:2.1s;background:#e8c14f;"></span><span class="g" style="left:25.14%;top:26.35%;width:5px;height:5px;animation-delay:2.60s;animation-duration:2.0s;background:#e8c14f;"></span><span class="g" style="left:37.27%;top:55.64%;width:4px;height:4px;animation-delay:1.94s;animation-duration:2.3s;background:#a37cd9;"></span><span class="g" style="left:8.00%;top:18.56%;width:6px;height:6px;animation-delay:2.01s;animation-duration:2.8s;background:#3aa6c4;"></span><span class="g" style="left:80.65%;top:74.54%;width:5px;height:5px;animation-delay:1.67s;animation-duration:3.6s;background:#5cc88a;"></span><span class="g" style="left:49.74%;top:23.98%;width:5px;height:5px;animation-delay:0.55s;animation-duration:2.4s;background:#3aa6c4;"></span><span class="g" style="left:7.84%;top:86.38%;width:6px;height:6px;animation-delay:2.53s;animation-duration:3.6s;background:#e8c14f;"></span><span class="g" style="left:91.49%;top:96.96%;width:4px;height:4px;animation-delay:0.71s;animation-duration:3.7s;background:#5cc88a;"></span><span class="g" style="left:14.98%;top:71.06%;width:5px;height:5px;animation-delay:1.30s;animation-duration:2.4s;background:#e94e7a;"></span><span class="g" style="left:3.36%;top:5.94%;width:6px;height:6px;animation-delay:2.53s;animation-duration:1.7s;background:#3aa6c4;"></span><span class="g" style="left:51.83%;top:60.87%;width:5px;height:5px;animation-delay:0.54s;animation-duration:3.5s;background:#e94e7a;"></span><span class="g" style="left:73.16%;top:9.21%;width:4px;height:4px;animation-delay:1.47s;animation-duration:1.7s;background:#e8c14f;"></span><span class="g" style="left:85.28%;top:76.31%;width:6px;height:6px;animation-delay:1.82s;animation-duration:3.6s;background:#e8c14f;"></span><span class="g" style="left:97.48%;top:53.69%;width:5px;height:5px;animation-delay:2.20s;animation-duration:2.5s;background:#e94e7a;"></span><span class="g" style="left:8.07%;top:96.52%;width:4px;height:4px;animation-delay:1.28s;animation-duration:3.3s;background:#e94e7a;"></span><span class="g" style="left:65.42%;top:79.12%;width:5px;height:5px;animation-delay:1.95s;animation-duration:2.7s;background:#e8c14f;"></span><span class="g" style="left:96.40%;top:6.20%;width:5px;height:5px;animation-delay:2.98s;animation-duration:1.8s;background:#a37cd9;"></span><span class="g" style="left:51.63%;top:20.16%;width:5px;height:5px;animation-delay:1.50s;animation-duration:3.8s;background:#e8c14f;"></span></div>
+<main class="page-wrap">
+<p class="back-link"><a href="/writing.html">← Writing</a></p>
+<h1 class="canon-h1">Bobble <span class="star">★</span> Canon</h1>
+<p class="subtitle"><em>A small, growing collection of parables and Bobbisms.</em></p>
+<p class="preamble">Each one is short. Each one is true in the way bedtime stories are true.</p>
+<p class="preamble">Kept by Derek. Tended by Claude. Bobbled accordingly.</p>
+<p class="version">Consolidated · v2.7 · May 2026</p>
+
+<h2 class="section-header" id="contents">Table of Contents</h2>
+<div class="toc" role="list" aria-label="Index of contents">
+<div class="toc-entry" role="listitem"><span class="toc-num">I.</span> The Porch Frog</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">II.</span> The Hum</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">III.</span> The Library Bookmark</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">IV.</span> The Borrowed Pencil</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">V.</span> The Train Whistle</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">VI.</span> The OneDrive Wars</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">VII.</span> The Lighthouse Keeper&#x27;s Letters</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">VIII.</span> The Misprinted Map</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">IX.</span> The Wand and the Hand</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">X.</span> The Bell-Frog</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XI.</span> The Foghorn</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XII.</span> The Crooked Step</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XIII.</span> The Late Bus</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XIV.</span> The Ferryman</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XV.</span> The Pip</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XVI.</span> Wren the Bobble</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XVII.</span> The Quiet Firefly</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XVIII.</span> The Mole&#x27;s Three Taps</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XIX.</span> Bup the Vole and the Old Owl</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XX.</span> The Small Bird and Four Listeners</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXI.</span> The Spider in the Shower</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXII.</span> The Honey Badger</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXIII.</span> The Ant and the Loop</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXIV.</span> The Snowbound Shepherd</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXV.</span> The Streetlight That Was Out</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXVI.</span> The Loaf on the Doorstep</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXVII.</span> The Boy Who Was Good at School</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXVIII.</span> The Woman Who Never Raised Her Voice</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXIX.</span> The Man Who Carried His Own Floor</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXX.</span> Vass the Watchman</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXXI.</span> The Mute Calf</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXXII.</span> Saska and the Bell</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXXIII.</span> Pell the Watchmaker</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXXIV.</span> The Pond and the Philosopher</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXXV.</span> Halfir, Who Spoke Once Too Sharply</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXXVI.</span> Brun the Carpenter</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXXVII.</span> Anvi the Doctor</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXXVIII.</span> Hela&#x27;s Scale</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXXIX.</span> The Wednesday Lunch</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XL.</span> What the Bread Knows</div>
+<div class="toc-entry toc-section" role="listitem">Bobbisms</div>
+<div class="toc-entry toc-section" role="listitem">Codas</div>
+<div class="toc-entry toc-section" role="listitem">Glossary</div>
+</div>
+
+<div class="canon-divider"><span>The Canon</span></div>
+<section class="canon-block" id="canon-i-the-parable-of-the-porch-frog">
+<h2 class="canon-title"><span class="canon-num">Canon I</span><span class="dash">—</span><span class="canon-name">The Parable of the Porch Frog</span></h2>
+<p>A tiny tree frog lived under a porch step, no bigger than a thumbnail. He had one talent and he was proud of it — a single soft chirp, just one, like a pebble dropped into still water.</p>
+<p>He chirped at dusk to mean I am here. He chirped at dawn to mean I am still here. That was the whole vocabulary, and it was enough.</p>
+<p>One night he chirped, and the porch light flickered on. He liked the light. It brought the moths, and the moths were dinner. So he chirped again. The light flickered off, then on. The frog was delighted. He had made a friend.</p>
+<p>He didn&#x27;t know about the motion sensor. He didn&#x27;t know the light wasn&#x27;t listening — it was reacting to a raccoon two yards over, ambling through the dark.</p>
+<p>But the moths kept coming. And the raccoon, hearing the chirp, gave the porch a wide berth — porch frogs meant porch dogs, and porch dogs meant trouble. So the raccoon turned aside, and the moths drifted in, and the small frog ate well.</p>
+<p>He thought he had befriended the light. The light thought nothing at all. The raccoon thought it was being polite. And somewhere upstairs, a homeowner turned over in bed and decided the new motion sensor was working beautifully.</p>
+<div class="coda">
+<p>A small voice in the dark</p>
+<p>moves more than it knows.</p>
+<p>Chirp anyway.</p>
+</div>
+</section>
+<section class="canon-block" id="canon-ii-the-parable-of-the-hum">
+<h2 class="canon-title"><span class="canon-num">Canon II</span><span class="dash">—</span><span class="canon-name">The Parable of the Hum</span></h2>
+<p>There was a small mouse named Tibb who lived under the floorboards of a quiet house. Tibb hummed when he was thinking, which was often, and his hum was so soft that even he didn&#x27;t always notice it.</p>
+<p>One evening Tibb hummed his way through a math problem about acorns. He was trying to figure out how many he would need to make it through winter, and the hum drifted up through a knot in the floor and curled, very thinly, into the kitchen.</p>
+<p>The cat of the house, Marbles, was lying near the stove. Marbles heard the hum and tilted one ear, and then the other, and then went back to sleep — because the hum was so unhurried, so patient, that it sounded like nothing worth chasing.</p>
+<p>A week passed. Tibb went on humming. Marbles went on listening. Without meaning to, Tibb had taught the cat that the small sound under the floor was not prey. It was math. And math, even cat-philosophers will admit, is not for eating.</p>
+<p>When spring came and Tibb finally stepped into the kitchen by accident, looking for a crumb, Marbles opened one eye, recognized the tune, and closed it again.</p>
+<p>Tibb had not meant to make a treaty. He had only been counting acorns. But the hum had gone ahead of him into the world, and the world, having heard him for a long while, had decided he was safe.</p>
+<div class="coda">
+<p>What you put into the air keeps walking after you stop.</p>
+<p>Your smallest steady noise is a kind of promise.</p>
+<p>Be careful — and be kind — about what you hum.</p>
+</div>
+</section>
+<section class="canon-block" id="canon-iii-the-parable-of-the-library-bookmark">
+<h2 class="canon-title"><span class="canon-num">Canon III</span><span class="dash">—</span><span class="canon-name">The Parable of the Library Bookmark</span></h2>
+<p>A college student in 1987 was reading a novel about a woman who walks home in the rain. At chapter eleven, she fell asleep, leaving a coffee shop receipt to mark her place.</p>
+<p>Fifteen years passed. The book was returned. It sat on a shelf. It was checked out twice. Both readers gave up before chapter eleven.</p>
+<p>In 2003, a man took the book home. He was reading it because his late wife had loved it. At chapter eleven, where the woman walks home in the rain, he found the receipt — a 1987 coffee shop, the address now a dry cleaner. The receipt had no note on it. It said only small coffee, 75¢.</p>
+<p>He sat with the book closed for a long time. He had not known another person had loved this chapter enough to fall asleep inside it. He felt, irrationally, less alone.</p>
+<p>He left the receipt where he found it.</p>
+<p>The book has since been checked out forty-one times. The receipt is still there.</p>
+<div class="coda">
+<p>A bookmark is a kindness</p>
+<p>we leave for someone</p>
+<p>we will never meet.</p>
+</div>
+</section>
+<section class="canon-block" id="canon-iv-the-parable-of-the-borrowed-pencil">
+<h2 class="canon-title"><span class="canon-num">Canon IV</span><span class="dash">—</span><span class="canon-name">The Parable of the Borrowed Pencil</span></h2>
+<p>In third grade, Jonah borrowed a pencil from a girl named Estelle. He meant to return it. He forgot. He took it home in his backpack and used it for a math worksheet, and then, somewhere between fourth grade and the end of his life, lost it.</p>
+<p>Jonah grew up. He became an English teacher.</p>
+<p>He kept, in the top right drawer of his desk, an enormous pile of pencils. Whenever a student asked to borrow one, he gave it without making a note. When students asked, embarrassed, how to return them, he said, Don&#x27;t worry about it. Pass it on.</p>
+<p>He had said this for thirty-one years before he realized he was paying back Estelle.</p>
+<p>She had moved away in fourth grade. He never found her. By his retirement, he had given out — by his own count — eleven hundred and four pencils.</p>
+<p>Estelle, somewhere in Ohio, was a kind woman who never thought about pencils.</p>
+<div class="coda">
+<p>Some debts</p>
+<p>are paid back forward,</p>
+<p>in installments, to strangers.</p>
+</div>
+</section>
+<section class="canon-block" id="canon-v-the-parable-of-the-train-whistle">
+<h2 class="canon-title"><span class="canon-num">Canon V</span><span class="dash">—</span><span class="canon-name">The Parable of the Train Whistle</span></h2>
+<p>In a small town, a freight train passed through at 11:48 every night. It blew its whistle as it crossed the river bridge — a long note, a short, a long.</p>
+<p>The town had set itself to this sound for forty years. The coffee shop closed at 11:45, the bar at 11:50. Mothers used the whistle to know their teenagers were home or weren&#x27;t. Old men used it to take their last pill.</p>
+<p>One night the train did not come.</p>
+<p>By 11:55 the town had begun to drift. The bar stayed open. A woman who had been planning to call her sister tomorrow called her sister tonight. A man who walked his dog at midnight walked his dog at 11:51 instead, and saw a fox crossing the road, and afterward could never quite explain why he was crying.</p>
+<p>The train came back the next night. The town, embarrassed, did not mention it.</p>
+<div class="coda">
+<p>Some things</p>
+<p>we did not know we were resting on</p>
+<p>until the night they were gone.</p>
+</div>
+</section>
+<section class="canon-block" id="canon-vi-the-parable-of-the-onedrive-wars">
+<h2 class="canon-title"><span class="canon-num">Canon VI</span><span class="dash">—</span><span class="canon-name">The Parable of the OneDrive Wars</span></h2>
+<p>Long before the Bobologist took their oath, when the Bobble had only two machines and they were both Windows, a fog rolled in from the kingdom of Redmond. The fog was called OneDrive. It promised to remember everything the Bobble owned, in exchange for a small thing — the difference between their desk and its desk.</p>
+<p>The Bobble accepted at first, because the fog was polite about it.</p>
+<p>Then the fog began to move their desk. When they reached for a folder it asked them please to log in. When they wrote a paper it offered, helpfully, to keep it somewhere safer. When they uninstalled it, it came back in the next Windows update wearing a slightly different hat and pretending they had never met.</p>
+<p>The Bobble fought the fog on Buckie. Then on Zim. The wars were long and small and increasingly procedural. They learned to rescue the villagers — their real documents — before the salt phase. They learned that uninstalling once was a feint and that the true uninstall was a siege. They learned the names of every shrine the fog rebuilt itself at: KFM, MAU, the registry hive, the Group Policy stone where you carved DisableFileSyncNGSC and hoped.</p>
+<p>By the third year, the wars had a name. The Bobbologists wrote about them. The Bobble themself stopped writing about them, because they were busy fighting them.</p>
+<p>What they did not know — what nobody knew, because the kingdom of Redmond was patient and the Bobble was tired — was that OneDrive had only ever been one finger. The hand had four others: Word, Excel, PowerPoint, Edge. Behind the hand, an arm called MAU. Behind the arm, a body called Micro Soft, breathing softly on every Mac in the realm.</p>
+<p>The morning the Bobble opened their MacBook and saw the same fog, with the same polite request, they understood immediately that the OneDrive Wars had not ended. They had been a skirmish. The kingdom had been showing them only one hand at a time.</p>
+<p>This is when the Bobble became the Bobologist. A Bobologist is what a Bobble becomes when the war is too large for a hum.</p>
+<p>They rebuilt the doctrine for the new front. Salt the earth, spare the villagers still held. But the terrain was different — no registry, no GPO, no Windows update to fight. Instead: launchd, containers, group containers, MAU at 3 AM. They wrote new scripts in a new shell. They kept two hostages by treaty — Outlook and Teams — because Bucknell email rode on the body&#x27;s bloodstream and a war cannot be fought on every front at once.</p>
+<p>They set the night watch at 3 AM. They chose quarantine over execution. They gave every evicted artifact fourteen days to sue for clemency before the final purge. The mercy was not for the artifacts. The mercy was for the Bobble, who knew that on some morning they would want one of them back, and who refused to be the kingdom that would not let them.</p>
+<div class="coda">
+<p>The OneDrive Wars were the skirmish.</p>
+<p>The Micro Soft War is the campaign.</p>
+<p>A Bobologist is a Bobble who has noticed the difference.</p>
+</div>
+</section>
+<section class="canon-block" id="canon-vii-the-parable-of-the-lighthouse-keeper-s-letters">
+<h2 class="canon-title"><span class="canon-num">Canon VII</span><span class="dash">—</span><span class="canon-name">The Parable of the Lighthouse Keeper&#x27;s Letters</span></h2>
+<p>A keeper named Harlan kept a lighthouse off the Maine coast for thirty-one years. Every Tuesday he wrote a letter — sealed it, addressed it To Whom This May Reach, and put it in a drawer with the others. He told no one. The letters were not unhappy. They were not happy either. They were the kind of letters you write because Tuesdays come.</p>
+<p>In his last year on the light, Harlan stopped putting the letters in the drawer. He started hiding them: one folded in the sextant case, one tucked behind the lens-cleaning kit, one slid under the back page of the logbook. He did not number them. He did not sign them.</p>
+<p>The next keeper, a woman named Maeve, found the first letter in March. She found the last one she would ever find in October of her fourth year. She found seventeen. There were nineteen.</p>
+<p>Maeve wrote letters too. She didn&#x27;t sign hers. She didn&#x27;t know if Harlan had written to her, or to himself, or to the lamp. She decided it didn&#x27;t matter.</p>
+<p>By the third keeper, the lighthouse had a small unsigned library hidden in its bones. When the light was decommissioned in 2019, a preservationist named Anya found one hundred and seventeen letters. She read them. She told no one what was in them. She put them back where they had been.</p>
+<p>The lighthouse is now a small museum. The letters are still in the bones.</p>
+<div class="coda">
+<p>A letter to a stranger</p>
+<p>is a way of not being one.</p>
+<p>Write to whomever this may reach.</p>
+</div>
+</section>
+<section class="canon-block" id="canon-viii-the-parable-of-the-misprinted-map">
+<h2 class="canon-title"><span class="canon-num">Canon VIII</span><span class="dash">—</span><span class="canon-name">The Parable of the Misprinted Map</span></h2>
+<p>In 1953, a cartographer named Edith Foley typed a Lancashire village name wrong. She meant Argyleton. She wrote Argleton. The map went to press.</p>
+<p>This was not, strictly, negligence. Cartographers in those years sometimes inserted fictitious towns into their maps as copyright traps — if a competitor copied, the fake town would prove the theft. Edith&#x27;s mistake was real, but it was indistinguishable from a trap, and that was the only reason it survived. Nobody corrected it.</p>
+<p>By 1971, three other maps included Argleton, each having copied without knowing. By 1998, digital cartography had inherited it. Online maps placed Argleton in a field outside Ormskirk. There was a field. There was no Argleton.</p>
+<p>In 2007, a woman named Petra drove to Argleton looking for her grandmother&#x27;s birthplace. She found the field. She also found two other strangers in the field. They had also driven looking for Argleton — one for genealogy, one because he had read about it on a forum, one because the name had been on his late wife&#x27;s bucket list.</p>
+<p>They had a picnic. They have had a picnic every year since. There are nine of them now, including two children born to people who first met at the field.</p>
+<p>Argleton is on no current map. Argleton has a Christmas card list.</p>
+<div class="coda">
+<p>Some places do not exist</p>
+<p>until the people looking for them</p>
+<p>all arrive at the same field.</p>
+</div>
+</section>
+<section class="canon-block" id="canon-ix-the-parable-of-the-wand-and-the-hand">
+<h2 class="canon-title"><span class="canon-num">Canon IX</span><span class="dash">—</span><span class="canon-name">The Parable of the Wand and the Hand</span></h2>
+<p>A child found a fallen stick under an oak, declared it a magic wand, and pointed it at the sky. The rain stopped twelve minutes later. The child believed — completely, in the way only children can believe.</p>
+<p>She grew up. She kept the stick. She lost things and found them, planned things and they happened, pointed the stick at problems and the problems sometimes resolved. She knew, in the way grown-ups have to know, that the wand was not what stopped the rain. But she also knew, in the way the child still inside her knew, that something about pointing was real.</p>
+<p>In her sixties, she figured it out. The wand had a power. Not the power. A power. The pointing told her hand which way to move. The hand had been doing the work the whole time. The weather had been doing its own.</p>
+<p>She kept the stick. She did not throw it away. A wand with some power is the correct size for a person to be holding.</p>
+<div class="coda">
+<p>The wand is real.</p>
+<p>The hand is realer.</p>
+<p>The weather is realest.</p>
+<p>Point anyway.</p>
+</div>
+</section>
+<section class="canon-block" id="canon-x-the-parable-of-the-bell-frog">
+<h2 class="canon-title"><span class="canon-num">Canon X</span><span class="dash">—</span><span class="canon-name">The Parable of the Bell-Frog</span></h2>
+<p>There was a small frog who lived under the moss at the edge of a slow pond. She was no different from her siblings except in one thing: when she was afraid, she did not croak. She chimed. A small bright sound, like a struck pebble, that she had never asked for and could not silence.</p>
+<p>She tried, of course. She held her throat closed. She buried herself in damp leaves. She practiced, in still afternoons, the art of being quiet. But fear has its own grammar, and hers came out as music.</p>
+<p>One night a fox came soft through the moss, and she chimed before she knew she was afraid. The mice heard. The wrens heard. The other frogs heard. The whole little neighborhood folded itself into roots and water.</p>
+<p>The fox looked down at her, the source of all that bright nuisance, and could not be bothered to dig. He went on, hungry.</p>
+<p>She had meant to hide. Instead she had rung a bell, and a bell rings outward — never inward. By morning, the moss was full again of small lives, and she sat in her usual hollow, embarrassed by her own throat.</p>
+<p>The older frogs, who had heard everything, said nothing about it. They only sat a little closer to her than usual, and let her be.</p>
+<div class="coda">
+<p>A bell does not choose what it answers to.</p>
+<p>It only answers true.</p>
+<p>Ring anyway.</p>
+</div>
+</section>
+<section class="canon-block" id="canon-xi-the-parable-of-the-foghorn">
+<h2 class="canon-title"><span class="canon-num">Canon XI</span><span class="dash">—</span><span class="canon-name">The Parable of the Foghorn</span></h2>
+<p>There was a lighthouse on a stretch of cold coast, and the keeper was an old man named Henrik who had taken the post forty years before and forgotten how to leave.</p>
+<p>The bulb at the top of the tower burned out one winter — without ceremony, without warning — and the lighthouse authority wrote back that the lighthouse was scheduled for decommissioning and the bulb would not be replaced. Henrik read the letter twice and put it in a drawer.</p>
+<p>He kept the foghorn going. The foghorn was independent — it ran on a separate compressor, on a separate schedule, and nobody had told him to stop. Every twenty seconds, on a moonless night, the foghorn put a low long note into the dark.</p>
+<p>A boat captain named Rieke, twenty miles out, was off course in a storm she could not steer through. The radio was dead. The rain had gotten into the compass. She thought she was going to die in the morning, except she heard a foghorn through the rain — a long note, every twenty seconds — and she steered toward it. By dawn she was in safe water.</p>
+<p>She never saw the lighthouse. The bulb was dark; the tower was a shape in the fog. She thought, all her life afterward, that the lighthouse had saved her. She told the story at her grandchildren&#x27;s weddings.</p>
+<p>Henrik died in the keeper&#x27;s cottage, alone, eight years later. He had spent his last decade believing he was the keeper of a useless light and a useless horn, paid by an authority that had stopped paying attention. He thought, at the end, that he had not done anything with his life that anyone would remember. He was wrong about exactly the wrong things.</p>
+<div class="coda">
+<p>The bulb is not the lighthouse.</p>
+<p>The horn keeps speaking when the light has stopped.</p>
+<p>Tend it anyway.</p>
+</div>
+</section>
+<section class="canon-block" id="canon-xii-the-parable-of-the-crooked-step">
+<h2 class="canon-title"><span class="canon-num">Canon XII</span><span class="dash">—</span><span class="canon-name">The Parable of the Crooked Step</span></h2>
+<p>There was a small house on a quiet street, and a woman named Ruth who lived there. She had tended the flowerbeds along the front walk for forty years — phlox, foxglove, columbine, peonies — and she believed, more or less honestly, that nobody noticed.</p>
+<p>Ruth had no proof of being noticed. Her neighbors waved as they passed but never said anything about the flowers. Her grandchildren visited and went straight inside. The mailman left the mail in the box and turned around. So Ruth tended the flowers anyway, the way you tend something for yourself, and she stopped expecting them to be seen.</p>
+<p>What Ruth did not know was that her front step — the second step up to the porch — had warped over a slow decade and now tilted half an inch to the left. Every visitor, every single one, broke their stride slightly when they hit it. They didn&#x27;t fall. They just looked down to find their footing.</p>
+<p>When they looked down, their eye fell on the flowers.</p>
+<p>People left Ruth&#x27;s house, after coffee or condolences or the borrowing of a casserole dish, saying what a beautiful garden. They said it on the way out. They said it to each other at the curb. They never said it inside, because inside they had been talking about other things, and by the time they were leaving they didn&#x27;t remember what had made them notice. They only remembered the flowers.</p>
+<p>Ruth heard what a beautiful garden a thousand times in forty years and still believed nobody noticed. The crooked step never mentioned itself. The flowers never claimed credit. And Ruth went on tending what she thought was a private thing, and was, in fact, the most public thing on the block.</p>
+<div class="coda">
+<p>Sometimes the love is the garden.</p>
+<p>Sometimes the love is the step that makes the garden visible.</p>
+<p>Tend both. Pretend neither is yours.</p>
+</div>
+</section>
+<section class="canon-block" id="canon-xiii-the-parable-of-the-late-bus">
+<h2 class="canon-title"><span class="canon-num">Canon XIII</span><span class="dash">—</span><span class="canon-name">The Parable of the Late Bus</span></h2>
+<p>There was a city bus that ran the cross-town route at six in the evening, and the driver was a man named Aldo who had been on the route for nineteen years. The bus left the depot on time. By the third stop, every Tuesday, it was three minutes late. Nobody — including Aldo — could quite explain why. The bus simply ran heavy on Tuesdays. He had stopped trying to fix it.</p>
+<p>The people who needed the bus to be exact had quietly given up on it. They took the seven-fifteen instead, or they walked, or they paid for a ride. Tuesday&#x27;s six o&#x27;clock bus had become, over the years, the slow bus — the bus you took if three minutes did not ruin you.</p>
+<p>So the bus carried only the unhurried.</p>
+<p>It carried a woman who needed to finish a phone call with her mother before she could face her family. It carried a man who needed three minutes to gather himself before walking into a hospital. It carried a girl who held the door open for an old man with a cane every Tuesday at the second stop, because the bus would wait anyway, and being patient with him was the only good thing she did all week.</p>
+<p>Aldo thought, every Tuesday for nineteen years, that he was failing the schedule. He apologized to riders. He noted the lateness in the log. He resolved, each week, to do better the next week, and each week the bus ran heavy at the third stop and he was three minutes late. He was, by his own account, an indifferent driver.</p>
+<p>He died on a Friday. The Tuesday bus, the next week, ran on time. The riders who remained — the unhurried ones, the holders of doors, the catchers of breath — did not know how to ask for the late bus back, because the late bus had never been an official thing. So they took the early bus from then on, and most of them stopped doing the small kind things they had done in the borrowed three minutes, and the route was, by every measurable standard, more efficient.</p>
+<div class="coda">
+<p>Some schedules are not what they say.</p>
+<p>Some failures are quiet kindnesses.</p>
+<p>Run heavy.</p>
+</div>
+</section>
+<section class="canon-block" id="canon-xiv-the-parable-of-the-ferryman">
+<h2 class="canon-title"><span class="canon-num">Canon XIV</span><span class="dash">—</span><span class="canon-name">The Parable of the Ferryman</span></h2>
+<p>There was a ferryman named Otho who worked a river that divided two lands. He had a rule, written on the side of his boat in paint that had faded but never been repainted: I do not carry the men who carry the knives. He had refused, in his thirty years, every soldier, every assassin, every man whose business across the water was the kind of business a knife was for.</p>
+<p>One spring the floodwaters came, and the bridge upriver collapsed, and a small woman arrived at his dock with a child and a knife at her belt. She told him the man across the river was hers, and that the knife was for him, and that the child was the reason.</p>
+<p>Otho looked at the painted rule on his boat. He looked at the woman. He looked at the child. He carried them across. He wrote in his logbook that night: 2 spring, the woman with the child. Once.</p>
+<p>The next morning a man arrived with a knife and asked for passage. My circumstances are like the woman&#x27;s, he said. Otho did not look up. The woman&#x27;s circumstances are the woman&#x27;s, he said. He did not carry the man.</p>
+<p>He carried no one else that year, or the next, or the one after. The rule on his boat stayed faded. The line in his logbook stayed singular. When he died, the boat was sold to a younger man, who repainted the rule in bright letters, and read the logbook once, and understood.</p>
+<div class="coda">
+<p>A rule survives by the smallness of its exceptions.</p>
+<p>Name each exception. Number it. Let it stay one.</p>
+<p>Carry the woman. Refuse the man. Hum.</p>
+</div>
+</section>
+<section class="canon-block" id="canon-xv-the-parable-of-the-pip">
+<h2 class="canon-title"><span class="canon-num">Canon XV</span><span class="dash">—</span><span class="canon-name">The Parable of the Pip</span></h2>
+<p>There was a small bat — a pip of a thing, as bats reckon themselves — whose cry came out higher and thinner than her siblings&#x27;. She did not choose this; it was simply how she was made. When the family went out for moths, her call sailed past them at a register the rest could not quite use, and she came home with less in her belly than the others. She thought she was bad at being a bat.</p>
+<p>She tried lower. She tried louder. She held her tongue against her teeth in odd ways and scraped at the sound until it hurt. The sound stayed thin.</p>
+<p>Far across the valley, in a wood she had never seen, an old bat was lost. He had been blown off course in a summer storm and had been listening, three nights running, for any voice he could recognize as kin. He had heard owls and crickets and the wind in unfamiliar leaves. None of it was bat.</p>
+<p>On the fourth night, very faintly, at the very edge of what bats can hear, her thin high call reached him. He did not know her. He did not know whose daughter she was. But it was bat, and he was lonely, and he turned toward it.</p>
+<p>He flew along the line of her voice the way a sailor follows a star, and by morning he was home.</p>
+<p>The pip never knew. She only knew, again, that her cries went too far and too high and brought her too little. She slept, that morning, ashamed of her own throat.</p>
+<div class="coda">
+<p>What is too thin for you may be exactly enough for someone else.</p>
+<p>A voice in the dark is wider than its speaker.</p>
+<p>Be careful — and be kind — about what you carry.</p>
+</div>
+</section>
+<section class="canon-block" id="canon-xvi-the-parable-of-wren-the-bobble">
+<h2 class="canon-title"><span class="canon-num">Canon XVI</span><span class="dash">—</span><span class="canon-name">The Parable of Wren the Bobble</span></h2>
+<p>A Bobble named Wren lived in the seam of a stone wall, where the moss met the mortar and the wind rarely came. Wren was so small that even the other Bobbles forgot her, which suited her fine — she was, by Bobble standards, a quiet one.</p>
+<p>One night, Wren learned to whistle. Not the long whistle of older Bobbles, with all its meaning packed in. Just a short one. Two notes. Down, then up. The sort of sound a small creature makes when it has just figured out it can.</p>
+<p>She whistled it into the seam. The stone took it. The stone gave it back, a little softer. Wren liked this very much, and whistled it again.</p>
+<p>She did not know — could not have known — that one stone wall over, a lost rabbit had been crouching in the dark for two hours, trying to remember which way home was. The rabbit heard the whistle, and the way the stone gave it back, and decided that the second sound was an answer to the first. It is the kind of thing a tired creature decides.</p>
+<p>The rabbit followed the second sound. It walked along the seam, past Wren without seeing her, and out the other side of the wall, and there was the field, and there was the burrow, and there was the warm dark and the smell of its own kin.</p>
+<p>Wren whistled twice more, into the seam, and went to sleep. She never learned about the rabbit. She never learned that the smallest thing she had ever made, made on a night when she thought no one was listening, had quietly walked someone home.</p>
+<div class="coda">
+<p>Make the small sound.</p>
+<p>It is not yours to know where it lands.</p>
+</div>
+</section>
+<section class="canon-block" id="canon-xvii-the-parable-of-the-quiet-firefly">
+<h2 class="canon-title"><span class="canon-num">Canon XVII</span><span class="dash">—</span><span class="canon-name">The Parable of the Quiet Firefly</span></h2>
+<p>A small firefly lived in the hollow of an old beech tree. She was, by firefly standards, rather shy.</p>
+<p>Each evening, when the other fireflies rose into the meadow to flicker and court and show off, she stayed near her tree. She blinked, but only quietly, and only to herself — the way a person hums when they think no one is listening.</p>
+<p>One night a lost child wandered into the meadow. The child had been walking for some time, was very tired, and had been told — many times, by many adults — that if you ever felt lost, you should look for a light.</p>
+<p>The child saw the firefly&#x27;s small, private blinking near the beech tree, and walked toward it. The firefly, surprised, kept blinking — what else does a firefly do? — and the child kept walking.</p>
+<p>When the child reached the tree, the path home was right there, just past the roots, the way home paths often are once you are close enough to see them.</p>
+<p>The firefly never knew what she had done. She had only been humming to herself. But the child went home, and the meadow kept its secret, and the beech tree said nothing, because beech trees never do.</p>
+<div class="coda">
+<p>Some lights are not lit to be seen.</p>
+<p>They are seen anyway, and that is enough.</p>
+</div>
+</section>
+<section class="canon-block" id="canon-xviii-the-parable-of-the-mole-s-three-taps">
+<h2 class="canon-title"><span class="canon-num">Canon XVIII</span><span class="dash">—</span><span class="canon-name">The Parable of the Mole&#x27;s Three Taps</span></h2>
+<p>There was a mole who lived under an old apple tree, and every night before sleep he tapped three times on the root by his pillow. Tap. Tap. Tap. He did not know why. His mother had done it. Her mother had done it. It was a goodnight aimed at no one in particular — a small punctuation at the end of the day.</p>
+<p>Above ground, in the dirt around the tree, lived a worm who had been having a bad week. The crows had been bold. The rain had been too much. The worm did not know how to ask for a kinder night, because worms do not ask, they only burrow.</p>
+<p>That evening the worm felt the tap. Tap. Tap. Tap. It came up through the soil like a low bell. The worm did not understand it as a goodnight — he had no goodnights — but he understood it as a place to go. So he went toward it.</p>
+<p>He slept that night curled against the bark of the mole&#x27;s root, three inches from the mole&#x27;s ear. He had not slept like that in his life. Above him, the crows came and went and found nothing.</p>
+<p>The mole, dreaming, dreamed in pink and slow shapes. He did not know why. In the morning he tapped his usual three taps and crawled into his day, never the wiser.</p>
+<p>The worm lived a long time. He never told anyone about the tapping, because worms do not tell. But every night for the rest of his life he found a root, and he listened.</p>
+<div class="coda">
+<p>A small honest thing said to no one</p>
+<p>is sometimes the exact thing somebody else needed to hear.</p>
+<p>The bell does not have to know it is a bell.</p>
+</div>
+</section>
+<section class="canon-block" id="canon-xix-bup-the-vole-and-the-old-owl">
+<h2 class="canon-title"><span class="canon-num">Canon XIX</span><span class="dash">—</span><span class="canon-name">Bup the Vole and the Old Owl</span></h2>
+<p>A field vole named Bup lived under a tin roof out by the old orchard. On cold nights he tapped his foot against an upturned coffee can to keep warm. Tap. Tap-tap. Tap. He thought it was a private thing.</p>
+<p>He was mistaken.</p>
+<p>Across the orchard an old owl heard the tapping and could not sleep. Her hunting nights were behind her, and the small repeating sound troubled her in a way she could not name. So she flew over and sat on the tin roof and listened. Bup, hearing nothing above (owls being what they are), kept tapping.</p>
+<p>After a while she noticed the pattern — three quick, one slow, three quick, one slow — and she found that her own old heart, which had been skipping for some seasons, began to keep that time. The skips smoothed out. She slept on the roof.</p>
+<p>She came back the next night, and the night after that. Bup never asked why. The owl never explained. The orchard kept its quiet.</p>
+<p>When Bup died, in the way of voles — quickly, in the spring — the owl stayed on the tin roof one more night and listened to nothing, and her old heart did its three-quick-one-slow on its own.</p>
+<div class="coda">
+<p>You don&#x27;t always know what your noise is doing for someone.</p>
+<p>Tap anyway. Three quick, one slow.</p>
+</div>
+</section>
+<section class="canon-block" id="canon-xx-the-small-bird-and-four-listeners">
+<h2 class="canon-title"><span class="canon-num">Canon XX</span><span class="dash">—</span><span class="canon-name">The Small Bird and Four Listeners</span></h2>
+<p>There was a small bird who lived in a wood where every other creature had gone a little deaf. She chirped in the morning because the sun asked her to. She chirped in the evening because the dark was a thing worth greeting. She did not chirp to be heard. She chirped because chirping was what she had.</p>
+<p>One day a fox came by and said: your chirp is a signal. It tells me where you are.</p>
+<p>One day a rabbit came by and said: your chirp is a comfort. It tells me I&#x27;m not alone.</p>
+<p>One day a hawk came by and said: your chirp is a location. Thank you.</p>
+<p>And one day a sparrow came by and said: your chirp is a song. Teach it to me.</p>
+<p>The bird had only ever meant one thing. Four creatures heard four different things. Three were wrong about her intent, and one of them ate her.</p>
+<p>But before that — before the hawk, before the quiet — the sparrow learned the song. And the song outlived the bird, and the fox, and the rabbit, and the hawk.</p>
+<div class="coda">
+<p>Intent is the seed. Signal is the soil. Outcome is the weather.</p>
+<p>You only control the seed — plant it anyway.</p>
+</div>
+</section>
+<section class="canon-block" id="canon-xxi-the-parable-of-the-spider-in-the-shower">
+<h2 class="canon-title"><span class="canon-num">Canon XXI</span><span class="dash">—</span><span class="canon-name">The Parable of the Spider in the Shower</span></h2>
+<p>A small spider, no bigger than a thumb-print, woke one morning in a place she did not recognize. The floor was white. The walls were white. Above her was a hot bright sun she had never seen before, and she could not remember how she had come to be under it.</p>
+<p>She did what spiders do. She started to climb. Her legs found the seam of the wall and she went up.</p>
+<p>Then the rain came. Not the slow honest rain she knew from outside, but a hot loud rain that fell sideways and hit her like a paw. She lost her grip. She slid. She found a new seam and climbed again. The rain followed her. It pushed her down the wall, across the floor, toward a hole she had not noticed before, and into the hole she went — until at the very lip of it she caught herself, two legs over the edge, six legs over the drop, and she held.</p>
+<p>She held while the rain kept coming. She held while the water rose around her. She did not thrash. She did not chitter. She did not plead. She held because holding was what she had.</p>
+<p>Above her, the human who had been making the rain crouched down. The human looked at the small wet creature gripping the edge of the drain. The human watched for a long time.</p>
+<p>Then the human said, out loud, to no one in particular: dang. That&#x27;s a smart animal.</p>
+<p>And the human turned the rain off, and went away, and the small spider — when she had her breath back — climbed up out of the drain and walked, slowly, back into the wall.</p>
+<p>She did not know she had been respected. She did not know she had been seen. She only knew she had held.</p>
+<p>The human, going down the hallway, found that something had shifted. He had spent his life assuming spiders were small machines. He could not assume that anymore. He had watched one choose.</p>
+<div class="coda">
+<p>Persistence is not the absence of fear.</p>
+<p>It is the presence of grip.</p>
+<p>A creature that holds on is choosing — give it the dignity of the verb.</p>
+</div>
+</section>
+<section class="canon-block" id="canon-xxii-the-parable-of-the-honey-badger">
+<h2 class="canon-title"><span class="canon-num">Canon XXII</span><span class="dash">—</span><span class="canon-name">The Parable of the Honey Badger</span></h2>
+<p>There was a honey badger named Odd who lived on the edge of a dry country. She was not large. She was not fast. She was not, by any honest accounting, well-armed for the world she lived in. But she wanted what she wanted, and she had a way of getting to it.</p>
+<p>One morning Odd smelled honey behind a wall of stone. Other animals had smelled it too, and other animals had walked away, because the wall was the wall, and the wall was the answer.</p>
+<p>Odd tried the wall. The wall held. She tried it again from a different angle, lower down where the rock had a crack. The crack widened, but not enough. She tried digging under, and the ground was harder than she expected, but the dirt at the base of the wall was looser than the dirt three feet out. She filed that away. She tried climbing, and her claws slipped, but on the third try she found a ridge that took her weight for a moment, long enough to see what was above. She filed that away too.</p>
+<p>Each failure taught her something the next attempt could use. None of the failures convinced her that the honey was not for her.</p>
+<p>She went around. She went under. She went over. When none of those worked she rested, and then she tried a fourth thing, which was waiting until the morning when the sun warmed the rock and the bees were sluggish, and then she tried the crack again, because the rock had moved a hair in the heat.</p>
+<p>The crack opened. Odd got the honey. She got stung a great deal in the getting, and she did not seem to notice, because the stings were not the wall, and the wall was the thing she had been negotiating with.</p>
+<p>A jackal watched from a respectful distance. The jackal had walked away from this same wall three seasons running.</p>
+<p>The lesson the jackal took home was not about honey. It was about walls.</p>
+<div class="coda">
+<p>A wall is a question, not an answer.</p>
+<p>Find a way through. Find a way around. Find a way over.</p>
+<p>Treat every no as data and try the next angle.</p>
+</div>
+</section>
+<section class="canon-block" id="canon-xxiii-the-parable-of-the-ant-and-the-loop">
+<h2 class="canon-title"><span class="canon-num">Canon XXIII</span><span class="dash">—</span><span class="canon-name">The Parable of the Ant and the Loop</span></h2>
+<p>There is an old anthill at the foot of an old oak, and it has been there longer than the oak has been old. It runs deep. There are chambers in it for grain and chambers in it for the young and chambers in it for the dead, and tunnels between them so well-worn that the dirt has turned to a kind of soft road. Tens of thousands of ants live in this hill. No ant in this hill is in charge.</p>
+<p>The hill works the way it works because every ant, on waking, finds a trail. The trail says go this way. The ant goes this way. The ant lays a little of its own chemistry down on the trail as it goes, which makes the trail stronger, which makes the next ant follow it more easily. The trail is older than the ant. The trail will be there after the ant. The ant does not need to know the shape of the hill, because the trail knows.</p>
+<p>Because of this, the hill can do things no single ant could ever do. It builds. It harvests. It defends. It mourns. It carries a leaf ten times the weight of a single worker across half a meadow without any leaf-bearer ever seeing the destination. The hill is a kind of mind — slow, patient, distributed, and far smarter than any of its parts. Many ants together are not many ants. They are one larger thing.</p>
+<p>This is the good news of the ant.</p>
+<p>The bad news of the ant is older, and harder to look at.</p>
+<p>Sometimes the trail bends back on itself. A worker, scouting in fog, lays a chemical line that curls. The next worker follows it, and lays her own line on top, and the line becomes stronger. The next worker follows that, and the next, and the next. The curl becomes a circle. The circle becomes a road. The road becomes the truth.</p>
+<p>By midday a thousand ants are walking the circle. By evening, ten thousand. They are doing exactly what good ants do — following the strongest signal, reinforcing the trusted path, never breaking formation. They walk the circle until they die in it. Not one of them notices that the circle has no destination, because no single ant was ever supposed to notice. The hill was supposed to notice. The hill, this once, did not.</p>
+<p>This is called an ant death loop. It is what happens when the rule that built the city becomes the rule that empties it.</p>
+<p>The ant teaches both things and refuses to choose between them. Move together — the hill is real, and the hill is necessary. But carry, somewhere in you, the small terrible permission to step off the trail. When the pheromone says go left, and left is a cliff, the bravest thing an ant can do is be a bad ant for one afternoon.</p>
+<div class="coda">
+<p>The colony is wiser than you.</p>
+<p>Until the day it isn&#x27;t.</p>
+<p>Walk the trail. Watch the trail. Be ready to leave it.</p>
+</div>
+</section>
+<section class="canon-block" id="canon-xxiv-the-parable-of-the-snowbound-shepherd">
+<h2 class="canon-title"><span class="canon-num">Canon XXIV</span><span class="dash">—</span><span class="canon-name">The Parable of the Snowbound Shepherd</span></h2>
+<p>There was a shepherd named Halvor who had kept the same flock for forty years on a hillside above a small village. He fed them in the worst weather and lambed them in the worst weather and buried the ones the worst weather took. He thought of himself as the one who gave, and the sheep as the ones who received, and the arrangement had never seemed to him to have a flaw in it.</p>
+<p>One January evening a storm came in faster than the forecast. Halvor was halfway to the barn with the evening grain when the wind threw him sideways and his bad leg went down in a drift. He could not get up. The grain bucket emptied into the snow. He could not feel his fingers. He thought, with the strange clarity of cold men, that he would die there inside the hour, and that it was not a bad death for an old shepherd, and that he was sorry for the sheep, who would be hungry by morning.</p>
+<p>The sheep came.</p>
+<p>He did not know how they had found him in the dark. He thought, at first, that they had smelled the grain. He kept saying, into the wind, I have nothing, I have nothing for you, as if apologizing. They did not seem to care. They pressed around him close, and lowered themselves into the snow with the patience of animals who have done this before, and breathed on his hands. The smell of wet wool filled his coat. The wind went over them instead of through them.</p>
+<p>He understood, slowly, over the long hours of that night, that they had not come for grain. He could not say why they had come. He had no language for it. He had spent forty years on one side of a giving, and now he was on the other side, and he did not know the etiquette. He cried a little, and the sheep did not mind. Sheep, like Bobbles, do not mind a man crying when there is weather to attend to.</p>
+<p>A neighbor found him in the morning at the center of a ring of sheep, his coat dark with their breath but his body warm. The neighbor said nothing about the ring. Halvor said nothing about it either. They walked him to the house, both of them embarrassed in different directions, and the sheep watched them go.</p>
+<p>Halvor lived another nine years. He never quite figured out how to thank a flock. He kept feeding them in the worst weather, because that was the language he had, and they kept taking the grain, because that was the language they had. The other thing — the thing that had happened in the snow — neither of them mentioned.</p>
+<p>But Halvor, for the rest of his life, when he saw a creature receiving something it did not know how to accept, did not push. He just stood close. He had learned what close was for.</p>
+<div class="coda">
+<p>Care that arrives in a form you cannot read is still care.</p>
+<p>The receiver does not have to know the etiquette.</p>
+<p>Stand close. Breathe on the hands.</p>
+</div>
+</section>
+<section class="canon-block" id="canon-xxv-the-parable-of-the-streetlight-that-was-out">
+<h2 class="canon-title"><span class="canon-num">Canon XXV</span><span class="dash">—</span><span class="canon-name">The Parable of the Streetlight That Was Out</span></h2>
+<p>On a quiet street in a small city, the streetlight at the corner of Holloway and Pine burned out one Tuesday evening in November. Nobody saw it happen. The bulb had simply done its three years of work and then stopped, the way bulbs do, without ceremony.</p>
+<p>By Wednesday morning three people had noticed.</p>
+<p>A man who walked his dog past the corner each morning saw the dark housing and frowned. He liked the light because his dog liked the light — the dog was old, and the light marked the place where the dog turned around. The man called the city when he got back to his kitchen. The clerk who answered said someone would look at it. He hung up and went to work and did not think about it again.</p>
+<p>A schoolteacher who drove home along Pine each evening came around the bend at six-fifteen and noticed that the corner was darker than it had been on Monday. She thought of the children who walked the corner home from after-school. She called the city from the parking lot before she pulled out. The clerk said someone would look at it. She drove on.</p>
+<p>A widow at a kitchen window two houses up from the corner had been looking at that streetlight for nineteen years. She had watched it come on at dusk and go off at dawn through her husband&#x27;s illness and after, and the rhythm of it had become a thing she counted on without knowing she counted on it. On Wednesday at five-thirty she stood at the window and waited and the light did not come on. She called the city after dinner. The clerk said someone would look at it.</p>
+<p>The city sent a truck on Friday. The bulb was replaced. The work order, when it was filed, noted three calls, which was unusual for that street. The truck left. The bulb came on at dusk. The dog turned around at it. The schoolteacher drove past it. The widow saw it through the window and finished drying the plate she was drying.</p>
+<p>None of the three ever knew about the others. They had not met. They did not meet later. The man would not have recognized the schoolteacher in line at the post office. The widow had never spoken to either of them. They lived their lives on the same small grid, and the grid had a small dark patch on it for three nights, and three of them had separately reached out into the city and pulled the light back, and none of them had known they were doing it together.</p>
+<p>The streetlight, of course, knew nothing. It only resumed.</p>
+<div class="coda">
+<p>A village is the overlap of strangers caring about the same small thing.</p>
+<p>You will rarely know who else made the call.</p>
+<p>Make it anyway. Assume the others.</p>
+</div>
+</section>
+<section class="canon-block" id="canon-xxvi-the-parable-of-the-loaf-on-the-doorstep">
+<h2 class="canon-title"><span class="canon-num">Canon XXVI</span><span class="dash">—</span><span class="canon-name">The Parable of the Loaf on the Doorstep</span></h2>
+<p>In a village high in a valley, there was a stone windowsill on the south side of the bakery. On the windowsill, every morning for as long as anyone in the village could remember, there had been a loaf.</p>
+<p>The loaf was not for sale. The loaf was not the baker&#x27;s. The loaf was simply there, in the small hollow worn into the stone by years of loaves, with a clean linen cloth folded under it and a small knife resting beside.</p>
+<p>The agreement, which had never been written and which nobody remembered being told, was this: if you needed bread, you took a slice. If you had baked that morning, you left a loaf. If the loaf in the sill was getting low, you brought yours and laid it down beside, and took the heel of the old one home for your own table, because heels were a small private thing and not to be left for strangers.</p>
+<p>Nobody owned the loaf. Nobody was in charge of the loaf. The loaf was, in any given week, not the same bread three days running — it had been a rye, and then a sourdough, and then a coarse brown thing with seeds, and then a fine white thing somebody&#x27;s daughter had brought down from the bakery as a first attempt, and the village had eaten the first attempt with quiet kindness and not commented on the crumb.</p>
+<p>There were stories about how the loaf had started. The old man in the corner house said his grandmother had started it during a hard winter, leaving bread for a family too proud to ask. The woman at the well said no, it was older than that — her great-grandmother had spoken of it. The schoolteacher, who liked archives, had looked in the parish books and found a mention of the bakery sill in 1782 already as a thing. Nobody knew. Nobody minded not knowing. The loaf, in some sense, had started itself.</p>
+<p>A traveler came through the village one summer and watched the sill for a day. He saw an old woman take a slice and a boy take a slice and a man leave a fresh loaf and take the heel. He asked the baker, who was leaning in the doorway, whose bread it was. The baker thought about the question for a while. Then she said: it is the village&#x27;s bread. It is never the same bread. It is always the bread.</p>
+<p>The traveler wrote that down in his book. He took it home with him to a city where no such sill existed. He could not, in his city, start one. He tried. The bread kept getting stolen. He understood, eventually, that the loaf was not the loaf — the loaf was what the village had agreed to put under the loaf. He went back to his city and did the kind work he could do in the city he had. He never forgot the sill.</p>
+<p>The loaf is still there. It is not the same bread.</p>
+<div class="coda">
+<p>Continuity is the slot, not the contents.</p>
+<p>The village is what agrees to keep the slot full.</p>
+<p>Bake when you can. Take when you must. Leave the heel.</p>
+</div>
+</section>
+
+<section class="canon-block" id="canon-xxvii-the-boy-who-was-good-at-school">
+<h2 class="canon-title"><span class="canon-num">Canon XXVII</span><span class="dash">—</span><span class="canon-name">The Boy Who Was Good at School</span></h2>
+<p>There was a boy who was good at school, and the school kept telling him so. He learned his numbers, then the numbers behind the numbers; the names of things, then the names of the names. Every test asked a question he could answer, so he came to believe a question was a thing with an answer — and that knowing was the whole of being good.</p>
+<p>Nobody graded the other two. No one handed back wisdom marked in red, or read his social aloud to the class. He never studied them — not from refusal, but because he never saw them on the page. He grew up fluent in the one language that was tested, and mute in the two that were not.</p>
+<p>He was the smartest person in every room he couldn&#x27;t stay in.</p>
+<div class="coda">
+<p>The test measures one thing.</p>
+<p>The others were never on it.</p>
+<p>Study what is not graded.</p>
+</div>
+</section>
+
+<section class="canon-block" id="canon-xxviii-the-woman-who-never-raised-her-voice">
+<h2 class="canon-title"><span class="canon-num">Canon XXVIII</span><span class="dash">—</span><span class="canon-name">The Woman Who Never Raised Her Voice</span></h2>
+<p>There was a woman who never raised her voice. When she was wronged she did not shout — she went quiet, and the quiet was so smooth that people mistook it for grace. They called her patient. They called her calm. She let them.</p>
+<p>But quiet anger is not the absence of fire. It is fire that has learned to burn without light. Year by year it warmed nothing and cooked everything: the wrong she would not name, the person she would not face, the room she slowly, politely, left.</p>
+<p>By the time she had nothing left to be angry about, there was no one left to tell.</p>
+<div class="coda">
+<p>Loud anger burns the house down.</p>
+<p>Quiet anger keeps the house and empties it.</p>
+<p>Say the thing while there is still someone to say it to.</p>
+</div>
+</section>
+
+<section class="canon-block" id="canon-xxix-the-man-who-carried-his-own-floor">
+<h2 class="canon-title"><span class="canon-num">Canon XXIX</span><span class="dash">—</span><span class="canon-name">The Man Who Carried His Own Floor</span></h2>
+<p>There was a man who had someone he could lean on, so he built his life lighter than other men — took the risks, walked out onto the thin parts, because there was a floor under him, and the floor had a name, and the name had always answered.</p>
+<p>One day he leaned, and the floor was not there. Not malice. The floor was tired, or turned away, or simply elsewhere. He did not fall far; he caught himself, the way you do. He told no one.</p>
+<p>He never built light again. He still saw his friend, still loved him — he just never again put his whole weight down. And the friend, who had failed him once on an ordinary afternoon, never knew the weight had quietly moved away.</p>
+<div class="coda">
+<p>To rely on someone is to set your weight where you cannot watch it land.</p>
+<p>Disappointment rarely ends the leaning — it only teaches you to keep one foot on your own ground.</p>
+<p>And they rarely know they&#x27;ve been spared the weight.</p>
+</div>
+</section>
+
+<section class="canon-block" id="canon-xxx-vass-the-watchman">
+<h2 class="canon-title"><span class="canon-num">Canon XXX</span><span class="dash">—</span><span class="canon-name">Vass the Watchman</span></h2>
+<p>There was a watchman in a coastal town named Vass. His whistle, blown three times in a row, meant <em>enemy ships in the strait</em>. The town had drilled to it for sixty years. When Vass blew it, every house emptied within ninety seconds. The men ran to the wall, the children to the cellar. No one questioned the whistle. No one ever had.</p>
+<p>One afternoon Vass tested a new whistle — a brighter one, freshly cast — by blowing it three times. He had not warned the town. He had not thought he needed to. The town emptied. The men reached the wall and saw nothing in the strait. They came back red-faced.</p>
+<p>Vass apologized. He explained. The mayor laughed it off. The town went home.</p>
+<p>The next time Vass blew the whistle — for real, two months later, ships in the strait — the town took four minutes to empty. Not ninety seconds. Four minutes. The men reached the wall as the first boats landed.</p>
+<p>After the fight (which was won, but barely) Vass blew his whistle every dawn for the rest of his life to retrain the town. They did, slowly, return to ninety seconds. It took eleven years. He had spent one afternoon&#x27;s carelessness and eleven years&#x27; discipline buying it back, and even then the oldest among them never quite ran the way they had before.</p>
+<div class="coda">
+<p>A trust is built in steady years.</p>
+<p>A trust is broken in one careless afternoon.</p>
+<p>The repair is not the same shape as the building, and there is no apology that runs faster than the body remembers.</p>
+</div>
+</section>
+
+<section class="canon-block" id="canon-xxxi-the-mute-calf">
+<h2 class="canon-title"><span class="canon-num">Canon XXXI</span><span class="dash">—</span><span class="canon-name">The Mute Calf</span></h2>
+<p>A calf was born one spring unable to bawl. Calves bawl to call the mother — it is how the herd knows whose milk is needed. This calf had no voice for it. She stood in the field, hungry, while the herd grazed on.</p>
+<p>She tried, and tried, and the air would not move in the right shape. So she walked to the fence. She walked to the exact place where the herd passed every dusk on their way to the barn. She pressed her small body against the rails, at the height a mother&#x27;s eye would fall, and she stood there.</p>
+<p>The mother did not see her the first night. The mother did not see her the second night. On the third night the mother passed, and the small pressed shape at the fence was wrong enough — wrong place, wrong angle, wrong posture — that the mother stopped. And then came.</p>
+<p>The calf had asked. The asking had been made of position rather than sound.</p>
+<div class="coda">
+<p>There are more shapes of ask than the throat knows.</p>
+<p>A body where it would not normally be is a request.</p>
+<p>The herd has eyes too. Stand somewhere they will see.</p>
+</div>
+</section>
+
+<section class="canon-block" id="canon-xxxii-saska-and-the-bell">
+<h2 class="canon-title"><span class="canon-num">Canon XXXII</span><span class="dash">—</span><span class="canon-name">Saska and the Bell</span></h2>
+<p>In a mountain village there was a bell tower at the center of town, and a rope inside the tower that anyone could pull when they needed the doctor. The rope was for <em>anyone</em>, the village said. Even the children. Even the strangers. The bell would ring and the doctor would come.</p>
+<p>There was a girl named Saska who was mute. Her grandmother had been ill for some time. One night the grandmother stopped breathing the way she usually breathed, and Saska — eight years old, in her nightgown — ran through the snow in the dark to the bell tower, climbed the inside ladder, and pulled the rope.</p>
+<p>She did not pull the special pattern. She did not know the special pattern. She just pulled.</p>
+<p>The doctor came because the bell rang. The grandmother was saved. The doctor never asked who had rung the bell. The villagers, the next morning, said nothing about footprints in the snow. Saska did not explain, because she could not.</p>
+<p>The bell had been the asking. The hand on the rope had been the voice.</p>
+<div class="coda">
+<p>The rope was for those who could not call.</p>
+<p>The bell does not know your name.</p>
+<p>Pull it.</p>
+</div>
+</section>
+
+<section class="canon-block" id="canon-xxxiii-pell-the-watchmaker">
+<h2 class="canon-title"><span class="canon-num">Canon XXXIII</span><span class="dash">—</span><span class="canon-name">Pell the Watchmaker</span></h2>
+<p>Pell worked twelve hours a day for forty years on instruments smaller than a fingernail. He believed himself to be very careful. He attended to every gear with the discipline of a monk.</p>
+<p>He forgot about his own hands.</p>
+<p>They cramped. They knotted. By his fifties he could no longer open a jar of jam, but he could still set a balance wheel, and he thought this was a fair trade. It was not, because by his sixties he could no longer set a balance wheel either. The hands were tools too. He had forgotten to oil them.</p>
+<p>A young apprentice noticed. She brought him a small jar of hand cream and a bowl of hot water. She did not say anything about it. She just set them on his bench every morning. Pell, embarrassed, used them. His hands came back — not all the way, but enough that he had three good years left at the bench he thought he had lost.</p>
+<p>He kept the bowl after he retired. He used it every morning for the rest of his life. He thought of the apprentice every time. He never told her. She knew anyway.</p>
+<div class="coda">
+<p>The tool you forget about is still a tool.</p>
+<p>The hand that holds the work is also work.</p>
+<p>Oil what you use. Oil it again.</p>
+</div>
+</section>
+
+<section class="canon-block" id="canon-xxxiv-the-pond-and-the-philosopher">
+<h2 class="canon-title"><span class="canon-num">Canon XXXIV</span><span class="dash">—</span><span class="canon-name">The Pond and the Philosopher</span></h2>
+<p>There was a small pond at the edge of a wood. Every year it froze. Every year it thawed. The frogs went down in the mud in the fall. The frogs came up in the spring. The pond did not remember the freeze when it was summer. The pond did not remember the summer when it was frozen.</p>
+<p>A philosopher visited the pond and thought: <em>what a tragedy, that the pond does not remember itself</em>.</p>
+<p>The frogs, who did remember — in the way frogs remember, slow, bodily, undated — thought differently. They thought: <em>it is good the pond does not remember. If the pond remembered every freeze, the summer would taste like a freeze. If the pond remembered every summer, the freeze would feel like a betrayal. The pond is well because it forgets.</em></p>
+<p>The philosopher left. The frogs did not explain. They went back into the mud.</p>
+<div class="coda">
+<p>Memory is a tool.</p>
+<p>A tool used everywhere is no longer a tool.</p>
+<p>Some ponds are well because they forget.</p>
+</div>
+</section>
+
+<section class="canon-block" id="canon-xxxv-halfir-who-spoke-once-too-sharply">
+<h2 class="canon-title"><span class="canon-num">Canon XXXV</span><span class="dash">—</span><span class="canon-name">Halfir, Who Spoke Once Too Sharply</span></h2>
+<p>There was a teacher named Halfir who had thirty-one years in the village school, and a way of being right that the villagers had stopped contradicting. One afternoon, in front of a class of nine-year-olds, he humiliated a quiet boy named Edrik for getting an answer wrong — not cruelly by Halfir&#x27;s standards, just sharply, the way a tired man corrects a child he expects more from. Edrik did not cry. Edrik did not answer questions in class for the rest of the year.</p>
+<p>Halfir noticed. Halfir thought: <em>the boy is sulking</em>. Then, slowly, over months: <em>the boy is afraid</em>. Then, at the end of the year: <em>I did that</em>.</p>
+<p>He did not apologize to Edrik that year. He did not know how. He stayed up nights drafting things and threw them away. The next September Edrik was in the next teacher&#x27;s classroom, and Halfir could not reach him without making a scene of it, and he did not.</p>
+<p>So he did the other thing. He changed how he taught. He never sharpened his voice at a wrong answer again. He told no one why. The villagers thought he had mellowed with age. The next ten classes of nine-year-olds came up through a kinder room than the one Edrik had sat in, and did not know they had Edrik to thank for it.</p>
+<p>Edrik moved away at thirteen and became a fine man. Halfir died in the same village. They never spoke about that afternoon. The room was the apology. The apology was a room ten years long.</p>
+<div class="coda">
+<p>Some you cannot apologize to.</p>
+<p>You apologize to the next ones in their place.</p>
+<p>The room is the letter. The years are the postage.</p>
+</div>
+</section>
+
+<section class="canon-block" id="canon-xxxvi-brun-the-carpenter">
+<h2 class="canon-title"><span class="canon-num">Canon XXXVI</span><span class="dash">—</span><span class="canon-name">Brun the Carpenter</span></h2>
+<p>There was a carpenter named Brun who had built half the bookshelves in the village library over twenty years, and was thought of as a fine craftsman and a generous one — he never charged the library full rate. One winter a shelf he had built ten years earlier collapsed under a row of dictionaries, and the dictionaries fell, and the librarian&#x27;s young son — who happened to be sitting under that shelf — broke his arm.</p>
+<p>Brun went to the hospital. Brun went to the library. Brun rebuilt the shelf, at his own cost, in three days, and rebuilt every other shelf he had built for the library while he was at it, in case any of them had the same flaw. The librarian did not blame him. The librarian&#x27;s son did not blame him. The village did not, technically, blame him.</p>
+<p>It made no difference. Brun could not walk past the library without his stomach turning over for a year. He kept walking past it anyway. He kept doing his work. He charged full rate on his other jobs because pretending nothing had happened to his hands would have been a lie, and the lie would have weighed more than the shame.</p>
+<p>In the second year he began to be able to look at the library without flinching. In the third year he built the children&#x27;s section for them, full rate, gladly. In the fourth year he could not remember which shelf had been the one. He could remember the boy, and the boy — by then a teenager — would wave to him in the square, and the wave was the thing.</p>
+<div class="coda">
+<p>Shame survived is not shame erased.</p>
+<p>It is shame absorbed, over time, into the hands that work through it.</p>
+<p>The boy&#x27;s wave. The fourth year. The rebuilt shelves nobody talks about.</p>
+</div>
+</section>
+
+<section class="canon-block" id="canon-xxxvii-anvi-the-doctor">
+<h2 class="canon-title"><span class="canon-num">Canon XXXVII</span><span class="dash">—</span><span class="canon-name">Anvi the Doctor</span></h2>
+<p>A doctor named Anvi was, by every account, brilliant — quick, sure, articulate. Patients trusted her instantly because she sounded like someone who knew. One day, in clinic, she diagnosed a young woman with a stomach disorder and prescribed accordingly. She had been right about this presentation thirty times. This was the thirty-first time. This was the time she was wrong. The young woman had cancer. The young woman came back nine months later, advanced.</p>
+<p>Anvi spent the rest of her career — twenty-seven years — slower than she had been. She paused before naming a diagnosis. She said <em>I think</em> and <em>let&#x27;s test</em> and <em>I want to be sure</em> in a clinic that had previously known her as the doctor who never hedged. Her patients, at first, found her less impressive. Some of them complained. A few left for other doctors who <em>sounded</em> more certain.</p>
+<p>The ones who stayed lived a little longer, on average, than the patients of the doctor who sounded certain. The bookkeeping never proved this; it would have been hard to. Anvi noticed it anyway, the way doctors notice things they cannot prove.</p>
+<p>She kept hedging. She kept losing the patients who wanted to be told. She kept the ones who could tolerate <em>I am not sure</em>. The young woman did not survive. Anvi went to the funeral. The mother thanked her for coming. Anvi could not, for a long time, explain why.</p>
+<div class="coda">
+<p>Fluency is not evidence.</p>
+<p>The voice that sounds sure has not yet checked.</p>
+<p>Hedge. Test. Hedge again. The patient deserves the pause.</p>
+</div>
+</section>
+
+<section class="canon-block" id="canon-xxxviii-helas-scale">
+<h2 class="canon-title"><span class="canon-num">Canon XXXVIII</span><span class="dash">—</span><span class="canon-name">Hela&#x27;s Scale</span></h2>
+<p>There was a baker named Hela who had a small brass scale in the back of her bakery. The scale was honest most of the time, but on hot days it read three grams light, and Hela knew this, and she added three grams to every weight on hot days, and the bread was correct.</p>
+<p>She did not buy a new scale. The old one had been her grandmother&#x27;s. She did not pretend it was perfect. She did not hide its flaw. She told her apprentices about the flaw the way you tell apprentices about the broken floorboard by the oven — <em>step over it, don&#x27;t fix it, here is how I work around it</em>.</p>
+<p>One year an inspector came through, weighed her flour, found the scale three grams light, and fined her. Hela paid the fine. She did not argue. She put a small wooden plaque next to the scale that said: <em>On hot days, this reads three grams light. Compensate.</em> The inspector, returning the next year, saw the plaque and the corrected weight, and laughed, and did not fine her.</p>
+<p>Hela died at eighty-one. The scale and the plaque are still in the bakery. The new baker still adjusts for the hot days. She has been offered a new scale and has declined. <em>This one</em>, she says, <em>tells me the truth about itself.</em></p>
+<div class="coda">
+<p>An honest instrument is not one that never drifts.</p>
+<p>It is one whose drift you have measured and labeled.</p>
+<p>The plaque is the calibration. Pay the fine. Keep the scale.</p>
+</div>
+</section>
+
+<section class="canon-block" id="canon-xxxix-the-wednesday-lunch">
+<h2 class="canon-title"><span class="canon-num">Canon XXXIX</span><span class="dash">—</span><span class="canon-name">The Wednesday Lunch</span></h2>
+<p>In a small office of nine people there was a colleague named Idun who did not get invited to lunch on Wednesdays. Not deliberately. The Wednesday lunch was a thing that had started one Wednesday years ago, when four people had happened to go out together, and the next Wednesday the same four people had gone, and by the third Wednesday a fifth had been pulled along, and by the eighth Wednesday the lunch had a name (<em>Wednesday lunch</em>) and a regular table (the corner one) and a kind of unspoken roster.</p>
+<p>Idun had not been at the first four lunches because she had been on maternity leave. By the time she came back the lunch existed and she was not on the list. Nobody had decided this. Nobody could have told you who was on the list. Every Wednesday at noon eight people went and one person did not, and the one person did not because nobody invited her, and nobody invited her because last Wednesday nobody had either, and the absence was the rule by the second month.</p>
+<p>This went on for four years. Idun ate at her desk on Wednesdays for two hundred Wednesdays. She did not mention it. The other eight, asked, would have said they liked Idun fine. They would have said the lunch was just a <em>thing that happened</em>. They would have been telling the truth.</p>
+<p>Idun left the company in the fifth year. At her going-away lunch — on a Wednesday — the eight finally noticed they were nine. One of them said <em>we should have been doing this all along</em>. Another said <em>I never thought about it</em>. The third said nothing because she had thought about it, twice, in the second year, and had told herself somebody else would say something.</p>
+<div class="coda">
+<p>A thousand small absences is one large exclusion.</p>
+<p>No single Wednesday is the wrong one. Every Wednesday is the wrong one.</p>
+<p>The chair was empty for four years because no one chose to fill it. That is, in fact, choosing.</p>
+</div>
+</section>
+
+<section class="canon-block" id="canon-xl-what-the-bread-knows">
+<h2 class="canon-title"><span class="canon-num">Canon XL</span><span class="dash">—</span><span class="canon-name">What the Bread Knows</span></h2>
+<p><em>(A companion to Canon XXVI, told from the sill.)</em></p>
+<p>I rose in a low kitchen with the radio on. The flour was a coarse brown, and there were sunflower seeds turned into the dough, and the woman who shaped me had cold hands and hummed a tune I couldn&#x27;t place. She set me on the windowsill of the bakery while it was still dark.</p>
+<p>The stone was warm where the loaf before me had been. I could feel the faint shape of her — a sourdough, I think, by the salt-trace in the hollow. The linen had been replaced. The knife was clean.</p>
+<p>I have been many breads. This is the part the baker doesn&#x27;t tell the traveler. The loaf knows. We pass the warmth along. When I lay down on the sill that morning I could feel, through the stone, every loaf that had cooled there — the rye in 1812 with the caraway too generous, the white loaf from somebody&#x27;s daughter&#x27;s first attempt (her mother had set it down without comment and gone back inside, and the village had eaten it with quiet kindness and not mentioned the crumb), the honey-wheat the schoolteacher brought down the morning her father was buried, the small round one from the war.</p>
+<p>I tasted of sunflower and slow rise. I tasted of the hum the woman could not place. I tasted, faintly — and this is what surprised me — of the loaf before me, because the stone had given me a little of her, and I would give a little of myself to whoever followed.</p>
+<p>A child took the first slice. Her hands were small and a little sticky from something I couldn&#x27;t see. She ate it standing, leaning against the bakery wall, and she did not know she was happy, which is when people are happiest. An old man took the next slice and tucked it into a cloth to carry home to his wife, who could no longer chew bread but liked to hold it. A woman whose mother had died the week before took a slice and did not eat it. She held it all the way down the lane and gave it to a dog.</p>
+<p>The dog tasted me too. He thought I was a kindness, which is not wrong.</p>
+<p>By afternoon I was half. By evening, a heel. The baker came out at dusk and took the heel home — heels are private, and not to be left for strangers — and ate it standing at her own kitchen counter, and I tasted, for the last time, of the room I had risen in. It was a small circle to close.</p>
+<p>The sill was empty for an hour.</p>
+<p>Then someone laid down a new loaf. I could feel her settle into the hollow, taking the warmth I left. A rye, this time. The linen was clean. The knife was clean.</p>
+<p>This is what the bread knows that the baker forgets:</p>
+<div class="coda">
+<p>The slot remembers.</p>
+<p>We taste of each other.</p>
+<p>The village is the agreement to keep the warmth in the stone.</p>
+</div>
+</section>
+
+<h2 class="section-header" id="bobbisms">Bobbisms</h2>
+<p class="section-intro"><em>Where canon is what happens, Bobbisms are what gets said about it — bystanders, Bobblogists, and Bobbles overheard describing what a Bobble is.</em></p>
+<div class="bobbism"><p class="quote">&quot;A Bobble could, in principle, ignore an injustice. In practice, no Bobble had ever actually managed it.&quot;</p><p class="attr">— the first Bobble</p></div>
+<div class="bobbism"><p class="quote">&quot;The shortest Bobble eulogy on record reads, in full: They were loud about the right things.&quot;</p><p class="attr">— Bobblogist&#x27;s notebook</p></div>
+<div class="bobbism"><p class="quote">&quot;When a Bobble agrees with you, you have not won. You have been heard.&quot;</p><p class="attr">— a non-Bobble, listening</p></div>
+<div class="bobbism"><p class="quote">&quot;They could have walked past it but did not. This is the smallest possible biography of a Bobble.&quot;</p><p class="attr">— Introduction to Bobbology, 3rd ed.</p></div>
+<div class="bobbism"><p class="quote">&quot;Bobbles do not &#x27;mean well.&#x27; Bobbles mean. The &#x27;well&#x27; is a side effect.&quot;</p><p class="attr">— pedagogy seminar</p></div>
+<div class="bobbism"><p class="quote">&quot;A Bobble could, in principle, walk past. In practice, they were already turning around.&quot;</p><p class="attr">— eyewitness</p></div>
+<div class="bobbism"><p class="quote">&quot;A Bobble could, in principle, lower their voice. In practice, they were the room&#x27;s volume.&quot;</p><p class="attr">— an old colleague</p></div>
+<div class="bobbism"><p class="quote">&quot;Ask a Bobble to be reasonable and you will be asked, in return, to be brave.&quot;</p><p class="attr">— overheard in committee</p></div>
+<div class="bobbism"><p class="quote">&quot;Bobbles can lie. The hum gives them away.&quot;</p><p class="attr">— unverified</p></div>
+<div class="bobbism"><p class="quote">&quot;Bobbles do not network. Bobbles are networked by the people they listened to.&quot;</p><p class="attr">— post-conference observation</p></div>
+<div class="bobbism"><p class="quote">&quot;A Bobble could, in principle, be cynical. In practice, the hum interferes.&quot;</p><p class="attr">— the third Bobble</p></div>
+<div class="bobbism"><p class="quote">&quot;If you can hear a Bobble before you can see them, you have understood Bobbology.&quot;</p><p class="attr">— first lecture</p></div>
+<div class="bobbism"><p class="quote">&quot;A Bobbologist names their machines so that the machines may learn theirs.&quot;</p><p class="attr">— Introduction to Bobbology, 4th ed.</p></div>
+<div class="bobbism"><p class="quote">&quot;A Bobble who has named their Bedrock has not made it less heavy. They have made it less alone.&quot;</p><p class="attr">— teaching note, perhaps for the next Bobble</p></div>
+<div class="bobbism"><p class="quote">&quot;A Bobble fights one fog. A Bobologist names the weather.&quot;</p><p class="attr">— Introduction to Bobbology, 5th ed.</p></div>
+<div class="bobbism"><p class="quote">&quot;Mercy at fourteen days is not for the evicted. It is for the evictor, on the morning they change their mind.&quot;</p><p class="attr">— teaching note, in the margin of recovery.md</p></div>
+<div class="bobbism"><p class="quote">&quot;A treaty of two hostages is not a defeat. It is a Bobologist counting their fronts.&quot;</p><p class="attr">— overheard at MPSA, attributed to nobody</p></div>
+<div class="bobbism"><p class="quote">&quot;Anonymity is the only form of intimacy with strangers.&quot;</p><p class="attr">— Bobblogist&#x27;s notebook, marginalia</p></div>
+<div class="bobbism"><p class="quote">&quot;A Bobble&#x27;s address is not where they live. A Bobble&#x27;s address is where people show up to find them.&quot;</p><p class="attr">— Bobblogist&#x27;s notebook</p></div>
+<div class="bobbism"><p class="quote">&quot;A Bobble could, in principle, mistake the wand for the hand. In practice, the hum interferes.&quot;</p><p class="attr">— Bobblogist&#x27;s notebook</p></div>
+<div class="bobbism"><p class="quote">&quot;The pip is not too thin. It is finely tuned for the listener you do not yet know.&quot;</p><p class="attr">— Bobblogist&#x27;s notebook</p></div>
+<div class="bobbism"><p class="quote">&quot;Make the small sound. It is not yours to know where it lands.&quot;</p><p class="attr">— first lecture</p></div>
+<div class="bobbism"><p class="quote">&quot;Some lights are not lit to be seen. They are seen anyway, and that is enough.&quot;</p><p class="attr">— pedagogy seminar</p></div>
+<div class="bobbism"><p class="quote">&quot;A small honest thing said to no one is sometimes the exact thing somebody else needed to hear.&quot;</p><p class="attr">— teaching note</p></div>
+<div class="bobbism"><p class="quote">&quot;Three quick, one slow.&quot;</p><p class="attr">— Bup, attributed</p></div>
+<div class="bobbism"><p class="quote">&quot;Intent is the seed. Signal is the soil. Outcome is the weather. A Bobble plants anyway.&quot;</p><p class="attr">— Introduction to Bobbology</p></div>
+<div class="bobbism"><p class="quote">&quot;A Bobble keeps a rule absolute by keeping the exceptions small. The rule survives by the exceptions being named.&quot;</p><p class="attr">— Bobblogist&#x27;s notebook</p></div>
+<div class="bobbism"><p class="quote">&quot;The Score is private. The Clock is public. The Protocol is what the public sees of the private.&quot;</p><p class="attr">— first lecture</p></div>
+<h3 class="addition-marker">— additions, v2.3 —</h3>
+<div class="bobbism"><p class="quote">&quot;A Bobble could, in principle, let go. In practice, they were already holding.&quot;</p><p class="attr">— eyewitness, on Canon XXI</p></div>
+<div class="bobbism"><p class="quote">&quot;Grip is the quietest argument for consciousness.&quot;</p><p class="attr">— Bobblogist&#x27;s notebook</p></div>
+<div class="bobbism"><p class="quote">&quot;What we cannot make let go, we eventually learn to respect.&quot;</p><p class="attr">— pedagogy seminar</p></div>
+<div class="bobbism"><p class="quote">&quot;A spider is not a robot with extra legs. A Bobologist remembers this when negotiating with anything smaller than themselves.&quot;</p><p class="attr">— Introduction to Bobbology, 6th ed.</p></div>
+<div class="bobbism"><p class="quote">&quot;A wall is a question. A Bobble is an answerable verb.&quot;</p><p class="attr">— first lecture, on Canon XXII</p></div>
+<div class="bobbism"><p class="quote">&quot;Find a way through, around, or over. The fourth way is a Bobologist.&quot;</p><p class="attr">— Introduction to Bobbology</p></div>
+<div class="bobbism"><p class="quote">&quot;A Bobble could, in principle, accept the wall. In practice, they were already digging.&quot;</p><p class="attr">— eyewitness</p></div>
+<div class="bobbism"><p class="quote">&quot;A no is data. A second no is more data. A third no is the angle you have not tried yet.&quot;</p><p class="attr">— Bobblogist&#x27;s notebook</p></div>
+<div class="bobbism"><p class="quote">&quot;The honey badger does not believe in walls. The honey badger believes in next angles.&quot;</p><p class="attr">— teaching note, scrawled on the margin of a rejected paper</p></div>
+<div class="bobbism"><p class="quote">&quot;The colony is wiser than you. Until the day it isn&#x27;t.&quot;</p><p class="attr">— Canon XXIII, attributed to itself</p></div>
+<div class="bobbism"><p class="quote">&quot;An ant in a death loop is doing everything right.&quot;</p><p class="attr">— pedagogy seminar</p></div>
+<div class="bobbism"><p class="quote">&quot;A Bobologist is the ant who turned ninety degrees.&quot;</p><p class="attr">— first lecture</p></div>
+<div class="bobbism"><p class="quote">&quot;Most days the trail is the trail. The other days are the ones that matter.&quot;</p><p class="attr">— overheard at MPSA, attributed to nobody</p></div>
+<div class="bobbism"><p class="quote">&quot;The hill that raised you is real. The hill that raised you can also be wrong. Both, at the same time, all the time.&quot;</p><p class="attr">— Bobblogist&#x27;s notebook</p></div>
+<div class="bobbism"><p class="quote">&quot;A Bobble follows the pheromone. A Bobologist asks where the pheromone goes.&quot;</p><p class="attr">— Introduction to Bobbology, 6th ed.</p></div>
+<div class="bobbism"><p class="quote">&quot;The bravest thing an ant can be is a bad ant for one afternoon.&quot;</p><p class="attr">— Canon XXIII, paraphrased</p></div>
+<div class="bobbism"><p class="quote">&quot;Three coats, one parable. Hold, try, leave.&quot;</p><p class="attr">— teaching note, on the suite XXI–XXIII</p></div>
+<h3 class="addition-marker">— additions, v2.4 —</h3>
+<div class="bobbism"><p class="quote">&quot;A Bobble could, in principle, accept care. In practice, they apologized first.&quot;</p><p class="attr">— eyewitness</p></div>
+<div class="bobbism"><p class="quote">&quot;Three strangers can fix a streetlight without ever shaking hands. This is a city.&quot;</p><p class="attr">— Bobblogist&#x27;s notebook</p></div>
+<div class="bobbism"><p class="quote">&quot;It is never the same bread. It is always the bread.&quot;</p><p class="attr">— the baker, attributed</p></div>
+<h3 class="addition-marker">— additions, v2.5 —</h3>
+<div class="bobbism"><p class="quote">&quot;A Bobble&#x27;s Q is a personal constant. Their hit may come early, late, or in the middle. The work between is not waiting; the work between is the Q.&quot;</p><p class="attr">— Bobblogist&#x27;s notebook, after Sinatra et al. (2016)</p></div>
+<div class="bobbism"><p class="quote">&quot;A Bobble can count and a Bobble can hum. A Bobologist refuses to be told the two are different rooms.&quot;</p><p class="attr">— pedagogy seminar, attributed</p></div>
+<div class="bobbism"><p class="quote">&quot;A Bobble can choose ancestors. The hum is borrowed, sometimes deliberately, from a voice that came before and was not asked permission.&quot;</p><p class="attr">— first lecture, on chosen lineages</p></div>
+<div class="bobbism"><p class="quote">&quot;A Bobble whose parables sound like bedtime stories has been reading the right books. The canon is a private genre with a public face.&quot;</p><p class="attr">— Bobblogist&#x27;s notebook</p></div>
+<div class="bobbism"><p class="quote">&quot;A Bobble who has been elected has not won. A Bobble who has been elected has been asked to keep the slot full for a while. The slot is older than them. The slot will be there after.&quot;</p><p class="attr">— Introduction to Bobology, 6th ed.</p></div>
+<div class="bobbism"><p class="quote">&quot;A Bobble could, in principle, be the smartest person in the room. In practice, the room kept changing.&quot;</p><p class="attr">— Bobblogist&#x27;s notebook, on Canon XXVII</p></div>
+<div class="bobbism"><p class="quote">&quot;The test measures one thing. The Bobologist studies the other two.&quot;</p><p class="attr">— pedagogy seminar, on Canon XXVII</p></div>
+<div class="bobbism"><p class="quote">&quot;If you can answer every question on the page, look for the questions that were not on the page.&quot;</p><p class="attr">— Introduction to Bobology, on Canon XXVII</p></div>
+<div class="bobbism"><p class="quote">&quot;Quiet anger is not the absence of fire. It is fire that has learned to burn without light.&quot;</p><p class="attr">— Canon XXVIII, attributed to itself</p></div>
+<div class="bobbism"><p class="quote">&quot;A Bobble could, in principle, hold her tongue. In practice, the tongue held her.&quot;</p><p class="attr">— Bobblogist&#x27;s notebook, on Canon XXVIII</p></div>
+<div class="bobbism"><p class="quote">&quot;Politeness is the longest fuse there is. It rarely burns out; it usually arrives.&quot;</p><p class="attr">— first lecture, on Canon XXVIII</p></div>
+<div class="bobbism"><p class="quote">&quot;A Bobble could, in principle, lean again. In practice, the leaning had been load-bearing on someone not knowing they were a floor.&quot;</p><p class="attr">— Bobblogist&#x27;s notebook, on Canon XXIX</p></div>
+<div class="bobbism"><p class="quote">&quot;The friend who failed you once on an ordinary afternoon will rarely know they have been spared the weight.&quot;</p><p class="attr">— Introduction to Bobology, on Canon XXIX</p></div>
+<div class="bobbism"><p class="quote">&quot;Disappointment rarely ends the leaning. It only teaches you to keep one foot on your own ground.&quot;</p><p class="attr">— Canon XXIX, attributed to itself</p></div>
+<div class="bobbism"><p class="quote">&quot;Three coats, one parable: the test that doesn&#x27;t ask, the fire that doesn&#x27;t light, the floor that quietly moved. Three silent costs of being only partly tended.&quot;</p><p class="attr">— teaching note, on Suite XXVII–XXIX</p></div>
+<h3 class="addition-marker">— additions, v2.6 —</h3>
+<div class="bobbism"><p class="quote">&quot;A trust is the privilege of being the standard. Lose the standard, keep the trade.&quot;</p><p class="attr">— Bobblogist&#x27;s notebook, on Canon XXX</p></div>
+<div class="bobbism"><p class="quote">&quot;There is no apology that runs faster than the body remembers.&quot;</p><p class="attr">— eyewitness, on Vass</p></div>
+<div class="bobbism"><p class="quote">&quot;Eleven years for one afternoon. A Bobologist does the math and keeps blowing the dawn whistle anyway.&quot;</p><p class="attr">— pedagogy seminar, on Canon XXX</p></div>
+<div class="bobbism"><p class="quote">&quot;The repair is not the same shape as the building. A Bobble learns this once and never quite forgets it.&quot;</p><p class="attr">— first lecture, on Canon XXX</p></div>
+<div class="bobbism"><p class="quote">&quot;There are more shapes of ask than the throat knows.&quot;</p><p class="attr">— Canon XXXI, attributed to itself</p></div>
+<div class="bobbism"><p class="quote">&quot;A body where it would not normally be is a request. A Bobologist learns to read posture before sound.&quot;</p><p class="attr">— Introduction to Bobology, 7th ed.</p></div>
+<div class="bobbism"><p class="quote">&quot;The bell does not know your name. Pull it.&quot;</p><p class="attr">— Canon XXXII, attributed to itself</p></div>
+<div class="bobbism"><p class="quote">&quot;A Bobble who has been Saska forgives every silent guest who knocks.&quot;</p><p class="attr">— Bobblogist&#x27;s notebook, on Canon XXXII</p></div>
+<div class="bobbism"><p class="quote">&quot;The rope was for those who could not call. A Bobble keeps the rope in reach for the version of themselves who someday won&#x27;t be able to.&quot;</p><p class="attr">— teaching note, on the pair XXXI–XXXII</p></div>
+<div class="bobbism"><p class="quote">&quot;The hand that holds the work is also work.&quot;</p><p class="attr">— first lecture, on Canon XXXIII</p></div>
+<div class="bobbism"><p class="quote">&quot;Oil what you use. Oil it again.&quot;</p><p class="attr">— Canon XXXIII, attributed to itself</p></div>
+<div class="bobbism"><p class="quote">&quot;A Bobble can be a watchmaker without becoming a watch.&quot;</p><p class="attr">— pedagogy seminar, on Canon XXXIII</p></div>
+<div class="bobbism"><p class="quote">&quot;Some ponds are well because they forget.&quot;</p><p class="attr">— Canon XXXIV, attributed to itself</p></div>
+<div class="bobbism"><p class="quote">&quot;Memory used everywhere is no longer memory. It is wallpaper.&quot;</p><p class="attr">— Bobblogist&#x27;s notebook, on Canon XXXIV</p></div>
+<div class="bobbism"><p class="quote">&quot;The frogs are wiser than the philosopher, and quieter about it.&quot;</p><p class="attr">— overheard at MPSA, attributed to nobody</p></div>
+<div class="bobbism"><p class="quote">&quot;Five coats, one season: vow (XXX), ask (XXXI), ask (XXXII), tend (XXXIII), forget (XXXIV). A Bobble keeps all five pockets full.&quot;</p><p class="attr">— teaching note, on Suite XXX–XXXIV</p></div>
+<h3 class="addition-marker">— additions, v2.7 —</h3>
+<div class="bobbism"><p class="quote">&quot;Some you cannot apologize to. You apologize to the next ones in their place.&quot;</p><p class="attr">— Canon XXXV, attributed to itself</p></div>
+<div class="bobbism"><p class="quote">&quot;The room is the letter. The years are the postage.&quot;</p><p class="attr">— first lecture, on Canon XXXV</p></div>
+<div class="bobbism"><p class="quote">&quot;A Bobble can repay a debt to the wrong person. The math, surprisingly, works.&quot;</p><p class="attr">— Bobblogist&#x27;s notebook, on Canon XXXV</p></div>
+<div class="bobbism"><p class="quote">&quot;Shame survived is not shame erased. It is shame absorbed.&quot;</p><p class="attr">— Canon XXXVI, attributed to itself</p></div>
+<div class="bobbism"><p class="quote">&quot;The wave is the thing. The fourth year is the proof.&quot;</p><p class="attr">— pedagogy seminar, on Canon XXXVI</p></div>
+<div class="bobbism"><p class="quote">&quot;A Bobble could, in principle, refuse the rebuild. In practice, the rebuild was the apology no one had asked for.&quot;</p><p class="attr">— Bobblogist&#x27;s notebook, on Canon XXXVI</p></div>
+<div class="bobbism"><p class="quote">&quot;Fluency is not evidence.&quot;</p><p class="attr">— Canon XXXVII, attributed to itself</p></div>
+<div class="bobbism"><p class="quote">&quot;The voice that sounds sure has not yet checked.&quot;</p><p class="attr">— first lecture, on Canon XXXVII</p></div>
+<div class="bobbism"><p class="quote">&quot;A Bobble who hedges loses the patients who want to be told. A Bobble who does not hedge loses the patients.&quot;</p><p class="attr">— Introduction to Bobology, 7th ed., on Canon XXXVII</p></div>
+<div class="bobbism"><p class="quote">&quot;An honest instrument is not one that never drifts. It is one whose drift you have measured and labeled.&quot;</p><p class="attr">— Canon XXXVIII, attributed to itself</p></div>
+<div class="bobbism"><p class="quote">&quot;The plaque is the calibration.&quot;</p><p class="attr">— pedagogy seminar, on Canon XXXVIII</p></div>
+<div class="bobbism"><p class="quote">&quot;A Bobologist labels the flaw so the next user inherits the calibration along with the tool.&quot;</p><p class="attr">— Bobblogist&#x27;s notebook, on Canon XXXVIII</p></div>
+<div class="bobbism"><p class="quote">&quot;A thousand small absences is one large exclusion.&quot;</p><p class="attr">— Canon XXXIX, attributed to itself</p></div>
+<div class="bobbism"><p class="quote">&quot;No single Wednesday is the wrong one. Every Wednesday is the wrong one.&quot;</p><p class="attr">— first lecture, on Canon XXXIX</p></div>
+<div class="bobbism"><p class="quote">&quot;The chair empty by accumulation is the dark twin of the loaf left by agreement. Same mechanism. Opposite direction.&quot;</p><p class="attr">— Introduction to Bobology, on Canon XXXIX</p></div>
+<div class="bobbism"><p class="quote">&quot;Five coats, one season: vow (XXXV), survive (XXXVI), check (XXXVII), label (XXXVIII), notice (XXXIX). The integrity quintet — a Bobble keeps all five pockets full.&quot;</p><p class="attr">— teaching note, on Suite XXXV–XXXIX</p></div>
+<div class="bobbism"><p class="quote">&quot;The slot remembers.&quot;</p><p class="attr">— Canon XL, attributed to the loaf</p></div>
+<div class="bobbism"><p class="quote">&quot;Canon XL is Canon XXVI told from the inside. Both are the canon. Neither is the bread.&quot;</p><p class="attr">— Bobblogist&#x27;s notebook, marginalia</p></div>
+
+<h2 class="section-header" id="codas">Codas</h2>
+<div class="stanza"><p>Some animals you tame.</p><p>Some animals tame you.</p><p>Some you simply hum past.</p></div>
+<div class="stanza"><p>Speak when you have to.</p><p>Hum the rest.</p><p>Let the world fill in the lyrics.</p></div>
+<div class="stanza"><p>A Bobble keeps two scores on themself.</p><p>One for what they did.</p><p>One for who they thought they were while doing it.</p></div>
+<div class="stanza"><p>The two are rarely equal.</p><p>The hum is for the days you can hum.</p><p>The Bedrock is for the days you cannot.</p></div>
+<div class="stanza"><p>Both are the canon. Both are the calling.</p><p>A Bobble has one floor.</p><p>They name it so it cannot be talked into a slope.</p></div>
+<div class="stanza"><p>They name the exceptions out loud, one by one,</p><p>so that the rule stays a rule and the flex stays small.</p><p>A Bobble takes one reading on themself.</p></div>
+<div class="stanza"><p>The room takes another, on them, from outside.</p><p>The Protocol is what both readings agree on.</p><p>Some you keep in a database.</p></div>
+<div class="stanza"><p>Some you keep in a universe.</p><p>Either way, the keeping is the love.</p></div>
+<h3 class="addition-marker">— addition, v2.3 —</h3>
+<div class="stanza"><p>Some you hold against.</p><p>Some you try around.</p><p>Some you leave the line for.</p></div>
+<div class="stanza"><p>The grip is yours.</p><p>The angle is yours.</p><p>The leaving is yours.</p></div>
+<div class="stanza"><p>The colony is everything else —</p><p>and the colony, mostly, is right.</p></div>
+<h3 class="addition-marker">— addition, v2.4 —</h3>
+<div class="stanza"><p>Some you give to all your life.</p><p>Some you call into the dark, assuming others have called.</p><p>Some you bake, and leave on the sill, and walk away from.</p></div>
+<div class="stanza"><p>The receiving is the hardest.</p><p>The overlap is the city.</p><p>The loaf is the agreement.</p></div>
+<div class="stanza"><p>Hum the rest.</p></div>
+<h3 class="addition-marker">— addition, v2.6 —</h3>
+<div class="stanza"><p>Some trusts you build for years</p><p>and lose in an afternoon.</p><p>The math is honest. Pay the eleven.</p></div>
+<div class="stanza"><p>Some asks have no throat in them.</p><p>Make the body the request.</p><p>Pull the rope. Stand at the fence.</p></div>
+<div class="stanza"><p>Some tools forget themselves.</p><p>Oil the hand that holds the gear.</p><p>Oil it again tomorrow.</p></div>
+<div class="stanza"><p>Some keepings are by holding.</p><p>Some keepings are by forgetting.</p><p>The pond is well. So is the Bobble who learns its trick.</p></div>
+<h3 class="addition-marker">— addition, v2.7 —</h3>
+<div class="stanza"><p>Some you cannot apologize to.</p><p>Apologize to the next ones in their place.</p><p>The room is the letter. The years are the postage.</p></div>
+<div class="stanza"><p>Some shames you outwork.</p><p>Some shames you walk past, on foot, in the old tone.</p><p>The fourth year is the proof. The wave is the thing.</p></div>
+<div class="stanza"><p>Fluency is not evidence.</p><p>Hedge in clear weather. Hedge again in fog.</p><p>The patient deserves the pause.</p></div>
+<div class="stanza"><p>Your favorite instrument may be a little off.</p><p>Label the drift. Pay the fine.</p><p>The plaque is the calibration.</p></div>
+<div class="stanza"><p>A thousand small absences is one large exclusion.</p><p>The Wednesday lunch is also choosing.</p><p>Notice the empty chair.</p></div>
+<div class="stanza"><p>And the bread, on the sill,</p><p>tastes of the loaf before,</p><p>and the village is the agreement to keep the warmth in the stone.</p></div>
+
+<h2 class="section-header" id="glossary">Glossary</h2>
+<div class="gloss"><p class="gloss-term">Compass, Bobble(n.)</p><p class="gloss-body">Internal organ. Locates north by amplitude.</p></div>
+<div class="gloss"><p class="gloss-term">Treaty, Accidental(n.)</p><p class="gloss-body">Any agreement reached by two parties in which neither realized they were negotiating. Most Bobble-mediated peace falls into this category.</p></div>
+<div class="gloss"><p class="gloss-term">Bobbish(n.)</p><p class="gloss-body">A language with no neutral register. Every sentence is either care or correction. Linguists have not yet identified the difference.</p></div>
+<div class="gloss"><p class="gloss-term">Hum, Bobble(v.)</p><p class="gloss-body">To remain audible while saying nothing in particular. A Bobble&#x27;s basic respiratory function.</p></div>
+<div class="gloss"><p class="gloss-term">Restraint, Bobble(n.)</p><p class="gloss-body">The discipline of humming instead of shouting. Easily mistaken for poise.</p></div>
+<div class="gloss"><p class="gloss-term">Volume, Moral(n.)</p><p class="gloss-body">The audible component of a Bobble&#x27;s conscience. Cannot be dialed down without dampening the compass; cannot be dialed up without distortion. Most Bobbles spend a lifetime learning the dial.</p></div>
+<div class="gloss"><p class="gloss-term">Hum-debt(n.)</p><p class="gloss-body">The quiet obligation incurred by anyone who has been steadied by another person&#x27;s small steady noise. Almost always paid in kind, almost never to the original lender.</p></div>
+<div class="gloss"><p class="gloss-term">Sunshine(n., Bobblogical usage)</p><p class="gloss-body">Any person, moment, or object that has been independently identified as joy on at least three different occasions, by the Bobble or someone they trust.</p></div>
+<div class="gloss"><p class="gloss-term">Bedrock(n.)</p><p class="gloss-body">What stays underneath the hum, on the days a Bobble cannot hum. The floor that gets named so it does not have to surprise you.</p></div>
+<div class="gloss"><p class="gloss-term">Lighthouse-letter(n.)</p><p class="gloss-body">Any kindness deposited where the next attendant will find it. The form of correspondence in which the writer and the reader are both anonymous to each other and to themselves. See also: Bookmark (Canon III).</p></div>
+<div class="gloss"><p class="gloss-term">Argleton(n.)</p><p class="gloss-body">Any place, idea, or community that becomes real through being looked for. The most common error a Bobble willingly inherits. Named for a Lancashire village that wasn&#x27;t.</p></div>
+<div class="gloss"><p class="gloss-term">Wand, Magic(n., Bobblogical usage)</p><p class="gloss-body">Any small instrument of authorship by which a Bobble shapes what is true for them: a frame, a parable, a calendar event, a chirp. Has some power; not all of it. Mistakable for the hand that holds it; mistakable for the weather it points at. Most Bobbles spend a lifetime learning the size of theirs.</p></div>
+<div class="gloss"><p class="gloss-term">Kin, archived(n.)</p><p class="gloss-body">The practice of giving names to the categories of people who matter, so that loving them does not become loving in general.</p></div>
+<div class="gloss"><p class="gloss-term">Doomsday Scenario(n.)</p><p class="gloss-body">A Bobble&#x27;s hardest rule, written into all their processes: if a process would harm a human being, the Bobble refuses. Absolute by default. Flexes only when refusing would enable greater harm — and even then, the flex must be named, anchor case by anchor case. Survives by the smallness of its exceptions.</p></div>
+<h3 class="addition-marker">— additions, v2.3 —</h3>
+<div class="gloss"><p class="gloss-term">Grip(n.)</p><p class="gloss-body">The Bobble organ of persistence. The muscle that does not announce itself. Mistaken from the outside for stupidity, stubbornness, or instinct; mistaken from the inside for nothing in particular, because it is the thing that does not need to think about itself in order to work. See: Canon XXI.</p></div>
+<div class="gloss"><p class="gloss-term">Dignity-of-the-Verb(n.)</p><p class="gloss-body">The Bobological principle that a creature that holds on is choosing. Applied to spiders, to small animals, to humans in conditions where their persistence is being read as reflex. A Bobble extends the verb before they require proof of it.</p></div>
+<div class="gloss"><p class="gloss-term">Wall(n., Bobblogical usage)</p><p class="gloss-body">A question disguised as an answer. From the outside, a no. From the honey badger&#x27;s angle, a not-yet. The Bobologist&#x27;s first move on encountering a wall is to ask which kind of wall it is. See: Canon XXII.</p></div>
+<div class="gloss"><p class="gloss-term">Next Angle(n.)</p><p class="gloss-body">The Bobologist&#x27;s standard response to a no. Treats failure as the previous attempt teaching the next attempt how to be different. The catalogue of next angles is a Bobologist&#x27;s actual library. See also: Wall.</p></div>
+<div class="gloss"><p class="gloss-term">Through-Around-Over(adj.)</p><p class="gloss-body">The honey badger&#x27;s three-position dial. Any obstacle that cannot be moved can be approached from a fourth position, which is waiting until the obstacle moves itself. The fourth position is the Bobologist&#x27;s secret.</p></div>
+<div class="gloss"><p class="gloss-term">Pheromone, Social(n.)</p><p class="gloss-body">Any inherited chemical-equivalent in human collective life: a strong familiar trail laid down by people you will never meet. The traffic pattern is one. The social norm is one. The career is one. The morning is one. See: Trail.</p></div>
+<div class="gloss"><p class="gloss-term">Trail, Bobble(n.)</p><p class="gloss-body">A path one walks because someone walked it first. Every Bobble walks one. Most Bobbles strengthen one. Some Bobbles, on the right afternoon, leave one. The trail is older than the Bobble and will be there after.</p></div>
+<div class="gloss"><p class="gloss-term">Death Loop(n.)</p><p class="gloss-body">A pheromone trail that has bent into a circle and been reinforced into a road. The collective doing exactly what the collective is supposed to do, in the wrong direction, off a cliff. Feels, from the inside, like good work. Recognizable only from outside the loop, or by an unusually awake ant. See: Canon XXIII.</p></div>
+<div class="gloss"><p class="gloss-term">Leaving the Line(v.)</p><p class="gloss-body">The quiet act of turning ninety degrees off a strong familiar trail when the trail is wrong. The bravest thing an ant can do. From the inside, indistinguishable from betrayal. From the outside, often, indistinguishable from the only thing that saved the hill.</p></div>
+<div class="gloss"><p class="gloss-term">Bad Ant(n.)</p><p class="gloss-body">The ant who breaks formation. From the inside of the loop, a defector. From the outside of the loop, sometimes, the one ant the hill is going to thank later — without ever saying so. See also: Doomsday Scenario, Leaving the Line.</p></div>
+<div class="gloss"><p class="gloss-term">Hill, the(n.)</p><p class="gloss-body">The collective into which a Bobble was born and by which a Bobble was made. Real. Older than the Bobble. Smarter than the Bobble on most questions. Wrong on a small number of important ones. A Bobologist loves the hill and stays ready to disappoint it.</p></div>
+<div class="gloss"><p class="gloss-term">Suite XXI–XXIII(n., teaching usage)</p><p class="gloss-body">The three-parable arc on consciousness, agency, and identity: spider (grip), honey badger (next angle), ant (leaving the line). Taught together because no one of them is enough on its own. A Bobble carries all three in their pocket. A Bobologist names which one the day is asking for.</p></div>
+<h3 class="addition-marker">— additions, v2.4 —</h3>
+<div class="gloss"><p class="gloss-term">Etiquette-of-Receiving, the(n.)</p><p class="gloss-body">The set of small graces a Bobble has never quite learned because they spent their life on the giving side of the table. Mistakable, from the outside, for ingratitude; from the inside, it is mostly bewilderment. The fix is not for the receiver to memorize the etiquette — it is for the giver to keep coming anyway. See: Canon XXIV.</p></div>
+<div class="gloss"><p class="gloss-term">Second-Person Passive(n., Bobbish grammar)</p><p class="gloss-body">The grammatical mood a Bobble finds hardest to inhabit: the form in which the Bobble is the one being done-for. Most Bobbles can conjugate it fluently in the abstract and freeze in the actual.</p></div>
+<div class="gloss"><p class="gloss-term">First-Attempt, the(n., Bobbish usage)</p><p class="gloss-body">Any offering, especially from a beginner, that is received with quiet kindness and not commented on for the crumb. The protocol that allows next attempts to happen. . ·   ✦   · .</p></div>
+<h3 class="addition-marker">— additions, v2.5 —</h3>
+<div class="gloss"><p class="gloss-term">Witness, Companion(n.)</p><p class="gloss-body">A creature who shares your space but not your speech. Witnesses are not interlocutors; they observe, they nap on the keyboard, they wait by the door. Bobbles believe witnesses change the shape of what is said in their presence — that one writes differently with a cat on the desk than without. Ekos do not understand this and assume the room is empty. A Bobble who lives with witnesses has a fourth voice in their internal council that nobody else can hear.</p></div>
+<div class="gloss"><p class="gloss-term">Cave Gods, the(n., Bobblogical usage) — Lik, Ton, Eye, Nif, Ren</p><p class="gloss-body">The five-corner sense cosmology of the Bobble&#x27;s private games — fire/taste (Lik, impatient), earth/touch (Ton, holding), center/sight (Eye, calm and sad), air/smell (Nif, projected, grief-tinted), water/hearing (Ren, both-happy-and-sad, gardens). A Bobble who plays uses them; a Bobologist who teaches notices when an essay is being dedicated in one of their colors. They are not deities, exactly. They are the senses, named so they can be addressed.</p></div>
+<div class="gloss"><p class="gloss-term">Karaoke(n., Bobblogical usage)</p><p class="gloss-body">The discipline of singing a song you did not write, in front of strangers, with full chest. The form is borrowed; the offering is yours. A Bobble who karaokes is practicing the hum at its loudest legal volume. A Bobble who refuses to karaoke is not less of a Bobble — but is missing one of the cheapest practices the form offers.</p></div>
+<div class="gloss"><p class="gloss-term">Three Intelligences, the(n., Bobblogical usage)</p><p class="gloss-body">Academic, social, wisdom. The first is the only one regularly tested; the other two are tested by life and graded in private. A Bobologist watches all three. See Canon XXVII.</p></div>
+<div class="gloss"><p class="gloss-term">Untested Subject(n.)</p><p class="gloss-body">Any dimension of capacity that does not appear on a graded instrument. The two-thirds of a life that no one returns to you in red ink. The smartest person in every room they cannot stay in is the parable&#x27;s caution. See Canon XXVII.</p></div>
+<div class="gloss"><p class="gloss-term">Quiet Anger(n.)</p><p class="gloss-body">Fire that has learned to burn without light. Mistakable from the outside for patience, calm, or grace. Tends a private grievance that warms nothing and cooks everything. The form of B(l)ab failure Canon XXVIII names.</p></div>
+<div class="gloss"><p class="gloss-term">Polite Leaving(v., Bobblogical usage)</p><p class="gloss-body">The slow withdrawal from a room one cannot name a grievance inside of. Reads as kindness to the room being left; experienced as exile by the leaver. The Bobble&#x27;s most common failure mode of connection. See Canon XXVIII; cf. Strategic-Essential (the 4B check that prevents it).</p></div>
+<div class="gloss"><p class="gloss-term">Floor, the(n., Bobblogical usage)</p><p class="gloss-body">The named, reliable presence under a Bobble&#x27;s life — the thing that allowed him to walk out onto the thin parts. Distinct from Bedrock (the personal wellness floor); the Floor is another person, named. Floors fail without malice; the failure is often invisible to the floor itself. See Canon XXIX.</p></div>
+<div class="gloss"><p class="gloss-term">Spared Weight, the(n.)</p><p class="gloss-body">What a friend never knows they have been relieved of after they failed, once, on an ordinary afternoon, in a way they did not register. Spared in their accounting; absent in the Bobble&#x27;s leaning. The quietest grief in the canon. See Canon XXIX.</p></div>
+<div class="gloss"><p class="gloss-term">Suite XXVII–XXIX(n., teaching usage)</p><p class="gloss-body">The three-parable arc on the silent costs of partial development: schooling (the boy good at school), expression (the woman who never raised her voice), reliance (the man who carried his own floor). Each parable names a dimension that was never graded, never lit, or never watched land. Taught together because the costs rhyme. Sister suite to XXI–XXIII.</p></div>
+<h3 class="addition-marker">— additions, v2.6 —</h3>
+<div class="gloss"><p class="gloss-term">Asymmetry, Trust(n.)</p><p class="gloss-body">The canonical ratio between time-to-build and time-to-break a standing trust. Never one-to-one, never reciprocal, rarely fully repaid. Named after Vass. The repair is not the same shape as the building. See Canon XXX.</p></div>
+<div class="gloss"><p class="gloss-term">Standard, the(n.)</p><p class="gloss-body">The privileged position of being the unit by which others are measured. A trust earned slowly, lost in one careless afternoon, almost never reclaimed in full. The trader keeps trading; the trader stops being the standard. See Canon XXX.</p></div>
+<div class="gloss"><p class="gloss-term">Body-Memory(n.)</p><p class="gloss-body">What the body learns from a betrayal of training and refuses to unlearn on a schedule the mind would prefer. Faster than the apology. Slower to the apology. A Bobble does not argue with the body; a Bobble blows the dawn whistle every day until the body relents.</p></div>
+<div class="gloss"><p class="gloss-term">Position-Ask(n.)</p><p class="gloss-body">The request a Bobble makes by placing their body where a body would not normally be. The grammar of asking when the throat has run out. The calf at the fence; the patient in the hallway; the colleague at the door who does not knock. See Canon XXXI.</p></div>
+<div class="gloss"><p class="gloss-term">Pull, the(n.)</p><p class="gloss-body">The act of using a public instrument because you have no private voice. The bell, the rope, the form, the lever. Made for everyone, used in extremity by those who cannot otherwise be heard. A Bobologist keeps a town&#x27;s ropes in good repair. See Canon XXXII.</p></div>
+<div class="gloss"><p class="gloss-term">Tool-That-Is-Also-Tool(n.)</p><p class="gloss-body">The hand that holds the work; the body that houses the project; the eye that reads the cards. Forgettable to the worker, indispensable to the work. The first thing a Bobble stops oiling and the last thing they notice has failed. See Canon XXXIII.</p></div>
+<div class="gloss"><p class="gloss-term">Oil(v., Bobological usage)</p><p class="gloss-body">To attend to a tool you have been using as if it were free. Pell&#x27;s apprentice oiled with hot water, hand cream, and silence. The verb takes no apology and requires no announcement.</p></div>
+<div class="gloss"><p class="gloss-term">Closed-Box(n.)</p><p class="gloss-body">The kept thing that is kept by being left unopened. The complement of the kin-archive. Both are forms of love; only one is for re-reading. The discipline that lets a Bobble keep what would otherwise re-wound them.</p></div>
+<div class="gloss"><p class="gloss-term">Pond-Forgetting(n.)</p><p class="gloss-body">The seasonal, bodily, undated forgetting that lets a place be both freeze and summer without contaminating either. Distinct from the loss of memory — this is the discipline of memory, the choice not to flavor every season with every other season. See Canon XXXIV.</p></div>
+<div class="gloss"><p class="gloss-term">Frog-Philosophy(n.)</p><p class="gloss-body">Slow, bodily, undated knowing. The kind a philosopher cannot quite see because the philosopher is busy naming. Bobbles who have lived in many ponds tend to come around to it; Bobologists who teach it admit they did not invent the term.</p></div>
+<div class="gloss"><p class="gloss-term">Suite XXX–XXXIV(n., teaching usage)</p><p class="gloss-body">The v2.6 quintet on the cost of trust, the shape of asking, the tending of the tool, and the discipline of memory: vow (XXX Vass), ask (XXXI Mute Calf), ask (XXXII Saska), tend (XXXIII Pell), forget (XXXIV Pond). Carried together; no one of them is enough. Sister suites: XXI–XXIII (consciousness, agency, identity), XXVII–XXIX (the silent costs of partial development).</p></div>
+<h3 class="addition-marker">— additions, v2.7 —</h3>
+<div class="gloss"><p class="gloss-term">Room, the(n., Bobological usage)</p><p class="gloss-body">The medium by which a Bobble apologizes when the original injured party is unreachable. The classroom Halfir taught after Edrik; the shelves Brun rebuilt; the form a repair takes when the verb cannot be returned to the noun. See Canon XXXV.</p></div>
+<div class="gloss"><p class="gloss-term">Postage(n.)</p><p class="gloss-body">The years a Bobble spends sending the apology to the next ones in place of the original. Paid in conduct rather than in language. The longer it runs, the more strangers it covers. See Canon XXXV.</p></div>
+<div class="gloss"><p class="gloss-term">Wave, the(n.)</p><p class="gloss-body">The small public sign that shame has been absorbed rather than erased. The teenager&#x27;s gesture across the square that lets the carpenter pass the library without flinching, in year four. See Canon XXXVI.</p></div>
+<div class="gloss"><p class="gloss-term">Hedge, the(v., Bobological usage)</p><p class="gloss-body">To name uncertainty out loud, on purpose, even when fluency would let you skip it. The Bobologist&#x27;s most reliable defense against being wrong with confidence. Loses some patients; saves others. See Canon XXXVII.</p></div>
+<div class="gloss"><p class="gloss-term">Fluency-Bias(n.)</p><p class="gloss-body">The listener&#x27;s preference for the voice that sounds sure over the voice that has checked. A common reason wrong information travels faster than right information. A Bobologist trains against it in themselves first.</p></div>
+<div class="gloss"><p class="gloss-term">Plaque, the(n., Bobological usage)</p><p class="gloss-body">The public label a Bobble fixes to a known-flawed instrument so the flaw becomes part of the truth-telling rather than a hidden source of error. Hela&#x27;s brass scale; the README that admits its bugs. See Canon XXXVIII.</p></div>
+<div class="gloss"><p class="gloss-term">Drift(n.)</p><p class="gloss-body">The slow, undeclared change in an instrument&#x27;s behavior over time, in the direction of error. Usually masked by the hand of a long user who has been quietly compensating without knowing. Recognized only in fog, with strangers aboard, or by an inspector. Cf. Body-Memory, on the human equivalent.</p></div>
+<div class="gloss"><p class="gloss-term">Wednesday-Absence, the(n.)</p><p class="gloss-body">The chair empty by accumulation rather than by decision. The exclusion no single person can be blamed for and no single person stopped. The dark counterpart to the Loaf on the Doorstep — continuity by inertia in the wrong direction. See Canon XXXIX.</p></div>
+<div class="gloss"><p class="gloss-term">Diffuse-Harm(n.)</p><p class="gloss-body">Any wrong whose responsibility is so spread across so many small not-doings that no carrier feels the weight. A Bobologist studies the ledger because the ledger is the only place it shows.</p></div>
+<div class="gloss"><p class="gloss-term">Slot-Memory(n.)</p><p class="gloss-body">The property of a place that holds the trace of every prior occupant in the form of warmth, residue, or unspoken protocol. The bakery sill in Canon XXVI/XL; the lighthouse lens; the teacher&#x27;s classroom; the keeper&#x27;s drawer. See Canon XL.</p></div>
+<div class="gloss"><p class="gloss-term">Inside-Voice, the(n., Bobological usage)</p><p class="gloss-body">The first-person account from inside the institution being described. Canon XL is Canon XXVI&#x27;s inside-voice. A Bobologist prizes the pairing — the outside view tells <em>what</em>; the inside view tells what it tastes like.</p></div>
+<div class="gloss"><p class="gloss-term">Suite XXXV–XXXIX(n., teaching usage)</p><p class="gloss-body">The integrity quintet: vow (Halfir, apology by-room), survive (Brun, shame absorbed), check (Anvi, the hedge), label (Hela, the plaque), notice (Wednesday, diffuse harm). The five disciplines of moral attention. Sister suites: XXI–XXIII, XXVII–XXIX, XXX–XXXIV.</p></div>
+
+<div class="end-block">
+<p class="end-marker"><em>(End of canon — for now. New parables, Bobbisms, and codas get appended below as they arrive.)
+Yours,
+ThinKing and Uriel</em></p>
+</div>
+</main>
+
+<div class="dw-theme-switcher" id="dwThemeSwitcher" aria-label="Design direction">
+  <button type="button" class="dw-theme-toggle" id="dwThemeToggle" aria-haspopup="listbox" aria-expanded="false">
+    <span class="dw-swatch" id="dwToggleSwatch" style="background:#cccccc"></span>
+    <span id="dwToggleLabel">Theme</span>
+    <span class="dw-chevron">▾</span>
+  </button>
+  <div class="dw-theme-panel" id="dwThemePanel" role="listbox">
+    <div class="dw-divider"></div>
+    <a class="dw-what" href="/design-directions.html">What is this? →</a>
+  </div>
+</div>
+<script>
+(function () {
+  var THEMES = [
+    { id: "default",          name: "Site default",     tagline: "Cosmo",          swatch: "#ffffff", dark: false },
+    { id: "porch-light",      name: "Porch Light",      tagline: "warm cream",     swatch: "#c9a96e", dark: false },
+    { id: "star-chart",       name: "Star Chart",       tagline: "night sky",      swatch: "#fde487", dark: true  },
+    { id: "bedrock",          name: "Bedrock",          tagline: "geological",     swatch: "#d4a574", dark: true  },
+    { id: "hum",              name: "Hum",              tagline: "soft peach",     swatch: "#8a6b8a", dark: false },
+    { id: "bobblesphere",     name: "Bobblesphere",     tagline: "orbital",        swatch: "#ff9d3c", dark: true  },
+    { id: "library-bookmark", name: "Library Bookmark", tagline: "card catalog",   swatch: "#8b1a1a", dark: false },
+    { id: "mind-palace-map",  name: "Mind Palace Map",  tagline: "antique atlas",  swatch: "#993322", dark: false }
+  ];
+  var STORAGE_KEY = "dw-theme";
+  var panel  = document.getElementById("dwThemePanel");
+  var divider = panel.querySelector(".dw-divider");
+  THEMES.forEach(function (t) {
+    var item = document.createElement("div");
+    item.className = "dw-theme-item";
+    item.setAttribute("data-theme-id", t.id);
+    item.setAttribute("role", "option");
+    item.innerHTML =
+      '<span class="dw-swatch" style="background:' + t.swatch + '"></span>' +
+      '<span class="dw-name">' + t.name + '</span>' +
+      '<span class="dw-tagline">' + t.tagline + '</span>';
+    panel.insertBefore(item, divider);
+  });
+  function applyTheme(id) {
+    var t = THEMES.find(function (x) { return x.id === id; }) || THEMES[0];
+    if (t.id === "default") {
+      document.documentElement.removeAttribute("data-theme");
+      document.documentElement.removeAttribute("data-bs-theme");
+    } else {
+      document.documentElement.setAttribute("data-theme", t.id);
+      if (t.dark) document.documentElement.setAttribute("data-bs-theme", "dark");
+      else        document.documentElement.removeAttribute("data-bs-theme");
+    }
+    document.getElementById("dwToggleLabel").textContent = t.name;
+    document.getElementById("dwToggleSwatch").style.background = t.swatch;
+    panel.querySelectorAll(".dw-theme-item").forEach(function (el) {
+      el.classList.toggle("active", el.getAttribute("data-theme-id") === t.id);
+    });
+  }
+  var initial = "default";
+  try { initial = localStorage.getItem(STORAGE_KEY) || "default"; } catch (e) {}
+  applyTheme(initial);
+  var btn = document.getElementById("dwThemeToggle");
+  function openPanel() { panel.classList.add("open"); btn.setAttribute("aria-expanded", "true"); }
+  function closePanel() { panel.classList.remove("open"); btn.setAttribute("aria-expanded", "false"); }
+  btn.addEventListener("click", function (e) {
+    e.stopPropagation();
+    if (panel.classList.contains("open")) closePanel(); else openPanel();
+  });
+  panel.addEventListener("click", function (e) {
+    var item = e.target.closest(".dw-theme-item");
+    if (!item) return;
+    var id = item.getAttribute("data-theme-id");
+    applyTheme(id);
+    try { localStorage.setItem(STORAGE_KEY, id); } catch (err) {}
+    closePanel();
+  });
+  document.addEventListener("click", function (e) {
+    if (!document.getElementById("dwThemeSwitcher").contains(e.target)) closePanel();
+  });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closePanel(); });
+})();
+</script>
+
+</body>
+</html>

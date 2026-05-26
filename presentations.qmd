@@ -1,0 +1,30 @@
+---
+title: "Presentations"
+listing:
+  - id: bobology
+    contents: presentations/bobology
+    type: default
+    # Curated order: Lecture 1 -> Lecture 2 -> Lecture 3 -> Lecture 4.
+    # Toggle to date/title still works via sort-ui.
+    sort: "order asc"
+    sort-ui: [date, title]
+    fields: [date, title, description]
+    feed: true
+  - id: other
+    contents: presentations/other
+    type: default
+    sort: "date desc"
+    sort-ui: [date, title]
+    fields: [date, title, description]
+    feed: true
+---
+
+## Bobology
+
+::: {#bobology}
+:::
+
+## Other & Misc
+
+::: {#other}
+:::

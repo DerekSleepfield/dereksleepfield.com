@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7 design directions · derekwakefield.com</title>
+<style>
+  :root {
+    --paper: #f4f1ea;
+    --ink: #1f1f1f;
+    --rule: #d8d2c2;
+    --soft: #6b6452;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  header.master {
+    padding: 36px 28px 22px;
+    background: #fff;
+    border-bottom: 1px solid var(--rule);
+  }
+  header.master h1 {
+    margin: 0 0 4px;
+    font-size: 28px;
+    letter-spacing: -0.01em;
+  }
+  header.master p {
+    margin: 0;
+    color: var(--soft);
+    font-size: 14px;
+    font-style: italic;
+    max-width: 800px;
+  }
+  header.master .constellation {
+    color: var(--soft);
+    font-size: 12px;
+    letter-spacing: 0.4em;
+    margin: 0 0 4px;
+    user-select: none;
+  }
+  main {
+    padding: 28px 28px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .opt {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    padding: 22px 24px 18px;
+    margin-bottom: 26px;
+    box-shadow: 0 2px 8px rgba(40,30,10,0.04);
+  }
+  .opt h2 {
+    margin: 0 0 3px;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+  }
+  .opt h2 .num {
+    color: #b8b1a0;
+    font-weight: 400;
+    margin-right: 8px;
+    font-variant-numeric: tabular-nums;
+  }
+  .opt .tagline {
+    color: #7f3fbf;
+    font-size: 13.5px;
+    font-style: italic;
+    margin: 0 0 10px;
+  }
+  .opt .desc {
+    color: #4a4a4a;
+    font-size: 13.5px;
+    line-height: 1.55;
+    margin: 0 0 16px;
+    max-width: 760px;
+  }
+  .opt iframe {
+    width: 100%;
+    height: 480px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+    display: block;
+  }
+  footer.master {
+    padding: 30px 28px 60px;
+    text-align: center;
+    color: var(--soft);
+    font-size: 13px;
+    font-style: italic;
+  }
+  footer.master b {
+    color: #7f3fbf;
+    font-style: normal;
+  }
+</style>
+</head>
+<body>
+
+<header class="master">
+  <p class="constellation">·   ✦   ·   ★   ·   ✧   ·</p>
+  <h1>seven design directions for derekwakefield.com</h1>
+  <p>each card below is a working mockup of your homepage rendered in that aesthetic. scroll, browse, hum. when one lands, holler the number and i'll wire it into _quarto.yml + styles.css.</p>
+</header>
+
+<main>
+
+<!-- ─────────── 1 / PORCH LIGHT ─────────── -->
+<section class="opt">
+  <h2><span class="num">01</span>Porch Light</h2>
+  <p class="tagline">small voice, on a porch, with one bulb above the door</p>
+  <p class="desc">Cream paper, single tiny constellation, generous whitespace, serif so quiet you can hear the page. The website-as-porch — you arrive, the light is on, the frog is humming. Best if you want the site to feel <em>arrived at</em> rather than <em>presented</em>.</p>
+  <iframe srcdoc='
+<style>
+  body{margin:0;background:#faf8f3;color:#2a2a2a;font-family:"Iowan Old Style","Palatino",Georgia,serif;line-height:1.55}
+  .wrap{max-width:520px;margin:0 auto;padding:40px 28px}
+  .const{color:#9c8e6f;font-size:11px;letter-spacing:0.35em;text-align:center;margin:0 0 16px}
+  h1{font-size:30px;margin:0 0 2px;font-weight:600;letter-spacing:-0.01em}
+  .sub{color:#7d745f;font-size:13.5px;font-style:italic;margin:0 0 22px}
+  nav{font-size:13px;color:#5b5340;margin:0 0 26px;padding:8px 0;border-top:1px solid #e5dec4;border-bottom:1px solid #e5dec4;letter-spacing:0.02em}
+  nav a{color:#5b5340;text-decoration:none;margin-right:14px}
+  nav a:hover{color:#c9a96e}
+  p.bio{font-size:15px;margin:0 0 18px;color:#3a3528}
+  .now{font-size:12.5px;color:#7d745f;font-style:italic;border-left:2px solid #c9a96e;padding:2px 0 2px 12px;margin:14px 0}
+  .foot{margin-top:36px;color:#9c8e6f;font-size:12px;text-align:center;font-style:italic}
+</style>
+<div class="wrap">
+  <p class="const">·  ✦  ·  ★  ·  ✧  ·</p>
+  <h1>Derek Wakefield</h1>
+  <p class="sub">Assistant Professor of Political Science · Bucknell</p>
+  <nav><a>Home</a><a>Research</a><a>Teaching</a><a>CV</a><a>Now</a><a>Writing</a><a>Apps</a></nav>
+  <p class="bio">A Bobologist with a moral compass louder than his survival instinct. Teaching, writing, and humming his way through American political behavior. Currently thinking about deliberation, race, and the genealogy of ideas.</p>
+  <div class="now">now reading <b>bobble canon</b> · now writing <b>chapter 3</b> · now hearing <b>porch frog</b></div>
+  <p class="foot">© 2026 · the small light is on</p>
+</div>
+'></iframe>
+</section>
+
+<!-- ─────────── 2 / STAR CHART ─────────── -->
+<section class="opt">
+  <h2><span class="num">02</span>Star Chart</h2>
+  <p class="tagline">deep night, scholarly astrolabe, nav as constellation</p>
+  <p class="desc">Full-bleed navy starfield, parchment-yellow ink, navigation drawn like coordinates on a celestial map. Each page is a planet. Big presence; pairs nicely with the citation-genealogy work since that lineage <em>is</em> a constellation of names across decades.</p>
+  <iframe srcdoc='
+<style>
+  body{margin:0;background:radial-gradient(ellipse at 30% 20%,#1a2440 0%,#0a1428 65%);color:#d8d0b8;font-family:"Crimson Pro","Crimson Text",Cambria,Georgia,serif;line-height:1.5;min-height:480px}
+  .wrap{max-width:680px;margin:0 auto;padding:36px 32px}
+  .sky{font-family:monospace;color:#a89868;font-size:11px;line-height:1.35;white-space:pre;text-align:center;margin:0 0 14px;opacity:0.65;letter-spacing:0.06em}
+  h1{font-size:34px;margin:0 0 2px;font-weight:600;letter-spacing:-0.005em;color:#fde487}
+  .sub{color:#9d9270;font-size:14px;font-style:italic;margin:0 0 22px}
+  nav{font-size:12.5px;color:#a89868;margin:0 0 24px;padding:10px 0;border-top:1px solid #2a3458;border-bottom:1px solid #2a3458;letter-spacing:0.18em;text-transform:uppercase}
+  nav a{color:#a89868;text-decoration:none;margin-right:16px}
+  nav a:hover{color:#fde487}
+  p.bio{font-size:15.5px;margin:0 0 16px;color:#d8d0b8}
+  .now{font-size:12.5px;color:#9d9270;font-style:italic;margin:16px 0;letter-spacing:0.02em}
+  .foot{margin-top:30px;color:#7a6f55;font-size:11.5px;text-align:center;font-style:italic;letter-spacing:0.1em}
+</style>
+<div class="wrap">
+<pre class="sky">    ·     ·   ★    ·       ✦     ·         ·
+  ·     *           ·    ·         ·   *
+       ·     ✧   ·       *     ·       ·
+   *       ·     · ★ ·    ·     ✦   ·
+       ·   *      ·      ·  *      ✧</pre>
+  <h1>Derek Wakefield</h1>
+  <p class="sub">Assistant Professor of Political Science · Bucknell</p>
+  <nav><a>Home</a><a>Research</a><a>Teaching</a><a>CV</a><a>Now</a><a>Writing</a><a>Apps</a></nav>
+  <p class="bio">A Bobologist with a moral compass louder than his survival instinct. Teaching, writing, and humming his way through American political behavior. Constellations of citation, lineages of voice.</p>
+  <div class="now">now reading bobble canon · now writing chapter 3 · now hearing porch frog</div>
+  <p class="foot">© 2026 · charting the small lights</p>
+</div>
+'></iframe>
+</section>
+
+<!-- ─────────── 3 / FIELD NOTES ─────────── -->
+<section class="opt">
+  <h2><span class="num">03</span>Bedrock</h2>
+  <p class="tagline">heavy slab serif, geological strata, gravity-anchored</p>
+  <p class="desc">Deep teal background, limestone-cream ink, ASCII strata layers dividing sections. The web equivalent of the bedrock metaphor in your canon — what stays underneath the hum on the days you cannot hum. Confident, slow, present.</p>
+  <iframe srcdoc='
+<style>
+  body{margin:0;background:#1a2840;color:#e8e2d1;font-family:Domine,"Cambria",Georgia,serif;line-height:1.5;min-height:480px}
+  .wrap{max-width:640px;margin:0 auto;padding:36px 32px}
+  .strata{font-family:monospace;font-size:12px;line-height:1.05;letter-spacing:0.05em;color:#d4a574;white-space:pre;margin:0 0 18px;opacity:0.85}
+  h1{font-size:36px;margin:0 0 4px;font-weight:700;letter-spacing:-0.02em;color:#fff8e8}
+  .sub{color:#a89673;font-size:13.5px;margin:0 0 24px;letter-spacing:0.04em}
+  nav{font-size:12px;color:#d4a574;margin:0 0 26px;padding:12px 0;border-top:2px solid #2c3d5c;border-bottom:2px solid #2c3d5c;letter-spacing:0.22em;text-transform:uppercase;font-weight:700}
+  nav a{color:#d4a574;text-decoration:none;margin-right:18px}
+  nav a:hover{color:#fff8e8}
+  p.bio{font-size:16px;margin:0 0 18px;color:#e8e2d1;font-weight:400}
+  .now{font-size:13px;color:#a89673;margin:18px 0;font-style:italic}
+  .foot{margin-top:30px;color:#6a7388;font-size:11.5px;font-style:italic;text-align:center;letter-spacing:0.08em}
+</style>
+<div class="wrap">
+<pre class="strata">─────────────────────────────────────────
+≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈≈
+░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓</pre>
+  <h1>Derek Wakefield</h1>
+  <p class="sub">Assistant Professor of Political Science · Bucknell</p>
+  <nav><a>Home</a><a>Research</a><a>Teaching</a><a>CV</a><a>Now</a><a>Writing</a><a>Apps</a></nav>
+  <p class="bio">A Bobologist with a moral compass louder than his survival instinct. The hum is for the days you can hum. The bedrock is for the days you cannot. Both are the canon.</p>
+  <div class="now">now reading bobble canon · now writing chapter 3 · now hearing porch frog</div>
+  <p class="foot">© 2026 · what stays underneath the hum</p>
+</div>
+'></iframe>
+</section>
+
+<!-- ─────────── 5 / HUM ─────────── -->
+<section class="opt">
+  <h2><span class="num">04</span>Hum</h2>
+  <p class="tagline">soft peach, dusty plum, continuous low-volume wave</p>
+  <p class="desc">Pastel-warm background, a tiny sound-wave running across the top, type set in a relaxed serif. The visual equivalent of the smallest steady noise — the page hums at you instead of shouting. Best for the days when the canon’s gentleness is the point.</p>
+  <iframe srcdoc='
+<style>
+  body{margin:0;background:#f4ebe1;color:#3a2e2e;font-family:Cormorant,"Cormorant Garamond",Georgia,serif;line-height:1.55;min-height:480px}
+  .wrap{max-width:580px;margin:0 auto;padding:34px 28px}
+  .wave{font-family:monospace;color:#8a6b8a;font-size:12px;letter-spacing:0.05em;text-align:center;margin:0 0 18px;opacity:0.7}
+  h1{font-size:38px;margin:0 0 3px;font-weight:500;letter-spacing:-0.005em}
+  .sub{color:#8a6b8a;font-size:14.5px;font-style:italic;margin:0 0 24px}
+  nav{font-size:13.5px;color:#5d4f4f;margin:0 0 26px;padding:0;letter-spacing:0.06em}
+  nav a{color:#5d4f4f;text-decoration:none;margin-right:14px;border-bottom:1px solid transparent;padding-bottom:1px}
+  nav a:hover{border-bottom-color:#8a6b8a;color:#8a6b8a}
+  p.bio{font-size:16.5px;margin:0 0 14px;color:#3a2e2e;font-weight:400}
+  .now{font-size:13.5px;color:#8a6b8a;font-style:italic;margin:16px 0;text-align:left}
+  .foot{margin-top:34px;color:#a08e8e;font-size:12px;text-align:center;font-style:italic;letter-spacing:0.04em}
+</style>
+<div class="wrap">
+  <p class="wave">∿  ~  ∿  ~  ∿  ~  ∿  ~  ∿  ~  ∿  ~  ∿  ~  ∿</p>
+  <h1>Derek Wakefield</h1>
+  <p class="sub">Assistant Professor of Political Science · Bucknell</p>
+  <nav><a>home</a><a>research</a><a>teaching</a><a>cv</a><a>now</a><a>writing</a><a>apps</a></nav>
+  <p class="bio">A Bobologist with a moral compass louder than his survival instinct. Teaching, writing, and humming his way through American political behavior. The smallest steady noise is a kind of promise.</p>
+  <div class="now">now reading bobble canon · now writing chapter 3 · now hearing porch frog</div>
+  <p class="foot">© 2026 · ∿ still humming ∿</p>
+</div>
+'></iframe>
+</section>
+
+<!-- ─────────── 6 / TREE OF KNOWLEDGE ─────────── -->
+<section class="opt">
+  <h2><span class="num">05</span>Bobblesphere</h2>
+  <p class="tagline">orbital rings · radial nav · sections as planets</p>
+  <p class="desc">Deep-space gray, cream-star ink, an orbital ring system as the navigation motif. Each page is a planet. Cosmic-but-warm. Best if you want a sense of <em>systems</em> — how the parts revolve around the center.</p>
+  <iframe srcdoc='
+<style>
+  body{margin:0;background:#0f1419;color:#f7eccb;font-family:Inter,"Helvetica Neue",Helvetica,Arial,sans-serif;line-height:1.55;min-height:480px}
+  .wrap{max-width:680px;margin:0 auto;padding:30px 28px}
+  .orbits{font-family:monospace;color:#ff9d3c;font-size:13px;line-height:1.1;text-align:center;white-space:pre;margin:0 0 14px;opacity:0.85}
+  h1{font-size:32px;margin:0 0 4px;font-weight:600;letter-spacing:-0.015em;color:#fff5d0;text-align:center}
+  .sub{color:#a89c7d;font-size:13.5px;margin:0 0 22px;text-align:center;letter-spacing:0.04em}
+  nav{font-size:12px;color:#f7eccb;margin:0 0 22px;text-align:center;letter-spacing:0.18em;text-transform:uppercase}
+  nav a{color:#f7eccb;text-decoration:none;margin:0 11px;border:1px solid #2a3140;border-radius:14px;padding:5px 12px;display:inline-block;margin-bottom:6px}
+  nav a:hover{border-color:#ff9d3c;color:#ff9d3c}
+  p.bio{font-size:15px;margin:0 0 14px;color:#d8cfb4;text-align:center;max-width:520px;margin-left:auto;margin-right:auto}
+  .now{font-size:12.5px;color:#a89c7d;font-style:italic;margin:18px 0;text-align:center;letter-spacing:0.02em}
+  .foot{margin-top:26px;color:#5a5240;font-size:11.5px;text-align:center;letter-spacing:0.1em}
+</style>
+<div class="wrap">
+<pre class="orbits">       ╭───────╮
+     ╭     ◯     ╮
+    ╭   ╭─────╮   ╮
+    │   │  ✦  │   │
+    ╰   ╰─────╯   ╯
+     ╰     ◯     ╯
+       ╰───────╯</pre>
+  <h1>Derek Wakefield</h1>
+  <p class="sub">Assistant Professor of Political Science · Bucknell</p>
+  <nav><a>Home</a><a>Research</a><a>Teaching</a><a>CV</a><a>Now</a><a>Writing</a><a>Apps</a></nav>
+  <p class="bio">A Bobologist with a moral compass louder than his survival instinct. The center is the compass; the planets are the work. Both are the canon, both are the calling.</p>
+  <div class="now">now reading bobble canon · now writing chapter 3 · now hearing porch frog</div>
+  <p class="foot">© 2026 · IN ORBIT</p>
+</div>
+'></iframe>
+</section>
+
+<!-- ─────────── 9 / LIBRARY BOOKMARK ─────────── -->
+<section class="opt">
+  <h2><span class="num">06</span>Library Bookmark</h2>
+  <p class="tagline">card catalog · dotted dividers · archival quiet</p>
+  <p class="desc">Library-card cream, typewriter monospace, a hand-lettered Dewey-decimal-style bookmark hanging down the side. Echoes Canon III (the receipt-as-bookmark parable). Best if you want the site to feel like a kindness left for someone you’ll never meet.</p>
+  <iframe srcdoc='
+<style>
+  body{margin:0;background:#f9f6ed;color:#2d2519;font-family:"IBM Plex Mono","Courier New",monospace;line-height:1.55;min-height:480px}
+  .wrap{max-width:680px;margin:0 auto;padding:30px 28px 30px 110px;position:relative;min-height:440px}
+  .bookmark{position:absolute;left:18px;top:0;width:68px;background:#fff;border:1.5px solid #2d2519;padding:14px 8px;font-size:9.5px;line-height:1.5;letter-spacing:0.04em;text-align:center}
+  .bookmark .num{font-weight:700;font-size:11px;border-bottom:1px solid #2d2519;padding-bottom:4px;margin-bottom:6px}
+  .bookmark .div{border-top:1px dashed #2d2519;margin:5px 0}
+  .bookmark .stamp{color:#8b1a1a;border:1px solid #8b1a1a;padding:1px 3px;margin-top:6px;display:inline-block;font-size:8px;letter-spacing:0.08em}
+  h1{font-size:24px;margin:0 0 2px;font-weight:700;letter-spacing:-0.005em}
+  .sub{color:#665845;font-size:12.5px;margin:0 0 20px}
+  nav{font-size:12px;color:#2d2519;margin:0 0 22px;padding:6px 0;border-top:1.5px dashed #2d2519;border-bottom:1.5px dashed #2d2519;letter-spacing:0.06em}
+  nav a{color:#2d2519;text-decoration:none;margin-right:13px;text-transform:uppercase}
+  nav a:hover{color:#8b1a1a}
+  p.bio{font-size:13.5px;margin:0 0 12px;color:#2d2519;line-height:1.65}
+  .now{font-size:12px;color:#665845;font-style:italic;margin:12px 0}
+  .foot{margin-top:24px;color:#8a7a5e;font-size:11px;letter-spacing:0.08em}
+</style>
+<div class="wrap">
+  <div class="bookmark">
+    <div class="num">HM<br>51<br>.W34<br>2026</div>
+    <div>Wakefield,<br>Derek</div>
+    <div class="div"></div>
+    <div>Bobble<br>Canon</div>
+    <div class="div"></div>
+    <div class="stamp">PORCH</div>
+  </div>
+  <h1>Derek Wakefield</h1>
+  <p class="sub">Assistant Professor of Political Science · Bucknell</p>
+  <nav><a>Home</a><a>Research</a><a>Teaching</a><a>CV</a><a>Now</a><a>Writing</a><a>Apps</a></nav>
+  <p class="bio">A Bobologist with a moral compass louder than his survival instinct. Teaching, writing, and humming his way through American political behavior. A bookmark is a kindness we leave for someone we will never meet.</p>
+  <div class="now">now reading bobble canon · now writing chapter 3 · now hearing porch frog</div>
+  <p class="foot">© 2026 · MARKED · NOT FINISHED</p>
+</div>
+'></iframe>
+</section>
+
+<!-- ─────────── 10 / MIND PALACE MAP ─────────── -->
+<section class="opt">
+  <h2><span class="num">07</span>Mind Palace Map</h2>
+  <p class="tagline">antique cartography · compass rose · framed scholarly plate</p>
+  <p class="desc">Aged-paper, sepia ink, a compass rose and lat/long crosshairs as the visual frame. The site renders like an old atlas plate — your bio is the legend, the nav is the index of regions. Best if you want a clear thematic line from the existing mind-palace.html page outward.</p>
+  <iframe srcdoc='
+<style>
+  body{margin:0;background:#efe5d0;color:#2a1f0e;font-family:"IM Fell English","Spectral",Georgia,serif;line-height:1.6;min-height:480px}
+  .wrap{max-width:680px;margin:0 auto;padding:26px 30px;border:2px solid #2a1f0e;outline:1px solid #2a1f0e;outline-offset:8px;margin-top:14px;margin-bottom:14px}
+  .compass{font-family:monospace;font-size:11px;line-height:1.1;color:#2a1f0e;text-align:center;white-space:pre;margin:0 0 6px}
+  h1{font-size:34px;margin:0 0 2px;font-weight:600;letter-spacing:-0.005em;text-align:center;font-variant:small-caps;letter-spacing:0.06em}
+  .sub{color:#5a4828;font-size:13px;font-style:italic;margin:0 0 18px;text-align:center;letter-spacing:0.04em}
+  nav{font-size:12px;color:#2a1f0e;margin:0 0 18px;padding:8px 0;border-top:1px double #2a1f0e;border-bottom:1px double #2a1f0e;letter-spacing:0.1em;text-align:center;font-variant:small-caps}
+  nav a{color:#2a1f0e;text-decoration:none;margin:0 9px}
+  nav a:hover{color:#993322}
+  p.bio{font-size:14.5px;margin:0 0 14px;color:#2a1f0e;text-align:justify}
+  .firstletter::first-letter{font-size:42px;float:left;line-height:0.85;padding:4px 6px 0 0;color:#993322;font-weight:700}
+  .now{font-size:12.5px;color:#5a4828;font-style:italic;margin:14px 0;text-align:center}
+  .foot{margin-top:18px;color:#7a6a4a;font-size:11px;text-align:center;font-variant:small-caps;letter-spacing:0.1em}
+</style>
+<div class="wrap">
+<pre class="compass">           N
+           │
+      NW ╲ │ ╱ NE
+           ✦
+      SW ╱ │ ╲ SE
+           │
+           S</pre>
+  <h1>Derek Wakefield</h1>
+  <p class="sub">Assistant Professor of Political Science · Bucknell</p>
+  <nav><a>Home</a><a>Research</a><a>Teaching</a><a>CV</a><a>Now</a><a>Writing</a><a>Apps</a></nav>
+  <p class="bio firstletter">A Bobologist with a moral compass louder than his survival instinct. Teaching, writing, and humming his way through American political behavior. The map is not the territory, but the legend can still tell you which way home points.</p>
+  <div class="now">now reading bobble canon · now writing chapter 3 · now hearing porch frog</div>
+  <p class="foot">Anno mmxxvi · still humming</p>
+</div>
+'></iframe>
+</section>
+
+</main>
+
+<footer class="master">
+  built with <b>care</b>, with <b>ASCII</b>, with one ear toward the porch.<br>
+  call out the number when one of these lands and we wire it into <code>_quarto.yml</code> + <code>styles.css</code>.
+</footer>
+
+</body>
+</html>

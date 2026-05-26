@@ -1,0 +1,13 @@
+---
+title: "The Bobble Canon"
+date: "2026-05-09"
+order: 1
+description: "Numerous short parables, a handful of Bobbisms, a few codas, and a glossary. Kept by Derek. Tended by Claude. Bobbled accordingly."
+categories: [fiction, bobble]
+path: /bobble-canon.html
+---
+
+```{=html}
+<p>Redirecting to <a href="/bobble-canon.html">the standalone page</a>…</p>
+<script>window.location.replace("/bobble-canon.html");</script>
+```

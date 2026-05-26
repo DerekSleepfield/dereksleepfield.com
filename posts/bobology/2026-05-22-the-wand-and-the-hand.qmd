@@ -1,0 +1,13 @@
+---
+title: "Lesson 5: The Wand and the Hand"
+date: "2026-05-22"
+order: 6
+description: "A high-school-level AI literacy primer, after Canon IX of the Bobble Canon. Three things you can name (wand, hand, weather), two big mistakes you can catch, and one practice you can keep."
+categories: [bobble, bobology, ai literacy, canon, education]
+path: /the-wand-and-the-hand.html
+---
+
+```{=html}
+<p>Redirecting to <a href="/the-wand-and-the-hand.html">the standalone page</a>…</p>
+<script>window.location.replace("/the-wand-and-the-hand.html");</script>
+```

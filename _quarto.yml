@@ -1,0 +1,59 @@
+project:
+  type: website
+  output-dir: _site
+  resources:
+    - CNAME
+    # Ship every standalone HTML at the root automatically.
+    # Convention: prefix scratch/draft files with `_` to exclude them
+    # (Quarto treats `_*` as ignored in resources).
+    - "*.html"
+    - themes.css
+    - assets
+
+website:
+  title: "Derek Sleepfield"
+  description: "A small library of not-academic writing by Derek Wakefield."
+  site-url: https://dereksleepfield.com
+  open-graph: true
+  twitter-card: true
+  navbar:
+    background: light
+    pinned: true
+    left:
+      - text: "The shelf"
+        href: index.qmd
+      - text: "Writing"
+        href: writing.qmd
+      - text: "Presentations"
+        href: presentations.qmd
+      - text: "Apps"
+        href: apps.qmd
+      - text: "Games"
+        href: games.qmd
+    right:
+      - text: "Academic site →"
+        href: https://derekwakefield.com
+  page-footer:
+    left: "© 2026 Derek Wakefield · kept here quietly"
+    right:
+      - icon: envelope
+        href: mailto:dw043@bucknell.edu
+      - icon: github
+        href: https://github.com/DerekSleepfield
+      - text: "Academic site →"
+        href: https://derekwakefield.com
+
+format:
+  html:
+    theme:
+      light: [cosmo, themes.css]
+      dark: [darkly, themes.css]
+    css:
+      - themes.css
+    toc: true
+    toc-location: right
+    fig-cap-location: bottom
+    code-link: true
+    smooth-scroll: true
+    link-external-newwindow: true
+    mainfont: "EB Garamond, Iowan Old Style, Palatino, Georgia, serif"

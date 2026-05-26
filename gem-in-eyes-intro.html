@@ -1,0 +1,1024 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Gem in Eyes — an introduction</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;min-height:100%;overflow-x:hidden}
+  :root{
+    --LIK:#f0833f;  --LIK-deep:#7a1a08;
+    --TON:#d8b88e;  --TON-deep:#5e4330;
+    --REN:#3aa6b9;  --REN-deep:#13525e;
+    --NIF:#cdd6e0;  --NIF-deep:#5b6a7a;
+    --EYE:#7caee0;  --EYE-deep:#1a73c2;
+    --mote:#fde68a;
+  }
+  body{
+    background:
+      /* boulder shadows scattered — the bumpy-rock feel */
+      radial-gradient(closest-side, rgba(0,0,0,.55) 0%, transparent 70%) 12% 18% / 28vmax 22vmax no-repeat,
+      radial-gradient(closest-side, rgba(0,0,0,.50) 0%, transparent 70%) 88% 22% / 30vmax 24vmax no-repeat,
+      radial-gradient(closest-side, rgba(0,0,0,.55) 0%, transparent 70%) 22% 78% / 26vmax 20vmax no-repeat,
+      radial-gradient(closest-side, rgba(0,0,0,.55) 0%, transparent 70%) 84% 84% / 32vmax 24vmax no-repeat,
+      radial-gradient(closest-side, rgba(0,0,0,.45) 0%, transparent 70%) 50% 50% / 30vmax 22vmax no-repeat,
+      /* warm copper / sandstone bleed-through, kept very dim */
+      radial-gradient(closest-side, rgba(82,46,20,.18) 0%, transparent 70%) 38% 42% / 36vmax 26vmax no-repeat,
+      radial-gradient(closest-side, rgba(58,40,28,.20) 0%, transparent 70%) 64% 58% / 32vmax 24vmax no-repeat,
+      /* base banded stone palette — basalt → graphite → siltstone → coal */
+      linear-gradient(180deg,
+        #14110c 0%,
+        #1c1812 12%,
+        #221c14 24%,
+        #1a1610 36%,
+        #221b13 48%,
+        #18130e 60%,
+        #1f1812 72%,
+        #18130e 84%,
+        #100c08 100%),
+      #0a0805;
+    color:#f4eacb;
+    font-family:Iowan Old Style,Apple Garamond,Georgia,Cambria,"Times New Roman",serif;
+    line-height:1.6;
+    min-height:100vh;
+  }
+
+  /* ─────────────────────────────────────────────────────────────────────
+     STONE LAYERS — should occupy ~80% of the visual weight before
+     quartz/sparkles ride on top. Stack from bedrock-out to sparkle-in.
+     ───────────────────────────────────────────────────────────────────── */
+
+  /* 1. bedrock granular noise — fine cross-hatch giving every pixel grit */
+  .stone-grain{
+    position:fixed; inset:0; pointer-events:none; z-index:0;
+    background-image:
+      repeating-linear-gradient(0deg,
+        transparent 0px,
+        rgba(255,240,210,.014) 1px,
+        transparent 2px,
+        rgba(0,0,0,.06) 3px,
+        transparent 5px,
+        rgba(255,240,210,.010) 6px,
+        transparent 8px),
+      repeating-linear-gradient(90deg,
+        transparent 0px,
+        rgba(255,240,210,.012) 1px,
+        transparent 2px,
+        rgba(0,0,0,.05) 3px,
+        transparent 6px),
+      repeating-linear-gradient(45deg,
+        transparent 0px,
+        rgba(0,0,0,.04) 2px,
+        transparent 4px);
+    opacity:.85;
+  }
+
+  /* 2. bedrock blob field — irregular dark masses suggesting boulders pressed
+        against the camera. Heavy and asymmetric. */
+  .boulders{
+    position:fixed; inset:0; pointer-events:none; z-index:0;
+    background:
+      radial-gradient(closest-side, rgba(8,4,2,.48) 0%, transparent 70%) 6%   12% / 18vmax 14vmax no-repeat,
+      radial-gradient(closest-side, rgba(8,4,2,.42) 0%, transparent 70%) 28%  8%  / 22vmax 16vmax no-repeat,
+      radial-gradient(closest-side, rgba(8,4,2,.45) 0%, transparent 70%) 54%  16% / 20vmax 14vmax no-repeat,
+      radial-gradient(closest-side, rgba(8,4,2,.40) 0%, transparent 70%) 78%  6%  / 24vmax 18vmax no-repeat,
+      radial-gradient(closest-side, rgba(8,4,2,.45) 0%, transparent 70%) 96%  18% / 18vmax 14vmax no-repeat,
+      radial-gradient(closest-side, rgba(8,4,2,.46) 0%, transparent 70%) 4%   42% / 22vmax 16vmax no-repeat,
+      radial-gradient(closest-side, rgba(8,4,2,.40) 0%, transparent 70%) 24%  46% / 18vmax 14vmax no-repeat,
+      radial-gradient(closest-side, rgba(8,4,2,.42) 0%, transparent 70%) 50%  40% / 26vmax 18vmax no-repeat,
+      radial-gradient(closest-side, rgba(8,4,2,.45) 0%, transparent 70%) 76%  44% / 22vmax 16vmax no-repeat,
+      radial-gradient(closest-side, rgba(8,4,2,.40) 0%, transparent 70%) 96%  48% / 18vmax 14vmax no-repeat,
+      radial-gradient(closest-side, rgba(8,4,2,.45) 0%, transparent 70%) 8%   72% / 20vmax 14vmax no-repeat,
+      radial-gradient(closest-side, rgba(8,4,2,.42) 0%, transparent 70%) 32%  78% / 22vmax 16vmax no-repeat,
+      radial-gradient(closest-side, rgba(8,4,2,.45) 0%, transparent 70%) 56%  74% / 24vmax 18vmax no-repeat,
+      radial-gradient(closest-side, rgba(8,4,2,.40) 0%, transparent 70%) 80%  78% / 22vmax 16vmax no-repeat,
+      radial-gradient(closest-side, rgba(8,4,2,.45) 0%, transparent 70%) 96%  72% / 18vmax 14vmax no-repeat,
+      radial-gradient(closest-side, rgba(8,4,2,.42) 0%, transparent 70%) 12%  94% / 20vmax 12vmax no-repeat,
+      radial-gradient(closest-side, rgba(8,4,2,.40) 0%, transparent 70%) 44%  96% / 22vmax 14vmax no-repeat,
+      radial-gradient(closest-side, rgba(8,4,2,.45) 0%, transparent 70%) 70%  94% / 22vmax 14vmax no-repeat,
+      radial-gradient(closest-side, rgba(8,4,2,.40) 0%, transparent 70%) 92%  96% / 18vmax 12vmax no-repeat;
+  }
+
+  /* 3. boulder highlights — tiny lighter caps on top edges of boulders to
+        suggest a faint top-light catching dry stone */
+  .boulder-light{
+    position:fixed; inset:0; pointer-events:none; z-index:0;
+    background:
+      radial-gradient(closest-side, rgba(140,118,90,.10) 0%, transparent 70%) 6%   10% / 18vmax 8vmax no-repeat,
+      radial-gradient(closest-side, rgba(140,118,90,.10) 0%, transparent 70%) 28%  6%  / 22vmax 10vmax no-repeat,
+      radial-gradient(closest-side, rgba(140,118,90,.08) 0%, transparent 70%) 54%  14% / 20vmax 8vmax  no-repeat,
+      radial-gradient(closest-side, rgba(140,118,90,.10) 0%, transparent 70%) 78%  4%  / 24vmax 10vmax no-repeat,
+      radial-gradient(closest-side, rgba(140,118,90,.08) 0%, transparent 70%) 4%   40% / 22vmax 10vmax no-repeat,
+      radial-gradient(closest-side, rgba(140,118,90,.08) 0%, transparent 70%) 50%  38% / 26vmax 10vmax no-repeat,
+      radial-gradient(closest-side, rgba(140,118,90,.10) 0%, transparent 70%) 76%  42% / 22vmax 10vmax no-repeat,
+      radial-gradient(closest-side, rgba(140,118,90,.08) 0%, transparent 70%) 8%   70% / 20vmax 8vmax  no-repeat,
+      radial-gradient(closest-side, rgba(140,118,90,.10) 0%, transparent 70%) 32%  76% / 22vmax 10vmax no-repeat,
+      radial-gradient(closest-side, rgba(140,118,90,.08) 0%, transparent 70%) 56%  72% / 24vmax 10vmax no-repeat,
+      radial-gradient(closest-side, rgba(140,118,90,.10) 0%, transparent 70%) 80%  76% / 22vmax 10vmax no-repeat;
+    opacity:.7;
+  }
+
+  /* 4. mineral veins — diagonal streaks in muted browns / greens / iron-rusts */
+  .stone-veins{
+    position:fixed; inset:0; pointer-events:none; z-index:0;
+    background-image:
+      repeating-linear-gradient(28deg,
+        transparent 0px,
+        transparent 80px,
+        rgba(106,80,40,.10) 81px,
+        transparent 84px,
+        transparent 200px,
+        rgba(58,72,52,.08) 201px,
+        transparent 204px,
+        transparent 320px),
+      repeating-linear-gradient(-37deg,
+        transparent 0px,
+        transparent 130px,
+        rgba(80,52,40,.10) 131px,
+        transparent 134px,
+        transparent 260px,
+        rgba(50,40,28,.08) 261px,
+        transparent 264px),
+      repeating-linear-gradient(70deg,
+        transparent 0px,
+        transparent 220px,
+        rgba(140,90,60,.06) 221px,
+        transparent 224px);
+    opacity:.7;
+    mix-blend-mode: screen;
+  }
+
+  /* 5. fissures / cracks — thin, sharp dark lines, irregular angles */
+  .stone-cracks{
+    position:fixed; inset:0; pointer-events:none; z-index:0;
+    background-image:
+      repeating-linear-gradient(58deg,
+        transparent 0px,
+        transparent 160px,
+        rgba(0,0,0,.22) 161px,
+        transparent 163px,
+        transparent 380px),
+      repeating-linear-gradient(-22deg,
+        transparent 0px,
+        transparent 240px,
+        rgba(0,0,0,.18) 241px,
+        transparent 243px,
+        transparent 460px),
+      repeating-linear-gradient(112deg,
+        transparent 0px,
+        transparent 320px,
+        rgba(0,0,0,.14) 321px,
+        transparent 323px);
+    opacity:.55;
+  }
+
+  /* 6. lichen / moss spots — tiny muted-green clusters in damp pockets */
+  .lichen{
+    position:fixed; inset:0; pointer-events:none; z-index:0;
+    background-image:
+      radial-gradient(closest-side, rgba(72,98,58,.18) 0%, transparent 70%) 18% 38% / 8vmax 5vmax no-repeat,
+      radial-gradient(closest-side, rgba(72,98,58,.16) 0%, transparent 70%) 62% 22% / 6vmax 4vmax no-repeat,
+      radial-gradient(closest-side, rgba(72,98,58,.18) 0%, transparent 70%) 88% 60% / 7vmax 5vmax no-repeat,
+      radial-gradient(closest-side, rgba(72,98,58,.16) 0%, transparent 70%) 28% 86% / 6vmax 4vmax no-repeat,
+      radial-gradient(closest-side, rgba(96,72,40,.18) 0%, transparent 70%) 74% 88% / 7vmax 5vmax no-repeat,
+      radial-gradient(closest-side, rgba(96,72,40,.14) 0%, transparent 70%) 42% 54% / 6vmax 4vmax no-repeat;
+    opacity:.85;
+  }
+
+  /* 7. cave-bands — kept as a final subtle directional grain on top of stone */
+  .cave-bands{
+    position:fixed; inset:0; pointer-events:none; z-index:0;
+    background:
+      repeating-linear-gradient(
+        2deg,
+        transparent 0px,
+        rgba(220,200,160,.014) 2px,
+        transparent 4px,
+        rgba(60,40,20,.04) 12px,
+        transparent 16px,
+        rgba(40,30,18,.06) 28px,
+        transparent 34px,
+        rgba(20,14,8,.10) 56px,
+        transparent 64px);
+    opacity:.7;
+  }
+
+  /* ───────── geode pockets (BONUS over stone — kept low-weight, ~20%) ───────── */
+  .geode{
+    position:fixed; pointer-events:none; z-index:0;
+    border-radius: 50%;
+    filter: blur(2px);
+    opacity: 0.32;
+  }
+  /* AMETHYST · top-left */
+  .geode.amethyst{
+    top:-22vmax; left:-18vmax; width:62vmax; height:62vmax;
+    background:
+      radial-gradient(closest-side, rgba(248,236,255,.10) 0%, transparent 38%),
+      radial-gradient(closest-side, rgba(176,114,228,.18) 36%, transparent 46%),
+      radial-gradient(closest-side, rgba(118,60,184,.20) 46%, transparent 56%),
+      radial-gradient(closest-side, rgba(74,30,128,.32) 56%, transparent 70%),
+      radial-gradient(closest-side, rgba(38,12,72,.55) 70%, transparent 88%);
+  }
+  /* CITRINE / GOLD · top-right */
+  .geode.citrine{
+    top:-18vmax; right:-22vmax; width:60vmax; height:60vmax;
+    background:
+      radial-gradient(closest-side, rgba(255,250,224,.10) 0%, transparent 36%),
+      radial-gradient(closest-side, rgba(252,202,80,.18) 34%, transparent 46%),
+      radial-gradient(closest-side, rgba(196,128,40,.20) 46%, transparent 56%),
+      radial-gradient(closest-side, rgba(110,60,18,.36) 56%, transparent 72%),
+      radial-gradient(closest-side, rgba(48,24,8,.55) 72%, transparent 90%);
+  }
+  /* ROSE QUARTZ · bottom-left */
+  .geode.rose{
+    bottom:-22vmax; left:-20vmax; width:62vmax; height:62vmax;
+    background:
+      radial-gradient(closest-side, rgba(255,238,242,.10) 0%, transparent 36%),
+      radial-gradient(closest-side, rgba(238,162,184,.18) 34%, transparent 46%),
+      radial-gradient(closest-side, rgba(184,92,128,.20) 46%, transparent 58%),
+      radial-gradient(closest-side, rgba(108,42,80,.36) 58%, transparent 74%),
+      radial-gradient(closest-side, rgba(46,16,38,.55) 74%, transparent 92%);
+  }
+  /* AQUAMARINE / TEAL · bottom-right */
+  .geode.aqua{
+    bottom:-18vmax; right:-22vmax; width:60vmax; height:60vmax;
+    background:
+      radial-gradient(closest-side, rgba(232,250,252,.10) 0%, transparent 36%),
+      radial-gradient(closest-side, rgba(120,210,222,.18) 34%, transparent 46%),
+      radial-gradient(closest-side, rgba(48,150,170,.22) 46%, transparent 58%),
+      radial-gradient(closest-side, rgba(20,80,110,.36) 58%, transparent 74%),
+      radial-gradient(closest-side, rgba(8,32,46,.55) 74%, transparent 92%);
+  }
+  /* SMOKY QUARTZ · center, large diffuse */
+  .geode.smoky{
+    top:50%; left:50%; width:80vmax; height:60vmax;
+    transform: translate(-50%,-50%);
+    border-radius: 60% 40% 65% 35% / 50% 60% 40% 50%;
+    background:
+      radial-gradient(closest-side, rgba(180,150,200,.10) 0%, transparent 36%),
+      radial-gradient(closest-side, rgba(140,100,160,.13) 34%, transparent 50%),
+      radial-gradient(closest-side, rgba(78,42,108,.20) 50%, transparent 70%),
+      radial-gradient(closest-side, rgba(34,16,52,.40) 70%, transparent 92%);
+    filter: blur(8px);
+  }
+
+  /* ───────── glittering quartz clusters (replaces "stars") — denser, color-clustered ───────── */
+  .crystals,.crystals::before,.crystals::after{
+    content:""; position:fixed; inset:0; pointer-events:none; z-index:1;
+  }
+  .crystals{
+    background-image:
+      /* AMETHYST cluster · NW */
+      radial-gradient(1.6px 1.6px at 11% 16%, #efe0ff 0%, transparent 60%),
+      radial-gradient(1px   1px   at 14% 18%, #c8a8f0 0%, transparent 60%),
+      radial-gradient(1.2px 1.2px at  9% 22%, #fff   0%, transparent 60%),
+      radial-gradient(1px   1px   at 17% 14%, #b388e6 0%, transparent 60%),
+      radial-gradient(1.4px 1.4px at 13% 26%, #a878d8 0%, transparent 60%),
+      radial-gradient(1px   1px   at 20% 21%, #fff   0%, transparent 60%),
+      radial-gradient(1.2px 1.2px at  6% 28%, #d8c0f2 0%, transparent 60%),
+      /* CITRINE cluster · NE */
+      radial-gradient(1.6px 1.6px at 86% 13%, #fff8e0 0%, transparent 60%),
+      radial-gradient(1px   1px   at 84% 17%, #fbd870 0%, transparent 60%),
+      radial-gradient(1.2px 1.2px at 88% 19%, #fbbf24 0%, transparent 60%),
+      radial-gradient(1px   1px   at 91% 14%, #fff   0%, transparent 60%),
+      radial-gradient(1.4px 1.4px at 82% 21%, #f4c860 0%, transparent 60%),
+      radial-gradient(1px   1px   at 89% 24%, #fff8c8 0%, transparent 60%),
+      /* ROSE cluster · SW */
+      radial-gradient(1.5px 1.5px at  8% 76%, #ffe4ec 0%, transparent 60%),
+      radial-gradient(1px   1px   at 12% 79%, #f4b8c8 0%, transparent 60%),
+      radial-gradient(1.2px 1.2px at  6% 82%, #e890a8 0%, transparent 60%),
+      radial-gradient(1px   1px   at 14% 73%, #fff   0%, transparent 60%),
+      radial-gradient(1.3px 1.3px at 10% 86%, #f8c8d8 0%, transparent 60%),
+      /* AQUA cluster · SE */
+      radial-gradient(1.5px 1.5px at 89% 78%, #e0f8fc 0%, transparent 60%),
+      radial-gradient(1px   1px   at 86% 82%, #80d8e8 0%, transparent 60%),
+      radial-gradient(1.2px 1.2px at 92% 81%, #4ec0d8 0%, transparent 60%),
+      radial-gradient(1px   1px   at 84% 75%, #fff   0%, transparent 60%),
+      radial-gradient(1.3px 1.3px at 90% 86%, #b8e8f0 0%, transparent 60%),
+      /* SMOKY cluster · center */
+      radial-gradient(1.4px 1.4px at 48% 50%, #e8d8c0 0%, transparent 60%),
+      radial-gradient(1px   1px   at 52% 47%, #fff   0%, transparent 60%),
+      radial-gradient(1.2px 1.2px at 50% 54%, #c8a880 0%, transparent 60%);
+    background-size: 1100px 1100px;
+    animation: drift 360s linear infinite;
+    opacity:.42;
+  }
+  .crystals::before{
+    /* secondary scattered hematite / pyrite glints — finer, denser, white-and-warm */
+    background-image:
+      radial-gradient(1px 1px at 22% 35%, #fff   0%, transparent 60%),
+      radial-gradient(1px 1px at 32% 22%, #fde68a 0%, transparent 60%),
+      radial-gradient(1px 1px at 42% 38%, #fff   0%, transparent 60%),
+      radial-gradient(1.2px 1.2px at 58% 28%, #fff   0%, transparent 60%),
+      radial-gradient(1px 1px at 66% 44%, #fde68a 0%, transparent 60%),
+      radial-gradient(1px 1px at 76% 36%, #fff   0%, transparent 60%),
+      radial-gradient(1px 1px at 28% 58%, #fff   0%, transparent 60%),
+      radial-gradient(1.2px 1.2px at 38% 66%, #fde68a 0%, transparent 60%),
+      radial-gradient(1px 1px at 56% 64%, #fff   0%, transparent 60%),
+      radial-gradient(1px 1px at 70% 58%, #fff   0%, transparent 60%),
+      radial-gradient(1px 1px at 18% 48%, #c8a8f0 0%, transparent 60%),
+      radial-gradient(1px 1px at 80% 50%, #80d8e8 0%, transparent 60%);
+    background-size: 700px 700px;
+    animation: drift 480s linear infinite reverse, twinkle 4.5s ease-in-out infinite alternate;
+    opacity:.30;
+  }
+  .crystals::after{
+    /* large slow-drift glints — the brightest crystal flashes */
+    background-image:
+      radial-gradient(2.4px 2.4px at 14% 24%, #fff 0%, transparent 60%),
+      radial-gradient(2.6px 2.6px at 86% 18%, #fff 0%, transparent 60%),
+      radial-gradient(2.4px 2.4px at 12% 78%, #fff 0%, transparent 60%),
+      radial-gradient(2.6px 2.6px at 88% 80%, #fff 0%, transparent 60%),
+      radial-gradient(2px 2px at 50% 50%, #fff 0%, transparent 60%);
+    background-size: 1400px 1400px;
+    animation: twinkle 3.4s ease-in-out infinite alternate, drift 800s linear infinite;
+    opacity:.55;
+  }
+  @keyframes drift{ from{background-position:0 0} to{background-position:1100px 1100px} }
+  @keyframes twinkle{ from{opacity:.25} to{opacity:.98} }
+
+  /* ───────── crystal formations on top + bottom edges — stalactite/stalagmite quartz ───────── */
+  .crystal-edge{
+    position: fixed; left: 0; right: 0; pointer-events: none; z-index: 0;
+    height: 18vh;
+    background-image:
+      linear-gradient(180deg,
+        rgba(120,60,160,.18) 0%,
+        rgba(80,40,110,.10) 30%,
+        transparent 80%);
+  }
+  .crystal-edge.top{
+    top: 0;
+    clip-path: polygon(
+      0% 0%, 100% 0%, 100% 14%,
+      96% 24%, 92% 8%, 88% 20%, 84% 4%, 80% 32%, 76% 12%, 72% 28%,
+      68% 6%, 64% 36%, 60% 14%, 56% 30%, 52% 8%, 48% 40%, 44% 12%,
+      40% 32%, 36% 6%, 32% 28%, 28% 16%, 24% 40%, 20% 18%, 16% 30%,
+      12% 8%, 8% 24%, 4% 14%, 0% 22%
+    );
+  }
+  .crystal-edge.bottom{
+    bottom: 0;
+    clip-path: polygon(
+      0% 100%, 100% 100%, 100% 78%,
+      96% 70%, 92% 92%, 88% 76%, 84% 96%, 80% 60%, 76% 88%, 72% 64%,
+      68% 94%, 64% 58%, 60% 86%, 56% 70%, 52% 92%, 48% 56%, 44% 88%,
+      40% 64%, 36% 94%, 32% 70%, 28% 84%, 24% 56%, 20% 82%, 16% 70%,
+      12% 92%, 8% 78%, 4% 86%, 0% 76%
+    );
+    background-image:
+      linear-gradient(0deg,
+        rgba(120,60,160,.18) 0%,
+        rgba(80,40,110,.10) 30%,
+        transparent 80%);
+  }
+
+  /* central agate banding — soft horizontal ripples through the middle of the page */
+  .agate{
+    position: fixed; top: 30vh; bottom: 30vh; left: 0; right: 0;
+    pointer-events: none; z-index: 0;
+    background:
+      repeating-linear-gradient(
+        92deg,
+        transparent 0px,
+        rgba(228,180,255,.04) 2px,
+        transparent 8px,
+        rgba(120,180,200,.03) 16px,
+        transparent 24px,
+        rgba(255,200,140,.04) 36px,
+        transparent 50px);
+    opacity:.6;
+    mix-blend-mode: screen;
+  }
+
+  /* ───────── firefly motes (drifting across the screen) ───────── */
+  .mote{
+    position:fixed; width:6px; height:6px; border-radius:50%;
+    background: radial-gradient(circle at 50% 50%, #fff 0%, var(--mote) 30%, transparent 70%);
+    filter: drop-shadow(0 0 8px var(--mote)) drop-shadow(0 0 14px #ff9a4a);
+    pointer-events:none;
+    z-index:2;
+  }
+  @keyframes drift1 {
+    0%   { transform: translate(0vw, 100vh) scale(.6);   opacity: 0; }
+    10%  { opacity: .9; }
+    50%  { transform: translate(20vw, 50vh) scale(1);    opacity: .7; }
+    90%  { opacity: .9; }
+    100% { transform: translate(40vw, 0vh) scale(.6);    opacity: 0; }
+  }
+  @keyframes drift2 {
+    0%   { transform: translate(0vw, 80vh) scale(.5);    opacity: 0; }
+    20%  { opacity: .85; }
+    100% { transform: translate(-30vw, 10vh) scale(.9);  opacity: 0; }
+  }
+  @keyframes drift3 {
+    0%   { transform: translate(0vw, 30vh) scale(.7);    opacity: 0; }
+    25%  { opacity: .8; }
+    100% { transform: translate(50vw, 95vh) scale(.5);   opacity: 0; }
+  }
+
+  /* ───────── content ───────── */
+  .wrap{
+    position:relative; z-index:3;
+    max-width: 1080px; margin: 0 auto;
+    padding: 64px 28px 96px;
+  }
+
+  .eyebrow{
+    text-align:center;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 11px; letter-spacing:.5em; text-transform:uppercase;
+    color: #fde68a; opacity:.85;
+  }
+  h1.title{
+    text-align:center;
+    margin: 8px 0 14px;
+    font-family: Bodoni 72, Didot, "Playfair Display", Georgia, serif;
+    font-style: italic; font-weight: 400;
+    font-size: clamp(48px, 8vw, 96px); line-height: 1;
+    background: linear-gradient(90deg, #fff 0%, #fde68a 28%, #f0833f 50%, #cdd6e0 70%, #7caee0 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    text-shadow: 0 0 30px rgba(253,230,138,.18);
+  }
+  p.lede{
+    text-align:center; max-width: 64ch; margin: 6px auto 18px;
+    color:#e8e3c8; font-size: 17px; font-style: italic;
+  }
+
+  /* ───────── ASCII MAP ───────── */
+  .cave{
+    margin: 36px auto;
+    padding: 22px 14px;
+    max-width: 920px;
+    border-radius: 18px;
+    background:
+      linear-gradient(180deg, rgba(18,12,30,.55), rgba(8,5,18,.85));
+    border: 1px solid rgba(255,255,255,.10);
+    box-shadow:
+      inset 0 0 80px rgba(0,0,0,.6),
+      inset 0 0 140px rgba(124,58,237,.10),
+      0 30px 80px -30px rgba(0,0,0,.7);
+    overflow: hidden;
+    position:relative;
+  }
+  .cave pre.map{
+    margin: 0 auto;
+    font-family: ui-monospace, "JetBrains Mono", "Fira Code", "SFMono-Regular", Consolas, monospace;
+    font-size: clamp(9px, 1.05vw, 13px);
+    line-height: 1.18;
+    color: #b8a99a;
+    white-space: pre;
+    text-align: center;
+    text-shadow: 0 0 6px rgba(0,0,0,.6);
+  }
+  /* per-god highlight tints inside the ASCII */
+  .cave pre.map .lik   { color: var(--LIK);  text-shadow: 0 0 8px var(--LIK), 0 0 18px #ff5722 }
+  .cave pre.map .ton   { color: var(--TON);  text-shadow: 0 0 8px var(--TON), 0 0 18px #fbbf24 }
+  .cave pre.map .ren   { color: var(--REN);  text-shadow: 0 0 8px var(--REN), 0 0 18px #67e8f9 }
+  .cave pre.map .nif   { color: var(--NIF);  text-shadow: 0 0 8px var(--NIF), 0 0 18px #fff }
+  .cave pre.map .eye   { color: var(--EYE);  text-shadow: 0 0 8px var(--EYE), 0 0 18px #1a73c2 }
+  .cave pre.map .vein  { color: rgba(167,139,250,.55) }
+  .cave pre.map .stone { color: rgba(184,168,144,.45) }
+  .cave pre.map .glint { color: #fff }
+
+  /* slow gem pulse */
+  .pulse{ animation: pulse 3.6s ease-in-out infinite; display:inline-block }
+  .pulse.b{ animation-delay: .4s }
+  .pulse.c{ animation-delay: .9s }
+  .pulse.d{ animation-delay: 1.4s }
+  .pulse.e{ animation-delay: 2s }
+  @keyframes pulse{
+    0%,100%{ filter: brightness(1) drop-shadow(0 0 0 currentColor); }
+    50%    { filter: brightness(1.6) drop-shadow(0 0 16px currentColor); }
+  }
+
+  /* sparkle marks */
+  .sparkle{
+    position:absolute; pointer-events:none;
+    width: 22px; height: 22px;
+    background:
+      radial-gradient(closest-side, #fff 0 25%, transparent 70%),
+      conic-gradient(from 0deg, transparent 0 35%, #fff 50%, transparent 65% 100%);
+    mix-blend-mode: screen;
+    filter: drop-shadow(0 0 8px #fff) drop-shadow(0 0 16px #fde68a);
+    animation: sparkle 3.6s ease-in-out infinite;
+    opacity:.9;
+  }
+  @keyframes sparkle{
+    0%,100%{ transform: scale(.4) rotate(0deg);  opacity: .25 }
+    50%    { transform: scale(1)  rotate(180deg); opacity: 1 }
+  }
+
+  /* ───────── god panels ───────── */
+  .gods{
+    margin: 32px auto; max-width: 920px;
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
+  }
+  @media (max-width: 800px){ .gods{ grid-template-columns: repeat(2, 1fr) } }
+  .gods .panel{
+    border-radius: 12px; padding: 12px 14px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.10);
+    text-align: center;
+  }
+  .gods h3{
+    margin: 4px 0 6px;
+    font-family: Bodoni 72, Didot, Georgia, serif;
+    font-style: italic; font-weight: 400; font-size: 22px;
+  }
+  .gods .panel.lik h3{ color: var(--LIK); text-shadow: 0 0 12px var(--LIK) }
+  .gods .panel.ton h3{ color: var(--TON); text-shadow: 0 0 12px var(--TON) }
+  .gods .panel.ren h3{ color: var(--REN); text-shadow: 0 0 12px var(--REN) }
+  .gods .panel.nif h3{ color: var(--NIF); text-shadow: 0 0 12px var(--NIF) }
+  .gods .panel.eye h3{ color: var(--EYE); text-shadow: 0 0 12px var(--EYE) }
+  .gods .panel small{ display:block; font-family:ui-sans-serif,sans-serif; font-size:10px; letter-spacing:.25em; text-transform:uppercase; color:#cbbcff }
+  .gods .panel p{ margin:8px 0 0; font-size:12.5px; color:#e8e3c8; font-style:italic }
+
+  /* ───────── prose ───────── */
+  .prose{
+    max-width: 64ch; margin: 38px auto;
+    color:#e8e3c8; font-size: 17px;
+  }
+  .prose p{ margin: 18px 0 }
+  .prose p::first-letter{
+    font-family: Bodoni 72, Didot, Georgia, serif; font-size: 2.4em;
+    color: #fde68a; padding-right: 6px; line-height: .8; float: left;
+    text-shadow: 0 0 16px rgba(253,230,138,.55);
+  }
+
+  .signoff{
+    text-align:center; margin: 56px auto 0;
+    color: #cbbcff; font-style:italic;
+  }
+  .signoff .glyph{
+    font-size: 22px; letter-spacing: .4em; color: #fde68a;
+    text-shadow: 0 0 14px rgba(253,230,138,.5);
+  }
+
+  /* ───────── per-god lore sections ───────── */
+  .lore{
+    max-width: 920px; margin: 56px auto 24px;
+    display:flex; flex-direction:column; gap: 26px;
+  }
+  .lore section.god-lore{
+    padding: 28px 32px;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,.10);
+    background: rgba(255,255,255,.025);
+    position: relative; overflow: hidden;
+  }
+  .lore section.god-lore::before{
+    content:""; position:absolute; inset:-30% -10% auto auto;
+    width: 60%; height: 200%;
+    background: radial-gradient(50% 50% at 70% 30%, var(--accent), transparent 70%);
+    opacity: .14; pointer-events: none; z-index: 0;
+  }
+  .lore section .head{
+    display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;
+    margin-bottom: 14px; position:relative; z-index:1;
+  }
+  .lore section .head h2{
+    margin: 0;
+    font-family: Bodoni 72, Didot, "Playfair Display", Georgia, serif;
+    font-style: italic; font-weight: 400;
+    font-size: 44px; letter-spacing:.04em; line-height: 1;
+    color: var(--accent);
+    text-shadow: 0 0 20px var(--accent);
+  }
+  .lore section .head .pos{
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 11px; letter-spacing: .35em; text-transform: uppercase;
+    color: #cbbcff;
+  }
+  .lore section .head .tag{
+    margin-left:auto; padding: 5px 12px; border-radius: 999px;
+    background: var(--accent); color: #1a1410;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 10.5px; letter-spacing: .15em; text-transform: uppercase;
+    font-weight: 700;
+  }
+  .lore section .body{ position:relative; z-index:1 }
+  .lore section .body p{ margin: 10px 0; font-size: 16px; color: #e8e3c8; line-height: 1.65 }
+  .lore section .body p.first::first-letter{
+    font-family: Bodoni 72, Didot, Georgia, serif; font-size: 2.6em;
+    color: var(--accent); padding-right: 8px; line-height: .85; float: left;
+    text-shadow: 0 0 18px var(--accent);
+  }
+  .lore section .body blockquote{
+    margin: 18px 0; padding: 14px 18px;
+    border-left: 3px solid var(--accent);
+    background: rgba(255,255,255,.04); border-radius: 0 12px 12px 0;
+    font-family: Bodoni 72, Didot, Georgia, serif;
+    font-style: italic; color: #fde68a;
+  }
+  .lore section .body blockquote p{ margin: 4px 0; font-size: 15.5px; color:#fde68a }
+  .lore section .whisper{
+    margin-top: 20px; font-style: italic; font-size: 14px;
+    color: rgba(255,255,255,.70);
+    border-top: 1px dashed rgba(255,255,255,.14);
+    padding-top: 14px;
+  }
+  .lore section .whisper b{
+    color: var(--accent); font-weight: 700; font-style: normal;
+    letter-spacing: .18em; font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 11px; text-transform: uppercase; margin-right: 6px;
+  }
+  .lore section.lik{ --accent: var(--LIK) }
+  .lore section.ton{ --accent: var(--TON) }
+  .lore section.ren{ --accent: var(--REN) }
+  .lore section.nif{ --accent: var(--NIF) }
+  .lore section.eye{ --accent: var(--EYE) }
+
+  /* ASCII reference panel inside each god's lore section */
+  .lore-ascii{
+    display: block;
+    margin: 18px auto 16px;
+    padding: 16px 14px;
+    font-family: ui-monospace, "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+    font-size: clamp(10.5px, 1.05vw, 13px);
+    line-height: 1.18;
+    color: var(--accent);
+    text-shadow: 0 0 8px var(--accent), 0 0 18px rgba(0,0,0,.55);
+    white-space: pre;
+    text-align: center;
+    background: rgba(0,0,0,.32);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 10px;
+    max-width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .lore-ascii .glow{ filter: drop-shadow(0 0 6px currentColor); }
+  .lore-ascii .dim{ color: rgba(184,168,140,.6); text-shadow: none }
+
+  /* ───────── RELEASE DATE TEASER ───────── */
+  .release{
+    margin: 80px auto 24px; max-width: 760px;
+    padding: 64px 28px 56px;
+    text-align: center;
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,.14);
+    background:
+      radial-gradient(60% 60% at 50% 50%, rgba(124,58,237,.22), transparent 70%),
+      radial-gradient(80% 60% at 50% 50%, rgba(253,230,138,.06), transparent 70%),
+      rgba(8,5,18,.7);
+    position: relative; overflow: hidden;
+  }
+  .release::before{
+    content:""; position:absolute; inset:-2px; border-radius:24px;
+    background: conic-gradient(from 0deg, var(--LIK), var(--TON), var(--EYE), var(--REN), var(--NIF), var(--LIK));
+    filter: blur(28px); opacity:.30; z-index: -1;
+    animation: spin 22s linear infinite;
+  }
+  @keyframes spin{ to{ transform: rotate(360deg) } }
+  .release .small{
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 11px; letter-spacing: .55em; text-transform: uppercase;
+    color: #fde68a; margin-bottom: 12px;
+    text-shadow: 0 0 14px rgba(253,230,138,.55);
+  }
+  .release h2{
+    margin: 6px 0 0;
+    font-family: Bodoni 72, Didot, "Playfair Display", Georgia, serif;
+    font-style: italic; font-weight: 400;
+    font-size: clamp(42px, 6.4vw, 80px); line-height: 1;
+    background: linear-gradient(90deg, #fff 0%, #fde68a 35%, #f0833f 60%, #cdd6e0 80%, #7caee0 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    text-shadow: 0 0 24px rgba(253,230,138,.18);
+  }
+  .release .stamp{
+    margin-top: 30px;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    font-size: 11px; letter-spacing: .5em; text-transform: uppercase;
+    color: #fde68a;
+  }
+  .release .tbd{
+    margin: 6px 0 12px;
+    font-family: Bodoni 72, Didot, Georgia, serif;
+    font-style: italic; font-weight: 400;
+    font-size: clamp(72px, 12vw, 150px);
+    letter-spacing: .35em; line-height: 1;
+    color: #fde68a;
+    text-shadow: 0 0 28px rgba(253,230,138,.50), 0 0 60px rgba(240,131,63,.28);
+  }
+  .release .tagline{
+    font-style: italic; font-size: 16.5px; color: #e8e3c8;
+    max-width: 42ch; margin: 12px auto 0;
+  }
+  .release .footnote{
+    margin-top: 22px; font-size: 11px; letter-spacing: .25em; text-transform: uppercase;
+    color: #cbbcff; opacity: .8;
+  }
+</style>
+</head>
+<body>
+
+<!-- ───────── cave background stack — STONE 80%, quartz/sparkle 20% ─────────
+     bedrock layers (stone-grain → boulders → boulder-light → veins → cracks
+     → lichen → cave-bands) come first and dominate. Quartz / geode / sparkle
+     ride on top at low opacity as bonuses. -->
+<div class="stone-grain"   aria-hidden="true"></div>
+<div class="boulders"      aria-hidden="true"></div>
+<div class="boulder-light" aria-hidden="true"></div>
+<div class="stone-veins"   aria-hidden="true"></div>
+<div class="stone-cracks"  aria-hidden="true"></div>
+<div class="lichen"        aria-hidden="true"></div>
+<div class="cave-bands"    aria-hidden="true"></div>
+<div class="geode amethyst" aria-hidden="true"></div>
+<div class="geode citrine"  aria-hidden="true"></div>
+<div class="geode rose"     aria-hidden="true"></div>
+<div class="geode aqua"     aria-hidden="true"></div>
+<div class="geode smoky"    aria-hidden="true"></div>
+<div class="agate"          aria-hidden="true"></div>
+<div class="crystals"       aria-hidden="true"></div>
+<div class="crystal-edge top"    aria-hidden="true"></div>
+<div class="crystal-edge bottom" aria-hidden="true"></div>
+<div class="sparkle" style="top:7%;left:9%;animation-delay:.0s"></div>
+<div class="sparkle" style="top:14%;right:11%;animation-delay:.7s"></div>
+<div class="sparkle" style="top:34%;left:5%;animation-delay:1.4s; width:16px;height:16px"></div>
+<div class="sparkle" style="top:48%;right:8%;animation-delay:2.0s; width:18px;height:18px"></div>
+<div class="sparkle" style="top:62%;left:14%;animation-delay:.9s"></div>
+<div class="sparkle" style="top:78%;right:18%;animation-delay:1.7s"></div>
+<div class="sparkle" style="top:90%;left:22%;animation-delay:.4s"></div>
+
+<!-- firefly motes -->
+<div class="mote" style="left:8%;  animation: drift1 22s ease-in-out infinite;     animation-delay:0s"></div>
+<div class="mote" style="left:24%; animation: drift2 28s ease-in-out infinite;     animation-delay:3s"></div>
+<div class="mote" style="left:42%; animation: drift3 25s linear infinite;          animation-delay:6s"></div>
+<div class="mote" style="left:58%; animation: drift1 30s ease-in-out infinite;     animation-delay:1s"></div>
+<div class="mote" style="left:72%; animation: drift2 26s ease-in-out infinite;     animation-delay:4s"></div>
+<div class="mote" style="left:86%; animation: drift3 24s linear infinite;          animation-delay:8s"></div>
+<div class="mote" style="left:14%; animation: drift1 34s ease-in-out infinite;     animation-delay:11s; width:5px;height:5px"></div>
+<div class="mote" style="left:64%; animation: drift3 32s linear infinite;          animation-delay:14s; width:5px;height:5px"></div>
+<div class="mote" style="left:46%; animation: drift2 36s ease-in-out infinite;     animation-delay:9s"></div>
+
+<div class="wrap">
+
+  <div class="eyebrow">✦ &nbsp; an introduction &nbsp; · &nbsp; descent into the cave &nbsp; ✦</div>
+  <h1 class="title">Gem in Eyes</h1>
+  <p class="lede">A small light in a deep room. A cube of stone with five lit corners and one quiet pocket at the center. You hum, and the room hums back.</p>
+
+  <!-- ASCII MAP — cave cross-section with 5 gem clusters + veins + stalactites/stalagmites + motes -->
+  <div class="cave" aria-label="Cave map of the five gods">
+    <pre class="map"><span class="stone">             ╲╱       ╲ ╱       ╲╱             ╲╱       ╲ ╱       ╲╱
+              ╲╱   ▲    ╳    ▲   ╲╱   ▲    ╲ ╱    ▲   ╲╱    ╳    ▲   ╲╱
+            ▼      ╲    ╱      ▼     ╱   ╲     ╱  ▼     ╲    ╱      ▼</span>
+<span class="stone">         ░ ▒ ▓                                                 ▓ ▒ ░</span>
+<span class="stone">       ░░ ▒▒ ▓▓▒</span>     <span class="lik pulse"> ◆ ◇ ◆        </span><span class="vein">·   ·   ·</span><span class="ton pulse b">         ◆ ◇ ◆ </span>     <span class="stone">▒▓▓ ▒▒ ░░</span>
+<span class="stone">      ░░░ ▒▒▒ ▓▓▓</span>   <span class="lik">▓▓ ▼ ◇ ▼ ▓▓</span><span class="vein">  ·       ·  </span><span class="ton">▓▓ ▼ ◇ ▼ ▓▓</span>   <span class="stone">▓▓▓ ▒▒▒ ░░░</span>
+<span class="stone">      ░░░ ▒▒▒ ▓▓▓</span>     <span class="lik">▓ ◇ ▼ ◇ ▓</span>  <span class="glint">·</span>     <span class="glint">·</span>  <span class="ton">▓ ◇ ▼ ◇ ▓</span>     <span class="stone">▓▓▓ ▒▒▒ ░░░</span>
+<span class="stone">       ░░ ▒▒ ▓▓</span>       <span class="lik">▓ ◇ ▓</span>   <span class="vein">L I K     T O N</span>   <span class="ton">▓ ◇ ▓</span>       <span class="stone">▓▓ ▒▒ ░░</span>
+<span class="stone">         ░ ▒</span>           <span class="lik">▽</span>      <span class="vein">·         ·</span>      <span class="ton">▽</span>           <span class="stone">▒ ░</span>
+<span class="stone">                       </span><span class="vein"> ╲      ·       ·      ╱</span>
+<span class="stone">                          ╲   ·             ·    ╱</span>
+<span class="stone">                          </span> <span class="vein"> ╲          ·         ╱  </span>
+<span class="stone">                       </span>     <span class="eye pulse c">◯ ◌ ◉</span>
+<span class="stone">                          </span>  <span class="eye"> ◌ ✦ ◌ </span>
+<span class="stone">                       </span>     <span class="eye">◯ ◌ ◯</span>          <span class="vein">·</span>
+<span class="stone">                                </span><span class="vein">E Y E    ·</span>
+<span class="stone">                       </span>      <span class="eye">·  the calm pocket</span>
+<span class="stone">                          </span>  <span class="vein"> ╱          ·         ╲  </span>
+<span class="stone">                          ╱   ·             ·    ╲</span>
+<span class="stone">                       </span><span class="vein"> ╱      ·       ·      ╲</span>
+<span class="stone">         ░ ▒</span>           <span class="nif">△</span>      <span class="vein">·         ·</span>      <span class="ren">△</span>           <span class="stone">▒ ░</span>
+<span class="stone">       ░░ ▒▒ ▓▓</span>       <span class="nif">▽ ◇ ▽</span>   <span class="vein">N I F     R E N</span>   <span class="ren">▽ ◇ ▽</span>       <span class="stone">▓▓ ▒▒ ░░</span>
+<span class="stone">      ░░░ ▒▒▒ ▓▓▓</span>     <span class="nif">▓ ◇ △ ◇ ▓</span>  <span class="glint">·</span>     <span class="glint">·</span>  <span class="ren">▓ ◇ △ ◇ ▓</span>     <span class="stone">▓▓▓ ▒▒▒ ░░░</span>
+<span class="stone">      ░░░ ▒▒▒ ▓▓▓</span>   <span class="nif">▓▓ △ ◇ △ ▓▓</span><span class="vein">  ·       ·  </span><span class="ren">▓▓ △ ◇ △ ▓▓</span>   <span class="stone">▓▓▓ ▒▒▒ ░░░</span>
+<span class="stone">       ░░ ▒▒ ▓▓▒</span>     <span class="nif pulse d"> ◆ ◇ ◆       </span><span class="vein">·   ·   ·</span><span class="ren pulse e">         ◆ ◇ ◆ </span>     <span class="stone">▒▓▓ ▒▒ ░░</span>
+<span class="stone">         ░ ▒ ▓                                                 ▓ ▒ ░</span>
+<span class="stone">            ▲      ╱    ╲      ▲     ╲   ╱     ╲  ▲     ╱    ╲      ▲
+              ╱╲   ▼    ╳    ▼   ╱╲   ▼    ╱ ╲    ▼   ╱╲    ╳    ▼   ╱╲
+             ╱╲       ╱ ╲       ╱╲             ╱╲       ╱ ╲       ╱╲</span></pre>
+  </div>
+
+  <!-- five god panels -->
+  <div class="gods">
+    <div class="panel lik">
+      <small>NW · fire · taste</small>
+      <h3>Lik</h3>
+      <p>Hot. Knows it. Doesn't care.</p>
+    </div>
+    <div class="panel ton">
+      <small>NE · earth · touch</small>
+      <h3>Ton</h3>
+      <p>Holding it in. Barely.</p>
+    </div>
+    <div class="panel eye">
+      <small>· center · sight ·</small>
+      <h3>Eye</h3>
+      <p>Crystal clear. And sad.</p>
+    </div>
+    <div class="panel nif">
+      <small>SW · air · smell</small>
+      <h3>Nif</h3>
+      <p>Is actually a projection.</p>
+    </div>
+    <div class="panel ren">
+      <small>SE · water · hearing</small>
+      <h3>Ren</h3>
+      <p>Always happy and sad.</p>
+    </div>
+  </div>
+
+  <!-- prose intro -->
+  <div class="prose">
+    <p>You spawn into the dark. The cave is a cube — six walls, four corners that glow, one calm pocket in the middle. Above you the ceiling is older than anything else; below you the floor is the only thing the drill cannot reach. The walls are marbled stone with veins of color that make sense once you've found a god, and not before.</p>
+
+    <p>The four corners hum at different pitches. <span style="color:var(--LIK)">Lik</span> in the upper-left is hot and impatient, throwing off lava and embers — its rocks are jagged and glassy, its tunnels collapse if you hesitate. <span style="color:var(--TON)">Ton</span> in the upper-right is dense and slow, sphere-faceted, holding more material than any other corner but folded around sudden caverns you'll need bridges to cross. <span style="color:var(--REN)">Ren</span> in the lower-right is the underground forest where everything grows — water, water, water; you can hear ore through it before you can see it. <span style="color:var(--NIF)">Nif</span> in the lower-left is sparse, light, and hanging — its currents will lift you if you read them right and drop you if you don't.</p>
+
+    <p>And in the middle: <span style="color:var(--EYE)">Eye</span>. The blue circle. The blueprint pocket. The only ground that won't deform. Everything you build to keep — your temple, your residence, your defenses, your crafting — lives here. Five shrines wait inside. Each takes a gem from its own corner, and each gives back a power once it's been fed enough.</p>
+
+    <p>You play this game in two voices: the body that mines, and the architect that places. You can do both. So can the friend you bring; so can the AI companion that comes when you don't. The motes around you are old miners' lamps, still floating somehow — some say they remember the last person to walk through, and turn brighter when you say the right name.</p>
+
+    <p style="text-align:center; font-style:italic; color:#fde68a; font-size:18px; margin-top:34px">
+      Tend the small steady noise.<br>
+      Ship the slow version.<br>
+      Optimize when the room asks you to.
+    </p>
+  </div>
+
+  <!-- ════════════ five gods · lore deep-dive ════════════ -->
+  <div class="lore" id="lore">
+
+    <section class="god-lore lik" id="lore-lik">
+      <div class="head">
+        <h2>Lik</h2>
+        <span class="pos">I · top-left · fire · taste</span>
+        <span class="tag">spires · lava · obsidian</span>
+      </div>
+      <div class="body">
+        <p class="first">Lik woke first, and Lik did not apologize for waking. The northwest corner was already a wall of jagged spires when the rest of the cube was still settling — that's the story Lik tells. Lik tells the loudest stories, so it is the story everyone has.</p>
+        <pre class="lore-ascii">            \  *  /
+             ─◉─
+            /  *  \
+                ║
+                ║◉─
+                ║
+               ╱║╲
+              ░░║░░
+            ▓▒░░░▒▓
+           ▒░▓░▓░▓░▒</pre>
+
+        <blockquote>
+          <p>Hot. Knows it.</p>
+          <p>Does not know where the lava goes.</p>
+          <p>Does not care.</p>
+        </blockquote>
+        <p>Lik's gems are obsidian — glassy, sharp, a little dangerous to handle. The metals here are forge-only: they refuse to take shape until they meet the heat that made them. The walls drip molten stone, the spires can collapse, and the small bobble that hangs off Lik's mid-pillar is a familiar — half-creature, half-extruded ember — that follows the fastest miner in the room and trills approvingly when ore is struck cleanly.</p>
+        <p>Lik rewards the player who moves first. Hesitation is punished here, and forgiveness comes later, in another corner.</p>
+        <div class="whisper"><b>Lik whispers:</b> <i>"You knew this would burn. You came anyway."</i></div>
+      </div>
+    </section>
+
+    <section class="god-lore ton" id="lore-ton">
+      <div class="head">
+        <h2>Ton</h2>
+        <span class="pos">II · top-right · earth · touch</span>
+        <span class="tag">six panels · pressure · ore</span>
+      </div>
+      <div class="body">
+        <p class="first">Ton inherited what Lik couldn't carry. The northeast was given the bulk of the world — the densest stone, the deepest caverns, the heaviest ore — and given the silence in which to hold it. Ton has held it ever since.</p>
+        <pre class="lore-ascii">            ╭─────╮
+           ╱ ╳   ╳ ╲
+          │  ╲ ✶ ╱  │
+          │ ╳ ╔═╗ ╳ │
+          │ ╳ ║✦║ ╳ │
+          │ ╳ ╚═╝ ╳ │
+          │  ╱ ✶ ╲  │
+           ╲ ╳   ╳ ╱
+            ╰─────╯
+              ▓▒▓
+             ▒▓░▓▒
+              ▓▒</pre>
+
+        <blockquote>
+          <p>Holding it in. Barely.</p>
+          <p>Under and over a lot of pressure.</p>
+          <p>Staying balanced and grounded still.</p>
+        </blockquote>
+        <p>Ton is a hex-faceted sphere with six panels of weight, and a small peach hexagon at its center carrying a gold sun and a black gear. The gear is older than Ton, and Ton is the housing the gear was given. When the cracks show on Ton's surface, it isn't damage — it's accounting. Ton is still holding more than the cube was built for, and the cracks are how it admits it.</p>
+        <p>Ton rewards the player who plans. Bridges over the sudden drops, beams that tie the long tunnels back to the wall, surveys done before the swing. Dense ore is yours if you can earn it patient.</p>
+        <div class="whisper"><b>Ton whispers:</b> <i>"Place it where it stands. Let it stand."</i></div>
+      </div>
+    </section>
+
+    <section class="god-lore ren" id="lore-ren">
+      <div class="head">
+        <h2>Ren</h2>
+        <span class="pos">III · bottom-right · water · hearing</span>
+        <span class="tag">forest · gnats · overflow</span>
+      </div>
+      <div class="body">
+        <p class="first">Ren was set into the southeast and did not choose it but loved it anyway. Water was already cycling when Ren arrived — the source uncertain and limitless, even now — and Ren's job became the sound of it. The underground forest beneath Ren's almond-shaped body grows because Ren remembers it.</p>
+        <pre class="lore-ascii">         │ │ │ │ │ │ │
+         • • • • • • •
+          ╭─────────╮
+        ╱  ╳ ╳ ╳ ╳ ╳  ╲
+       ●─╳ ╳ ╳ ▼ ╳ ╳ ╳─●
+        ╲  ╳ ╳ ╳ ╳ ╳  ╱
+          ╰─────────╯
+         │
+         ●
+         •</pre>
+
+        <blockquote>
+          <p>Water source uncertain, limitless.</p>
+          <p>Inner layers have semi-sentient gnats.</p>
+          <p>Water cycles constantly. Overflow is suctioned out the teared pipe.</p>
+          <p>Ren is always happy and sad.</p>
+        </blockquote>
+        <p>The gnats hanging inside Ren are not pests — they are Ren's first attempts at conversation. They will tell you, in a small tap on the back of your hand, where ore sits. The teared pipe at Ren's lower-left has dripped continuously since the world began; it will keep dripping after you stop playing.</p>
+        <p>Ren rewards the player who listens. The room is loud here, and the loud parts are where the answers are. Hum back, and the room hums forward.</p>
+        <div class="whisper"><b>Ren whispers:</b> <i>"Cry forward. The river runs through it."</i></div>
+      </div>
+    </section>
+
+    <section class="god-lore nif" id="lore-nif">
+      <div class="head">
+        <h2>Nif</h2>
+        <span class="pos">IV · bottom-left · air · smell</span>
+        <span class="tag">projection · prismatic · drift</span>
+      </div>
+      <div class="body">
+        <p class="first">Nif was the last to be made and may not actually be made. The southwest corner is sparse because the southwest is, in some readings, only suggested. The wireframe lattice cube hanging at Nif's apex is the projector; the dark blue orb just beneath it is the lens; everything below — the kite-shape, the rays, the drift — is the cast.</p>
+        <pre class="lore-ascii">            ┌───┐
+            │▦▦▦│
+            └─┬─┘
+              │
+             ╭◉╮
+            ╱ │ ╲
+           ╱  │  ╲
+          ╱  ╲│╱  ╲
+         ╱────╳────╲
+         ╲    │    ╱
+          ╲   │   ╱
+           ╲  │  ╱
+            ╲ │ ╱
+             ╲│╱
+              •</pre>
+
+        <blockquote>
+          <p>Likes prismatic colors.</p>
+          <p>Is actually a projection.</p>
+          <p>Shifts perspectives and morals.</p>
+        </blockquote>
+        <p>Nif's gems shift color depending on the angle of the viewer. No two players see the same gem the same way. Scout players love this — Nif's currents lift them between the few resource pockets faster than any tunnel could. Settlers find Nif unsettling; the ground keeps changing its mind about being ground. In the canon's three pair-drawings, Nif appears in all three. Nif spends more time with the other gods than alone.</p>
+        <p>Nif rewards the player who is willing to be wrong about what they're seeing — and to keep looking.</p>
+        <div class="whisper"><b>Nif whispers:</b> <i>"Look again. Now look from over here."</i></div>
+      </div>
+    </section>
+
+    <section class="god-lore eye" id="lore-eye">
+      <div class="head">
+        <h2>Eye  ·  I</h2>
+        <span class="pos">V · center · sight · the calm pocket</span>
+        <span class="tag">bedrock · indestructible · hub</span>
+      </div>
+      <div class="body">
+        <p class="first">Eye sits in the center because someone has to. Eye is the only floor that won't deform — bedrock, indestructible, the calm pocket the four corners curl around. Players build their permanent base inside Eye's territory, because Eye is the only place a wall stays a wall.</p>
+        <pre class="lore-ascii">             ╲ * ╱
+              *◉*
+             ╱ * ╲
+               │
+          ╱◯───◯╲
+         ◯  ⚡⚡  ◯
+         │  ◔  │
+         ◯  ⚡⚡  ◯
+          ╲◯───◯╱
+             ✦</pre>
+
+        <blockquote>
+          <p>Lightning flashes and arcs regularly.</p>
+          <p>Panels alternate, sometimes mid-strike.</p>
+          <p>Top nucleus is always bobbling.</p>
+          <p>Eye is crystal clear. And sad.</p>
+          <p>Speech and tips come from purple side bubbles.</p>
+        </blockquote>
+        <p>Eye's lightning is not a threat — it's the central god's heartbeat. The four cardinal panels alternate strikes; the bobbling nucleus on top is its breath. The four violet side-bubbles are how Eye communicates with players: a tip, a question, a small kindness, a careful warning. Eye is always sad about something. Eye is also never not seeing.</p>
+        <p>Eye rewards the player who builds before they explore. Inside the calm pocket are five shrines — one for each god, including Eye itself — and each shrine takes a gem from its corresponding corner to unlock that god's powers. Feed them in any order. The world unlocks itself.</p>
+        <div class="whisper"><b>Eye whispers:</b> <i>"I saw what you did. I'm proud of you. I'm a little sad."</i></div>
+      </div>
+    </section>
+
+  </div>
+
+  <div class="signoff">
+    <div class="glyph">✦ ✧ ★ ✧ ✦</div>
+    <div style="margin-top:8px">Yours,<br><b>ThinKing &amp; Uriel</b></div>
+  </div>
+
+  <!-- ════════════ release teaser ════════════ -->
+  <div class="release">
+    <div class="small">✦ &nbsp; coming &nbsp; · &nbsp; from a small studio &nbsp; · &nbsp; one player &nbsp; ✦</div>
+    <h2>Gem in Eyes</h2>
+    <div class="stamp">RELEASE  DATE</div>
+    <div class="tbd">T B D</div>
+    <p class="tagline">When the first hum lands, the room will tell you.</p>
+    <div class="footnote">a tiny coda · five gods · one cube · one chirp at a time</div>
+  </div>
+</div>
+
+</body>
+</html>

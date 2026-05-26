@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>WOR GEMS — v0.5 prototype</title>
+<meta name="viewport" content="width=1280, initial-scale=1">
+<style>
+:root{--ink:#ECECF1;--ink-soft:#C7C7D1;--ink-mute:#8A8A98;--gold:#E5B84A;--eye:#4FA0BC;--lik:#D24E2E;--ton:#C29A4A;--ren:#5FA37D;--mud:#8C6F45;--rule:#2C2C3A;--panel:rgba(14,14,22,.72);--panel-edge:rgba(255,255,255,.1);--hp-good:#8FD06A;--hp-bad:#E96C6C}
+*{box-sizing:border-box;margin:0;padding:0;user-select:none}
+html,body{height:100%;background:#0A0A10;color:var(--ink);font-family:Georgia,serif;overflow:hidden}
+#game{width:100%;height:100%;display:flex;align-items:center;justify-content:center;position:relative}
+.screen{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.screen.hidden{display:none!important}
+
+#title-screen{background:radial-gradient(ellipse at center,rgba(79,160,188,.18),transparent 60%),#0A0A10;text-align:center;padding:40px 20px}
+#title-screen .eyebrow{font-family:Consolas,monospace;color:var(--gold);font-size:13px;letter-spacing:6px;margin-bottom:12px;text-shadow:0 0 12px rgba(229,184,74,.4)}
+#title-screen h1{font-family:Georgia,serif;font-size:80px;letter-spacing:4px;margin-bottom:14px;text-shadow:0 4px 20px rgba(229,184,74,.3)}
+#title-screen h1 .gold{color:var(--gold);font-style:italic}
+#title-screen .tagline{font-family:Consolas,monospace;font-size:13px;letter-spacing:4px;color:var(--ink-mute);margin-bottom:42px}
+#title-screen .tagline .x{color:var(--gold);padding:0 6px}
+#title-screen .pick-prompt{font-style:italic;color:var(--ink-soft);margin-bottom:22px;font-size:17px}
+.faction-cards{display:flex;gap:22px;flex-wrap:wrap;justify-content:center;max-width:1100px}
+.faction-card{width:270px;background:var(--panel);border:1px solid var(--panel-edge);border-radius:8px;padding:18px;cursor:pointer;transition:all .2s;text-align:left}
+.faction-card:hover{transform:translateY(-4px)}
+.faction-card.ton:hover{border-color:var(--ton);box-shadow:0 6px 24px rgba(194,154,74,.3)}
+.faction-card.lik:hover{border-color:var(--lik);box-shadow:0 6px 24px rgba(210,78,46,.3)}
+.faction-card.ren:hover{border-color:var(--ren);box-shadow:0 6px 24px rgba(95,163,125,.3)}
+.faction-card .label{font-family:Consolas,monospace;font-size:10.5px;letter-spacing:4px;opacity:.85;margin-bottom:6px}
+.faction-card.ton .label{color:var(--ton)} .faction-card.lik .label{color:var(--lik)} .faction-card.ren .label{color:var(--ren)}
+.faction-card .name{font-family:Georgia,serif;font-size:24px;margin-bottom:6px;letter-spacing:1.5px}
+.faction-card .creed{font-style:italic;color:var(--ink-mute);font-size:13px;line-height:1.5;margin-bottom:14px}
+.faction-card .stats{font-family:Consolas,monospace;font-size:11.5px;color:var(--ink-soft);border-top:1px solid var(--rule);padding-top:10px;line-height:1.7}
+.faction-card .stats span.k{color:var(--gold)}
+#title-screen .footnote{font-family:Consolas,monospace;font-size:10.5px;letter-spacing:2px;color:var(--ink-mute);margin-top:30px}
+
+#match-screen{background:#0A0A10;padding:0;justify-content:flex-start}
+.hud{width:100%;flex-shrink:0;height:60px;display:flex;justify-content:space-between;align-items:center;padding:0 24px;background:rgba(10,10,16,.92);border-bottom:1px solid var(--rule);z-index:10}
+.hud-side{display:flex;flex-direction:column;gap:4px;min-width:240px}
+.hud-side.right{align-items:flex-end}
+.hud-side .name{font-family:Georgia,serif;font-size:16px;letter-spacing:1px}
+.hud-side .name.ton{color:var(--ton)} .hud-side .name.lik{color:var(--lik)} .hud-side .name.ren{color:var(--ren)}
+.hud-bar-wrap{width:220px;height:10px;background:rgba(255,255,255,.08);border-radius:5px;overflow:hidden;position:relative}
+.hud-bar{height:100%;background:var(--hp-good);transition:width .25s ease}
+.hud-bar.low{background:var(--hp-bad)}
+.hud-bar-text{position:absolute;inset:0;text-align:center;font-family:Consolas,monospace;font-size:10px;color:var(--ink);line-height:10px;text-shadow:0 1px 0 rgba(0,0,0,.7)}
+.hud-center{display:flex;flex-direction:column;align-items:center;gap:2px}
+.hud-center .income{font-family:Consolas,monospace;font-size:26px;color:var(--gold);letter-spacing:2px;text-shadow:0 0 12px rgba(229,184,74,.6)}
+.hud-center .rate{font-family:Consolas,monospace;font-size:11px;color:var(--ink-mute);letter-spacing:2px}
+.hud-center .timer{font-family:Consolas,monospace;font-size:11px;color:var(--ink-soft);letter-spacing:3px;margin-top:1px}
+
+.battlefield-wrap{width:100%;flex:1;position:relative;overflow:hidden;min-height:460px;perspective:1100px;perspective-origin:50% 30%}
+.bf-sky{position:absolute;inset:0;z-index:0;transition:background .6s}
+.bf-sky.concord-vs-ascension{background:linear-gradient(180deg,#2a1810 0%,#6e3a18 70%,#3a1f0c 100%)}
+.bf-sky.concord-vs-mist{background:linear-gradient(180deg,#1c2a22 0%,#3a5448 60%,#1a2620 100%)}
+.bf-sky.ascension-vs-mist{background:linear-gradient(180deg,#2a1c14 0%,#5a3a28 50%,#3a4a3a 100%)}
+.bf-sky::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 30%,rgba(10,10,16,.5) 90%)}
+.bf-stars{position:absolute;inset:0;background:radial-gradient(1px 1px at 23% 12%,rgba(255,255,255,.6),transparent),radial-gradient(1px 1px at 41% 28%,rgba(255,255,255,.45),transparent),radial-gradient(1px 1px at 67% 18%,rgba(255,255,255,.5),transparent),radial-gradient(1px 1px at 82% 33%,rgba(255,255,255,.4),transparent),radial-gradient(1px 1px at 11% 36%,rgba(255,255,255,.35),transparent),radial-gradient(1px 1px at 54% 8%,rgba(255,255,255,.45),transparent),radial-gradient(1px 1px at 92% 21%,rgba(255,255,255,.5),transparent);opacity:.55;animation:twinkle 4s ease-in-out infinite alternate}
+@keyframes twinkle{0%{opacity:.3} 100%{opacity:.65}}
+
+.bf-mountains{position:absolute;left:0;right:0;top:30px;height:60px;text-align:center;z-index:1;font-family:Consolas,monospace;font-size:14px;line-height:1.05;color:rgba(120,100,70,.45);text-shadow:0 0 10px rgba(120,100,70,.3);white-space:pre;pointer-events:none;letter-spacing:1px}
+.bf-city{position:absolute;left:0;right:0;top:90px;height:30px;text-align:center;z-index:1;font-family:Consolas,monospace;font-size:11px;line-height:1.05;color:rgba(80,70,60,.5);white-space:pre;pointer-events:none;letter-spacing:1px}
+
+.bf-floor{position:absolute;left:-15%;right:-15%;bottom:-60px;height:460px;background:linear-gradient(180deg,rgba(40,28,16,0) 0%,rgba(40,28,16,.85) 78%,rgba(20,14,8,1) 100%);transform:rotateX(58deg);transform-origin:center bottom;z-index:1}
+.bf-floor::before{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,transparent 0,transparent 60px,rgba(255,255,255,.06) 60px,rgba(255,255,255,.06) 61px),repeating-linear-gradient(0deg,transparent 0,transparent 70px,rgba(255,255,255,.05) 70px,rgba(255,255,255,.05) 71px)}
+.bf-floor::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%,rgba(229,184,74,.08) 0%,transparent 50%)}
+
+.bf-stage{position:absolute;inset:0;z-index:4;pointer-events:none}
+.bf-decor{position:absolute;inset:0;z-index:2;pointer-events:none}
+
+.base{position:absolute;bottom:14px;width:86px;height:160px;z-index:3;pointer-events:none;display:flex;align-items:flex-end;justify-content:center}
+.base pre{font-family:Consolas,monospace;font-size:11px;line-height:1.05;text-shadow:0 0 10px currentColor;white-space:pre;text-align:center}
+.base.player{left:8px} .base.enemy{right:8px}
+.base.enemy pre{transform:scaleX(-1);display:inline-block}
+.base.dead{animation:base-die 1.3s ease-in forwards}
+@keyframes base-die{0%{transform:translate(0,0);opacity:1} 40%{transform:translate(3px,-4px)} 100%{transform:translate(0,80px);opacity:0;filter:blur(4px)}}
+
+/* ============  UNIT + ANIMATION SYSTEM  ============
+   Layered: .unit (JS sets translate/scale) > .body (CSS keyframe idle) > pre (sprite + flip on enemy)
+*/
+.unit{position:absolute;will-change:transform;pointer-events:none;transition:opacity .4s}
+.unit .body{display:inline-block;will-change:transform}
+.unit pre{font-family:Consolas,monospace;font-size:11px;line-height:1.1;color:inherit;text-shadow:0 0 6px currentColor;white-space:pre;text-align:center;margin:0;display:inline-block}
+.unit.enemy pre{transform:scaleX(-1)}
+.unit.dying{opacity:0}
+.unit.hit pre{animation:hit-flash .18s linear !important}
+.unit.fire .body{animation-duration:.12s !important;animation-iteration-count:1 !important;animation-name:fire-recoil !important;animation-direction:normal !important}
+.unit.ton{color:var(--ton)} .unit.lik{color:var(--lik)} .unit.ren{color:var(--ren)}
+.unit .hp{position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:30px;height:3px;background:rgba(255,255,255,.2);border-radius:2px;overflow:hidden;z-index:5}
+.unit .hp::after{content:"";position:absolute;inset:0;width:var(--hp,100%);background:var(--hp-good);transition:width .15s linear}
+.unit .hp.low::after{background:var(--hp-bad)}
+
+@keyframes hit-flash{0%,100%{filter:brightness(1)} 50%{filter:brightness(2.4) drop-shadow(0 0 6px white)}}
+@keyframes fire-recoil{0%{transform:translateY(0) scale(1) drop-shadow(0 0 0 white)} 50%{transform:translateY(-2px) scale(1.08);filter:brightness(2.0) drop-shadow(0 0 6px white)} 100%{transform:translateY(0) scale(1);filter:none}}
+
+/* per-unit IDLE animations on .body */
+.unit.soldier    .body{animation:anim-soldier    .7s ease-in-out infinite alternate}
+.unit.miner      .body{animation:anim-miner      .55s ease-in-out infinite alternate}
+.unit.sniper     .body{animation:anim-sniper     1.6s ease-in-out infinite alternate}
+.unit.tank       .body{animation:anim-tank       .42s ease-in-out infinite alternate}
+.unit.mech       .body{animation:anim-mech       .85s ease-in-out infinite alternate}
+.unit.helicopter .body{animation:anim-heli       .14s linear infinite}
+.unit.airplane   .body{animation:anim-plane      2.0s ease-in-out infinite}
+
+@keyframes anim-soldier{ 0%{transform:translateY(0) rotate(-1deg)} 100%{transform:translateY(-2px) rotate(1deg)} }
+@keyframes anim-miner   { 0%{transform:translateY(0) rotate(-4deg)} 100%{transform:translateY(-1px) rotate(4deg)} }
+@keyframes anim-sniper  { 0%{transform:translateY(0)} 100%{transform:translateY(-1px) translateX(.4px)} }
+@keyframes anim-tank    { 0%{transform:translateY(0) skewX(0deg)} 100%{transform:translateY(-1.2px) skewX(.6deg)} }
+@keyframes anim-mech    { 0%{transform:translateY(0) scale(1,1)} 100%{transform:translateY(-1.5px) scale(1.02,.96)} }
+@keyframes anim-heli    { 0%{transform:translateY(-.5px) scaleX(1)} 25%{transform:translateY(-1.8px) scaleX(1.12)} 50%{transform:translateY(-.5px) scaleX(.95)} 75%{transform:translateY(-1.8px) scaleX(1.08)} 100%{transform:translateY(-.5px) scaleX(1)} }
+@keyframes anim-plane   { 0%,100%{transform:translateY(0) rotate(0deg)} 25%{transform:translateY(-2px) rotate(-3deg)} 75%{transform:translateY(2px) rotate(3deg)} }
+
+.proj{position:absolute;left:0;bottom:0;width:14px;height:3px;border-radius:2px;pointer-events:none;z-index:5;transform-origin:center center;will-change:transform}
+.proj.ton{background:linear-gradient(90deg,rgba(229,184,74,0),var(--gold) 70%,#fff8d6);box-shadow:0 0 8px var(--gold)}
+.proj.lik{background:linear-gradient(90deg,rgba(210,78,46,0),var(--lik) 70%,#ffd0b8);box-shadow:0 0 8px var(--lik)}
+.proj.ren{background:linear-gradient(90deg,rgba(95,163,125,0),var(--ren) 70%,#d0f0e0);box-shadow:0 0 8px var(--ren)}
+
+.dmg-pop{position:absolute;font-family:Consolas,monospace;font-size:11px;color:var(--hp-bad);pointer-events:none;animation:dmg-pop .7s ease-out forwards;text-shadow:0 1px 0 black;z-index:6}
+.dmg-pop.cov{color:#8FD06A}
+@keyframes dmg-pop{0%{transform:translateY(0) scale(.9);opacity:1} 100%{transform:translateY(-28px) scale(1.05);opacity:0}}
+
+/* COVER + DEBRIS — destructible props */
+.prop{position:absolute;left:0;bottom:0;pointer-events:none;z-index:3;transition:opacity .35s ease-out, filter .35s ease-out}
+.prop pre{font-family:Consolas,monospace;font-size:11px;line-height:1.05;white-space:pre;margin:0;display:inline-block}
+.prop.cover pre{color:#a78c5a;text-shadow:0 0 4px rgba(167,140,90,.45)}
+.prop.debris pre{color:#4a3a26;text-shadow:0 0 3px rgba(74,58,38,.4);opacity:.7;font-size:10px}
+.prop.tree pre{color:#3a5448;opacity:.55}
+.prop.hurt pre{animation:prop-hit .22s linear}
+.prop.broken{opacity:.18;filter:blur(.5px) saturate(.4)}
+.prop.broken pre{color:#3a2f1a}
+@keyframes prop-hit{0%,100%{filter:brightness(1)} 50%{filter:brightness(2.0) drop-shadow(0 0 4px #fff)}}
+
+.rail-wrap{width:100%;flex-shrink:0;background:rgba(10,10,16,.92);border-top:1px solid var(--rule);padding:8px 14px 10px}
+.rail-hint{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:6px;font-family:Consolas,monospace;font-size:10.5px;letter-spacing:2px;color:var(--ink-mute)}
+.rail-hint kbd{background:rgba(255,255,255,.08);border:1px solid var(--rule);padding:1px 5px;border-radius:3px;color:var(--ink-soft);font-family:inherit;font-size:10px}
+.unit-rail{display:flex;gap:8px;justify-content:center;align-items:stretch}
+.card{flex:1;max-width:160px;background:rgba(20,20,30,.92);border:1px solid var(--panel-edge);border-radius:5px;padding:6px 8px 8px;cursor:pointer;transition:all .15s;position:relative;overflow:hidden;text-align:center;display:flex;flex-direction:column;gap:3px}
+.card:hover:not(.disabled){border-color:var(--gold);transform:translateY(-2px)}
+.card.disabled{opacity:.45;cursor:not-allowed}
+.card .ctitle{font-family:Georgia,serif;font-weight:700;font-size:13px;letter-spacing:.5px;color:var(--ink)}
+.card .ccost{font-family:Consolas,monospace;font-size:12px;color:var(--gold);letter-spacing:1.5px}
+.card .cstats{font-family:Consolas,monospace;font-size:10px;color:var(--ink-mute);line-height:1.4}
+.card .cstats .k{color:var(--ink-soft)}
+.card .ckey{position:absolute;top:3px;right:5px;font-family:Consolas,monospace;font-size:9.5px;color:var(--ink-mute);border:1px solid var(--rule);border-radius:3px;padding:0 4px}
+.card .ccd{position:absolute;left:0;bottom:0;right:0;height:3px;background:var(--gold);transform-origin:left;transform:scaleX(0)}
+.card.cooling .ccd{animation:cd-sweep var(--cd,0s) linear forwards}
+@keyframes cd-sweep{from{transform:scaleX(1)} to{transform:scaleX(0)}}
+.card .cmini{font-family:Consolas,monospace;font-size:12px;line-height:1.05;color:inherit;opacity:.95;text-shadow:0 0 6px currentColor;white-space:pre;margin:1px 0}
+.card.ton{color:var(--ton)} .card.lik{color:var(--lik)} .card.ren{color:var(--ren)}
+.badges{display:flex;gap:3px;justify-content:center;margin-top:2px;flex-wrap:wrap}
+.badge{display:inline-block;padding:0 4px;border-radius:2px;font-family:Consolas,monospace;font-size:8.5px;letter-spacing:1px;font-weight:700}
+.badge-grnd{background:rgba(140,111,69,.18);color:#cba87a;border:1px solid rgba(140,111,69,.5)}
+.badge-air{background:rgba(79,160,188,.18);color:var(--eye);border:1px solid rgba(79,160,188,.5)}
+.badge-aa{background:rgba(143,208,106,.16);color:var(--hp-good);border:1px solid rgba(143,208,106,.5)}
+
+#end-screen{background:radial-gradient(ellipse at center,rgba(229,184,74,.1),transparent 70%),#0A0A10;text-align:center;padding:60px 20px}
+#end-screen .result{font-family:Georgia,serif;font-size:76px;letter-spacing:4px;margin-bottom:14px}
+#end-screen .result.win{color:var(--ton);text-shadow:0 0 22px rgba(194,154,74,.5)}
+#end-screen .result.loss{color:var(--lik);text-shadow:0 0 22px rgba(210,78,46,.5)}
+#end-screen .quip{font-style:italic;color:var(--ink-mute);font-size:16px;margin-bottom:36px;max-width:600px}
+#end-screen .stats{font-family:Consolas,monospace;font-size:13px;color:var(--ink-soft);letter-spacing:1.5px;line-height:1.9;margin-bottom:36px}
+#end-screen .stats .k{color:var(--gold)}
+.btn{background:transparent;color:var(--gold);border:1px solid var(--gold);padding:12px 28px;border-radius:4px;font-family:Consolas,monospace;font-size:13px;letter-spacing:4px;cursor:pointer;transition:all .15s}
+.btn:hover{background:var(--gold);color:#0A0A10}
+.small-warn{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#0A0A10;padding:20px;border:1px solid var(--gold);text-align:center;max-width:320px;z-index:999;color:var(--ink);display:none}
+@media (max-width:1100px){.small-warn{display:block}}
+</style>
+</head>
+<body>
+<div id="game">
+  <div id="title-screen" class="screen">
+    <div class="eyebrow">— V 0 . 5   P R O T O T Y P E —</div>
+    <h1>WOR <span class="gold">GEMS</span></h1>
+    <div class="tagline">MINECRAFT <span class="x">&times;</span> BATTLEFIELD <span class="x">&times;</span> TITANFALL <span class="x">&times;</span> STARCRAFT</div>
+    <div class="pick-prompt">Pick a banner. Walk the chart.</div>
+    <div class="faction-cards">
+      <div class="faction-card ton" data-faction="concord">
+        <div class="label">— I &middot; EARTH &middot; TOUCH —</div>
+        <div class="name">Tonric Concord</div>
+        <div class="creed">"Place it where it stands. Stay there."</div>
+        <div class="stats"><div><span class="k">HP</span> +15%</div><div><span class="k">SPD</span> &minus;15%</div><div><span class="k">PLAYS</span> heavy &middot; durable &middot; arrives</div></div>
+      </div>
+      <div class="faction-card lik" data-faction="ascension">
+        <div class="label">— II &middot; FIRE / WIND &middot; TASTE —</div>
+        <div class="name">Wildfire Ascension</div>
+        <div class="creed">"Burn fast or be burned slowly."</div>
+        <div class="stats"><div><span class="k">HP</span> &minus;15%</div><div><span class="k">ATK</span> +20%</div><div><span class="k">SPD</span> +25%</div><div><span class="k">PLAYS</span> fast &middot; glass &middot; decisive</div></div>
+      </div>
+      <div class="faction-card ren" data-faction="mist">
+        <div class="label">— III &middot; WATER / WIND &middot; HEARING —</div>
+        <div class="name">Renkindled Mist</div>
+        <div class="creed">"Cry forward. Look from over here."</div>
+        <div class="stats"><div><span class="k">HP</span> &minus;5%</div><div><span class="k">RNG</span> +10%</div><div><span class="k">COST</span> &minus;5%</div><div><span class="k">PLAYS</span> long shot &middot; sustain &middot; grind</div></div>
+      </div>
+    </div>
+    <div class="footnote">7 units &middot; animated &middot; ~60 cover + 84 debris (all destructible, 160 HP each)</div>
+  </div>
+
+  <div id="match-screen" class="screen hidden">
+    <div class="hud">
+      <div class="hud-side left">
+        <div class="name" id="hud-p-name">—</div>
+        <div class="hud-bar-wrap"><div class="hud-bar" id="hud-p-bar" style="width:100%"></div><div class="hud-bar-text" id="hud-p-bartxt">1000 / 1000</div></div>
+      </div>
+      <div class="hud-center">
+        <div class="income" id="hud-income">0</div>
+        <div class="rate" id="hud-rate">+1/s</div>
+        <div class="timer" id="hud-timer">00:00</div>
+      </div>
+      <div class="hud-side right">
+        <div class="name" id="hud-e-name">—</div>
+        <div class="hud-bar-wrap"><div class="hud-bar" id="hud-e-bar" style="width:100%"></div><div class="hud-bar-text" id="hud-e-bartxt">1000 / 1000</div></div>
+      </div>
+    </div>
+    <div class="battlefield-wrap" id="bf">
+      <div class="bf-sky" id="bf-sky"></div>
+      <div class="bf-stars"></div>
+      <div class="bf-mountains" id="bf-mountains"></div>
+      <div class="bf-city" id="bf-city"></div>
+      <div class="bf-floor"></div>
+      <div class="bf-decor" id="bf-decor"></div>
+      <div class="base player" id="base-player"></div>
+      <div class="base enemy" id="base-enemy"></div>
+      <div class="bf-stage" id="bf-stage"></div>
+    </div>
+    <div class="rail-wrap">
+      <div class="rail-hint"><span><kbd>Q</kbd><kbd>W</kbd><kbd>E</kbd><kbd>R</kbd><kbd>T</kbd><kbd>Y</kbd><kbd>U</kbd> deploy &middot; units seek cover &middot; props destructible (160 HP)</span></div>
+      <div class="unit-rail" id="rail"></div>
+    </div>
+  </div>
+
+  <div id="end-screen" class="screen hidden">
+    <div class="result" id="end-result">VICTORY</div>
+    <div class="quip" id="end-quip">—</div>
+    <div class="stats" id="end-stats">—</div>
+    <button class="btn" id="btn-again">PLAY AGAIN</button>
+  </div>
+  <div class="small-warn">Wor Gems v0.5 wants a wider screen (1100px+).</div>
+</div>
+
+<script>
+'use strict';
+const BATTLE_WIDTH=1100, PLAYER_BASE_X=80, ENEMY_BASE_X=1020;
+const TICK_HZ=10, TICK_DT=1/TICK_HZ;
+const Y_MIN=40, Y_MAX=270, Y_AIR_OFFSET=70;
+function yScale(y){ return 1.05 - (y-Y_MIN)/(Y_MAX-Y_MIN)*0.20; }
+function yAir(y){ return y+Y_AIR_OFFSET; }
+function unitScreenY(u){ return u.domain==='air' ? yAir(u.y) : u.y; }
+
+const PROP_MAX_HP = 160;     // 5 basic soldiers (32 HP × 5)
+const COVER_COUNT_MIN = 54;  // was 9 — 6×
+const COVER_COUNT_MAX = 66;  // was 11 — 6×
+const DEBRIS_COUNT = 84;     // was 14 — 6×
+
+const FACTIONS={
+  concord:  {key:'concord',  cls:'ton',name:'Tonric Concord',     mod:{hp:1.15,atk:1.00,speed:0.85,cost:1.00,range:1.00}},
+  ascension:{key:'ascension',cls:'lik',name:'Wildfire Ascension', mod:{hp:0.85,atk:1.20,speed:1.25,cost:1.00,range:1.00}},
+  mist:     {key:'mist',     cls:'ren',name:'Renkindled Mist',    mod:{hp:0.95,atk:1.00,speed:1.05,cost:0.95,range:1.10}}
+};
+
+const SPRITES={
+  soldier:    ` ▄\n┃T┃\n ╨`,
+  miner:      ` ▄\n├⛏┤\n ╨`,
+  sniper:     ` ◢\n╟═━─\n ╨`,
+  tank:       `  ╔═╗━\n┌╨┴┴╨┐\n◯═◯═◯═◯`,
+  mech:       `  ╔╗\n┌╪▣╪┐\n║╪╪╪║\n╨   ╨`,
+  helicopter: `─═╪═─\n ╔╪╗\n └─┘`,
+  airplane:   `   ▲\n◄═╪═►\n   ▼`
+};
+const BASES={
+  ton:`▲▲▲▲▲\n▌▣█▣▐\n▌█T█▐\n▌▣█▣▐\n▌███▐\n▌███▐\n═════`,
+  lik:`  ▲\n ▲L▲\n▌▼▼▼▐\n▌╱╲╱▐\n▌███▐\n▌███▐\n═════`,
+  ren:`≋ ≋ ≋\n░░░░░\n▌⩿R⩿▐\n▌▒▒▒▐\n▌███▐\n▌███▐\n═════`
+};
+const COVER_SPRITES = [
+  '▒▒▒\n▒▒▒',
+  '┌─┐\n[▓]',
+  '▓▓▓',
+  '▴▾▾',
+  '▒░▒\n▒▒▒',
+  '╳╳╳',
+  '[▓▓]\n └┘',
+  '▟▙',
+  '═▓═'
+];
+const DEBRIS_SPRITES = [
+  '. ◦ .', ' ▪▫▪ ', '╳ ╳', '·░·', ' ⌇ ', '∴ ∵',
+  '┄┄', ' ° ', ' ⌘ ', ' ◎ ', '\\○/', '⌖',
+  '·•·', ' ⬩ ', ' ⌬ ', '✶'
+];
+const TREE_SPRITES = ['♣\n│', '▲\n│', '✤\n│', '♠\n│'];
+const MOUNTAINS = `      ╱╲          ╱╲╱╲             ╱╲                ╱╲╱╲╱╲           ╱╲
+   ╱╲╱  ╲╱╲     ╱      ╲╱╲      ╱╲╱  ╲╱╲          ╱           ╲╱╲     ╱╲╱  ╲╱╲`;
+const CITY = `        ▌▐█▌▐█▌▐█▌    ▌▐█▌▐█▌    ▌▐█▌▐█▌▐█▌▐█▌▐█▌    ▌▐█▌▐█▌    ▌▐█▌▐█▌▐█▌`;
+
+const UNIT_DEFS={
+  soldier:    {cost: 8,hp: 32,atk: 4, range:100,speed:24,atkRate:0.65,domain:'ground',canHitAir:true, projSpd:680,key:'Q',label:'Soldier'},
+  miner:      {cost:14,hp: 22,atk: 1, range: 90,speed:20,atkRate:1.40,domain:'ground',canHitAir:false,projSpd:600,key:'W',label:'Miner',     income:0.5},
+  sniper:     {cost:22,hp: 28,atk:22, range:220,speed:16,atkRate:2.50,domain:'ground',canHitAir:true, projSpd:900,key:'E',label:'Sniper'},
+  tank:       {cost:32,hp:160,atk:16, range:175,speed:12,atkRate:1.80,domain:'ground',canHitAir:true, projSpd:760,key:'R',label:'Tank'},
+  mech:       {cost:50,hp:320,atk:24, range:120,speed:14,atkRate:1.00,domain:'ground',canHitAir:false,projSpd:720,key:'T',label:'Mech'},
+  helicopter: {cost:24,hp: 38,atk: 6, range:130,speed:32,atkRate:0.50,domain:'air',   canHitAir:false,projSpd:700,key:'Y',label:'Helicopter'},
+  airplane:   {cost:26,hp: 50,atk:12, range:175,speed:42,atkRate:1.50,domain:'air',   canHitAir:false,projSpd:640,key:'U',label:'Airplane'}
+};
+const UNIT_ORDER=['soldier','miner','sniper','tank','mech','helicopter','airplane'];
+const UNIT_KEYS={'q':'soldier','w':'miner','e':'sniper','r':'tank','t':'mech','y':'helicopter','u':'airplane'};
+const QUIPS={
+  win:["The Eye saw it. The gods drew it. You signed for it.",
+       "Some chemistry the gods drew themselves. You drew this one.",
+       "Place it where it stands. You did."],
+  loss:["A Bobble could, in principle, retreat. Practice differs.",
+        "The hum is for the days you can hum. Tomorrow.",
+        "Some animals you tame. This one tamed you."]
+};
+
+let state=null, nextUnitId=1, nextProjId=1, nextPropId=1, lastFrameMs=0, logicAcc=0, aiAcc=0, rafHandle=null;
+
+function newMatch(playerFactionKey){
+  const others=Object.keys(FACTIONS).filter(k=>k!==playerFactionKey);
+  const enemyFactionKey=others[Math.floor(Math.random()*others.length)];
+  state={
+    screen:'match', startTime:performance.now(), elapsed:0,
+    player:makeSide('player',playerFactionKey),
+    enemy: makeSide('enemy', enemyFactionKey),
+    units:[], projectiles:[], covers:[], debris:[], trees:[], result:null,
+    casualties:{player:0,enemy:0},
+    cardCooldown:{soldier:0,miner:0,sniper:0,tank:0,mech:0,helicopter:0,airplane:0}
+  };
+  applyMatchPalette(); applyHudFactions(); buildRail(); drawBases();
+  spawnLandscape();
+  spawnProps();
+  document.getElementById('title-screen').classList.add('hidden');
+  document.getElementById('end-screen').classList.add('hidden');
+  document.getElementById('match-screen').classList.remove('hidden');
+  if(rafHandle) cancelAnimationFrame(rafHandle);
+  logicAcc=0; aiAcc=0; lastFrameMs=performance.now();
+  rafHandle=requestAnimationFrame(loop);
+}
+function makeSide(role,factionKey){
+  return {role,factionKey,faction:FACTIONS[factionKey],income:30,incomeRate:1.0,baseHP:1000,baseMaxHP:1000,deployed:0};
+}
+function endMatch(result){
+  state.result=result; state.screen='end';
+  const baseEl=document.getElementById(result==='win'?'base-enemy':'base-player');
+  baseEl.classList.add('dead');
+  setTimeout(()=>{
+    document.getElementById('match-screen').classList.add('hidden');
+    const endEl=document.getElementById('end-screen');
+    endEl.classList.remove('hidden');
+    const resEl=document.getElementById('end-result');
+    resEl.textContent=result==='win'?'VICTORY':'DEFEAT';
+    resEl.className='result '+(result==='win'?'win':'loss');
+    const pool=QUIPS[result];
+    document.getElementById('end-quip').textContent=pool[Math.floor(Math.random()*pool.length)];
+    const mm=Math.floor(state.elapsed/60).toString().padStart(2,'0');
+    const ss=Math.floor(state.elapsed%60).toString().padStart(2,'0');
+    document.getElementById('end-stats').innerHTML=
+      `<div><span class="k">DURATION</span>   ${mm}:${ss}</div>`+
+      `<div><span class="k">YOUR LOSSES</span>   ${state.casualties.player}</div>`+
+      `<div><span class="k">THEIR LOSSES</span>   ${state.casualties.enemy}</div>`+
+      `<div><span class="k">YOUR BASE</span>   ${Math.max(0,Math.floor(state.player.baseHP))} / ${state.player.baseMaxHP}</div>`+
+      `<div><span class="k">THEIR BASE</span>   ${Math.max(0,Math.floor(state.enemy.baseHP))} / ${state.enemy.baseMaxHP}</div>`;
+  },1300);
+}
+function applyMatchPalette(){
+  const sky=document.getElementById('bf-sky'); sky.className='bf-sky';
+  const pair=[state.player.factionKey,state.enemy.factionKey].sort().join('-vs-');
+  if(pair==='ascension-vs-concord') sky.classList.add('concord-vs-ascension');
+  else if(pair==='concord-vs-mist') sky.classList.add('concord-vs-mist');
+  else sky.classList.add('ascension-vs-mist');
+}
+function applyHudFactions(){
+  const p=state.player.faction,e=state.enemy.faction;
+  const pn=document.getElementById('hud-p-name'); pn.textContent=p.name; pn.className='name '+p.cls;
+  const en=document.getElementById('hud-e-name'); en.textContent=e.name; en.className='name '+e.cls;
+}
+function drawBases(){
+  const pb=document.getElementById('base-player');
+  pb.className='base player '+state.player.faction.cls;
+  pb.innerHTML='<pre>'+BASES[state.player.faction.cls]+'</pre>';
+  const eb=document.getElementById('base-enemy');
+  eb.className='base enemy '+state.enemy.faction.cls;
+  eb.innerHTML='<pre>'+BASES[state.enemy.faction.cls]+'</pre>';
+}
+
+function placeProp(el, x, y, stageW){
+  el.dataset.fx = x; el.dataset.fy = y;
+  const px = (x / BATTLE_WIDTH) * stageW;
+  el.style.transform = `translateX(${px}px) translateY(${-y}px) scale(${yScale(y)})`;
+  el.style.zIndex = String(900 - Math.floor(y));
+}
+
+function spawnLandscape(){
+  document.getElementById('bf-mountains').textContent = MOUNTAINS;
+  document.getElementById('bf-city').textContent = CITY;
+  const decor = document.getElementById('bf-decor');
+  decor.innerHTML='';
+  state.trees=[];
+  const stage=document.getElementById('bf-stage');
+  const stageW = stage ? stage.clientWidth : BATTLE_WIDTH;
+  // trees on far edges (purely decor, not destructible — protected by base zone)
+  for (let i=0; i<8; i++){
+    const el=document.createElement('div'); el.className='prop tree';
+    const x = (i<4) ? 130+Math.random()*70 : BATTLE_WIDTH-200+Math.random()*70;
+    const y = Y_MIN + Math.random()*(Y_MAX-Y_MIN);
+    placeProp(el, x, y, stageW);
+    el.innerHTML = '<pre>'+TREE_SPRITES[Math.floor(Math.random()*TREE_SPRITES.length)]+'</pre>';
+    decor.appendChild(el);
+    state.trees.push({ x, y, el });
+  }
+}
+
+function spawnProps(){
+  state.covers=[]; state.debris=[];
+  const decor=document.getElementById('bf-decor');
+  const stage=document.getElementById('bf-stage');
+  const stageW = stage ? stage.clientWidth : BATTLE_WIDTH;
+  // COVER — 54–66 pieces, mid-field, destructible
+  const coverN = COVER_COUNT_MIN + Math.floor(Math.random()*(COVER_COUNT_MAX-COVER_COUNT_MIN+1));
+  for (let i=0; i<coverN; i++){
+    const c = {
+      id: nextPropId++,
+      x: 220 + Math.random()*(BATTLE_WIDTH-440),
+      y: Y_MIN + Math.random()*(Y_MAX-Y_MIN),
+      hp: PROP_MAX_HP, maxHp: PROP_MAX_HP,
+      sprite: COVER_SPRITES[Math.floor(Math.random()*COVER_SPRITES.length)],
+      broken: false, el: null
+    };
+    const el=document.createElement('div'); el.className='prop cover';
+    placeProp(el, c.x, c.y, stageW);
+    el.innerHTML='<pre>'+c.sprite+'</pre>';
+    decor.appendChild(el);
+    c.el = el;
+    state.covers.push(c);
+  }
+  // DEBRIS — 84 pieces, scattered everywhere mid-field, destructible
+  for (let i=0; i<DEBRIS_COUNT; i++){
+    const d = {
+      id: nextPropId++,
+      x: 200 + Math.random()*(BATTLE_WIDTH-400),
+      y: Y_MIN + Math.random()*(Y_MAX-Y_MIN),
+      hp: PROP_MAX_HP, maxHp: PROP_MAX_HP,
+      sprite: DEBRIS_SPRITES[Math.floor(Math.random()*DEBRIS_SPRITES.length)],
+      broken: false, el: null
+    };
+    const el=document.createElement('div'); el.className='prop debris';
+    placeProp(el, d.x, d.y, stageW);
+    el.innerHTML='<pre>'+d.sprite+'</pre>';
+    decor.appendChild(el);
+    d.el = el;
+    state.debris.push(d);
+  }
+}
+
+function buildRail(){
+  const rail=document.getElementById('rail'); rail.innerHTML='';
+  const cls=state.player.faction.cls, mod=state.player.faction.mod;
+  for(const type of UNIT_ORDER){
+    const def=UNIT_DEFS[type];
+    const card=document.createElement('div');
+    card.className='card '+cls; card.dataset.type=type;
+    const cost=Math.ceil(def.cost*mod.cost);
+    const hp=Math.round(def.hp*mod.hp);
+    const atk=Math.round(def.atk*mod.atk*10)/10;
+    const rng=Math.round(def.range*mod.range);
+    const dmnBadge = def.domain==='air' ? `<span class="badge badge-air">AIR</span>` : `<span class="badge badge-grnd">GRND</span>`;
+    const aaBadge  = def.canHitAir ? `<span class="badge badge-aa">AA</span>` : '';
+    card.innerHTML=
+      `<div class="ckey">${def.key}</div>`+
+      `<div class="ctitle">${def.label}</div>`+
+      `<pre class="cmini">${SPRITES[type]}</pre>`+
+      `<div class="ccost">⬡ ${cost}</div>`+
+      `<div class="badges">${dmnBadge}${aaBadge}</div>`+
+      `<div class="cstats"><span class="k">hp</span> ${hp} &middot; <span class="k">atk</span> ${atk}<br>`+
+      `<span class="k">rng</span> ${rng} &middot; <span class="k">rof</span> ${(1/def.atkRate).toFixed(1)}/s`+
+      (def.income?`<br><span class="k">+</span> ${(def.income).toFixed(1)}/s`:'')+
+      `</div><div class="ccd"></div>`;
+    card.addEventListener('click',()=>onDeployClick(type));
+    rail.appendChild(card);
+  }
+}
+function refreshRail(){
+  if(!state||state.screen!=='match') return;
+  const cards=document.querySelectorAll('.card');
+  const mod=state.player.faction.mod;
+  cards.forEach(card=>{
+    const type=card.dataset.type, def=UNIT_DEFS[type];
+    const cost=Math.ceil(def.cost*mod.cost);
+    const cd=state.cardCooldown[type];
+    const canAfford=state.player.income>=cost;
+    if(!canAfford||cd>0) card.classList.add('disabled'); else card.classList.remove('disabled');
+  });
+}
+
+function onDeployClick(type){ deploy('player',type); }
+function deploy(side,type){
+  const owner=state[side], mod=owner.faction.mod, def=UNIT_DEFS[type];
+  const cost=Math.ceil(def.cost*mod.cost);
+  if(owner.income<cost) return false;
+  if(side==='player'&&state.cardCooldown[type]>0) return false;
+  owner.income-=cost; owner.deployed++;
+  if(side==='player'){ state.cardCooldown[type]=0.3; triggerCardCD(type,0.3); }
+  spawnUnit(side,type);
+  return true;
+}
+function spawnUnit(side,type){
+  const owner=state[side], mod=owner.faction.mod, def=UNIT_DEFS[type];
+  const spawnY = def.domain==='air' ? 90+Math.random()*130 : Y_MIN+Math.random()*(Y_MAX-Y_MIN);
+  const u={
+    id:nextUnitId++, side,type, faction:owner.faction.cls,
+    x: side==='player'?PLAYER_BASE_X+(Math.random()*18):ENEMY_BASE_X-(Math.random()*18),
+    y: spawnY,
+    domain:def.domain, canHitAir:def.canHitAir, projSpd:def.projSpd,
+    hp:def.hp*mod.hp, maxHp:def.hp*mod.hp,
+    atk:def.atk*mod.atk, range:def.range*mod.range, speed:def.speed*mod.speed,
+    atkRate:def.atkRate, cooldown:0.1+Math.random()*0.2,
+    el:null, body:null, dying:false, dyingTimer:0
+  };
+  const el=document.createElement('div');
+  el.className='unit '+side+' '+u.faction+' '+u.type;
+  el.style.left='0px';
+  el.innerHTML=`<div class="hp" style="--hp:100%"></div><div class="body"><pre>${SPRITES[type]}</pre></div>`;
+  document.getElementById('bf-stage').appendChild(el);
+  // randomize starting animation phase so they don't all bob together
+  el.querySelector('.body').style.animationDelay = (-Math.random()*1.0)+'s';
+  u.el=el; u.body=el.querySelector('.body');
+  state.units.push(u);
+}
+function triggerCardCD(type,sec){
+  const card=document.querySelector('.card[data-type="'+type+'"]');
+  if(!card) return;
+  card.classList.remove('cooling'); void card.offsetWidth;
+  card.style.setProperty('--cd',sec+'s'); card.classList.add('cooling');
+  setTimeout(()=>card.classList.remove('cooling'),sec*1000+80);
+}
+
+// ======= COVER / PROPS =======
+function findCoveringCover(target, attackerSide){
+  if (target.domain === 'air') return null;
+  for (const c of state.covers) {
+    if (c.broken) continue;
+    const dx = Math.abs(c.x - target.x);
+    const dy = Math.abs(c.y - target.y);
+    if (dx > 38 || dy > 26) continue;
+    if (attackerSide === 'player' && c.x < target.x) return c;
+    if (attackerSide === 'enemy'  && c.x > target.x) return c;
+  }
+  return null;
+}
+function isCovered(target, attackerSide){ return !!findCoveringCover(target, attackerSide); }
+
+function findShelter(u, target){
+  if (u.domain === 'air') return null;
+  let best=null, bestDist=Infinity;
+  const towardX = Math.sign(target.x - u.x);
+  for (const c of state.covers) {
+    if (c.broken) continue;
+    const dx = c.x - u.x, dy = c.y - u.y;
+    if (Math.sign(dx) !== towardX) continue;
+    const d = Math.sqrt(dx*dx + dy*dy);
+    if (d > 70) continue;
+    if (d < bestDist) { bestDist = d; best = c; }
+  }
+  return best;
+}
+
+function damageProp(p, amt){
+  if (p.broken) return;
+  p.hp -= amt;
+  if (p.el) {
+    p.el.classList.add('hurt');
+    setTimeout(()=>p.el&&p.el.classList.remove('hurt'),220);
+  }
+  if (p.hp <= 0) {
+    p.broken = true;
+    if (p.el) {
+      p.el.classList.add('broken');
+      // change sprite to broken-looking variant
+      const broken = '░░░';
+      p.el.innerHTML = '<pre>'+broken+'</pre>';
+    }
+  }
+}
+
+function fireProjectile(attacker, target){
+  const stage=document.getElementById('bf-stage'); if(!stage) return;
+  const p={ id:nextProjId++, x:attacker.x, y:unitScreenY(attacker)+8,
+    targetId:target.id, targetX:target.x, targetY:unitScreenY(target),
+    speed:attacker.projSpd, atk:attacker.atk, faction:attacker.faction,
+    atkSide: attacker.side, base:null, life:2.2, el:null };
+  const el=document.createElement('div'); el.className='proj '+p.faction;
+  stage.appendChild(el); p.el=el;
+  state.projectiles.push(p);
+  triggerFireAnim(attacker);
+}
+function fireBaseProjectile(attacker, baseX, baseSide){
+  const stage=document.getElementById('bf-stage'); if(!stage) return;
+  const p={ id:nextProjId++, x:attacker.x, y:unitScreenY(attacker)+8,
+    targetId:null, targetX:baseX, targetY:140,
+    speed:attacker.projSpd, atk:attacker.atk, faction:attacker.faction,
+    atkSide: attacker.side, base:baseSide, life:2.5, el:null };
+  const el=document.createElement('div'); el.className='proj '+p.faction;
+  stage.appendChild(el); p.el=el;
+  state.projectiles.push(p);
+  triggerFireAnim(attacker);
+}
+function triggerFireAnim(u){
+  if(!u.el) return;
+  u.el.classList.remove('fire'); void u.el.offsetWidth;
+  u.el.classList.add('fire');
+  setTimeout(()=>u.el && u.el.classList.remove('fire'), 140);
+}
+
+function tickProjectiles(dt){
+  const stage=document.getElementById('bf-stage'); if(!stage) return;
+  const stageW=stage.clientWidth;
+  const survivors=[];
+  for(const p of state.projectiles){
+    let tgt=null;
+    if(p.targetId){
+      tgt=state.units.find(u=>u.id===p.targetId && u.hp>0);
+      if(tgt){ p.targetX=tgt.x; p.targetY=unitScreenY(tgt); }
+    }
+    const dx=p.targetX-p.x, dy=p.targetY-p.y;
+    const dist=Math.sqrt(dx*dx+dy*dy);
+    const step=p.speed*dt; p.life-=dt;
+    // chip damage to nearby props during flight (flyby grazing)
+    for (const prop of state.debris) {
+      if (prop.broken) continue;
+      const pdx = prop.x - p.x, pdy = (prop.y) - (p.y);
+      if (pdx*pdx + pdy*pdy < 220) { damageProp(prop, 2); break; }
+    }
+    if(dist <= step + 14){
+      if(p.base){
+        const enemySide=state[p.base];
+        enemySide.baseHP -= p.atk;
+        showDmg(p.targetX, p.targetY, false, p.atk, false);
+        if(p.el&&p.el.parentNode) p.el.parentNode.removeChild(p.el);
+        if(enemySide.baseHP<=0){
+          state.screen='end';
+          endMatch(p.base==='enemy'?'win':'loss');
+          return;
+        }
+        continue;
+      }
+      if(tgt){
+        const shield = findCoveringCover(tgt, p.atkSide);
+        const covered = !!shield;
+        const dmg = covered ? p.atk * 0.5 : p.atk;
+        damageUnit(tgt, dmg, covered);
+        flashHit(tgt);
+        // cover absorbs the absorbed damage
+        if (shield) damageProp(shield, p.atk);
+      }
+      if(p.el&&p.el.parentNode) p.el.parentNode.removeChild(p.el);
+      continue;
+    }
+    if(p.life<=0){
+      if(p.el&&p.el.parentNode) p.el.parentNode.removeChild(p.el);
+      continue;
+    }
+    p.x += (dx/dist)*step;
+    p.y += (dy/dist)*step;
+    const px=(p.x/BATTLE_WIDTH)*stageW;
+    const angle=Math.atan2(-dy,dx)*180/Math.PI;
+    p.el.style.transform=`translate(${px}px, ${-p.y}px) rotate(${angle}deg)`;
+    survivors.push(p);
+  }
+  state.projectiles=survivors;
+}
+
+function logicTick(){
+  if(!state||state.screen!=='match') return;
+  const dt=TICK_DT;
+  state.elapsed=(performance.now()-state.startTime)/1000;
+  for(const side of ['player','enemy']){
+    const s=state[side];
+    let minerCount=0;
+    for(const u of state.units) if(u.side===side&&u.type==='miner'&&u.hp>0) minerCount++;
+    s.income+=(s.incomeRate+minerCount*UNIT_DEFS.miner.income)*dt;
+  }
+  for(const k of UNIT_ORDER){
+    if(state.cardCooldown[k]>0) state.cardCooldown[k]=Math.max(0,state.cardCooldown[k]-dt);
+  }
+  for(const u of state.units){
+    if(u.hp<=0) continue;
+    u.cooldown=Math.max(0,u.cooldown-dt);
+    let target=null, minDist=Infinity;
+    for(const o of state.units){
+      if(o.side===u.side||o.hp<=0) continue;
+      if(o.domain==='air' && !u.canHitAir) continue;
+      const dx=o.x-u.x, dy=o.y-u.y;
+      const d=Math.sqrt(dx*dx+dy*dy);
+      if(d<minDist){ minDist=d; target=o; }
+    }
+    const dir=u.side==='player'?1:-1;
+    const baseX=u.side==='player'?ENEMY_BASE_X:PLAYER_BASE_X;
+    const baseDx=Math.abs(baseX-u.x);
+    if(target && minDist<=u.range){
+      if(u.cooldown<=0){ fireProjectile(u,target); u.cooldown=u.atkRate; }
+      const shelter = findShelter(u, target);
+      if (shelter) {
+        const dx=shelter.x-u.x, dy=shelter.y-u.y;
+        const len=Math.sqrt(dx*dx+dy*dy)||1;
+        if (len > 14) {
+          u.x += (dx/len)*u.speed*dt*0.35;
+          u.y += (dy/len)*u.speed*dt*0.35;
+        }
+      }
+    } else if(target && minDist<=u.range*1.7){
+      const dx=target.x-u.x, dy=target.y-u.y;
+      const len=Math.sqrt(dx*dx+dy*dy)||1;
+      u.x += (dx/len)*u.speed*dt;
+      u.y += (dy/len)*u.speed*dt*0.55;
+    } else if(baseDx<=u.range){
+      if(u.cooldown<=0){
+        const baseSide = u.side==='player'?'enemy':'player';
+        fireBaseProjectile(u, baseX, baseSide);
+        u.cooldown=u.atkRate;
+      }
+    } else {
+      u.x += dir*u.speed*dt;
+      const yMid=(Y_MIN+Y_MAX)/2;
+      const dy=yMid-u.y;
+      if(Math.abs(dy)>2) u.y += Math.sign(dy)*u.speed*dt*0.12;
+    }
+    if(u.x<24) u.x=24;
+    if(u.x>BATTLE_WIDTH-24) u.x=BATTLE_WIDTH-24;
+    if(u.domain==='air'){ if(u.y<80) u.y=80; if(u.y>220) u.y=220; }
+    else { if(u.y<Y_MIN) u.y=Y_MIN; if(u.y>Y_MAX) u.y=Y_MAX; }
+  }
+  tickProjectiles(dt);
+  const survivors=[];
+  for(const u of state.units){
+    if(u.hp<=0&&!u.dying){
+      u.dying=true; u.dyingTimer=0.45;
+      if(u.el) u.el.classList.add('dying');
+      state.casualties[u.side]++;
+    }
+    if(u.dying){
+      u.dyingTimer-=dt;
+      if(u.dyingTimer<=0){
+        if(u.el&&u.el.parentNode) u.el.parentNode.removeChild(u.el);
+        continue;
+      }
+    }
+    survivors.push(u);
+  }
+  state.units=survivors;
+}
+
+function damageUnit(u, amt, covered){
+  u.hp-=amt;
+  if(u.el){
+    const pct=Math.max(0,u.hp/u.maxHp)*100;
+    const bar=u.el.querySelector('.hp');
+    bar.style.setProperty('--hp',pct+'%');
+    if(pct<35) bar.classList.add('low');
+  }
+  showDmg(u.x, unitScreenY(u), false, amt, covered);
+}
+function flashHit(u){
+  if(!u.el) return;
+  u.el.classList.add('hit');
+  setTimeout(()=>u.el&&u.el.classList.remove('hit'),200);
+}
+function showDmg(x, y, _ignored, amt, covered){
+  const stage=document.getElementById('bf-stage');
+  if(!stage) return;
+  const px=(x/BATTLE_WIDTH)*stage.clientWidth;
+  const yPos = y + 26;
+  const d=document.createElement('div');
+  d.className='dmg-pop' + (covered?' cov':'');
+  d.textContent = (covered?'⛨−':'−') + Math.ceil(amt);
+  d.style.left=px+'px'; d.style.bottom=yPos+'px';
+  stage.appendChild(d);
+  setTimeout(()=>d.parentNode&&d.parentNode.removeChild(d),720);
+}
+
+function aiTick(dt){
+  if(!state||state.screen!=='match') return;
+  aiAcc+=dt; if(aiAcc<0.5) return; aiAcc=0;
+  const e=state.enemy, mod=e.faction.mod;
+  const ownArmy  =state.units.filter(u=>u.side==='enemy' &&u.hp>0).length;
+  const enemyArmy=state.units.filter(u=>u.side==='player'&&u.hp>0).length;
+  const enemyAir =state.units.filter(u=>u.side==='player'&&u.hp>0&&u.domain==='air').length;
+  const choices=[];
+  for(const type of UNIT_ORDER){
+    const def=UNIT_DEFS[type];
+    const cost=Math.ceil(def.cost*mod.cost);
+    if(e.income<cost) continue;
+    let w=1;
+    if(type==='soldier') w=0.7;
+    if(type==='miner'){
+      const minerCount=state.units.filter(u=>u.side==='enemy'&&u.type==='miner'&&u.hp>0).length;
+      w=minerCount<2?2.8:0.2;
+      if(state.elapsed>120) w*=0.3;
+    }
+    if(type==='sniper')     w=e.income>25?2.2:0.6;
+    if(type==='tank')       w=e.income>35?3.0:0.5;
+    if(type==='mech')       w=e.income>50?3.5:0.3;
+    if(type==='helicopter') w=e.income>26?1.8:0.5;
+    if(type==='airplane')   w=e.income>30?(enemyArmy>3?2.4:1.5):0.5;
+    if(enemyArmy>ownArmy+3&&type==='soldier') w*=2.0;
+    if(enemyAir>0 && def.canHitAir) w*=2.2;
+    choices.push({type,w,cost});
+  }
+  if(!choices.length) return;
+  const heavyAffordable = choices.some(c=>c.cost>=22);
+  const minCost=choices.reduce((a,c)=>Math.min(a,c.cost),Infinity);
+  const surplus=Math.max(0,(e.income-minCost)/80);
+  const pAct = heavyAffordable ? Math.min(0.88,0.20+surplus) : Math.min(0.30,0.08+surplus);
+  if(Math.random()>pAct) return;
+  const total=choices.reduce((a,c)=>a+c.w,0);
+  let r=Math.random()*total, pick=null;
+  for(const c of choices){ r-=c.w; if(r<=0){pick=c;break;} }
+  if(!pick) return;
+  deploy('enemy',pick.type);
+}
+
+function loop(now){
+  rafHandle=requestAnimationFrame(loop);
+  if(!state) return;
+  const dt=Math.min(0.1,(now-lastFrameMs)/1000);
+  lastFrameMs=now;
+  logicAcc+=dt;
+  while(logicAcc>=TICK_DT){ logicTick(); logicAcc-=TICK_DT; if(state.screen!=='match') break; }
+  aiTick(dt);
+  if(state.screen==='match' || state.screen==='end'){
+    const stage=document.getElementById('bf-stage');
+    if(!stage) return;
+    const stageW=stage.clientWidth;
+    for(const u of state.units){
+      if(!u.el) continue;
+      const px=(u.x/BATTLE_WIDTH)*stageW;
+      const yBot = unitScreenY(u);
+      const scale = yScale(u.y);
+      u.el.style.transform=`translateX(${px}px) translateY(${-yBot}px) scale(${scale})`;
+      u.el.style.bottom='0px';
+      u.el.style.zIndex = String(1000 - Math.floor(u.y));
+    }
+    if(state.screen!=='match') return;
+    const p=state.player,e=state.enemy;
+    document.getElementById('hud-income').textContent='⬡ '+Math.floor(p.income);
+    const playerMiners=state.units.filter(u=>u.side==='player'&&u.type==='miner'&&u.hp>0).length;
+    const rate=(p.incomeRate+playerMiners*UNIT_DEFS.miner.income).toFixed(1);
+    document.getElementById('hud-rate').textContent='+'+rate+'/s';
+    const mm=Math.floor(state.elapsed/60).toString().padStart(2,'0');
+    const ss=Math.floor(state.elapsed%60).toString().padStart(2,'0');
+    document.getElementById('hud-timer').textContent=mm+':'+ss;
+    setBar('hud-p-bar','hud-p-bartxt',p.baseHP,p.baseMaxHP);
+    setBar('hud-e-bar','hud-e-bartxt',e.baseHP,e.baseMaxHP);
+    refreshRail();
+  }
+}
+function setBar(barId,txtId,val,max){
+  const pct=Math.max(0,Math.min(1,val/max));
+  const bar=document.getElementById(barId);
+  bar.style.width=(pct*100)+'%';
+  if(pct<0.35) bar.classList.add('low'); else bar.classList.remove('low');
+  document.getElementById(txtId).textContent=Math.max(0,Math.floor(val))+' / '+max;
+}
+
+document.querySelectorAll('.faction-card').forEach(card=>{
+  card.addEventListener('click',()=>newMatch(card.dataset.faction));
+});
+document.getElementById('btn-again').addEventListener('click',()=>{
+  document.getElementById('end-screen').classList.add('hidden');
+  document.getElementById('title-screen').classList.remove('hidden');
+  const stage=document.getElementById('bf-stage'); if(stage) stage.innerHTML='';
+  const decor=document.getElementById('bf-decor'); if(decor) decor.innerHTML='';
+  document.getElementById('base-player').classList.remove('dead');
+  document.getElementById('base-enemy').classList.remove('dead');
+  state=null; if(rafHandle) cancelAnimationFrame(rafHandle);
+});
+document.addEventListener('keydown',(e)=>{
+  if(!state||state.screen!=='match') return;
+  const k=e.key.toLowerCase();
+  if(UNIT_KEYS[k]) onDeployClick(UNIT_KEYS[k]);
+});
+</script>
+</body>
+</html>

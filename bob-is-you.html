@@ -1,0 +1,711 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bob is You: You are Bob — Derek Wakefield</title>
+<meta name="description" content="Why your health is a five-axis problem (physical, mental, emotional, social, spiritual), and what the shape of you actually looks like.">
+<meta property="og:title" content="Bob is You: You are Bob">
+<meta property="og:description" content="An integrated guide to your five dimensions of health. WHO 1948 · Engel 1977 · Hettler 1976 · SAMHSA today.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://derekwakefield.com/bob-is-you.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Bob is You: You are Bob">
+<meta name="twitter:description" content="An integrated guide to your five dimensions of health.">
+<link rel="canonical" href="https://derekwakefield.com/bob-is-you.html">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+
+  /* ─────────── Site default tokens (Cosmo-flavored) ─────────── */
+  :root {
+    --bs-body-bg: #ffffff;
+    --bs-body-color: #1c1d22;
+    --bs-heading-color: #1c1d22;
+    --bs-primary: #2780e3;
+    --bs-link-color: #2780e3;
+    --bs-link-hover-color: #1f6dc1;
+    --bs-border-color: #dee2e6;
+    --bs-secondary-bg: #f3f3f6;
+    --bs-tertiary-bg: #fafafa;
+    --bs-emphasis-color: #1c1d22;
+
+    /* ── Bobology series accents (kept constant across themes) ── */
+    --bob-navy:   #0F1B36;
+    --bob-cream:  #FBF8F1;
+    --bob-gold:   #D4A24C;
+    --bob-steel:  #5A7A8C;
+    --bob-terra:  #C97757;
+    --bob-sage:   #5C8C7F;
+    --bob-mute:   #6B7488;
+  }
+
+  /* ─────────── Theme variants (mirrored from /themes.css) ─────────── */
+  html[data-theme] body,
+  html[data-theme] .navbar,
+  html[data-theme] .navbar-brand,
+  html[data-theme] .nav-link {
+    transition: background-color 220ms ease, color 220ms ease, border-color 220ms ease;
+  }
+
+  html[data-theme="porch-light"] {
+    --bs-body-bg: #faf8f3; --bs-body-color: #2a2a2a; --bs-heading-color: #2a2a2a;
+    --bs-primary: #c9a96e; --bs-link-color: #5b5340; --bs-link-hover-color: #c9a96e;
+    --bs-border-color: #e5dec4; --bs-secondary-bg: #fff; --bs-tertiary-bg: #fff;
+    --bs-emphasis-color: #c9a96e;
+  }
+  html[data-theme="porch-light"] body { background: #faf8f3; color: #2a2a2a; font-family: "Iowan Old Style", "Palatino", Georgia, serif; line-height: 1.65; }
+
+  html[data-theme="star-chart"] {
+    --bs-body-bg: #0a1428; --bs-body-color: #d8d0b8; --bs-heading-color: #fde487;
+    --bs-primary: #fde487; --bs-link-color: #a89868; --bs-link-hover-color: #fde487;
+    --bs-border-color: #2a3458; --bs-secondary-bg: #112042; --bs-tertiary-bg: #0e1a36;
+    --bs-emphasis-color: #fde487;
+  }
+  html[data-theme="star-chart"] body { background: radial-gradient(ellipse at 30% 20%, #1a2440 0%, #0a1428 65%) fixed; color: #d8d0b8; font-family: "Crimson Pro", "Crimson Text", Cambria, Georgia, serif; line-height: 1.55; }
+
+  html[data-theme="bedrock"] {
+    --bs-body-bg: #1a2840; --bs-body-color: #e8e2d1; --bs-heading-color: #fff8e8;
+    --bs-primary: #d4a574; --bs-link-color: #d4a574; --bs-link-hover-color: #fff8e8;
+    --bs-border-color: #2c3d5c; --bs-secondary-bg: #223354; --bs-tertiary-bg: #1e2e48;
+    --bs-emphasis-color: #d4a574;
+  }
+  html[data-theme="bedrock"] body { background: #1a2840; color: #e8e2d1; font-family: Domine, Cambria, Georgia, serif; line-height: 1.55; }
+  html[data-theme="bedrock"] h1, html[data-theme="bedrock"] h2, html[data-theme="bedrock"] h3, html[data-theme="bedrock"] h4 { font-weight: 700; letter-spacing: -0.015em; }
+
+  html[data-theme="hum"] {
+    --bs-body-bg: #f4ebe1; --bs-body-color: #3a2e2e; --bs-heading-color: #3a2e2e;
+    --bs-primary: #8a6b8a; --bs-link-color: #5d4f4f; --bs-link-hover-color: #8a6b8a;
+    --bs-border-color: #e3d4c9; --bs-secondary-bg: #f9f1e8; --bs-tertiary-bg: #f9f1e8;
+    --bs-emphasis-color: #8a6b8a;
+  }
+  html[data-theme="hum"] body { background: #f4ebe1; color: #3a2e2e; font-family: Cormorant, "Cormorant Garamond", Georgia, serif; line-height: 1.6; font-size: 1.05em; }
+  html[data-theme="hum"] h1, html[data-theme="hum"] h2, html[data-theme="hum"] h3, html[data-theme="hum"] h4 { font-weight: 500; }
+
+  html[data-theme="bobblesphere"] {
+    --bs-body-bg: #0f1419; --bs-body-color: #d8cfb4; --bs-heading-color: #fff5d0;
+    --bs-primary: #ff9d3c; --bs-link-color: #ff9d3c; --bs-link-hover-color: #fff5d0;
+    --bs-border-color: #2a3140; --bs-secondary-bg: #161c24; --bs-tertiary-bg: #131820;
+    --bs-emphasis-color: #ff9d3c;
+  }
+  html[data-theme="bobblesphere"] body { background: #0f1419; color: #d8cfb4; font-family: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif; line-height: 1.55; }
+  html[data-theme="bobblesphere"] h1, html[data-theme="bobblesphere"] h2, html[data-theme="bobblesphere"] h3, html[data-theme="bobblesphere"] h4 { font-weight: 600; letter-spacing: -0.015em; }
+
+  html[data-theme="library-bookmark"] {
+    --bs-body-bg: #f9f6ed; --bs-body-color: #2d2519; --bs-heading-color: #2d2519;
+    --bs-primary: #8b1a1a; --bs-link-color: #2d2519; --bs-link-hover-color: #8b1a1a;
+    --bs-border-color: #d4c8a8; --bs-secondary-bg: #fffdf5; --bs-tertiary-bg: #fffdf5;
+    --bs-emphasis-color: #8b1a1a;
+  }
+  html[data-theme="library-bookmark"] body { background: #f9f6ed; color: #2d2519; font-family: "IBM Plex Mono", "Courier New", monospace; line-height: 1.65; font-size: 0.96em; }
+  html[data-theme="library-bookmark"] h1, html[data-theme="library-bookmark"] h2, html[data-theme="library-bookmark"] h3, html[data-theme="library-bookmark"] h4 { font-weight: 700; letter-spacing: -0.005em; }
+
+  html[data-theme="mind-palace-map"] {
+    --bs-body-bg: #efe5d0; --bs-body-color: #2a1f0e; --bs-heading-color: #2a1f0e;
+    --bs-primary: #993322; --bs-link-color: #2a1f0e; --bs-link-hover-color: #993322;
+    --bs-border-color: #c4b58c; --bs-secondary-bg: #f5ecd8; --bs-tertiary-bg: #f5ecd8;
+    --bs-emphasis-color: #993322;
+  }
+  html[data-theme="mind-palace-map"] body { background: #efe5d0; color: #2a1f0e; font-family: "IM Fell English", Spectral, Georgia, serif; line-height: 1.65; }
+  html[data-theme="mind-palace-map"] h1, html[data-theme="mind-palace-map"] h2, html[data-theme="mind-palace-map"] h3, html[data-theme="mind-palace-map"] h4 { font-variant: small-caps; letter-spacing: 0.04em; }
+
+  /* ─────────── theme-switcher widget (mirrored from /themes.css) ─────────── */
+  .dw-theme-switcher { position: fixed; top: 14px; right: 18px; z-index: 1080; font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 13px; }
+  .dw-theme-switcher button.dw-theme-toggle { background: rgba(255,255,255,0.85); color: #333; border: 1px solid rgba(0,0,0,0.12); border-radius: 14px; padding: 5px 11px 5px 13px; cursor: pointer; line-height: 1.1; backdrop-filter: blur(4px); box-shadow: 0 1px 4px rgba(0,0,0,0.08); display: inline-flex; align-items: center; gap: 6px; font-family: inherit; font-size: inherit; }
+  .dw-theme-switcher button.dw-theme-toggle:hover { background: rgba(255,255,255,0.95); }
+  .dw-theme-switcher button.dw-theme-toggle .dw-chevron { font-size: 9px; opacity: 0.6; }
+  .dw-theme-switcher button.dw-theme-toggle .dw-swatch { width: 11px; height: 11px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.15); display: inline-block; }
+  html[data-theme] .dw-theme-switcher button.dw-theme-toggle { background: rgba(255,255,255,0.12); color: var(--bs-body-color, #ddd); border-color: rgba(255,255,255,0.18); backdrop-filter: blur(8px); }
+  html[data-theme="porch-light"] .dw-theme-switcher button.dw-theme-toggle,
+  html[data-theme="hum"] .dw-theme-switcher button.dw-theme-toggle,
+  html[data-theme="library-bookmark"] .dw-theme-switcher button.dw-theme-toggle,
+  html[data-theme="mind-palace-map"] .dw-theme-switcher button.dw-theme-toggle { background: rgba(255,255,255,0.85); color: var(--bs-body-color); border-color: rgba(0,0,0,0.12); }
+  .dw-theme-panel { display: none; position: absolute; top: 36px; right: 0; min-width: 240px; background: #fff; color: #333; border: 1px solid rgba(0,0,0,0.12); border-radius: 8px; box-shadow: 0 6px 24px rgba(0,0,0,0.16); padding: 6px; }
+  .dw-theme-panel.open { display: block; }
+  .dw-theme-panel .dw-theme-item { display: flex; align-items: center; gap: 10px; padding: 7px 10px; border-radius: 5px; cursor: pointer; line-height: 1.2; }
+  .dw-theme-panel .dw-theme-item:hover { background: rgba(0,0,0,0.05); }
+  .dw-theme-panel .dw-theme-item.active { background: rgba(0,0,0,0.08); font-weight: 600; }
+  .dw-theme-panel .dw-theme-item .dw-swatch { width: 13px; height: 13px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.18); flex-shrink: 0; }
+  .dw-theme-panel .dw-theme-item .dw-name { flex-grow: 1; }
+  .dw-theme-panel .dw-theme-item .dw-tagline { font-size: 11px; opacity: 0.55; font-style: italic; margin-left: auto; }
+  .dw-theme-panel .dw-divider { height: 1px; background: rgba(0,0,0,0.1); margin: 6px 4px; }
+  .dw-theme-panel .dw-what { display: block; padding: 7px 10px; font-size: 12px; color: #555; text-decoration: none; border-radius: 5px; font-style: italic; }
+  .dw-theme-panel .dw-what:hover { background: rgba(0,0,0,0.05); color: #222; }
+  @media (max-width: 600px) {
+    .dw-theme-switcher { top: 10px; right: 12px; }
+    .dw-theme-panel { min-width: 220px; right: 0; }
+    .dw-theme-panel .dw-theme-item .dw-tagline { display: none; }
+  }
+
+  /* ─────────── PAGE LAYOUT (theme-aware) ─────────── */
+  body {
+    background: var(--bs-body-bg);
+    color: var(--bs-body-color);
+    font: 17px/1.7 Georgia, "Iowan Old Style", "Times New Roman", serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 {
+    color: var(--bs-heading-color);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  a {
+    color: var(--bs-link-color);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+  a:hover { color: var(--bs-link-hover-color); }
+  strong { color: var(--bs-emphasis-color); }
+
+  .wrap { max-width: 720px; margin: 0 auto; padding: 48px 28px 24px; }
+
+  .eyebrow {
+    font: 600 11px/1.4 "Helvetica Neue", Calibri, Arial, sans-serif;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--bs-primary);
+    margin: 0 0 12px;
+  }
+  h1 {
+    font: 700 42px/1.07 Georgia, "Iowan Old Style", serif;
+    margin: 0 0 8px;
+  }
+  h1 .subtitle {
+    display: block;
+    font: italic 400 22px/1.35 Georgia, serif;
+    color: var(--bs-body-color);
+    opacity: 0.75;
+    margin-top: 12px;
+    letter-spacing: 0;
+  }
+  .byline {
+    font: 12px/1.5 "Helvetica Neue", Calibri, Arial, sans-serif;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--bs-body-color);
+    opacity: 0.6;
+    margin: 18px 0 0;
+  }
+  .stars {
+    text-align: center;
+    color: var(--bs-primary);
+    letter-spacing: 0.4em;
+    margin: 36px 0;
+    font-size: 14px;
+  }
+  h2 {
+    font: 700 26px/1.22 Georgia, serif;
+    margin: 56px 0 4px;
+  }
+  h2 .eyebrow-inline {
+    display: block;
+    font: 600 10.5px/1.4 "Helvetica Neue", Calibri, Arial, sans-serif;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--bs-primary);
+    margin: 0 0 6px;
+  }
+  h2 + .rule {
+    width: 36px; height: 3px; background: var(--bs-primary);
+    margin: 8px 0 22px; border-radius: 1px;
+  }
+  h3 {
+    font: 700 19px/1.3 Georgia, serif;
+    margin: 28px 0 8px;
+  }
+  p { margin: 0 0 16px; }
+  p.lede:first-letter {
+    font-family: Georgia, serif;
+    font-size: 56px;
+    line-height: 0.9;
+    float: left;
+    color: var(--bs-heading-color);
+    padding: 8px 10px 0 0;
+    font-weight: 700;
+  }
+
+  /* The reveal panel and pull quote: intentional dark "spotlight" zones —
+     stay Bobology navy regardless of site theme. */
+  blockquote.pull {
+    background: var(--bob-navy);
+    color: var(--bob-cream);
+    padding: 32px 36px;
+    border-radius: 4px;
+    margin: 40px -20px;
+    font: italic 22px/1.5 Georgia, serif;
+    text-align: center;
+  }
+  blockquote.pull strong { color: var(--bob-cream); }
+  blockquote.pull cite {
+    display: block;
+    font: 600 11px/1.4 "Helvetica Neue", Calibri, Arial, sans-serif;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--bob-gold);
+    font-style: normal;
+    margin-top: 18px;
+  }
+
+  /* Five dimension cards — top stripes carry semantic colors */
+  .five {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin: 22px 0 8px;
+  }
+  @media (min-width: 720px) {
+    .five { grid-template-columns: 1fr 1fr; }
+    .five .card:nth-child(5) { grid-column: 1 / -1; }
+  }
+  .card {
+    padding: 20px 22px;
+    border-radius: 4px;
+    border-top: 4px solid;
+    background: var(--bs-secondary-bg);
+    border-bottom: 1px solid var(--bs-border-color);
+    border-left: 1px solid var(--bs-border-color);
+    border-right: 1px solid var(--bs-border-color);
+  }
+  .card.physical  { border-top-color: var(--bob-gold); }
+  .card.mental    { border-top-color: var(--bob-steel); }
+  .card.emotional { border-top-color: var(--bob-terra); }
+  .card.social    { border-top-color: var(--bob-sage); }
+  .card.spiritual { border-top-color: var(--bob-navy); }
+  .card .label {
+    font: 600 11px/1.4 "Helvetica Neue", Calibri, Arial, sans-serif;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--bs-heading-color);
+    margin: 0 0 6px;
+  }
+  .card .gloss {
+    font: italic 17px/1.45 Georgia, serif;
+    color: var(--bs-heading-color);
+    margin: 0 0 8px;
+  }
+  .card .body {
+    font: 14.5px/1.55 "Helvetica Neue", Calibri, Arial, sans-serif;
+    color: var(--bs-body-color);
+    margin: 0;
+  }
+
+  /* The reveal panel — fixed dark "spotlight" zone */
+  .reveal-wrap {
+    margin: 48px -20px;
+    padding: 36px 28px 28px;
+    background: var(--bob-navy);
+    color: var(--bob-cream);
+    border-radius: 4px;
+    text-align: center;
+  }
+  .reveal-wrap h2 {
+    color: var(--bob-cream);
+    font-size: 30px;
+    margin: 0 0 8px;
+  }
+  .reveal-wrap h2 .eyebrow-inline { color: var(--bob-gold); }
+  .reveal-wrap p { color: rgba(251,248,241,0.88); font-size: 15.5px; max-width: 560px; margin-left: auto; margin-right: auto; }
+  .reveal-wrap strong { color: var(--bob-cream); }
+  .reveal-wrap .radar {
+    background: var(--bob-cream);
+    border-radius: 4px;
+    padding: 18px;
+    margin: 22px auto 18px;
+    max-width: 580px;
+  }
+  .reveal-wrap .radar svg { display: block; width: 100%; height: auto; }
+  .reveal-wrap .legend {
+    font: italic 13px/1.4 Georgia, serif;
+    color: rgba(251,248,241,0.7);
+    margin: 12px 0 0;
+  }
+  .reveal-wrap a { color: var(--bob-gold); }
+  .reveal-wrap a:hover { color: #FBF8F1; }
+
+  /* Footnotes */
+  sup.fn { font-size: 0.72em; color: var(--bs-primary); padding: 0 1px; font-weight: 700; }
+  sup.fn a { color: var(--bs-primary); text-decoration: none; }
+  sup.fn a:hover { text-decoration: underline; }
+  .notes { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--bs-border-color); }
+  .notes h3 {
+    font: 600 11px/1.4 "Helvetica Neue", Calibri, Arial, sans-serif;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--bs-primary);
+    margin: 0 0 14px;
+  }
+  .notes ol { padding-left: 24px; margin: 0; }
+  .notes li {
+    font: 13.5px/1.55 "Helvetica Neue", Calibri, Arial, sans-serif;
+    color: var(--bs-body-color);
+    margin: 0 0 10px;
+  }
+  .notes li a { color: var(--bs-link-color); text-decoration: none; border-bottom: 1px dotted var(--bs-link-color); }
+  .notes li a:hover { color: var(--bs-link-hover-color); border-bottom-color: var(--bs-link-hover-color); }
+
+  .footer-stars {
+    text-align: center;
+    color: var(--bs-primary);
+    letter-spacing: 0.4em;
+    margin: 56px 0 14px;
+    font-size: 14px;
+  }
+  .colophon {
+    text-align: center;
+    color: var(--bs-body-color);
+    opacity: 0.6;
+    font: italic 13px/1.5 Georgia, serif;
+    margin: 0;
+  }
+
+  /* ─────────── site chrome (header + footer + format toggle) ─────────── */
+  .site-bar {
+    border-bottom: 1px solid var(--bs-border-color);
+    background: var(--bs-tertiary-bg);
+  }
+  .site-bar-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 14px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    font: 12px/1.4 "Helvetica Neue", Calibri, Arial, sans-serif;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--bs-body-color);
+    opacity: 0.85;
+  }
+  .site-bar a {
+    color: var(--bs-link-color);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 1px;
+    transition: border-color 160ms ease;
+  }
+  .site-bar a:hover { border-bottom-color: var(--bs-primary); color: var(--bs-link-hover-color); }
+  .site-bar .crumb .sep { padding: 0 8px; opacity: 0.5; }
+  .site-bar .series { color: var(--bs-primary); font-weight: 600; }
+
+  .site-foot {
+    border-top: 1px solid var(--bs-border-color);
+    background: var(--bs-tertiary-bg);
+    margin-top: 48px;
+  }
+  .site-foot-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 22px 28px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    font: 12px/1.5 "Helvetica Neue", Calibri, Arial, sans-serif;
+    color: var(--bs-body-color);
+    opacity: 0.75;
+    flex-wrap: wrap;
+  }
+  .site-foot a { color: var(--bs-link-color); text-decoration: none; border-bottom: 1px solid transparent; }
+  .site-foot a:hover { color: var(--bs-link-hover-color); border-bottom-color: var(--bs-primary); }
+</style>
+</head>
+<body>
+
+<nav class="site-bar" aria-label="Site navigation">
+  <div class="site-bar-inner">
+    <span class="crumb">
+      <a href="https://derekwakefield.com/">Derek Wakefield</a>
+      <span class="sep">›</span>
+      <a href="/writing.html">Writing</a>
+      <span class="sep">›</span>
+      <span class="series">Bobology</span>
+    </span>
+    <span><a href="https://derekwakefield.com/" title="Back to derekwakefield.com">↩ home</a></span>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <p class="eyebrow">An Integrated Guide</p>
+  <h1>Bob is You: You are Bob<span class="subtitle">Why your health is a five-axis problem, and what the shape of you actually looks like.</span></h1>
+  <p class="byline">A reading on integrated health · 12 minutes</p>
+
+  <div class="stars">·   ✦   ·   ✦   ·   ✦   ·</div>
+
+  <p class="lede">There is a version of you that you keep meeting in pieces. At the gym you are a body. At your desk you are an attention span. With your parents you are a phone call. After midnight you are a worry. On Sunday morning you are a question that doesn't have a name. Each of these is real. None of them, alone, is you.</p>
+
+  <p>The integrated version (the one that includes all of the others at once) is the version most of us never get a good look at. Call that version Bob. Bob is not your job or your workout or your meditation app or your group chat. Bob is the whole instrument. Bob is the part of you that has to live with all of the other parts when they disagree.</p>
+
+  <p>This piece is about the five strings on that instrument, what happens when one of them goes out of tune, and a small drawing at the bottom that, if you let it, will show you, quickly and a little uncomfortably, what shape you are right now.</p>
+
+  <h2><span class="eyebrow-inline">A short history of the idea</span>What we mean by &ldquo;health&rdquo;</h2>
+  <div class="rule"></div>
+
+  <p>The framework is older than it gets credit for. In 1948 the World Health Organization's founding constitution defined health as <em>"a state of complete physical, mental and social well-being and not merely the absence of disease or infirmity."</em><sup class="fn"><a href="#fn1">1</a></sup> Three dimensions, no biology fundamentalism. A quiet revolution in a single sentence.</p>
+
+  <p>The psychiatrist George Engel formalized the same intuition for medicine in 1977, in a much-cited paper in <em>Science</em> titled <em>The Need for a New Medical Model</em>. Engel argued that biomedicine was failing patients by treating bodies as if minds and lives were a separate department; he called the alternative the <em>biopsychosocial</em> model, and the term stuck.<sup class="fn"><a href="#fn2">2</a></sup></p>
+
+  <p>One year earlier, at the University of Wisconsin–Stevens Point, Dr. Bill Hettler had co-founded what became the National Wellness Institute and proposed six dimensions of wellness: physical, emotional, intellectual, social, occupational, and spiritual.<sup class="fn"><a href="#fn3">3</a></sup> Half a century later, the U.S. Substance Abuse and Mental Health Services Administration (SAMHSA) teaches an eight-dimension version of the same idea, adding environmental and financial.<sup class="fn"><a href="#fn4">4</a></sup></p>
+
+  <p>We are going to use five. Not because five is the right number (there is no right number) but because five captures most of what the longer lists capture without collapsing the things that actually behave differently. The five are <strong>physical, mental, emotional, social,</strong> and <strong>spiritual</strong>. You already know most of what those mean. The interesting part is what is between them.</p>
+
+  <h2><span class="eyebrow-inline">The Five Dimensions</span>One sentence apiece, then the connective tissue</h2>
+  <div class="rule"></div>
+
+  <div class="five">
+    <div class="card physical">
+      <p class="label">Physical</p>
+      <p class="gloss">Your body's basic operating capacity.</p>
+      <p class="body">Sleep, movement, nutrition, illness, recovery, energy at noon. The dimension that is hardest to lie about for long, because it announces itself in symptoms.</p>
+    </div>
+    <div class="card mental">
+      <p class="label">Mental</p>
+      <p class="gloss">Your cognitive function in the day-to-day.</p>
+      <p class="body">Focus, learning, problem-solving, working memory, the ability to think a thought through to its end without picking up your phone. Not "smart." Functional.</p>
+    </div>
+    <div class="card emotional">
+      <p class="label">Emotional</p>
+      <p class="gloss">Your felt experience and your relationship to it.</p>
+      <p class="body">Mood, regulation, the ability to notice what you feel and to feel it without being dragged under. Distinct from mental: you can have a sharp mind and a stormy interior simultaneously.</p>
+    </div>
+    <div class="card social">
+      <p class="label">Social</p>
+      <p class="gloss">The network of people you actually have.</p>
+      <p class="body">Depth, frequency, reciprocity. The number of people who would answer the phone at 2 a.m. The amount of time per week you are not transacting with another human but just being with one.</p>
+    </div>
+    <div class="card spiritual">
+      <p class="label">Spiritual</p>
+      <p class="gloss">Your sense of meaning and orientation.</p>
+      <p class="body">Why you are doing what you are doing. Not necessarily religious, though it can be. The internal answer to "what is this for?" The thing that lets you get back up after the day knocks you down.</p>
+    </div>
+  </div>
+
+  <h2><span class="eyebrow-inline">The Heart of It</span>How the five actually connect</h2>
+  <div class="rule"></div>
+
+  <p>The cleanest research finding of the last fifty years on human health, repeated across so many disciplines that it stops feeling like an argument, is this: <strong>the five dimensions are not five things. They are five views of the same thing, and a change in any one of them moves all the others.</strong></p>
+
+  <p>The mechanisms are no longer mysterious. A few of the most studied loops:</p>
+
+  <h3>Sleep is not just a physical input.</h3>
+
+  <p>The neuroscientist Matthew Walker has shown, in lab after lab and now in the popular book <em>Why We Sleep</em>, that REM sleep is when the brain reduces the emotional charge attached to memories: the next-morning "it doesn't feel as bad now" effect.<sup class="fn"><a href="#fn5">5</a></sup> Sleep-deprived brains show heightened amygdala reactivity and weakened prefrontal control; the rational manager is offline while the threat system is on overdrive. A bad night, then, is not just physical fatigue. It is an emotional regulation problem the next day, which becomes a social problem the next afternoon, which becomes a work problem by Wednesday. Sleep touches physical, mental, emotional, and social at minimum, and in long-term chronic deprivation it touches the fifth axis too: people who sleep badly for long enough often report a loss of meaning before they report a sleep complaint.</p>
+
+  <h3>Exercise is not just a body input.</h3>
+
+  <p>The Harvard psychiatrist John Ratey synthesized two decades of research in <em>Spark</em> on <em>brain-derived neurotrophic factor</em>, or BDNF, a protein that aerobic exercise releases in the brain and that is essentially fertilizer for neurons.<sup class="fn"><a href="#fn6">6</a></sup> Regular cardio measurably improves focus, learning, and mood with effect sizes that, in some trials, rival the lower doses of antidepressants prescribed for the same indications. The "I went for a run and the whole day got better" effect is not a vibe; it is neurochemistry, with paperwork. Physical → mental → emotional, in roughly that order, within an hour.</p>
+
+  <h3>Loneliness is not just an emotional problem.</h3>
+
+  <p>Julianne Holt-Lunstad's now-canonical 2010 meta-analysis pooled 148 studies and roughly 300,000 participants and found that weak social ties carried a mortality risk comparable to smoking up to fifteen cigarettes a day; larger than obesity, larger than physical inactivity.<sup class="fn"><a href="#fn7">7</a></sup> The 2023 U.S. Surgeon General's advisory on loneliness was built on that finding. The social dimension is, in plainly measurable mortality terms, also a physical risk factor. Push it down and the body goes with it.</p>
+
+  <h3>Purpose is not a spiritual nice-to-have.</h3>
+
+  <p>In 2014 Patrick Hill and Nicholas Turiano followed roughly 6,000 adults for fourteen years and found that people with a stronger sense of purpose in life were less likely to die during the follow-up. The effect held at every age, including young adults, and persisted after controlling for other measures of well-being.<sup class="fn"><a href="#fn8">8</a></sup> The Harvard Study of Adult Development, now in its eighty-fifth year under Robert Waldinger, has produced the same conclusion three different ways: <em>relationship satisfaction at age fifty predicts physical health at age eighty better than cholesterol does.</em><sup class="fn"><a href="#fn9">9</a></sup> Spiritual and social, in the long run, are physical.</p>
+
+  <h3>The body keeps the score.</h3>
+
+  <p>The trauma researcher Bessel van der Kolk titled his 2014 book after the finding that emotional injuries leave physical traces: in posture, immune function, sleep architecture, and chronic pain.<sup class="fn"><a href="#fn10">10</a></sup> Healing them often requires going through the body, not around it. The reverse is also true: chronic physical conditions tax mental and emotional capacity, narrow social bandwidth, and erode the sense of why-this-matters. Every dimension speaks the others' language eventually.</p>
+
+  <h3>The general pattern.</h3>
+
+  <p>Push on one dimension and the others move. Sometimes they move in your favor: exercise lifts mood, mood improves focus, focus produces a better day, the better day makes you warmer in a conversation with someone you love. Sometimes they move against you: chronic stress shortens sleep, short sleep heightens emotional reactivity, reactivity drives social withdrawal, withdrawal narrows the sense of meaning. The compensations work for a while. A strong social network can buy you a year of bad physical habits before the body collects. A clear sense of purpose can carry you through a stretch of poor emotional regulation. A single great night of sleep can rescue an otherwise lousy week. But the system is honest in the long run. Whatever you don't tend eventually shows up as a bill in a different currency.</p>
+
+  <h2><span class="eyebrow-inline">A side note on self-help</span>Why one-axis advice usually fails</h2>
+  <div class="rule"></div>
+
+  <p>This is also why most self-help fails on the way it is sold. A book about exercise is almost always also a book about mood, focus, and sleep; it just doesn't say so. A book about Stoicism is almost always also about social regulation, recovery, and sleep; it just doesn't say so either. When you read the book and try to make a change on the single axis it discusses, you usually fail not because the advice is bad but because the other four axes don't know about the project.</p>
+
+  <p>The change holds when at least two dimensions help carry it. You start running; you sleep slightly better; your mood lifts a little; the new habit stops feeling like discipline and starts feeling like inertia. Or: you start a small daily meaning practice (something as secular as ten minutes of reading) and you sleep slightly better, and you call your sister, and the practice keeps itself going because three other dimensions are now invested in it. This is also why "willpower" is a misleading frame. Willpower is usually one dimension trying to do all five jobs, and one dimension can't.</p>
+
+  <div class="reveal-wrap">
+    <h2><span class="eyebrow-inline">The Reveal</span>Bob is a shape.</h2>
+    <p>Picture a pentagon. Five points: Physical, Mental, Emotional, Social, Spiritual. Five axes, each running from the center (0) to the outside edge (10). Rate yourself on each, today, with the kind of honesty you would only give to yourself or your doctor. Connect the dots.</p>
+    <p><strong>That shape is Bob. Right now. Today.</strong></p>
+
+    <div class="radar">
+      <svg viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A pentagon-shaped radar plot of physical, mental, emotional, social, and spiritual dimensions, with a sample Bob profile overlaid.">
+        <defs>
+          <style>
+            .grid { fill: none; stroke: #c8c4b8; stroke-width: 1; }
+            .axis { stroke: #6B7488; stroke-width: 1; }
+            .lbl  { font: 600 13px "Helvetica Neue", Calibri, Arial, sans-serif; fill: #0F1B36; letter-spacing: 0.12em; }
+            .ax-num { font: 10px "Helvetica Neue", Arial, sans-serif; fill: #8D8678; }
+            .bob-fill { fill: rgba(212,162,76,0.35); stroke: #D4A24C; stroke-width: 2; stroke-linejoin: round; }
+            .bob-dot  { fill: #0F1B36; }
+            .center-dot { fill: #6B7488; }
+            .caption { font: italic 12px Georgia, serif; fill: #6B7488; }
+          </style>
+        </defs>
+
+        <polygon class="grid" points="300.00,198.00 330.43,220.11 318.81,255.89 281.19,255.89 269.57,220.11" />
+        <polygon class="grid" points="300.00,166.00 360.87,210.22 337.62,281.78 262.38,281.78 239.13,210.22" />
+        <polygon class="grid" points="300.00,134.00 391.30,200.33 356.43,307.67 243.57,307.67 208.70,200.33" />
+        <polygon class="grid" points="300.00,102.00 421.74,190.45 375.24,333.55 224.76,333.55 178.26,190.45" />
+        <polygon class="grid" points="300.00,70.00 452.17,180.56 394.05,359.44 205.95,359.44 147.83,180.56" stroke="#a39d8f" stroke-width="1.2"/>
+
+        <line class="axis" x1="300" y1="230" x2="300.00" y2="70.00" />
+        <line class="axis" x1="300" y1="230" x2="452.17" y2="180.56" />
+        <line class="axis" x1="300" y1="230" x2="394.05" y2="359.44" />
+        <line class="axis" x1="300" y1="230" x2="205.95" y2="359.44" />
+        <line class="axis" x1="300" y1="230" x2="147.83" y2="180.56" />
+
+        <text class="ax-num" x="306" y="200" text-anchor="start">2</text>
+        <text class="ax-num" x="306" y="168" text-anchor="start">4</text>
+        <text class="ax-num" x="306" y="136" text-anchor="start">6</text>
+        <text class="ax-num" x="306" y="104" text-anchor="start">8</text>
+        <text class="ax-num" x="306" y="72"  text-anchor="start">10</text>
+
+        <polygon class="bob-fill" points="300,118  391.30,200.34  347.02,294.72  224.76,333.55  239.13,210.22" />
+        <circle class="bob-dot" cx="300"    cy="118"    r="4"/>
+        <circle class="bob-dot" cx="391.30" cy="200.34" r="4"/>
+        <circle class="bob-dot" cx="347.02" cy="294.72" r="4"/>
+        <circle class="bob-dot" cx="224.76" cy="333.55" r="4"/>
+        <circle class="bob-dot" cx="239.13" cy="210.22" r="4"/>
+        <circle class="center-dot" cx="300" cy="230" r="2.5"/>
+
+        <text class="lbl" x="300" y="50"  text-anchor="middle">PHYSICAL</text>
+        <text class="lbl" x="465" y="175" text-anchor="start">MENTAL</text>
+        <text class="lbl" x="408" y="385" text-anchor="start">EMOTIONAL</text>
+        <text class="lbl" x="192" y="385" text-anchor="end">SOCIAL</text>
+        <text class="lbl" x="135" y="175" text-anchor="end">SPIRITUAL</text>
+
+        <text class="caption" x="300" y="455" text-anchor="middle">One Bob (Physical 7 · Mental 6 · Emotional 5 · Social 8 · Spiritual 4). What's yours?</text>
+      </svg>
+    </div>
+
+    <p class="legend">A perfect Bob is a regular pentagon all the way out. Nobody is that. A real Bob is uneven.</p>
+
+    <p style="margin-top:22px">The two questions worth asking the picture:</p>
+    <p style="text-align:left; max-width:520px; margin:14px auto 8px"><strong style="color:#D4A24C">1.&nbsp;&nbsp;What is the shape's area?</strong> &nbsp;A bigger pentagon is, roughly, a bigger life. This is what "wellness" actually means as a quantity: total area across all five dimensions, not max score on one.</p>
+    <p style="text-align:left; max-width:520px; margin:0 auto 8px"><strong style="color:#D4A24C">2.&nbsp;&nbsp;How symmetrical is it?</strong> &nbsp;A very lopsided shape is fragile. One dimension is carrying the others, and the others are quietly losing capacity. If you spend years on a Bob that is an 8 on Mental and a 3 on Social, the Social will eventually drag the Mental down to its level. The dimensions average; they do not partition.</p>
+
+    <p style="margin-top:20px; font-size:14.5px">This is what wellness wheels and life-balance assessments (used by counselors, university wellness centers, and clinical coaches) are actually doing. They are not selling enlightenment. They are pointing at a shape and asking which side is short.<sup class="fn"><a href="#fn11" style="color:#D4A24C">11</a></sup></p>
+  </div>
+
+  <h2><span class="eyebrow-inline">Closing</span>Bob is the whole instrument</h2>
+  <div class="rule"></div>
+
+  <p>Bob is you across all five strings, not just the one you happen to be playing today. The shape changes; that is the point. Some weeks the pentagon is wide and round and you can feel it. Some weeks one corner has caved in and the others are bracing.</p>
+
+  <p>The work isn't to make the pentagon symmetrical by Friday. The work is to look at the shape honestly, name the corner that's caved in, and ask which other dimension can lend it some weight while it recovers. Sleep can lend the emotional axis some help this week. A two-hour dinner with a real friend can lend the spiritual axis some help next week. A long walk can lend three axes some help at once, which is why long walks have been overrepresented in the writing of every culture that ever wrote anything down.</p>
+
+  <blockquote class="pull">
+    <strong>Bob is You.<br>You are Bob.</strong><br><br>
+    The shape is the thing to look at.
+  </blockquote>
+
+  <div class="notes">
+    <h3>Sources &amp; further reading</h3>
+    <ol>
+      <li id="fn1">World Health Organization, <em>Constitution of the World Health Organization</em>, adopted 1946, in force 1948. The "complete physical, mental and social well-being" phrasing appears in the preamble. <a href="https://www.who.int/about/governance/constitution">who.int/about/governance/constitution</a></li>
+      <li id="fn2">Engel, G. L. (1977). "The Need for a New Medical Model: A Challenge for Biomedicine." <em>Science</em>, 196(4286), 129–136. The original biopsychosocial paper; over 1,600 citations and still the standard reference. <a href="https://www.science.org/doi/10.1126/science.847460">science.org/doi/10.1126/science.847460</a></li>
+      <li id="fn3">Hettler, B. (1976). <em>The Six Dimensions of Wellness</em>. National Wellness Institute. <a href="https://nationalwellness.org/resources/six-dimensions-of-wellness/">nationalwellness.org/resources/six-dimensions-of-wellness</a></li>
+      <li id="fn4">Substance Abuse and Mental Health Services Administration, <em>Creating a Healthier Life: A Step-by-Step Guide to Wellness</em> (eight dimensions). <a href="https://library.samhsa.gov/sites/default/files/sma16-4953.pdf">library.samhsa.gov/sma16-4953.pdf</a></li>
+      <li id="fn5">Walker, M. (2017). <em>Why We Sleep: Unlocking the Power of Sleep and Dreams</em>. Scribner. Discussion of REM, the amygdala, and emotional recalibration. See also Walker, M. P. (2009), "The Role of Sleep in Cognition and Emotion," <em>Annals of the NYAS</em>, 1156, 168–197.</li>
+      <li id="fn6">Ratey, J. J. with Hagerman, E. (2008). <em>Spark: The Revolutionary New Science of Exercise and the Brain</em>. Little, Brown. Synthesizes the BDNF literature for general readers.</li>
+      <li id="fn7">Holt-Lunstad, J., Smith, T. B., &amp; Layton, J. B. (2010). "Social Relationships and Mortality Risk: A Meta-Analytic Review." <em>PLOS Medicine</em>, 7(7), e1000316. The "15 cigarettes" comparison is drawn from this paper and re-stated in the 2023 U.S. Surgeon General's advisory on loneliness. <a href="https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1000316">plos.org/plosmedicine</a></li>
+      <li id="fn8">Hill, P. L., &amp; Turiano, N. A. (2014). "Purpose in Life as a Predictor of Mortality Across Adulthood." <em>Psychological Science</em>, 25(7), 1482–1486. <a href="https://pubmed.ncbi.nlm.nih.gov/24815612/">pubmed: 24815612</a></li>
+      <li id="fn9">Waldinger, R. &amp; Schulz, M. (2023). <em>The Good Life</em>. Simon &amp; Schuster. Synthesizes 85+ years of the Harvard Study of Adult Development. The "relationship satisfaction at 50 predicts physical health at 80 better than cholesterol" finding is from the cohort's long-form follow-ups. <a href="https://www.adultdevelopmentstudy.org/">adultdevelopmentstudy.org</a></li>
+      <li id="fn10">van der Kolk, B. (2014). <em>The Body Keeps the Score: Brain, Mind, and Body in the Healing of Trauma</em>. Viking. Foundational on the physical traces of emotional injury.</li>
+      <li id="fn11">For real-world examples of the radar-plot self-assessment in clinical and educational use, see the <em>Wellness Wheel Assessment</em> from University of New Hampshire Extension (<a href="https://extension.unh.edu/health-well-being/programs/wellness-wheel-assessment">extension.unh.edu</a>) and the <em>Wellness Wheel Self-Assessment</em> from the UCCS Gallogly Recreation and Wellness Center (<a href="https://recwellness.uccs.edu/wellness/happiness/resources/foundations-of-happiness/wellness-wheel">recwellness.uccs.edu</a>). Both ask users to score themselves on six to eight dimensions and inspect the resulting shape.</li>
+    </ol>
+  </div>
+
+  <div class="footer-stars">·   ✦   ·   ✦   ·   ✦   ·</div>
+  <p class="colophon">an integrated guide · for the Bobs · part of the Bobology series</p>
+
+</div>
+
+<footer class="site-foot">
+  <div class="site-foot-inner">
+    <span>© 2026 Derek Wakefield · <a href="/writing.html">Writing</a> · <a href="/presentations.html">Presentations</a></span>
+  </div>
+</footer>
+
+<!-- ─────────── theme-switcher widget (mirrored from /theme-switcher.html) ─────────── -->
+<div class="dw-theme-switcher" id="dwThemeSwitcher" aria-label="Design direction">
+  <button type="button" class="dw-theme-toggle" id="dwThemeToggle" aria-haspopup="listbox" aria-expanded="false">
+    <span class="dw-swatch" id="dwToggleSwatch" style="background:#cccccc"></span>
+    <span id="dwToggleLabel">Theme</span>
+    <span class="dw-chevron">▾</span>
+  </button>
+  <div class="dw-theme-panel" id="dwThemePanel" role="listbox">
+    <div class="dw-divider"></div>
+    <a class="dw-what" href="/design-directions.html">What is this? →</a>
+  </div>
+</div>
+
+<script>
+(function () {
+  var THEMES = [
+    { id: "default",          name: "Site default",     tagline: "Cosmo",          swatch: "#ffffff", dark: false },
+    { id: "porch-light",      name: "Porch Light",      tagline: "warm cream",     swatch: "#c9a96e", dark: false },
+    { id: "star-chart",       name: "Star Chart",       tagline: "night sky",      swatch: "#fde487", dark: true  },
+    { id: "bedrock",          name: "Bedrock",          tagline: "geological",     swatch: "#d4a574", dark: true  },
+    { id: "hum",              name: "Hum",              tagline: "soft peach",     swatch: "#8a6b8a", dark: false },
+    { id: "bobblesphere",     name: "Bobblesphere",     tagline: "orbital",        swatch: "#ff9d3c", dark: true  },
+    { id: "library-bookmark", name: "Library Bookmark", tagline: "card catalog",   swatch: "#8b1a1a", dark: false },
+    { id: "mind-palace-map",  name: "Mind Palace Map",  tagline: "antique atlas",  swatch: "#993322", dark: false }
+  ];
+  var STORAGE_KEY = "dw-theme";
+  var panel  = document.getElementById("dwThemePanel");
+  var divider = panel.querySelector(".dw-divider");
+  THEMES.forEach(function (t) {
+    var item = document.createElement("div");
+    item.className = "dw-theme-item";
+    item.setAttribute("data-theme-id", t.id);
+    item.setAttribute("role", "option");
+    item.innerHTML =
+      '<span class="dw-swatch" style="background:' + t.swatch + '"></span>' +
+      '<span class="dw-name">' + t.name + '</span>' +
+      '<span class="dw-tagline">' + t.tagline + '</span>';
+    panel.insertBefore(item, divider);
+  });
+  function applyTheme(id) {
+    var t = THEMES.find(function (x) { return x.id === id; }) || THEMES[0];
+    if (t.id === "default") {
+      document.documentElement.removeAttribute("data-theme");
+      document.documentElement.removeAttribute("data-bs-theme");
+    } else {
+      document.documentElement.setAttribute("data-theme", t.id);
+      if (t.dark) document.documentElement.setAttribute("data-bs-theme", "dark");
+      else        document.documentElement.removeAttribute("data-bs-theme");
+    }
+    document.getElementById("dwToggleLabel").textContent = t.name;
+    document.getElementById("dwToggleSwatch").style.background = t.swatch;
+    panel.querySelectorAll(".dw-theme-item").forEach(function (el) {
+      el.classList.toggle("active", el.getAttribute("data-theme-id") === t.id);
+    });
+  }
+  var initial = "default";
+  try { initial = localStorage.getItem(STORAGE_KEY) || "default"; } catch (e) {}
+  applyTheme(initial);
+  var btn = document.getElementById("dwThemeToggle");
+  function openPanel() { panel.classList.add("open");  btn.setAttribute("aria-expanded", "true");  }
+  function closePanel() { panel.classList.remove("open"); btn.setAttribute("aria-expanded", "false"); }
+  btn.addEventListener("click", function (e) {
+    e.stopPropagation();
+    if (panel.classList.contains("open")) closePanel(); else openPanel();
+  });
+  panel.addEventListener("click", function (e) {
+    var item = e.target.closest(".dw-theme-item");
+    if (!item) return;
+    var id = item.getAttribute("data-theme-id");
+    applyTheme(id);
+    try { localStorage.setItem(STORAGE_KEY, id); } catch (err) {}
+    closePanel();
+  });
+  document.addEventListener("click", function (e) {
+    if (!document.getElementById("dwThemeSwitcher").contains(e.target)) closePanel();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closePanel();
+  });
+})();
+</script>
+
+</body>
+</html>

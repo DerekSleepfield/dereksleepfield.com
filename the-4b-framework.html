@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 3: The 4B Framework — Derek Wakefield</title>
+<meta name="description" content="Bobology's core framework (Bob, Bib, B(l)ab, Boobs) walked through with named research from Erikson, Polivy & Herman, Goffman, Grice, Deci & Ryan, Aristotle, Habermas, and Bateson.">
+<meta property="og:title" content="Lesson 3: The 4B Framework">
+<meta property="og:description" content="The four tenets of Bobology, with named scaffolding (Priest Bob's rule, Strategic-Essential, the karma loop) and academic citations explained at undergraduate level.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://derekwakefield.com/the-4b-framework.html">
+<link rel="canonical" href="https://derekwakefield.com/the-4b-framework.html">
+<!-- Site-wide theme variables. Standalone HTMLs are not Quarto-rendered;
+     we link themes.css so the inlined switcher widget below can propagate --bs-* tokens. -->
+<link rel="stylesheet" href="/themes.css">
+<style>
+  :root { color-scheme: light; }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    color: var(--bs-body-color, #1c1f24);
+    background: var(--bs-body-bg, #fbf8f1);
+    line-height: 1.66;
+    font-size: 18px;
+    transition: background-color 220ms ease, color 220ms ease;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 56px 28px 96px; }
+
+  /* ── Header ── */
+  header { text-align: center; margin-bottom: 40px; }
+  .stars { color: #b6a37a; letter-spacing: 0.4em; font-size: 13px; margin-bottom: 18px; }
+  .eyebrow {
+    text-transform: uppercase; letter-spacing: 0.22em;
+    font-size: 12px; color: #8a7a4a; margin-bottom: 12px;
+    font-family: -apple-system, "Segoe UI", Helvetica, sans-serif;
+  }
+  h1 {
+    font-size: 34px; margin: 0 0 10px; font-weight: 600; letter-spacing: -0.01em;
+    color: var(--bs-heading-color, #1c1f24);
+  }
+  .sub { color: #6b6357; font-style: italic; font-size: 16px; }
+
+  /* ── Section rules ── */
+  h2 {
+    font-size: 23px; margin: 44px 0 14px; font-weight: 600;
+    color: var(--bs-heading-color, #2d3a4a);
+    border-bottom: 1px solid var(--bs-border-color, rgba(0,0,0,0.10));
+    padding-bottom: 8px;
+  }
+  h2 .num {
+    display: inline-block; width: 1.8em; color: var(--bs-primary, #b6a37a);
+    font-weight: 500; font-variant-numeric: tabular-nums;
+  }
+  h3 { font-size: 17px; margin: 28px 0 8px; font-weight: 600; color: var(--bs-heading-color, #3a4655); }
+  p { margin: 14px 0; }
+  p.lede { font-size: 19px; }
+  em.term { font-style: italic; color: var(--bs-emphasis-color, #5a4a2a); }
+  strong { color: var(--bs-heading-color, #1c1f24); }
+
+  /* ── Tenet cards (carried forward from the explainer for visual continuity) ── */
+  .tenet {
+    background: var(--bs-secondary-bg, #fff);
+    border: 1px solid var(--bs-border-color, #e7dfc9);
+    border-radius: 10px;
+    padding: 22px 26px;
+    margin: 22px 0;
+    transition: background-color 220ms ease, border-color 220ms ease;
+  }
+  .tenet h2 {
+    margin-top: 0; border: none; padding: 0;
+    color: var(--bs-heading-color, #5a4a2a);
+    font-size: 26px;
+  }
+  .tenet .tag {
+    display: inline-block;
+    background: var(--bs-tertiary-bg, #f4eedf);
+    color: var(--bs-emphasis-color, #5a4a2a);
+    border-radius: 999px; padding: 2px 11px; font-size: 13px; font-style: italic;
+    margin-left: 8px; vertical-align: middle;
+  }
+  .creed {
+    margin: 16px 0 4px; font-style: italic;
+    color: var(--bs-emphasis-color, #5a4a2a);
+    border-left: 2px solid var(--bs-primary, #d8c79a);
+    padding: 4px 14px;
+  }
+
+  /* ── Scaffolding cards (lighter weight than tenets) ── */
+  .scaffold {
+    background: var(--bs-tertiary-bg, #fff);
+    border: 1px dashed var(--bs-border-color, #d8c79a);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin: 18px 0;
+  }
+  .scaffold h3 { margin-top: 0; color: var(--bs-emphasis-color, #5a4a2a); }
+
+  /* ── Inline citations ── */
+  cite {
+    font-style: normal;
+    color: var(--bs-link-color, #5b5340);
+    border-bottom: 1px dotted currentColor;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    text-align: center; color: #b6a37a;
+    margin: 38px 0; letter-spacing: 0.3em; font-size: 13px;
+  }
+
+  /* ── Takeaway ── */
+  .takeaway {
+    background: var(--bs-secondary-bg, #2d3a4a);
+    color: var(--bs-body-color, #fbf8f1);
+    border: 1px solid var(--bs-border-color, transparent);
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin: 30px 0 0;
+    font-style: italic; text-align: center;
+    font-size: 17px; line-height: 1.75;
+  }
+  .takeaway em { color: var(--bs-primary, #d8c79a); font-style: normal; }
+
+  /* ── References list ── */
+  .refs {
+    margin-top: 48px; padding-top: 22px;
+    border-top: 1px solid var(--bs-border-color, rgba(0,0,0,0.10));
+    font-size: 15px; line-height: 1.55;
+    color: var(--bs-body-color, #4a4537);
+  }
+  .refs h2 { margin-top: 0; }
+  .refs dt { font-weight: 600; margin-top: 18px; color: var(--bs-heading-color, #2d3a4a); }
+  .refs dd { margin: 4px 0 0 0; opacity: 0.85; }
+  .refs dd p { margin: 0 0 10px 0; }
+  .refs dd p:last-child { margin-bottom: 0; }
+
+  /* ── Footer ── */
+  footer {
+    margin-top: 48px; text-align: center;
+    color: #8a8270; font-size: 13px; letter-spacing: 0.05em;
+  }
+
+  /* ── When a site theme is active, propagate accent colors to links & headings ── */
+  html[data-theme] a { color: var(--bs-link-color, currentColor); }
+  html[data-theme] a:hover { color: var(--bs-link-hover-color, currentColor); }
+
+  @media (max-width: 600px) {
+    .wrap { padding: 32px 18px 64px; }
+    h1 { font-size: 28px; }
+    .tenet { padding: 18px 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="stars">. &nbsp; ✦ &nbsp; . &nbsp; ✦ &nbsp; .</div>
+  <div class="eyebrow">Bobology · Lesson 3</div>
+  <h1>The 4B Framework</h1>
+  <div class="sub">Bob · Bib · B(l)ab · Boobs: what the tenets are, why exactly these four, and how they hold together.</div>
+</header>
+
+<p class="lede">The Bobology canon is built of parables. Parables are good at one thing: showing what a quality <em>looks like</em> when it is lived. They are bad at another thing: telling you what the quality is <em>made of</em>. If a friend reads <em>The Parable of the Hum</em> and asks, "that's beautiful, but what exactly am I supposed to do?", the canon shrugs. That is the canon's job. It shrugs on purpose.</p>
+
+<p>The 4B is the shape of the answer when the shrug isn't enough. It is a framework: four named tenets you tend, plus three named pieces of scaffolding that hold them in place. The tenet names are deliberately silly (<em>Bob, Bib, B(l)ab, Boobs</em>). The framework is not silly. The silliness is the point. A framework you can't say out loud is a framework you'll never use.</p>
+
+<p>This lecture has three jobs. First, walk the four tenets in turn, with names from outside Bobology that ground what each one means. Second, lay out the scaffolding: what holds the four together when one of them tries to swallow the others. Third, show how the framework works as a diagnostic: when something feels off, the four tell you which one to check.</p>
+
+<div class="divider">. &nbsp; ✦ &nbsp; T H E &nbsp; F O U R &nbsp; ✦ &nbsp; .</div>
+
+<article class="tenet">
+  <h2>Bob <span class="tag">the nucleus</span></h2>
+
+  <p>Bob is the part of you that survives the changes: the version still recognizable as <em>you</em> after you have changed your mind, your job, or your decade. Whatever you put out in the world is sent from bob. Whatever returns, eventually, returns to bob.</p>
+
+  <p>Psychologists have a word for this. <cite>Erik Erikson, in <em>Identity: Youth and Crisis</em> (1968)</cite>, argued that a person's sense of being a coherent self over time is not given; it has to be built, and it has to keep being rebuilt. Erikson's "identity" is not a static fact about a person; it is an ongoing project. Bob is the part of the project that takes responsibility for keeping the rest in conversation.</p>
+
+  <p>The image Bobology uses for Bob is the palindrome: a string that reads the same forwards and backwards, like <em>SOLOS</em> or <em>KAYAK</em>. What goes in comes out the same. Not literally, of course; bob is not anti-change. The point is that bob's middle is symmetric: whatever you send out is sent <em>from the same place</em> it will eventually be received back. That symmetry is what makes karma legible. Without bob, there is nowhere for things to come home to.</p>
+
+  <p>The philosophical version of this question gets more pointed. <cite>Derek Parfit, in <em>Reasons and Persons</em> (1984)</cite>, argued that personal identity over time is less than we usually think; there is no metaphysical fact pinning the you-at-five to the you-at-seventy. He concluded, almost cheerfully, that this should free us. Bobology takes the same data and concludes something different: precisely <em>because</em> no metaphysical fact pins continuity, <em>you</em> have to. You have to be the thing that does the work of being one person. Bob is the act of doing that work.</p>
+
+  <p>Three quick notes on what bob is <em>not</em>:</p>
+  <ul>
+    <li><strong>Bob is not your personality.</strong> Personality is style. Bob is what holds across style-changes.</li>
+    <li><strong>Bob is not your beliefs.</strong> Beliefs are tools. Bob is the hand that picks the tool up.</li>
+    <li><strong>Bob is not your ego.</strong> Ego is bob unaccompanied by the other three. We will get to this.</li>
+  </ul>
+
+  <blockquote class="creed">Bob is the nucleus.<br>Bob is a palindrome.<br>Without bob you ain't.</blockquote>
+</article>
+
+<article class="tenet">
+  <h2>Bib <span class="tag">nourishment</span></h2>
+
+  <p>Bib is the tenet of paying attention to what feeds you, and what feeds the people who depend on you. Sleep, food, water, rest, the people who feed you back, the work that gives you energy instead of taking it. The framework treats all of this as one bucket because the items share a single discipline: the discipline of <em class="term">noticing</em>.</p>
+
+  <p>The Bobology one-liner is the warning: <em>we are smart but not at eating.</em></p>
+
+  <p>That clause is more precise than it sounds. Humans can outthink their own bodies. Our prefrontal cortex (the part that does planning and impulse control) can override hunger ("I'll finish this section first"), tiredness ("one more episode"), and thirst ("I'm not thirsty, just bored"). We can talk ourselves into a fifth coffee at three in the morning even when every signal in the body has been telling us to stop. <em>Smart-not-at-eating</em> is the price of being a long-horizon planner. It is also why a tenet that just says "trust your body" is too thin: your body is honest, but your override is loud.</p>
+
+  <p><cite>Janet Polivy and Peter Herman (1985, and a long line of follow-up work)</cite> spent decades studying what they called <em>restrained eating</em>. The compressed finding: people who cognitively restrict their food intake actually eat <em>more</em> in response to stress than people who do not, because the cognitive lid amplifies the rebound. The lesson isn't "stop restricting." The lesson is that the cognitive lid is loud, the body is quiet, and you have to make a habit of asking which one is right <em>this time</em>.</p>
+
+  <p>Newer research calls the listening skill <em class="term">interoception</em>: awareness of internal bodily states. <cite>Wolf Mehling et al. (2012)</cite> developed an instrument called the MAIA that measures interoception as eight sub-skills: noticing, not-distracting, not-worrying, attention regulation, emotional awareness, self-regulation, body listening, and trusting. The list is a mouthful. The point is short: interoception is a <em>practice</em>, not a feature. You get better at it the way you get better at chess.</p>
+
+  <p>Bib does not ask you to be in touch with your body at all times. It asks you to <em>notice when you've drifted out of touch</em>, and to come back. The drift is the default. The coming-back is the practice.</p>
+
+  <blockquote class="creed">Bib is nourishment;<br>we are smart but not at eating,<br>so we pay attention.</blockquote>
+</article>
+
+<article class="tenet">
+  <h2>B(l)ab <span class="tag">connection</span></h2>
+
+  <p>This is the most idiosyncratic tenet, so it gets the longest treatment.</p>
+
+  <p>Connection is the work of being one mind in a room with another mind. The Bobology shorthand for this is <em>bab</em>: two syllables, the oldest noise human infants make at adults. Bab is what's underneath language. You can do bab by listening. You can do bab by sitting across from someone and letting them know they are not alone.</p>
+
+  <p>The trouble is that connection has a louder cousin. <em>Blab</em> is bab with the L unleashed: connection drowned out by its own volume. The L stands for the loud things: your loves, your losses, the words that can't be unsaid. Blab is what happens when the loud things come out of you without you choosing.</p>
+
+  <p>The tenet name puts the L in parentheses on purpose: <strong>B(l)ab</strong>. The parenthesis is the discipline. The L isn't deleted; you can't delete it. The L <em>is</em> you. The discipline is keeping the L <em>present-but-governed</em>: silent on purpose, released when the moment actually asks.</p>
+
+  <p><cite>Erving Goffman, in <em>The Presentation of Self in Everyday Life</em> (1959)</cite>, called this <em>impression management</em> and reached for a stage metaphor. We have a <em>front stage</em> (what we perform to the room) and a <em>back stage</em> (what we keep among trusted others). His version of the parenthesis is the curtain between the two. A person who blabs every L has no curtain. A person who never lets the L through has frozen the curtain shut. The competent social actor keeps the curtain operable, moving according to who is in the room.</p>
+
+  <p>The linguist <cite>Paul Grice (1975)</cite> came at the same problem from inside language. His <em>Cooperative Principle</em> said that conversation works because speakers honor four implicit maxims: <em>quantity</em> (don't say more or less than needed), <em>quality</em> (don't say what you believe to be false), <em>relation</em> (be relevant), and <em>manner</em> (be clear). Most miscommunication is a maxim violation. <em>B(l)ab is mostly the maxim of quantity</em>: don't say more than the moment asked for. Don't say less, either. The L is silent when the moment asks; the L is released when the moment asks.</p>
+
+  <p>This is where Bobology adds something Goffman and Grice don't quite. The check that keeps the parenthesis honest is called <em class="term">Strategic-Essential</em>. Before you let an L out, you ask: <em>is this protection out of love, or concealment out of ego?</em> Same question, different verbs: am I keeping this in because the other person isn't ready, or because <em>I</em> am not? The first is care. The second is hiding.</p>
+
+  <p>If the parenthesis is treated as a license to never let the L out, B(l)ab collapses into a polite version of itself: present in the room but absent in any way that matters. Strategic-Essential is what keeps the dial honest. <strong>The point of the parenthesis is not silence. The point of the parenthesis is that you choose.</strong></p>
+
+  <blockquote class="creed">B(l)ab is connection;<br>the L is silent when the moment asks.</blockquote>
+</article>
+
+<article class="tenet">
+  <h2>Boobs <span class="tag">pleasure</span></h2>
+
+  <p>Bobology refuses both halves of the usual mistake about pleasure.</p>
+
+  <p>The first half is the <em>suspect</em> half: pleasure as something to be ashamed of, hidden, indulged only when no one is looking. Most ethical frameworks shaped by certain Christian and Stoic lineages have this baked into the floor. The second half is the <em>point</em> half: pleasure as the thing life is actually for. Hedonism, including its softer modern forms, has this version.</p>
+
+  <p>The 4B's instruction is <em>neither</em>. Pleasure is a tenet, held on equal footing with bob and bib and bab. You don't apologize for it. You also don't build your life around it.</p>
+
+  <p>Self-determination theorists <cite>Edward Deci and Richard Ryan (2000, with much follow-up)</cite> drew a useful line here, between <em>hedonic</em> well-being (pleasure, comfort, the absence of suffering) and <em>eudaimonic</em> well-being (meaning, growth, the sense that what you're doing matters). Thirty years of empirical work that followed found that both contribute to a good life, but their loading differs by domain and by person. A life of pure hedonia drifts toward what <cite>Brickman and Campbell (1971)</cite> called the <em>hedonic treadmill</em>: the finding that humans adapt to almost any positive change and return, after a while, to baseline. A life of pure eudaimonia, untempered by enjoyment, tends to break down in different ways: martyrdom, performative virtue, the slow grind of "should."</p>
+
+  <p>Boobs is the tenet that says: <em>both, in proportion, tended on purpose</em>. The Bobology instruction is <em class="term">tend, don't escape</em>. Pleasure is good. Pleasure as the exit door from the other three is not. If you find yourself reaching for boobs because bib is unattended or bob is unclear, the framework names what just happened. It doesn't tell you to stop. It tells you to <em>notice</em>.</p>
+
+  <blockquote class="creed">Boobs are pleasure;<br>we hold them as tenet, not as sin;<br>we tend them, we do not escape them.</blockquote>
+</article>
+
+<div class="divider">. &nbsp; ✦ &nbsp; T H E &nbsp; S C A F F O L D I N G &nbsp; ✦ &nbsp; .</div>
+
+<p>The four tenets do not stand on their own. The framework wraps them in three named ideas: a calibration check, a discernment move, and a metaphysics of feedback.</p>
+
+<div class="scaffold">
+  <h3>Priest Bob's rule: the calibration check</h3>
+  <p>Any tenet, overfocused, becomes a trap. <em>Bib without bab</em> is self-care turned hermitage. <em>Bab without the parenthesis</em> is blab. <em>Boobs untethered from the others</em> becomes escape. <em>Bob without the other three</em> is just an ego.</p>
+  <p><cite>Aristotle, in <em>Nicomachean Ethics</em> Book II</cite>, made the same observation 2,400 years earlier. Virtue, he argued, is the <em>mean</em> between two vices: one of excess and one of deficiency. Courage is the mean between cowardice and recklessness. Generosity is the mean between stinginess and waste. Aristotle called the master skill that runs all the others <em>phronēsis</em>, or practical wisdom, and treated it as the virtue that calibrates every other virtue. Priest Bob's rule is Bobology's version of <em>phronēsis</em>. The recurring instruction in the creed is seven verbs because no single verb does the work: <em>moderate, calibrate, check in, correct, grow, germinate, return</em>.</p>
+</div>
+
+<div class="scaffold">
+  <h3>Strategic-Essential: the discernment move</h3>
+  <p>We met it briefly under B(l)ab. The fuller version: before you act under any tenet, you ask whether the action is <em>strategic</em> (oriented toward what you want to happen <em>to</em> you) or <em>essential</em> (oriented toward what is actually true here). The names are borrowed loosely from <cite>Jürgen Habermas, in <em>The Theory of Communicative Action</em> (1981)</cite>, who distinguished <em>strategic action</em> (aimed at success) from <em>communicative action</em> (aimed at understanding). Habermas wanted communicative action to dominate the public sphere. Bobology wants the <em>question itself</em> to dominate the private sphere: not "which mode wins?" but "which mode am I in right now, and is that the right one?"</p>
+  <p>Strategic-Essential is what keeps the four tenets honest. Bib <em>as strategic</em> is dieting to look a certain way; bib <em>as essential</em> is sleeping because you slept badly last night. Bab <em>as strategic</em> is networking; bab <em>as essential</em> is sitting with a friend. Boobs <em>as strategic</em> is pleasure as performance; boobs <em>as essential</em> is pleasure as part of being alive. The same action can be either. The discernment <em>is</em> the work.</p>
+</div>
+
+<div class="scaffold">
+  <h3>Karma · Adapterstanding · Atavism: the loop</h3>
+  <p>The metaphysics is short. <strong>Karma</strong> is the signal you emit. <strong>Adapterstanding</strong> (short for <em>adaptive iterative understanding</em>) is how the echo reshapes as it travels: the way other people, situations, and time alter what you sent out, iteration by iteration, as each receiver adapts what they got and passes it on. <strong>Atavism</strong> is how the echo comes home, often years later, in shapes you didn't quite predict but recognize as yours.</p>
+  <p>This is feedback theory dressed up in better names. <cite>Gregory Bateson, in <em>Steps to an Ecology of Mind</em> (1972)</cite>, made the case that organisms and minds are best understood as recursive systems: every act emits information that re-enters the system through environment and other minds, eventually returning. Bobology gives the loop names because <em>named loops are more honest than unnamed ones</em>. Karma without adapterstanding is fatalism (everything that comes back is "deserved"). Adapterstanding without karma is paranoia (the world warps everything I send out). Atavism without the first two is mysticism (things just come back because they do).</p>
+  <p>The loop is allowed to close because bob is a palindrome. What you put out is permitted to come back. That permission is what makes the four tenets feel like <em>tending</em> rather than <em>striving</em>.</p>
+</div>
+
+<div class="divider">. &nbsp; ✦ &nbsp; T H E &nbsp; D I A G N O S T I C &nbsp; ✦ &nbsp; .</div>
+
+<p>The fastest practical use of the framework is as a diagnostic. When something feels off, ask the four in order:</p>
+
+<ul>
+  <li><strong>Bob.</strong> Am I still recognizably the person I was a year ago in the way that matters? If not, what dropped out? And is the new shape better, or just newer?</li>
+  <li><strong>Bib.</strong> Am I sleeping, eating, drinking, resting? Am I getting energy back from the work I'm doing, or only spending it? When did I last check?</li>
+  <li><strong>B(l)ab.</strong> Who am I in conversation with this week? Am I keeping the parenthesis honest, or have I gone silent everywhere, or loud everywhere?</li>
+  <li><strong>Boobs.</strong> When did I last enjoy something <em>on purpose</em>, with no exit-door motivation? Am I tending pleasure, or escaping into it?</li>
+</ul>
+
+<p>Each tenet, asked clean, points back to a behavior you can change tomorrow morning. The framework is not a personality test. It is a series of small, repeatable diagnostic questions you can run on yourself the way a mechanic runs them on a car. The four are the whole engine. Priest Bob's rule is the calibration; Strategic-Essential is the honesty check; Karma-Adapterstanding-Atavism is the long-running pattern recognition.</p>
+
+<p>You don't need to do all four every day. You need to do them <em>honestly</em> when one of them flags.</p>
+
+<div class="divider">. &nbsp; ✦ &nbsp; T A K E A W A Y &nbsp; ✦ &nbsp; .</div>
+
+<div class="takeaway">
+  Tend bob.<br>
+  Pay attention to bib.<br>
+  Govern the L; let bab continue.<br>
+  Hold boobs as tenet, not as exit.<br>
+  <em>Watch the dial. The four are held together.</em>
+</div>
+
+<p style="margin-top: 28px;">Priest Bob's rule reminds you that any tenet alone is a trap. Strategic-Essential keeps you honest about <em>why</em> you are doing what you are doing. Karma-Adapterstanding-Atavism (what you put out, how the world reshapes it as it travels, how it comes home in shapes you didn't predict but recognize as yours) keeps you patient; the loop is on a delay, and the delay is not a problem. The framework's name is silly. The framework is not. <em>Bobble accordingly.</em></p>
+
+<section class="refs">
+  <h2><span class="num">§</span> Further reading</h2>
+  <p style="font-size:14px;opacity:0.8;">Short summaries of the names dropped above. Read any of these in the original if a tenet still feels unfinished.</p>
+  <dl>
+    <dt>Erikson, E. H. (1968). <em>Identity: Youth and Crisis</em>.</dt>
+    <dd>
+      <p>Erik Erikson was a German-born psychoanalyst whose eight-stage model of psychosocial development became one of the standard maps of human life in mid-twentieth-century developmental psychology. <em>Identity: Youth and Crisis</em> consolidates his work on what he called the identity crisis of adolescence: the period during which a young person assembles a coherent sense of self by integrating roles, values, and social positions into a single ongoing project. Erikson coined the phrase "identity crisis" and traced its resolution through the later stages he had named (intimacy, generativity, integrity), each treated as a renegotiation rather than a finished accomplishment.</p>
+      <p>The book's lasting contribution is the move from identity-as-essence to identity-as-project. A self is something done, not something had, built over time through commitments and revisions, and exposed throughout to social and historical pressure. That move is the source-text for what Bobology calls <em>bob</em>: the part of you that takes responsibility for keeping the rest in conversation.</p>
+    </dd>
+
+    <dt>Parfit, D. (1984). <em>Reasons and Persons</em>.</dt>
+    <dd>
+      <p><em>Reasons and Persons</em> is the most influential late-twentieth-century work in analytic moral philosophy on personal identity. Derek Parfit argued, via a long battery of thought experiments (teletransportation, fission, gradual brain replacement), that there is no metaphysically robust fact about what makes a person at one time the "same" person as a person at another time. Identity, on his view, just consists in psychological continuity (memories, beliefs, intentions chained together), and that continuity admits of degrees.</p>
+      <p>Parfit took the conclusion to be liberating: if nothing deep binds you to your future self, much of the egoistic anxiety we direct at that self loses its grip. Bobology takes the same data and runs the inference the other way. Precisely because no metaphysics holds continuity in place, the work of being one person across time becomes a deliberate practice. That practice is bob.</p>
+    </dd>
+
+    <dt>Polivy, J., &amp; Herman, C. P. (1985 onward). Restrained-eating research.</dt>
+    <dd>
+      <p>Janet Polivy and C. Peter Herman are clinical psychologists at the University of Toronto whose decades-long research program introduced the construct of the <em>restrained eater</em>: someone who chronically overrides their hunger signals via cognitive rules (calorie counting, food restriction, dietary discipline). Their core finding, replicated many times, is the counterintuitive observation that restrained eaters tend to eat <em>more</em> under stress and after dietary disinhibition than unrestrained eaters do. The cognitive lid amplifies the rebound rather than suppressing it.</p>
+      <p>The implication is not that restraint is uniformly bad. It is that an over-reliance on top-down cognitive control makes a person blind to the body's signals exactly when those signals are most worth listening to. This is "smart but not at eating" in empirical form, and the reason bib is framed as a noticing practice rather than a discipline practice.</p>
+    </dd>
+
+    <dt>Mehling, W. E., et al. (2012). The Multidimensional Assessment of Interoceptive Awareness (MAIA).</dt>
+    <dd>
+      <p>Wolf Mehling and collaborators at UCSF's Osher Center developed the MAIA as a self-report instrument for measuring how well a person attends to internal bodily states: heart rate, breath, muscle tension, gut signals, hunger, fatigue, and the somatic correlates of emotion. The MAIA breaks interoception into eight learnable sub-skills (noticing, not-distracting, not-worrying, attention regulation, emotional awareness, self-regulation, body listening, and trusting), each of which can be assessed and trained independently.</p>
+      <p>The contribution is double. First, the MAIA operationalizes interoception, so interventions like mindfulness training, somatic therapy, and biofeedback can be measured against an instrument rather than against an intuition. Second, the eight-factor structure clarifies that interoception is a stack of distinct, trainable competencies, not a single innate gift. The MAIA is what licenses Bobology to treat bib as a practice, not a posture.</p>
+    </dd>
+
+    <dt>Goffman, E. (1959). <em>The Presentation of Self in Everyday Life</em>.</dt>
+    <dd>
+      <p>Erving Goffman was a Canadian-American sociologist who applied theatrical metaphors to everyday social interaction. <em>The Presentation of Self</em> uses the dramaturgical frame (front stage, back stage, performance, props, teams, audiences) to argue that social life is structured by <em>impression management</em>: people continually adjust what they reveal of themselves based on who is in the room and what they want that room to take away.</p>
+      <p>The dramaturgical view is sometimes read as cynical, as if people are "faking" their public selves, but Goffman's point was structural rather than moral. The curtain between front and back is not a lie; it is the architecture that lets coherent social interaction happen at all. The parenthesis in B(l)ab is a deliberate echo of his curtain.</p>
+    </dd>
+
+    <dt>Grice, H. P. (1975). "Logic and Conversation."</dt>
+    <dd>
+      <p>Paul Grice was a British philosopher of language whose William James Lectures at Harvard introduced the <em>Cooperative Principle</em>: the implicit norm that participants in a conversation are working toward a shared purpose, contributing what is required, when it is required, by the accepted direction of the exchange. Grice broke this principle into four maxims: <em>quantity</em> (give the right amount of information), <em>quality</em> (do not say what you believe to be false), <em>relation</em> (be relevant), and <em>manner</em> (be clear and orderly).</p>
+      <p>The maxims are descriptive of effective conversation and diagnostic of failed conversation. Most miscommunication, on Grice's account, is a maxim violation. B(l)ab is shaped most heavily by the maxim of quantity: the L is silent when more would be too much, and the L is released when less would be evasion.</p>
+    </dd>
+
+    <dt>Deci, E. L., &amp; Ryan, R. M. (2000 onward). Self-Determination Theory.</dt>
+    <dd>
+      <p>Edward Deci and Richard Ryan are American psychologists whose Self-Determination Theory is one of the most empirically supported macro-theories of human motivation in the literature. SDT identifies three basic psychological needs (autonomy, competence, and relatedness) and argues that well-being is largely a function of how well these are met across one's activities. In their 2000 review and the work that followed, Deci and Ryan also drew a useful distinction between <em>hedonic</em> well-being (pleasure, comfort, the absence of suffering) and <em>eudaimonic</em> well-being (meaning, growth, the sense that what one is doing matters).</p>
+      <p>Decades of empirical work since have shown that both forms contribute to a good life, but in different proportions for different people and different domains. SDT is the empirical floor under boobs: pleasure is a legitimate, named part of the framework rather than a guilty side-effect, and pleasure cannot be the whole framework either.</p>
+    </dd>
+
+    <dt>Brickman, P., &amp; Campbell, D. T. (1971). The hedonic treadmill.</dt>
+    <dd>
+      <p>Philip Brickman and Donald Campbell coined the term <em>hedonic treadmill</em> in a 1971 essay arguing that humans tend to adapt to most positive (and negative) changes in their circumstances and return, after a period, to a baseline level of subjective well-being. The classic illustrations are lottery winners and accident victims who, a year or two after a life-altering event, report well-being levels much closer to their pre-event baseline than the magnitude of the event would predict.</p>
+      <p>Subsequent research has refined the picture (adaptation is incomplete for some events such as chronic illness, widowhood, and unemployment, and the baseline itself can shift over decades), but the core finding survives. The treadmill is pleasure-as-pursuit's empirical Achilles' heel, and the reason Bobology asks you to <em>tend</em> boobs rather than chase them.</p>
+    </dd>
+
+    <dt>Aristotle. <em>Nicomachean Ethics</em>, Book II.</dt>
+    <dd>
+      <p>The <em>Nicomachean Ethics</em> is the founding text of Western virtue ethics. Book II contains the doctrine of the mean: virtue is the disposition to act in a way that hits the middle between two vices, one of excess and one of deficiency. Courage is the mean between cowardice (deficient response to risk) and recklessness (excessive response). Generosity is the mean between stinginess and waste. Honesty, friendship, even appropriate anger: each virtue is the mean of its own spectrum.</p>
+      <p>The mean is not a fixed midpoint that can be calculated in advance. It has to be found, situation by situation, by a master skill Aristotle called <em>phronēsis</em>, or practical wisdom: the disposition to deliberate well about what is good for human life. Phronēsis calibrates every other virtue. Priest Bob's rule is the same idea, two and a half millennia later.</p>
+    </dd>
+
+    <dt>Habermas, J. (1981). <em>The Theory of Communicative Action</em>.</dt>
+    <dd>
+      <p>Jürgen Habermas is the most influential German social philosopher of the late twentieth century. <em>The Theory of Communicative Action</em> is a two-volume attempt to ground a critical theory of modern society in a theory of language use. Habermas distinguishes <em>strategic</em> action (action aimed at success, where other people are means or obstacles to one's goals) from <em>communicative</em> action (action aimed at understanding, where participants orient toward agreement reached through reasoned dialogue).</p>
+      <p>His normative claim is that the modern public sphere has been increasingly colonized by strategic action (market and bureaucratic logics) at the expense of communicative action, and that the result is a weakened capacity for collective sense-making. Bobology borrows the distinction in a humbler register: not "which mode should dominate the public sphere?" but "which mode am I in right now, and is it the right one?" Strategic-Essential is the private-sphere version of Habermas's question.</p>
+    </dd>
+
+    <dt>Bateson, G. (1972). <em>Steps to an Ecology of Mind</em>.</dt>
+    <dd>
+      <p>Gregory Bateson was an English-born anthropologist, cyberneticist, and systems theorist whose work bridged anthropology, psychiatry, biology, and the formal study of information feedback. <em>Steps to an Ecology of Mind</em> is a collection of essays in which Bateson argues that the proper unit of analysis for understanding minds, organisms, and ecologies is not the individual entity but the recursive system: the loop in which an act emits information, that information re-enters through environment and other minds, and the loop closes (or fails to close) in altered form.</p>
+      <p>Bateson's insistence on the loop as the basic unit is the cybernetic ancestor of karma (the signal you emit) → adapterstanding (<em>adaptive iterative understanding</em>: how the world reshapes that signal as it travels through other people, situations, and time) → atavism (how the signal comes home, often years later, in altered form). Naming the three stages keeps the metaphysics honest. An unnamed loop is fatalism, or paranoia, or mysticism. A named loop is a feedback system you can learn to live inside.</p>
+    </dd>
+  </dl>
+</section>
+
+<footer>
+  Bobology · Lesson 3 · drafted 2026-05-21 · framework belongs to Derek
+</footer>
+
+</div>
+
+<!-- ─── Site-wide theme switcher (mirrors theme-switcher.html) ─── -->
+<div class="dw-theme-switcher" id="dwThemeSwitcher" aria-label="Design direction">
+  <button type="button" class="dw-theme-toggle" id="dwThemeToggle" aria-haspopup="listbox" aria-expanded="false">
+    <span class="dw-swatch" id="dwToggleSwatch" style="background:#cccccc"></span>
+    <span id="dwToggleLabel">Theme</span>
+    <span class="dw-chevron">▾</span>
+  </button>
+  <div class="dw-theme-panel" id="dwThemePanel" role="listbox">
+    <div class="dw-divider"></div>
+    <a class="dw-what" href="/design-directions.html">What is this? →</a>
+  </div>
+</div>
+<script>
+(function () {
+  var THEMES = [
+    { id: "default",          name: "Site default",     tagline: "Cosmo",          swatch: "#ffffff", dark: false },
+    { id: "porch-light",      name: "Porch Light",      tagline: "warm cream",     swatch: "#c9a96e", dark: false },
+    { id: "star-chart",       name: "Star Chart",       tagline: "night sky",      swatch: "#fde487", dark: true  },
+    { id: "bedrock",          name: "Bedrock",          tagline: "geological",     swatch: "#d4a574", dark: true  },
+    { id: "hum",              name: "Hum",              tagline: "soft peach",     swatch: "#8a6b8a", dark: false },
+    { id: "bobblesphere",     name: "Bobblesphere",     tagline: "orbital",        swatch: "#ff9d3c", dark: true  },
+    { id: "library-bookmark", name: "Library Bookmark", tagline: "card catalog",   swatch: "#8b1a1a", dark: false },
+    { id: "mind-palace-map",  name: "Mind Palace Map",  tagline: "antique atlas",  swatch: "#993322", dark: false }
+  ];
+  var STORAGE_KEY = "dw-theme";
+  var panel  = document.getElementById("dwThemePanel");
+  var divider = panel.querySelector(".dw-divider");
+  THEMES.forEach(function (t) {
+    var item = document.createElement("div");
+    item.className = "dw-theme-item";
+    item.setAttribute("data-theme-id", t.id);
+    item.setAttribute("role", "option");
+    item.innerHTML =
+      '<span class="dw-swatch" style="background:' + t.swatch + '"></span>' +
+      '<span class="dw-name">' + t.name + '</span>' +
+      '<span class="dw-tagline">' + t.tagline + '</span>';
+    panel.insertBefore(item, divider);
+  });
+  function applyTheme(id) {
+    var t = THEMES.find(function (x) { return x.id === id; }) || THEMES[0];
+    if (t.id === "default") {
+      document.documentElement.removeAttribute("data-theme");
+      document.documentElement.removeAttribute("data-bs-theme");
+    } else {
+      document.documentElement.setAttribute("data-theme", t.id);
+      if (t.dark) document.documentElement.setAttribute("data-bs-theme", "dark");
+      else        document.documentElement.removeAttribute("data-bs-theme");
+    }
+    document.getElementById("dwToggleLabel").textContent = t.name;
+    document.getElementById("dwToggleSwatch").style.background = t.swatch;
+    panel.querySelectorAll(".dw-theme-item").forEach(function (el) {
+      el.classList.toggle("active", el.getAttribute("data-theme-id") === t.id);
+    });
+  }
+  var initial = "default";
+  try { initial = localStorage.getItem(STORAGE_KEY) || "default"; } catch (e) {}
+  applyTheme(initial);
+  var btn = document.getElementById("dwThemeToggle");
+  function openPanel() { panel.classList.add("open");  btn.setAttribute("aria-expanded", "true");  }
+  function closePanel() { panel.classList.remove("open"); btn.setAttribute("aria-expanded", "false"); }
+  btn.addEventListener("click", function (e) {
+    e.stopPropagation();
+    if (panel.classList.contains("open")) closePanel(); else openPanel();
+  });
+  panel.addEventListener("click", function (e) {
+    var item = e.target.closest(".dw-theme-item");
+    if (!item) return;
+    var id = item.getAttribute("data-theme-id");
+    applyTheme(id);
+    try { localStorage.setItem(STORAGE_KEY, id); } catch (err) {}
+    closePanel();
+  });
+  document.addEventListener("click", function (e) {
+    if (!document.getElementById("dwThemeSwitcher").contains(e.target)) closePanel();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closePanel();
+  });
+})();
+</script>
+
+</body>
+</html>

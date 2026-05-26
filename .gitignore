@@ -1,0 +1,19 @@
+# Quarto build output
+/.quarto/
+_site/
+_freeze/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*~
+*.swp
+
+# LibreOffice / Word lock + temp files
+.~lock.*#
+*.tmp
+
+# Local drafts (Quarto already ignores _* but be explicit)
+_*.draft.html

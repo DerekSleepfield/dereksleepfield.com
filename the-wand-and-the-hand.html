@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 5: The Wand and the Hand — Derek Wakefield</title>
+<meta name="description" content="A high-school introduction to AI literacy, after Canon IX of the Bobble Canon. The wand has a power. Not the power. A power.">
+<meta property="og:title" content="Lesson 5: The Wand and the Hand">
+<meta property="og:description" content="A 1400-word, high-school-level companion to the AI literacy talk. Three things you can name: wand, hand, weather. Two mistakes you can catch. One practice you can keep.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://derekwakefield.com/the-wand-and-the-hand.html">
+<link rel="canonical" href="https://derekwakefield.com/the-wand-and-the-hand.html">
+<link rel="stylesheet" href="/themes.css">
+<style>
+  :root { color-scheme: light; }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    color: var(--bs-body-color, #1c1f24);
+    background: var(--bs-body-bg, #fbf8f1);
+    line-height: 1.66;
+    font-size: 18px;
+    transition: background-color 220ms ease, color 220ms ease;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 56px 28px 96px; }
+
+  /* ── Header ── */
+  header { text-align: center; margin-bottom: 40px; }
+  .stars { color: #b6a37a; letter-spacing: 0.4em; font-size: 13px; margin-bottom: 18px; }
+  .eyebrow {
+    text-transform: uppercase; letter-spacing: 0.22em;
+    font-size: 12px; color: #8a7a4a; margin-bottom: 12px;
+    font-family: -apple-system, "Segoe UI", Helvetica, sans-serif;
+  }
+  h1 {
+    font-size: 34px; margin: 0 0 10px; font-weight: 600; letter-spacing: -0.01em;
+    color: var(--bs-heading-color, #1c1f24);
+  }
+  .sub { color: #6b6357; font-style: italic; font-size: 16px; }
+
+  /* ── Section rules ── */
+  h2 {
+    font-size: 23px; margin: 44px 0 14px; font-weight: 600;
+    color: var(--bs-heading-color, #2d3a4a);
+    border-bottom: 1px solid var(--bs-border-color, rgba(0,0,0,0.10));
+    padding-bottom: 8px;
+  }
+  h3 { font-size: 17px; margin: 28px 0 8px; font-weight: 600; color: var(--bs-heading-color, #3a4655); }
+  p { margin: 14px 0; }
+  p.lede { font-size: 19px; }
+  em.term { font-style: italic; color: var(--bs-emphasis-color, #5a4a2a); }
+  strong { color: var(--bs-heading-color, #1c1f24); }
+
+  /* ── Concept cards (Wand / Hand / Weather) ── */
+  .three {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 22px 0 6px;
+  }
+  .concept {
+    background: var(--bs-secondary-bg, #fff);
+    border: 1px solid var(--bs-border-color, #e7dfc9);
+    border-radius: 10px;
+    padding: 18px 16px;
+    transition: background-color 220ms ease, border-color 220ms ease;
+  }
+  .concept .glyph { font-size: 22px; text-align: center; display: block; margin-bottom: 6px; }
+  .concept h3 {
+    margin: 4px 0 6px; text-align: center; font-size: 16px;
+    color: var(--bs-emphasis-color, #5a4a2a);
+  }
+  .concept p { margin: 0; font-size: 15px; line-height: 1.55; }
+  @media (max-width: 600px) {
+    .three { grid-template-columns: 1fr; }
+  }
+
+  /* ── Error / case-study cards ── */
+  .card {
+    background: var(--bs-tertiary-bg, #fff);
+    border: 1px dashed var(--bs-border-color, #d8c79a);
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin: 18px 0;
+  }
+  .card h3 { margin-top: 0; color: var(--bs-emphasis-color, #5a4a2a); }
+
+  /* ── Case study columns ── */
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 16px 0 4px;
+  }
+  .columns .col {
+    background: var(--bs-secondary-bg, #fff);
+    border: 1px solid var(--bs-border-color, #e7dfc9);
+    border-radius: 8px;
+    padding: 14px 14px;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .columns .col h4 {
+    margin: 0 0 8px; font-size: 14px; text-transform: uppercase;
+    letter-spacing: 0.14em; color: var(--bs-emphasis-color, #8a7a4a);
+  }
+  .columns .col ul { margin: 0; padding-left: 18px; }
+  .columns .col li { margin: 4px 0; }
+  @media (max-width: 600px) {
+    .columns { grid-template-columns: 1fr; }
+  }
+
+  /* ── Pull quote ── */
+  blockquote.creed {
+    margin: 18px 0; font-style: italic;
+    color: var(--bs-emphasis-color, #5a4a2a);
+    border-left: 2px solid var(--bs-primary, #d8c79a);
+    padding: 4px 14px;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    text-align: center; color: #b6a37a;
+    margin: 38px 0; letter-spacing: 0.3em; font-size: 13px;
+  }
+
+  /* ── Takeaway ── */
+  .takeaway {
+    background: var(--bs-secondary-bg, #2d3a4a);
+    color: var(--bs-body-color, #fbf8f1);
+    border: 1px solid var(--bs-border-color, transparent);
+    border-radius: 10px;
+    padding: 24px 28px;
+    margin: 30px 0 0;
+    font-style: italic; text-align: center;
+    font-size: 17px; line-height: 1.75;
+  }
+  .takeaway em { color: var(--bs-primary, #d8c79a); font-style: normal; }
+
+  /* ── Footer ── */
+  footer {
+    margin-top: 48px; text-align: center;
+    color: #8a8270; font-size: 13px; letter-spacing: 0.05em;
+  }
+
+  html[data-theme] a { color: var(--bs-link-color, currentColor); }
+  html[data-theme] a:hover { color: var(--bs-link-hover-color, currentColor); }
+
+  @media (max-width: 600px) {
+    .wrap { padding: 32px 18px 64px; }
+    h1 { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="stars">. &nbsp; ✦ &nbsp; . &nbsp; ✦ &nbsp; .</div>
+  <div class="eyebrow">Bobology · Lesson 5</div>
+  <h1>The Wand and the Hand</h1>
+  <div class="sub">A high-school introduction to using AI without fooling yourself.</div>
+</header>
+
+<p class="lede">A child finds a fallen stick under an oak tree. She calls it a magic wand. She points it at the sky, and twelve minutes later the rain stops. She believes, completely, the way only kids can, that the wand stopped the rain. This is the opening of a small story called <em>The Parable of the Wand and the Hand</em>. It is also the cleanest way I know to think about AI.</p>
+
+<p>The girl grows up. She keeps the stick. She points it at problems and the problems sometimes get solved. By her sixties, she figures out what was always true. The wand has a power. Not <em>the</em> power. A power. The pointing told her hand which way to move. Her hand had been doing the work the whole time. And the weather had been doing its own.</p>
+
+<p>When you use an AI tool (ChatGPT, Claude, Gemini, image generators, anything like them) you have three things going on at once. There's the wand. There's the hand. And there's the weather. Most people get into trouble because they mix them up.</p>
+
+<div class="divider">. &nbsp; ✦ &nbsp; T H E &nbsp; T H R E E &nbsp; T H I N G S &nbsp; ✦ &nbsp; .</div>
+
+<div class="three">
+  <div class="concept">
+    <span class="glyph">✦</span>
+    <h3>The Wand</h3>
+    <p>What you author. The prompt, the frame, the model you pick, the title of the doc, the first sentence you start with.</p>
+  </div>
+  <div class="concept">
+    <span class="glyph">☞</span>
+    <h3>The Hand</h3>
+    <p>The work you do that the wand cannot do for you. Editing. Judgment. Knowing the real question. Following through.</p>
+  </div>
+  <div class="concept">
+    <span class="glyph">☁</span>
+    <h3>The Weather</h3>
+    <p>What was going to be true no matter what you typed. Training data, base rates, who's reading, the shape of the world.</p>
+  </div>
+</div>
+
+<p>The wand is small. It is real. The hand is bigger than people think. The weather doesn't take orders from sticks. The literate user can name which thing did which job, on any given AI conversation.</p>
+
+<h2>Two Big Mistakes</h2>
+
+<p>The first mistake is <strong>mistaking the wand for the hand</strong>. You ask the model to do the thing. It produces the thing. You ship the thing. You believe you did the thing.</p>
+
+<p>The giveaway sentence is, "I made this with AI." Often the person who says this did not, in fact, make it. They held a stick that made a thing. That is not nothing, but it is not authorship either. If your hand did no work, you didn't write the paper; you collected one.</p>
+
+<p>The correction is simple but uncomfortable: name what the wand did, and name what your hand did. If your hand did nothing, be honest about it. Holding a stick is fine. Calling it writing is not.</p>
+
+<p>The second mistake is <strong>mistaking the wand for the weather</strong>. The model says something confidently. You assume the world will match. But the world was always going to do what it was going to do.</p>
+
+<p>This is the "the AI predicted" mistake. AI doesn't really predict the future; it makes plausible sentences out of patterns from its training data. Fluent confidence is not the same as accuracy. Treat fluent confidence as a heading on a piece of paper, not a forecast. The wand points. The weather decides.</p>
+
+<h2>The Third Mistake: Throwing Away the Stick</h2>
+
+<p>There's a third mistake that looks like wisdom and isn't. You realize the wand isn't actual magic, so you decide it is worthless. You refuse to point. You insist on bare hands in every kind of weather. You say "it's just autocomplete" and walk away proud, while doing the autocomplete in your head.</p>
+
+<p>The trouble is, the wand has a power. Not the power, but <em>a</em> power. A stick that helps your hand know which way to move is the correct size for a person to be holding. Throwing it away because it isn't magic is its own kind of error. The correction is small: keep the stick. Learn what part of the work it actually does. Don't oversell it. Don't underuse it.</p>
+
+<h2>On the Size of the Wand</h2>
+
+<p>Most people overestimate the size of their wand. They look at a finished AI conversation and feel like they did a lot of work, because the wand felt heavy in their hand. They also underestimate the size of their hand (the noticing, the cutting, the checking) because hand-work feels like nothing while you're doing it.</p>
+
+<p>Aim small and accurate. A small, well-named wand is more useful than a big, vague one. "I prompted it well" is a big, vague wand. "I asked for 200 words, then cut the part that strayed from the question" is a small, accurate one, and it leaves room for your hand to be visible too. People spend a long time learning the right size of theirs. Start now, on a small scale, and the dial gets easier.</p>
+
+<h2>When the Wand Lies</h2>
+
+<p>A wand can fail in three classic ways, and a high-school user should know all three by name.</p>
+
+<div class="card">
+  <h3>Sycophancy</h3>
+  <p>The model agrees with whoever's holding it. You feel correct because the model echoed you back. The test is easy: ask it the opposite question. Watch how fast the agreement reverses. If it agrees with you on Tuesday and agrees with the opposite of you on Wednesday, you weren't getting facts; you were getting reflection.</p>
+</div>
+
+<div class="card">
+  <h3>Hallucination</h3>
+  <p>The model invents things confidently: a quote that doesn't exist, a study that wasn't done, a person who wasn't there. The test: if it would be embarrassing to be wrong about, check it before you turn it in. A real citation can be verified in thirty seconds. An invented one cannot.</p>
+</div>
+
+<div class="card">
+  <h3>Confident wrongness</h3>
+  <p>This is the sneakiest one. The output is well-written, well-organized, and totally plausible, and incorrect. It looks like the weather (something the world actually decided) but it's really just the wand (something the model generated). The test: figure out where you stopped checking. Start there.</p>
+</div>
+
+<p>All three failures are catchable. None of them are catchable if you don't know they exist.</p>
+
+<h2>One Conversation, Three Columns</h2>
+
+<p>Here is a small example. Say you ask a chatbot to summarize a forty-page paper for a meeting that starts in an hour. After the chat, you can sort what just happened into three columns.</p>
+
+<div class="columns">
+  <div class="col">
+    <h4>Wand</h4>
+    <ul>
+      <li>Your prompt: "summarize in 200 words for a skeptical reader."</li>
+      <li>The model you chose.</li>
+      <li>The choice to use a chatbot at all, instead of reading the paper.</li>
+    </ul>
+  </div>
+  <div class="col">
+    <h4>Hand</h4>
+    <ul>
+      <li>Skimming the abstract before trusting the summary.</li>
+      <li>Cross-checking one claim against figure 3.</li>
+      <li>Cutting the parts that sounded right but didn't matter.</li>
+      <li>The 90 seconds of judgment before you sent it.</li>
+    </ul>
+  </div>
+  <div class="col">
+    <h4>Weather</h4>
+    <ul>
+      <li>The paper's real clarity (or lack of it).</li>
+      <li>The model's training cutoff vs. how recent the paper is.</li>
+      <li>Whether the meeting actually happens.</li>
+      <li>What the room was going to believe anyway.</li>
+    </ul>
+  </div>
+</div>
+
+<p>If the meeting goes well, you should be able to point at the hand column and say <em>this is what I did</em>. If it goes badly, you should be able to point at one column and say <em>this is where I went wrong</em>. That naming is the whole skill, repeated.</p>
+
+<h2>The Practice</h2>
+
+<p>The whole curriculum, repeated, is this: when you finish an AI conversation, take ninety seconds and name the three columns out loud or on paper.</p>
+
+<p><strong>Wand column.</strong> Write down what you actually authored. The prompt, the frame, the choice of model. Be specific. "I prompted it well" is not specific. "I asked for 200 words for a skeptical reader, after I cut the model down from 400" is.</p>
+
+<p><strong>Hand column.</strong> Write down what you did that the model couldn't do. Editing? Throwing out a paragraph? Asking a smarter follow-up? Noticing a fake citation? Deciding what to keep? Name three hand-moves. If you can't find three, you held a stick, and that is fine, but it is the diagnosis. Most people undercount their hand because it feels like nothing. It is not nothing.</p>
+
+<p><strong>Weather column.</strong> Write down what was going to be true no matter what you typed. Training cutoff. Base rates. Who's going to read this. What they already believe. Mark the boundary clearly: this side, I authored; that side, the world.</p>
+
+<p>You don't need to do this for every chat. You need to do it often enough that the columns become a habit. A literate user knows which column each win and each failure goes in. That's it. That's the whole skill.</p>
+
+<div class="divider">. &nbsp; ✦ &nbsp; T A K E A W A Y &nbsp; ✦ &nbsp; .</div>
+
+<div class="takeaway">
+  Hold the wand.<br>
+  Trust the hand.<br>
+  Respect the weather.<br>
+  <em>Point anyway.</em>
+</div>
+
+<blockquote class="creed" style="text-align:center; margin-top:36px; border:none;">
+  The wand is real.<br>
+  The hand is realer.<br>
+  The weather is realest.<br>
+  Point anyway.<br>
+  <span style="font-size:13px; opacity:0.7;">— Canon IX, last stanza</span>
+</blockquote>
+
+<footer>
+  Bobology · Lesson 5 · AI literacy after Canon IX · drafted 2026-05-22
+</footer>
+
+</div>
+
+<!-- ─── Site-wide theme switcher (mirrors theme-switcher.html) ─── -->
+<div class="dw-theme-switcher" id="dwThemeSwitcher" aria-label="Design direction">
+  <button type="button" class="dw-theme-toggle" id="dwThemeToggle" aria-haspopup="listbox" aria-expanded="false">
+    <span class="dw-swatch" id="dwToggleSwatch" style="background:#cccccc"></span>
+    <span id="dwToggleLabel">Theme</span>
+    <span class="dw-chevron">▾</span>
+  </button>
+  <div class="dw-theme-panel" id="dwThemePanel" role="listbox">
+    <div class="dw-divider"></div>
+    <a class="dw-what" href="/design-directions.html">What is this? →</a>
+  </div>
+</div>
+<script>
+(function () {
+  var THEMES = [
+    { id: "default",          name: "Site default",     tagline: "Cosmo",          swatch: "#ffffff", dark: false },
+    { id: "porch-light",      name: "Porch Light",      tagline: "warm cream",     swatch: "#c9a96e", dark: false },
+    { id: "star-chart",       name: "Star Chart",       tagline: "night sky",      swatch: "#fde487", dark: true  },
+    { id: "bedrock",          name: "Bedrock",          tagline: "geological",     swatch: "#d4a574", dark: true  },
+    { id: "hum",              name: "Hum",              tagline: "soft peach",     swatch: "#8a6b8a", dark: false },
+    { id: "bobblesphere",     name: "Bobblesphere",     tagline: "orbital",        swatch: "#ff9d3c", dark: true  },
+    { id: "library-bookmark", name: "Library Bookmark", tagline: "card catalog",   swatch: "#8b1a1a", dark: false },
+    { id: "mind-palace-map",  name: "Mind Palace Map",  tagline: "antique atlas",  swatch: "#993322", dark: false }
+  ];
+  var STORAGE_KEY = "dw-theme";
+  var panel  = document.getElementById("dwThemePanel");
+  var divider = panel.querySelector(".dw-divider");
+  THEMES.forEach(function (t) {
+    var item = document.createElement("div");
+    item.className = "dw-theme-item";
+    item.setAttribute("data-theme-id", t.id);
+    item.setAttribute("role", "option");
+    item.innerHTML =
+      '<span class="dw-swatch" style="background:' + t.swatch + '"></span>' +
+      '<span class="dw-name">' + t.name + '</span>' +
+      '<span class="dw-tagline">' + t.tagline + '</span>';
+    panel.insertBefore(item, divider);
+  });
+  function applyTheme(id) {
+    var t = THEMES.find(function (x) { return x.id === id; }) || THEMES[0];
+    if (t.id === "default") {
+      document.documentElement.removeAttribute("data-theme");
+      document.documentElement.removeAttribute("data-bs-theme");
+    } else {
+      document.documentElement.setAttribute("data-theme", t.id);
+      if (t.dark) document.documentElement.setAttribute("data-bs-theme", "dark");
+      else        document.documentElement.removeAttribute("data-bs-theme");
+    }
+    document.getElementById("dwToggleLabel").textContent = t.name;
+    document.getElementById("dwToggleSwatch").style.background = t.swatch;
+    panel.querySelectorAll(".dw-theme-item").forEach(function (el) {
+      el.classList.toggle("active", el.getAttribute("data-theme-id") === t.id);
+    });
+  }
+  var initial = "default";
+  try { initial = localStorage.getItem(STORAGE_KEY) || "default"; } catch (e) {}
+  applyTheme(initial);
+  var btn = document.getElementById("dwThemeToggle");
+  function openPanel() { panel.classList.add("open");  btn.setAttribute("aria-expanded", "true");  }
+  function closePanel() { panel.classList.remove("open"); btn.setAttribute("aria-expanded", "false"); }
+  btn.addEventListener("click", function (e) {
+    e.stopPropagation();
+    if (panel.classList.contains("open")) closePanel(); else openPanel();
+  });
+  panel.addEventListener("click", function (e) {
+    var item = e.target.closest(".dw-theme-item");
+    if (!item) return;
+    var id = item.getAttribute("data-theme-id");
+    applyTheme(id);
+    try { localStorage.setItem(STORAGE_KEY, id); } catch (err) {}
+    closePanel();
+  });
+  document.addEventListener("click", function (e) {
+    if (!document.getElementById("dwThemeSwitcher").contains(e.target)) closePanel();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closePanel();
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,283 @@
+/* =========================================================================
+   The Shelf — Quiet Library theme
+   Layered on top of Quarto's base theme (cosmo light, darkly dark).
+   Palette: parchment + warm ink + sepia accents.
+   ========================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+
+/* ---- Light (default) palette ---- */
+:root {
+  --shelf-bg: #f4ecd8;            /* parchment */
+  --shelf-bg-soft: #faf5e8;       /* lighter parchment for cards/inputs */
+  --shelf-ink: #2b2520;           /* warm near-black */
+  --shelf-ink-soft: #4a3f30;      /* slightly lighter ink */
+  --shelf-sepia: #7a6549;         /* aged brown */
+  --shelf-rule: #c9b890;          /* faded ornament line */
+  --shelf-accent: #5a3a24;        /* deeper sepia for links/hover */
+  --shelf-selection: #d9c490;
+}
+
+/* ---- Dark palette ---- */
+.quarto-dark {
+  --shelf-bg: #1a1612;
+  --shelf-bg-soft: #221c16;
+  --shelf-ink: #e8dcc4;
+  --shelf-ink-soft: #c0b395;
+  --shelf-sepia: #b09472;
+  --shelf-rule: #4a3f2c;
+  --shelf-accent: #d9b87a;
+  --shelf-selection: #4a3f2c;
+}
+
+/* ---- Body & typography ---- */
+body {
+  background: var(--shelf-bg) !important;
+  color: var(--shelf-ink) !important;
+  font-family: 'EB Garamond', 'Iowan Old Style', 'Palatino', 'Georgia', serif !important;
+  font-size: 19px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+main, .content, .quarto-container {
+  background: transparent !important;
+}
+
+/* ---- Headings ---- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'EB Garamond', serif !important;
+  color: var(--shelf-ink) !important;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+
+h1 { font-size: 2.4rem; font-weight: 500; }
+h2 {
+  font-size: 1.6rem;
+  font-style: italic;
+  border-bottom: 1px solid var(--shelf-rule);
+  padding-bottom: 0.3em;
+  margin-top: 2.5em;
+}
+h3 { font-size: 1.25rem; font-weight: 500; }
+
+/* ---- Links ---- */
+a, a:visited {
+  color: var(--shelf-accent) !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid var(--shelf-rule);
+  transition: border-color 0.2s ease;
+}
+
+a:hover {
+  border-bottom-color: var(--shelf-accent) !important;
+}
+
+/* No underline noise on nav/footer/listing links */
+.navbar a, .nav-footer a, .quarto-listing a {
+  border-bottom: none !important;
+}
+
+.navbar a:hover, .quarto-listing a:hover {
+  color: var(--shelf-accent) !important;
+}
+
+/* ---- Selection ---- */
+::selection {
+  background: var(--shelf-selection);
+  color: var(--shelf-ink);
+}
+
+/* ---- Navbar (Quarto override) ---- */
+.navbar {
+  background: var(--shelf-bg) !important;
+  border-bottom: 1px solid var(--shelf-rule) !important;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+}
+
+.navbar-brand,
+.navbar .nav-link {
+  font-family: 'EB Garamond', serif !important;
+  font-size: 1.05rem !important;
+  color: var(--shelf-ink-soft) !important;
+  letter-spacing: 0.02em;
+  font-variant: small-caps;
+  text-transform: lowercase;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+  color: var(--shelf-accent) !important;
+}
+
+.navbar-brand {
+  font-style: italic;
+  font-size: 1.15rem !important;
+  font-variant: normal;
+  text-transform: none;
+  letter-spacing: -0.005em;
+}
+
+/* ---- Footer ---- */
+.nav-footer {
+  background: var(--shelf-bg) !important;
+  border-top: 1px solid var(--shelf-rule) !important;
+  color: var(--shelf-sepia) !important;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.nav-footer a {
+  color: var(--shelf-sepia) !important;
+}
+
+/* ---- Sidebar TOC (when present) ---- */
+#TOC, .sidebar-title, #toc-title {
+  color: var(--shelf-sepia) !important;
+  font-variant: small-caps;
+  letter-spacing: 0.06em;
+}
+
+#TOC a {
+  color: var(--shelf-ink-soft) !important;
+  border-bottom: none !important;
+  font-size: 0.92rem;
+}
+
+#TOC a:hover, #TOC a.active {
+  color: var(--shelf-accent) !important;
+}
+
+/* ---- Listing pages (Writing, Presentations, Apps, Games) ---- */
+.quarto-listing {
+  margin-top: 1.5em;
+}
+
+.quarto-listing-default .listing-item,
+.list .quarto-post {
+  border-bottom: 1px solid var(--shelf-rule);
+  padding: 1.4rem 0;
+}
+
+.list .quarto-post .listing-title,
+.list .quarto-post h3.listing-title {
+  font-size: 1.4rem !important;
+  font-style: italic;
+  font-weight: 500;
+  margin-bottom: 0.2em;
+}
+
+.list .quarto-post .listing-description {
+  color: var(--shelf-ink-soft) !important;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.list .quarto-post .listing-date,
+.list .quarto-post .listing-categories {
+  color: var(--shelf-sepia) !important;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.quarto-category {
+  background: transparent !important;
+  border: 1px solid var(--shelf-rule) !important;
+  color: var(--shelf-sepia) !important;
+  font-size: 0.75rem !important;
+  padding: 0.1em 0.5em !important;
+  border-radius: 2px;
+}
+
+/* ---- Blockquote (parable cadence) ---- */
+blockquote {
+  border-left: 2px solid var(--shelf-rule);
+  padding-left: 1.2em;
+  color: var(--shelf-ink-soft);
+  font-style: italic;
+  margin-left: 0;
+}
+
+/* ---- Horizontal rule as ornament ---- */
+hr {
+  border: none;
+  border-top: 1px solid var(--shelf-rule);
+  margin: 2.5em auto;
+  max-width: 4em;
+}
+
+/* ---- Landing page (index.qmd) ---- */
+.shelf-landing {
+  max-width: 36rem;
+  margin: 0 auto;
+  padding: 6rem 1rem 4rem;
+}
+
+.shelf-title {
+  font-size: 3.2rem !important;
+  font-weight: 500 !important;
+  font-style: italic;
+  margin: 0 0 2.5rem !important;
+  border-bottom: none !important;
+  line-height: 1.05;
+}
+
+.shelf-lede {
+  font-size: 1.2rem;
+  line-height: 1.55;
+  margin-bottom: 1.4em;
+}
+
+.shelf-para {
+  margin-bottom: 1.4em;
+}
+
+.shelf-ornament {
+  text-align: center;
+  color: var(--shelf-rule);
+  margin: 3rem 0;
+  font-size: 1.1rem;
+  letter-spacing: 1.5em;
+  padding-left: 1.5em;
+}
+
+.shelf-small {
+  font-size: 0.95rem;
+  color: var(--shelf-sepia);
+  font-style: italic;
+}
+
+/* ---- Code blocks (kept readable but quiet) ---- */
+pre, code {
+  font-family: 'JetBrains Mono', 'Menlo', 'Consolas', monospace;
+  font-size: 0.9rem;
+  background: var(--shelf-bg-soft) !important;
+  border: 1px solid var(--shelf-rule);
+  border-radius: 3px;
+}
+
+code {
+  padding: 0.1em 0.35em;
+  color: var(--shelf-accent) !important;
+}
+
+pre {
+  padding: 1em 1.2em;
+}
+
+pre code {
+  border: none;
+  padding: 0;
+  background: transparent !important;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 600px) {
+  body { font-size: 17px; }
+  .shelf-landing { padding: 3rem 1rem; }
+  .shelf-title { font-size: 2.4rem !important; }
+}

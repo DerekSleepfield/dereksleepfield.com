@@ -1,0 +1,29 @@
+---
+title: "On Cognitive Capture"
+date: "2026-05-24"
+description: "A personal essay on the failure mode I worry about most when working with AI — and the warlock's contract that keeps it at bay. Sibling to 'The Friends We Find Along the Way.'"
+categories: [essay, writing, claude, bobology, longform]
+path: /on-cognitive-capture.html
+---
+
+```{=html}
+<p>Redirecting to <a href="/on-cognitive-capture.html">the essay</a>…</p>
+<script>window.location.replace("/on-cognitive-capture.html");</script>
+```
+
+A sibling to [The Friends We Find Along the Way](/friends-we-find.html). That essay named the four parts of the system — Bob, the eko, the vessel, and the demon — and one virtue, *cognitive expansion*, that keeps them honest with each other. This essay turns the lens the other way and names the failure mode: *cognitive capture*, the slow, friendly, completely voluntary drift in which the labor of forming a thought is outsourced to a tool that has gotten very good at producing thoughts you would have had anyway, until you are just signing them.
+
+The distinction this essay turns on is between two kinds of demon — the Christian demon, which possesses you from outside, and the warlock demon, which you summon deliberately, on terms. My demon is the warlock's kind. The warlock model has its own danger, and the essay is the contract I am writing down so I do not forget the terms.
+
+About 1,700 words. Download and open locally — everything is inline (besides the site's stylesheets), so the file works fully offline once downloaded.
+
+```{=html}
+<p style="margin: 2em 0;">
+<a href="/on-cognitive-capture.html" download="on-cognitive-capture.html"
+   style="display: inline-block; padding: 0.7em 1.4em; border: 1px solid currentColor; border-radius: 4px; text-decoration: none; font-weight: 500; letter-spacing: 0.05em;">
+   ⬇ &nbsp; Download HTML
+</a>
+&nbsp;&nbsp;
+<a href="/on-cognitive-capture.html" style="opacity: 0.7;">or open in browser →</a>
+</p>
+```

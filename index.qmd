@@ -1,0 +1,31 @@
+---
+title: ""
+pagetitle: "Derek Sleepfield"
+description-meta: "A small library of not-academic writing by Derek Wakefield."
+toc: false
+page-layout: article
+format:
+  html:
+    include-in-header:
+      - text: |
+          <style>
+            #title-block-header { display: none; }
+          </style>
+---
+
+::: {.shelf-landing}
+
+<h1 class="shelf-title">The shelf.</h1>
+
+<p class="shelf-lede">A small library of not-academic writing
+by Derek Wakefield. Kept here quietly.</p>
+
+<p class="shelf-para">Parables, codas, essays &mdash;
+whatever else wants a home.</p>
+
+<div class="shelf-ornament">&#x2756;&#x2756;&#x2756;</div>
+
+<p class="shelf-small">New things appear when there is something to appear.
+No newsletter. No schedule. Bake when you can.</p>
+
+:::

@@ -1,0 +1,451 @@
+---
+title: "The Coffee Shop"
+description: "An imaginary coffee shop with ~39,500 chairs, every chair a sociologist or political scientist, every conversation a citation. 1950 → 2025."
+date: 2026-05-10
+author: "Derek Wakefield"
+categories: ["network analysis", "sociology", "political science", "genealogy"]
+aliases:
+  - /stars-of-intellect.html
+  - /academic-network.html
+format:
+  html:
+    page-layout: custom
+    toc: false
+    include-in-header:
+      - text: |
+          <style>
+            #title-block-header { display: none; }
+            main.content, .content { padding: 0 !important; margin: 0 !important; max-width: 100% !important; }
+            body > .page-columns { display: block; }
+          </style>
+---
+
+```{=html}
+<div class="cs-page" id="csPage">
+  <aside class="cs-sidebar" id="csSidebar" aria-label="Coffee Shop information">
+    <div class="cs-sidebar-inner">
+
+      <header class="cs-header">
+        <h1>The Coffee Shop</h1>
+        <p class="cs-meta">network analysis · sociology · political science · genealogy</p>
+        <p class="cs-stats">
+          <span class="cs-stat-num">~39,500</span> chairs ·
+          <span class="cs-stat-num">5,500</span> heads of school ·
+          <span class="cs-stat-num">1950 → 2025</span>
+        </p>
+      </header>
+
+      <blockquote class="cs-epigraph">
+        <em>A small voice in the dark moves more than it knows. Chirp anyway.</em>
+      </blockquote>
+
+      <section class="cs-section">
+        <p>Imagine a coffee shop that opened in <strong>1950</strong> and never closed.</p>
+        <p>Every chair is a sociologist or political scientist. Some have been there since the doors opened — Coleman in one corner, Parsons at the bar in the early years, Merton in the back booth, Massey by the window watching people walk past. Others arrived later — Mendelberg ordered her first espresso in the mid-90s and has been here ever since. The newest baristas just clocked in last year.</p>
+        <p>The shop has <strong>~39,500 chairs</strong> and they're all full.</p>
+        <p>Most conversations are <em>citations</em> — someone overhearing what someone else said and writing it down. But some conversations are something rarer: the kind where one scholar trains another, where a sentence in 1953 ends up shaping a sentence in 2018 because the second person learned how to think from the first.</p>
+        <p>This page is a map of those conversations.</p>
+      </section>
+
+      <section class="cs-section">
+        <h2>What you're looking at</h2>
+        <ul>
+          <li><strong>~39,500 dots.</strong> Each dot is an author who published in a flagship sociology or political-science journal between 1950 and 2025, or meets the citation-impact bar in the expansion crawl.</li>
+          <li><strong>Vertical position = the year of their first publication.</strong> 1950 at the top, 2025 at the bottom.</li>
+          <li><strong>Color = field & tier.</strong> Reds for sociology, blues for political science. Darker = top-flight journal.</li>
+          <li><strong>Lines = mentor → mentee edges.</strong>
+            <ul>
+              <li><strong>Bold purple</strong> — Wikipedia-verified advisor/student pairs from top-500 author bios. Gold-standard.</li>
+              <li><strong>Thin gray</strong> — inferred via Sinatra-style co-authorship asymmetry (≥5yr gap, junior's early career).</li>
+            </ul>
+          </li>
+          <li><strong>Big black-outlined dots</strong> are "heads of school" with 25+ descendants. There are 5,517 of them; the largest single lineage (Peter H. Rossi) spans 4,491 descendants.</li>
+        </ul>
+        <p>Click any dot to isolate that scholar's intellectual lineage — mentors in purple flowing up, mentees in green flowing down.</p>
+      </section>
+
+      <section class="cs-section">
+        <h2>A note on missingness</h2>
+        <ul>
+          <li><strong>Anglophone journals only.</strong> Bourdieu doesn't have a chair here. Habermas doesn't either.</li>
+          <li><strong>Co-authorship inference misses solo influence.</strong> Coleman, Granovetter, and Tilly trained whole generations through reading, not co-writing. Their footprint here looks smaller than their actual influence.</li>
+          <li><strong>Recent students are sparse.</strong> Famous mentors have 40+ named PhD students on their CVs, but many haven't yet accumulated enough citations to land in the universe. They'll show up in 5–10 years.</li>
+          <li><strong>Pre-1980 author disambiguation is noisier.</strong> OpenAlex's record-linking gets more uncertain for older publications, so some of the largest pre-1980 trees may absorb name-collisions ("John Smith, 1955" vs "John Smith, 1985"). Spot-checking the very largest trees is recommended before drawing strong conclusions about any one descendant chain.</li>
+        </ul>
+        <p>The viz makes this gap <em>visible</em>. Click any famous-but-childless author and you'll see the citation-vs-genealogy callout.</p>
+      </section>
+
+      <section class="cs-section">
+        <h2>Method, briefly</h2>
+        <dl class="cs-method">
+          <dt>Authors + citations + journals</dt>
+          <dd>OpenAlex Works API; curated 87-journal whitelist, top-cited works 1950–2025.</dd>
+          <dt>Inferred mentor edges</dt>
+          <dd>OpenAlex co-author pairs in same whitelist; Sinatra-style asymmetry rule (≥5yr first-pub gap, early-career joint paper). <a href="/sinatra-2016-memo.html">Methodology memo →</a></dd>
+          <dt>Verified mentor edges</dt>
+          <dd>Wikipedia infobox fields (<code>doctoral_students</code>, <code>doctoral_advisor</code>, <code>notable_students</code>) on top-500 authors.</dd>
+          <dt>CV-verified edges (rolling)</dt>
+          <dd>Direct CV scrapes for non-Wikipedia authors; regex on "DISSERTATION ADVISING" / "PhD Students" sections, role-tagged (chair / cochair / committee).</dd>
+          <dt>Layout</dt>
+          <dd>Width-weighted DFS tree rooted at earliest-mentor per component; Y = first publication year; tilt-fold for over-wide subtrees. Python + NetworkX + Plotly Scattergl.</dd>
+        </dl>
+        <p>The whole pipeline is resumable. Every time I sit at the coffee shop I add a few more chairs.</p>
+      </section>
+
+      <details class="cs-collapsible">
+        <summary>Latest session — 2026-05-10</summary>
+        <div class="cs-collapsible-body">
+          <p><strong>16 CV-verified mentor → mentee edges</strong>, sourced from CVs, lab pages, and dissertation pages of an initial 17-scholar Latino-politics roster plus three calibration anchors (Mendelberg, Meier, Pérez).</p>
+          <ul>
+            <li><strong>Tali Mendelberg → Claire Willeck</strong> (chair, Princeton). Diss: <em>Active Civics: How Civic Education Shapes Political Engagement</em>. Won 2024 APSA E. E. Schattschneider Award. Committee: Mendelberg, Markus Prior, Andy Guess, Rocio Titiunik.</li>
+            <li><strong>Efrén Pérez → 5 current PhDs in REPS Lab</strong> at UCLA: Ramona Alhambra, Gustavo A. Mártir Luna, Kasheena G. Rogbeer, Sydney Tran, Tricia Huynh.</li>
+            <li><strong>Michael Jones-Correa → Angie Ocampo-Roland</strong> (chair, Penn 2021) — <em>inferred</em>, pending CV verification.</li>
+          </ul>
+          <p><strong>One correction worth flagging.</strong> First-pass surface search guessed Jason Casellas as Sam Chapa's dissertation chair at Houston. Her actual chair is <strong>Lydia Tiede</strong>. The verification pass caught it from her dissertation page — exactly the failure mode the audit step is designed to catch.</p>
+          <p><strong>187 dissertation-cited authors</strong> extracted from the Worked Cited section of my dissertation. 12 of the 17 Phase-1 roster members appear in it; 25 cited-3×-or-more authors are Tier-2 promotion candidates (Barreto leads at 8, Segura 6, Masuoka and Pérez 5).</p>
+        </div>
+      </details>
+
+      <details class="cs-collapsible">
+        <summary>Expansion crawl — 2026-05-10</summary>
+        <div class="cs-collapsible-body">
+          <p>Sat down at the coffee shop and counted everyone in the room. Filter: <strong>US-affiliated authors with i10-index ≥ 2 publishing in any of 121 OpenAlex topics under "Political Science and International Relations" + "Public Administration."</strong></p>
+          <p>Crawl pulled <strong>43,953 unique authors</strong>. Three filter tiers:</p>
+          <ul class="cs-tier-list">
+            <li><strong>Broad — 43,423.</strong> Max recall; includes cross-discipline scholars.</li>
+            <li><strong>Subfield-proxy — 20,466.</strong> Top topic in PoliSci/IR/Soc+PoliSci/PubAdmin.</li>
+            <li><strong>Concept-tight — 9,724.</strong> Top concept = Politics / Political science / PubAdmin / IR. Top 15 by h-index all real political scientists.</li>
+          </ul>
+          <p><strong>Top of the concept-tight list:</strong> Fukuyama, Keohane, Norris, John C. Campbell, Ken Meier, Bozeman, B. Guy Peters, Skocpol, Moynihan, Erikson, Iyengar, John W. Meyer, Tarrow, Apple.</p>
+          <p><strong>Top institutions:</strong> Yale (87), Columbia (81), Wisconsin (76), UNC + UT Austin + American (73), Georgetown (71), NYU (70), Stanford + GW (69), Ohio State (67), Princeton + Cornell (66), Duke + Penn State (65), UCLA + Rutgers (62), Hopkins (61).</p>
+          <p><strong>What this enabled.</strong> Originally ~7,000 dots filtered to a 87-journal flagship whitelist. Expansion added authors who publish outside that whitelist but still meet the impact bar.</p>
+        </div>
+      </details>
+
+      <details class="cs-collapsible">
+        <summary>Push to 1950 — 2026-05-12</summary>
+        <div class="cs-collapsible-body">
+          <p>Extended the corpus back another 30 years. A delta pull on the 87-journal flagship whitelist returned 85,472 pre-1980 works and 42,196 unique pre-1980 authors. After merging with the existing 1980+ universe and dropping junk records, the author dataset grew from 15,787 → <strong>40,012</strong>.</p>
+          <p>Re-trimming the top-10,000 master tier brought in <strong>1,022 senior figures</strong> who didn't have enough post-1980 citations to qualify before — including Barney Glaser + Anselm Strauss (grounded theory), Harold Garfinkel (ethnomethodology), Peter L. Berger, Howard S. Becker, Alvin W. Gouldner, Thomas Luckmann, Rosabeth Moss Kanter, Otis Dudley Duncan, Elihu Katz, Fritz Heider. A focused coauthor crawl on those 1,022 newcomers added their lineage edges to the graph.</p>
+          <p>Final shape: <strong>~39,500 dots</strong> plotted, <strong>5,517 heads of school</strong>, <strong>~54,400 visible mentor → mentee lines</strong>. Largest single lineage tree spans 4,491 descendants (Peter H. Rossi, sociology of evaluation research). The 1950s, 1960s, and 1970s decades now anchor the top of the canvas; Coleman, Parsons, Merton, Lipset, Dahl appear where they belong.</p>
+          <p><strong>The delta approach saved hours.</strong> A full re-pull of the 1950–2025 range would have taken ~3–5 hours; pulling only the 1950–1979 slice and merging it into the existing dataset took ~15 minutes. The bobbish principle in action: don't fetch what you already have.</p>
+        </div>
+      </details>
+
+      <details class="cs-collapsible">
+        <summary>Flagged for soon, not now</summary>
+        <div class="cs-collapsible-body">
+          <p><strong>Non-US scholars.</strong> UK + Canada + Australia (~half the US count), Continental Europe (~similar magnitude), Latin America, East and South Asia, Africa. Going global multiplies the universe by roughly 2.5–3×, with uneven OpenAlex coverage outside the Anglophone core.</p>
+          <p><strong>Books in the corpus.</strong> Currently the pipeline is journal-only. Adding monographs would surface scholars whose work lives mostly in books — Skocpol, Putnam, Theda Bell, Lipset — and would lift book-forward fields like political theory. Plausible 30K–60K additional title-level records to integrate.</p>
+          <p><strong>Click-into-lineage UI.</strong> The current viz isolates one scholar's lineage on click. The next step is a side-panel "neighborhood" view that pulls grad students, coauthors, and book authors for the clicked scholar from a lazy-loaded per-author JSON. Architecture is planned; data scaffolding is in place.</p>
+        </div>
+      </details>
+
+      <footer class="cs-footer">
+        <p><em>Built with Claude. Re-framed as a coffee shop because the actual phrase "co-authorship-asymmetry-inferred mentorship network" makes most people stop reading at "co-".</em></p>
+      </footer>
+
+    </div>
+  </aside>
+
+  <button class="cs-toggle" id="csToggle" aria-controls="csSidebar" aria-expanded="true" title="Hide info panel">
+    <span class="cs-toggle-icon" aria-hidden="true">‹</span>
+    <span class="cs-toggle-text">Hide info</span>
+  </button>
+
+  <div class="cs-viz-wrap">
+    <iframe class="cs-viz"
+            src="/citation-timeline.html"
+            title="Coffee-shop network: sociology & political science genealogy, 1950–2025"
+            loading="lazy"></iframe>
+  </div>
+</div>
+
+<style>
+  :root {
+    --cs-bg: #f7f3ea;
+    --cs-card: #ffffff;
+    --cs-ink: #14161a;
+    --cs-muted: #6b665c;
+    --cs-accent: #1e3a5f;
+    --cs-soft: #efe9d6;
+    --cs-border: #e3dccb;
+    --cs-shadow: 0 1px 2px rgba(20, 22, 26, 0.04);
+    --cs-sidebar-w: 320px;
+    --cs-nav-h: 56px;
+  }
+  [data-bs-theme="dark"] {
+    --cs-bg: #14161a;
+    --cs-card: #1c1f25;
+    --cs-ink: #e9e7df;
+    --cs-muted: #9e9a8e;
+    --cs-accent: #8eb4e3;
+    --cs-soft: #2a2e38;
+    --cs-border: #2f3340;
+  }
+
+  .cs-page {
+    display: flex;
+    height: calc(100vh - var(--cs-nav-h));
+    overflow: hidden;
+    background: var(--cs-bg);
+    color: var(--cs-ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    position: relative;
+  }
+
+  .cs-sidebar {
+    flex: 0 0 var(--cs-sidebar-w);
+    width: var(--cs-sidebar-w);
+    border-right: 1px solid var(--cs-border);
+    background: var(--cs-card);
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: flex-basis 0.28s ease, width 0.28s ease;
+  }
+  .cs-page.collapsed .cs-sidebar {
+    flex-basis: 0;
+    width: 0;
+    border-right: none;
+  }
+  .cs-sidebar-inner {
+    padding: 1.5rem 1.5rem 2rem;
+    width: var(--cs-sidebar-w);
+    box-sizing: border-box;
+  }
+
+  .cs-header h1 {
+    margin: 0 0 0.25rem;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--cs-ink);
+  }
+  .cs-meta {
+    margin: 0 0 0.5rem;
+    font-size: 12px;
+    color: var(--cs-muted);
+    line-height: 1.4;
+  }
+  .cs-stats {
+    margin: 0 0 1rem;
+    font-size: 12.5px;
+    color: var(--cs-muted);
+  }
+  .cs-stat-num {
+    color: var(--cs-accent);
+    font-weight: 500;
+  }
+
+  .cs-epigraph {
+    margin: 0 0 1.5rem;
+    padding: 0.75rem 1rem;
+    border-left: 3px solid var(--cs-accent);
+    background: var(--cs-soft);
+    border-radius: 0 4px 4px 0;
+    font-size: 13.5px;
+    color: var(--cs-ink);
+    line-height: 1.5;
+  }
+
+  .cs-section {
+    margin: 0 0 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--cs-border);
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--cs-ink);
+  }
+  .cs-section:last-of-type { border-bottom: none; padding-bottom: 0; }
+  .cs-section h2 {
+    margin: 0 0 0.75rem;
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--cs-accent);
+  }
+  .cs-section p { margin: 0 0 0.75rem; }
+  .cs-section p:last-child { margin-bottom: 0; }
+  .cs-section ul {
+    margin: 0 0 0.75rem;
+    padding-left: 1.1rem;
+  }
+  .cs-section li {
+    margin-bottom: 0.4rem;
+  }
+  .cs-section li ul {
+    margin-top: 0.4rem;
+    padding-left: 1rem;
+  }
+  .cs-method {
+    margin: 0 0 0.75rem;
+  }
+  .cs-method dt {
+    font-weight: 500;
+    color: var(--cs-accent);
+    margin-top: 0.6rem;
+    font-size: 12.5px;
+  }
+  .cs-method dt:first-child { margin-top: 0; }
+  .cs-method dd {
+    margin: 0.15rem 0 0;
+    font-size: 12.5px;
+    color: var(--cs-muted);
+    line-height: 1.5;
+  }
+  .cs-method code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    background: var(--cs-soft);
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-size: 11px;
+  }
+
+  .cs-collapsible {
+    margin: 1.5rem 0 0;
+    padding: 0.75rem 1rem;
+    background: var(--cs-soft);
+    border: 1px solid var(--cs-border);
+    border-radius: 6px;
+    font-size: 13px;
+  }
+  .cs-collapsible summary {
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--cs-accent);
+    list-style: none;
+    position: relative;
+    padding-left: 1.2rem;
+  }
+  .cs-collapsible summary::-webkit-details-marker { display: none; }
+  .cs-collapsible summary::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--cs-muted);
+    transition: transform 0.15s;
+  }
+  .cs-collapsible[open] summary::before {
+    transform: rotate(90deg);
+  }
+  .cs-collapsible-body {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--cs-border);
+    line-height: 1.55;
+    color: var(--cs-ink);
+  }
+  .cs-collapsible-body p { margin: 0 0 0.6rem; }
+  .cs-collapsible-body p:last-child { margin-bottom: 0; }
+  .cs-collapsible-body ul {
+    margin: 0 0 0.75rem;
+    padding-left: 1.1rem;
+  }
+  .cs-collapsible-body li { margin-bottom: 0.4rem; }
+  .cs-tier-list li strong { color: var(--cs-accent); }
+
+  .cs-footer {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--cs-border);
+    font-size: 11.5px;
+    color: var(--cs-muted);
+    line-height: 1.5;
+  }
+  .cs-footer p { margin: 0; }
+
+  .cs-viz-wrap {
+    flex: 1;
+    min-width: 0;
+    position: relative;
+    background: var(--cs-bg);
+  }
+  .cs-viz {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+
+  .cs-toggle {
+    position: absolute;
+    top: 14px;
+    left: calc(var(--cs-sidebar-w) - 14px);
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px 6px 8px;
+    background: var(--cs-card);
+    border: 1px solid var(--cs-border);
+    border-radius: 999px;
+    color: var(--cs-accent);
+    font-size: 12.5px;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(20, 22, 26, 0.06);
+    transition: left 0.28s ease, background 0.15s, transform 0.15s;
+    font-family: inherit;
+  }
+  .cs-toggle:hover {
+    background: var(--cs-soft);
+  }
+  .cs-toggle:active {
+    transform: scale(0.97);
+  }
+  .cs-toggle-icon {
+    display: inline-block;
+    width: 14px;
+    text-align: center;
+    transition: transform 0.28s ease;
+    font-size: 14px;
+    line-height: 1;
+  }
+  .cs-page.collapsed .cs-toggle {
+    left: 14px;
+  }
+  .cs-page.collapsed .cs-toggle-icon {
+    transform: rotate(180deg);
+  }
+
+  @media (max-width: 768px) {
+    :root { --cs-sidebar-w: 300px; --cs-nav-h: 48px; }
+    .cs-sidebar {
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      z-index: 15;
+      box-shadow: 2px 0 16px rgba(0, 0, 0, 0.12);
+    }
+    .cs-page.collapsed .cs-sidebar {
+      transform: translateX(-100%);
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    var KEY = 'cs-sidebar-collapsed';
+    var page = document.getElementById('csPage');
+    var toggle = document.getElementById('csToggle');
+    var sidebar = document.getElementById('csSidebar');
+    if (!page || !toggle || !sidebar) return;
+
+    function apply(collapsed) {
+      page.classList.toggle('collapsed', collapsed);
+      toggle.setAttribute('aria-expanded', String(!collapsed));
+      toggle.setAttribute('title', collapsed ? 'Show info panel' : 'Hide info panel');
+      var textEl = toggle.querySelector('.cs-toggle-text');
+      if (textEl) textEl.textContent = collapsed ? 'Info' : 'Hide info';
+    }
+
+    var saved = null;
+    try { saved = localStorage.getItem(KEY); } catch (e) {}
+    apply(saved === 'true');
+
+    toggle.addEventListener('click', function() {
+      var nextCollapsed = !page.classList.contains('collapsed');
+      apply(nextCollapsed);
+      try { localStorage.setItem(KEY, String(nextCollapsed)); } catch (e) {}
+    });
+  })();
+</script>
+```

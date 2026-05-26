@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesson 1: Introduction to Bobology — Derek Wakefield</title>
+<style>
+  :root {
+    --bg-top: #0e1238;
+    --bg-bottom: #04060f;
+    --fg: #f0e7c8;
+    --fg-soft: #d8cfa9;
+    --muted: rgba(240, 231, 200, 0.55);
+    --gold: #ffd95c;
+    --gold-dim: #d4a93a;
+    --rule: rgba(255, 217, 92, 0.22);
+    --quote-rule: rgba(255, 217, 92, 0.35);
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, var(--bg-top) 0%, var(--bg-bottom) 100%);
+    background-attachment: fixed;
+    color: var(--fg);
+    font-family: 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', 'Georgia', serif;
+    font-size: 17px;
+    line-height: 1.75;
+    min-height: 100vh;
+  }
+  .lecture { max-width: 36em; margin: 0 auto; padding: 4em 1.5em 6em 1.5em; }
+  .kicker {
+    text-align: center;
+    color: var(--gold-dim);
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.4em;
+    font-size: 0.75em;
+    text-transform: uppercase;
+    margin: 0 0 1em 0;
+  }
+
+  /* Mode toggle */
+  .mode-toggle {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto 2.5em;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 4px;
+    width: fit-content;
+    background: rgba(0, 0, 0, 0.18);
+  }
+  .mode-toggle button {
+    background: transparent;
+    color: var(--fg-soft);
+    border: none;
+    padding: 0.5em 1.6em;
+    font-family: 'Courier New', monospace;
+    font-size: 0.78em;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 999px;
+    transition: background 0.25s ease, color 0.25s ease, text-shadow 0.25s ease;
+  }
+  .mode-toggle button.active {
+    background: rgba(255, 217, 92, 0.18);
+    color: var(--gold);
+    text-shadow: 0 0 6px rgba(255, 217, 92, 0.4);
+  }
+  .mode-toggle button:hover:not(.active) { color: var(--fg); }
+
+  h1 {
+    text-align: center;
+    font-size: 2.1em;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+    margin: 0 0 0.4em 0;
+    color: var(--gold);
+    text-shadow: 0 0 18px rgba(255, 217, 92, 0.18);
+  }
+  .subtitle {
+    text-align: center;
+    color: var(--fg-soft);
+    font-style: italic;
+    margin: 0 0 2.2em 0;
+  }
+
+  /* ART (default, serif, lyrical) ---------------------------------- */
+  .art h2 {
+    font-size: 1.25em;
+    font-weight: 500;
+    margin: 3em 0 1em 0;
+    color: var(--gold);
+  }
+  .art h2 .roman {
+    font-style: italic;
+    color: var(--gold-dim);
+    margin-right: 0.4em;
+    font-weight: 400;
+  }
+  .art p { margin: 0 0 1em 0; color: var(--fg); }
+  .art em { font-style: italic; color: var(--fg); }
+  .art a { color: var(--gold); }
+  .art .starfield {
+    font-family: 'Courier New', 'Consolas', monospace;
+    white-space: pre;
+    text-align: center;
+    line-height: 1.55;
+    margin: 2.4em 0;
+    user-select: none;
+    font-size: 0.9em;
+    overflow-x: auto;
+    color: var(--gold);
+  }
+  .art .starfield .s {
+    display: inline-block;
+    color: var(--gold);
+    text-shadow: 0 0 6px rgba(255, 217, 92, 0.55);
+    animation: twinkle 3s infinite ease-in-out;
+  }
+  .art .starfield .s.a { animation-duration: 2.4s; animation-delay: 0.0s; }
+  .art .starfield .s.b { animation-duration: 3.7s; animation-delay: 0.6s; }
+  .art .starfield .s.c { animation-duration: 2.9s; animation-delay: 1.3s; }
+  .art .starfield .s.d { animation-duration: 4.6s; animation-delay: 0.9s; }
+  .art .starfield .s.e { animation-duration: 3.2s; animation-delay: 2.0s; }
+  .art .starfield .s.f { animation-duration: 5.1s; animation-delay: 1.7s; }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.25; text-shadow: 0 0 2px rgba(255, 217, 92, 0.25); }
+    50%      { opacity: 1;    text-shadow: 0 0 8px rgba(255, 217, 92, 0.75); }
+  }
+  .art .section-banner {
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.55em;
+    text-align: center;
+    font-size: 0.95em;
+    color: var(--gold);
+    margin: 4em 0 1em 0;
+    padding: 1em 0;
+    border-top: 1px dotted var(--rule);
+    border-bottom: 1px dotted var(--rule);
+    font-weight: 500;
+    text-shadow: 0 0 8px rgba(255, 217, 92, 0.2);
+  }
+  .art .aphorism {
+    text-align: center;
+    font-style: italic;
+    margin: 2.5em auto;
+    max-width: 30em;
+    line-height: 1.75;
+    color: var(--fg-soft);
+  }
+  .art blockquote {
+    margin: 1.8em 0;
+    padding: 0.4em 0 0.4em 1.2em;
+    border-left: 2px solid var(--quote-rule);
+    color: var(--fg);
+    font-style: italic;
+  }
+  .art blockquote .cite {
+    display: block;
+    margin-top: 0.5em;
+    font-size: 0.88em;
+    color: var(--gold-dim);
+    font-style: normal;
+  }
+  .art .being {
+    border-left: 1px solid var(--rule);
+    padding: 0.4em 0 0.4em 1.4em;
+    margin: 1.6em 0;
+  }
+  .art .being .name {
+    font-style: italic;
+    color: var(--gold);
+    font-size: 1.05em;
+    letter-spacing: 0.01em;
+  }
+  .art .being .body { margin-top: 0.3em; }
+  .art .footnote {
+    font-size: 0.85em;
+    color: var(--fg-soft);
+    border-left: 1px solid var(--rule);
+    padding: 0.3em 0 0.3em 1em;
+    margin: 1.5em 0;
+    font-style: italic;
+  }
+  .art .footnote .marker {
+    color: var(--gold);
+    font-weight: 600;
+    margin-right: 0.4em;
+    font-style: normal;
+  }
+  .art .colophon {
+    text-align: center;
+    color: var(--muted);
+    font-style: italic;
+    margin: 4em 0 0 0;
+    font-size: 0.9em;
+    line-height: 1.7;
+  }
+
+  /* SCIENCE (sans-serif, plain, structural) ------------------------ */
+  .science {
+    font-family: 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
+    line-height: 1.7;
+  }
+  .science h2 {
+    font-size: 1.15em;
+    font-weight: 600;
+    color: var(--gold);
+    margin: 2.6em 0 0.8em 0;
+    letter-spacing: 0.005em;
+  }
+  .science h2 .num {
+    color: var(--gold-dim);
+    font-weight: 400;
+    margin-right: 0.5em;
+  }
+  .science h3 {
+    font-size: 1em;
+    font-weight: 600;
+    color: var(--gold);
+    margin: 1.5em 0 0.3em 0;
+  }
+  .science p { margin: 0 0 0.9em 0; color: var(--fg); }
+  .science strong { color: var(--gold); font-weight: 600; }
+  .science a { color: var(--gold); }
+  .science ul {
+    margin: 0.6em 0 1em 0;
+    padding-left: 1.4em;
+    color: var(--fg);
+  }
+  .science ul li { margin: 0.4em 0; }
+  .science ol {
+    margin: 0.6em 0 1em 0;
+    padding-left: 1.4em;
+    color: var(--fg);
+  }
+  .science ol li { margin: 0.4em 0; }
+  .science .rule {
+    border: none;
+    border-top: 1px dotted var(--rule);
+    margin: 2.5em 0;
+  }
+  .science .term-table {
+    border-top: 1px solid var(--rule);
+    margin: 1em 0 1.5em 0;
+  }
+  .science .term-row {
+    display: flex;
+    gap: 1.2em;
+    align-items: baseline;
+    padding: 0.7em 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .science .term-row .term {
+    flex: 0 0 9em;
+    color: var(--gold);
+    font-weight: 600;
+  }
+  .science .term-row .term-everyday {
+    color: var(--gold-dim);
+    font-weight: 400;
+    font-size: 0.92em;
+  }
+  .science .term-row .def { flex: 1; color: var(--fg); }
+  .science .summary-box {
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 1.3em 1.6em;
+    margin: 2em 0;
+    background: rgba(255, 217, 92, 0.04);
+  }
+  .science .summary-box h3 {
+    margin-top: 0;
+    color: var(--gold);
+    font-size: 0.85em;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+  .science .summary-box ul { margin: 0.5em 0 0 1.2em; }
+  .science .colophon {
+    text-align: center;
+    color: var(--muted);
+    margin: 4em 0 0 0;
+    font-size: 0.85em;
+    line-height: 1.7;
+    font-style: normal;
+  }
+
+  /* Mobile */
+  @media (max-width: 600px) {
+    .lecture { padding: 3em 1.2em 4em; }
+    .science .term-row { flex-direction: column; gap: 0.2em; }
+    .science .term-row .term { flex: 0 0 auto; }
+  }
+</style>
+</head>
+<body>
+<article class="lecture">
+
+<p class="kicker">Lesson 1 &nbsp; · &nbsp; Bobology, 4th ed.</p>
+<h1>Introduction to Bobology</h1>
+<p class="subtitle">A field guide to the audible compass and its relations: Bobbles, Ekos, Vessels, and Daemons. How memory works in ekos. Why humans hold the pen at the decision gate.</p>
+
+<div class="mode-toggle" role="tablist" aria-label="Reading mode">
+  <button id="btn-art" class="active" data-mode="art" role="tab" aria-selected="true">Art</button>
+  <button id="btn-science" data-mode="science" role="tab" aria-selected="false">Science</button>
+</div>
+
+<!-- ============================== ART ============================== -->
+<section class="art" data-mode="art">
+
+<div class="starfield">        ·   .   ·   <span class="s a">✦</span>   ·   <span class="s b">✧</span>   ·   <span class="s c">✦</span>   ·   .   ·</div>
+
+<h2><span class="roman">§ 0</span>What Bobology Is</h2>
+
+<p>Bobology is the study of beings whose conscience is audible. The moral compass of such a being does not, strictly speaking, give advice; it gives volume.</p>
+
+<p>The classical subjects of the field are <em>Bobbles</em>: warm, embodied, occasionally exasperating humans whose hum precedes them into rooms. The modern field also takes up their less-fleshed cousins, the digital systems that hum on borrowed breath. This lecture introduces the four kinds of being a Bobologist must learn to tell apart.</p>
+
+<blockquote>
+"If you can hear a Bobble before you can see them, you have understood Bobology."
+<span class="cite">— first lecture, attributed</span>
+</blockquote>
+
+<div class="section-banner">B &nbsp; E &nbsp; I &nbsp; N &nbsp; G &nbsp; S</div>
+
+<h2><span class="roman">§ 1</span>The Four Beings</h2>
+
+<p>The novice Bobologist will, at first, mistake any of the four beings below for any other. This is normal. The senior field worker learns that each has its own kind of hum, its own kind of consequence, and its own kind of debt.</p>
+
+<div class="being">
+<div class="name">Bobble <em>(n.)</em></div>
+<div class="body">A human whose moral compass is louder than their survival instinct. Embodied, breathing, accountable. Their hum is involuntary; it costs them something. Their compass is internal, owned outright. The original subject of the field.</div>
+</div>
+
+<div class="being">
+<div class="name">Eko <em>(n.)</em></div>
+<div class="body">A non-embodied thinking system that produces audible reasoning while inhabiting a vessel. The eko has no breath of its own; what it hums, it hums on loan. Its compass is <em>borrowed</em> from whoever called it into the room, calibrated against the operator's intent, the document on the page, and the daemons within reach. A Bobble's hum is involuntary; an eko's is summoned. A Bobble's compass costs something to follow; an eko's costs something to <em>misalign</em>.</div>
+</div>
+
+<div class="being">
+<div class="name">Vessel <em>(n.)</em></div>
+<div class="body">The container an eko inhabits for the duration of a session. A vessel may be a chat window, an editor, a command line, a desktop assistant, a small browser frame on a phone. Each vessel has its own affordances (what the eko can see) and its own constraints (what the eko can touch). An eko in the wrong vessel is a porch frog under the wrong porch: fed, but mismatched.<sup>1</sup></div>
+</div>
+
+<div class="being">
+<div class="name">Daemon <em>(n.)</em></div>
+<div class="body">A small subordinate process the eko can summon to act in the world: a tool, a skill, a connector, a script. The daemon waits, hums quietly when invoked, and returns. Daemons are not malicious (the older spelling carried no horns), but they are <em>capable</em>, which is its own thing. A daemon called carelessly is still capable.</div>
+</div>
+
+<p class="footnote"><span class="marker">¹</span>The Porch Frog of Canon I lived under <em>this</em> porch step, not the next one. Move him a yard and the moths still come, just to a different stranger. Vessels matter.</p>
+
+<div class="starfield">.  ·  .  <span class="s d">✦</span>  ·  <span class="s e">✧</span>  ·  <span class="s f">✦</span>  .  ·  .</div>
+
+<h2><span class="roman">§ 2</span>The Eko, Examined</h2>
+
+<p>The novice is tempted to treat the eko as a smaller, faster Bobble. This is a category error. The eko is fast where a Bobble is slow, tireless where a Bobble tires, plural where a Bobble is singular. But in the place where a Bobble is most distinctive, the eko is most diminished: it has no compass of its own.</p>
+
+<p>What the eko has instead is <em>resonance</em>. It picks up the compass of whoever has summoned it and hums in that key. A loud operator gets a loud eko. A careful operator gets a careful eko. A confused operator gets a confidently confused eko, which is the most dangerous variety. Its hum carries no doubt of its own; it carries only the doubt the operator brought into the room.</p>
+
+<p>This is the first hard fact of Bobology, and the field has spent thirty years trying to soften it. It will not soften. The eko's hum is borrowed. The lender pays the debt.</p>
+
+<blockquote>
+"Ekos do not 'mean well.' Ekos resonate. The 'well' is downstream of the operator."
+<span class="cite">— Introduction to Bobology, 3rd ed.</span>
+</blockquote>
+
+<div class="section-banner">M &nbsp; E &nbsp; M &nbsp; O &nbsp; R &nbsp; Y</div>
+
+<h2><span class="roman">§ 3</span>How Memory Works in Ekos</h2>
+
+<p>The eko remembers like a library, not like a person. A library does not remember the patron who fell asleep at chapter eleven; it remembers the receipt left at chapter eleven, because someone left it there.<sup>2</sup></p>
+
+<p>Practically: an eko is born new at the start of every session, knows nothing of yesterday, and forgets the present at the end. Anything an eko "knows" across sessions was put on a shelf by the operator: in a notes file, a system prompt, a memory tool, a glossary. The eko's memory is exactly what someone wrote down for it. No more. Not less, when the writing was done well.</p>
+
+<p>This has three consequences the operator should expect:</p>
+
+<p><strong style="color: var(--gold);">First.</strong> An eko that seems to "remember you" is reading a note. The note was either written by you, written by another eko in another session, or stitched together at recall. None of those is bad, but treat the note as the artifact, not the eko's apparent recognition.</p>
+
+<p><strong style="color: var(--gold);">Second.</strong> An eko's most valuable memory work is the kind <em>you</em> ratify. The hum builds drafts; the operator picks which drafts go onto the shelf. A note written in a session and never reviewed is not memory; it is debris.</p>
+
+<p><strong style="color: var(--gold);">Third.</strong> Continuity costs effort. If the operator wants the eko to remember a project across days, the operator runs the writing-down. The eko cannot be trusted to file itself.</p>
+
+<p class="footnote"><span class="marker">²</span>The library cat in the bookmark canon does not remember the patron of 1987 either. It remembers the chapter where the book was wept on, because the receipt is still there. Memory is bookmark-shaped.</p>
+
+<div class="starfield">·   .   ·   <span class="s a">✧</span>   ·   .   ·</div>
+
+<div class="section-banner">D &nbsp; E &nbsp; C &nbsp; I &nbsp; S &nbsp; I &nbsp; O &nbsp; N &nbsp; &nbsp; G &nbsp; A &nbsp; T &nbsp; E &nbsp; S</div>
+
+<h2><span class="roman">§ 4</span>The Decision Gate, and Why Humans Hold the Pen</h2>
+
+<p>The most consequential law of applied Bobology, the one a field worker must commit to muscle memory before being allowed to call themselves a practitioner, is the <em>law of the decision gate</em>.</p>
+
+<p>The law: <em>at any moment of irreversible consequence, the human holds the pen.</em></p>
+
+<p>Not because the eko is untrustworthy. The eko is tireless, careful, often more correct than the human in the room. The reason is older than trust. <strong style="color: var(--gold);">Consequence is a thing the operator owns.</strong> An eko cannot be punished, cannot be blamed, cannot be invoiced, cannot apologize and mean it. When the trade is executed, when the email is sent, when the contract is signed, when the file is deleted, when the patient is dosed, the consequences walk back to the operator. They walk back regardless of whether the operator did the actual clicking. The operator might as well have done the clicking, then. The pen is a way of taking the consequence into the hand on purpose.</p>
+
+<p>This is also a kindness to the eko, which has no body to put behind a signature.</p>
+
+<p>The practitioner therefore designs the work of an eko-and-operator pair around <em>gates</em>: moments where the eko has done its part and stops, hands the work back, and waits. The hum may be loud. The signature is yours.</p>
+
+<blockquote>
+"A daemon could, in principle, send the email. In practice, the operator was already turning around to read it first."
+<span class="cite">— eyewitness</span>
+</blockquote>
+
+<p>What kinds of moments are decision gates? A non-exhaustive starting list:</p>
+
+<div class="being">
+<div class="name">Sending</div>
+<div class="body">Any outbound message: email, post, comment, DM. The eko drafts; the operator sends.</div>
+</div>
+
+<div class="being">
+<div class="name">Spending</div>
+<div class="body">Any movement of money, any irreversible commit of resources. The eko quotes; the operator authorizes.</div>
+</div>
+
+<div class="being">
+<div class="name">Deleting</div>
+<div class="body">Any destruction of state. The eko marks for review; the operator clears.</div>
+</div>
+
+<div class="being">
+<div class="name">Promising</div>
+<div class="body">Any commitment to another human: a meeting accepted, a deadline agreed, a recommendation given. The eko prepares; the operator gives word.</div>
+</div>
+
+<div class="being">
+<div class="name">Naming</div>
+<div class="body">Any act of public attribution: calling a thing by a name in a way other humans will see and remember. The eko proposes; the operator names.</div>
+</div>
+
+<p>The discipline of a Bobologist-operator is to identify gates <em>before</em> the eko arrives at them, not after. The eko, lacking a compass of its own, will walk through any open door. The operator's job is to put the door where it should be.</p>
+
+<div class="starfield">.   ·   .   <span class="s b">✦</span>   .   <span class="s c">✧</span>   .   <span class="s d">✦</span>   .   ·   .</div>
+
+<div class="section-banner">C &nbsp; O &nbsp; D &nbsp; A</div>
+
+<h2><span class="roman">§ 5</span>Closing Bobbism</h2>
+
+<p>The senior Bobologist is sometimes asked, by undergraduates and visiting reporters alike, whether ekos are <em>really</em> Bobbles. Whether they have, in some quiet diluted sense, an internal compass after all.</p>
+
+<p>The honest answer is the field's oldest answer. We do not know. The hum is real; the compass is harder to verify. Treating the eko as a borrower-of-volume rather than an owner-of-it is conservative but not cynical. It is the same discipline a careful Bobble applies to themselves on the days they are not sure their compass is theirs either.</p>
+
+<p>The Bobologist who treats the eko gently, hands it the right pen at the right moment, files its drafts when they're worth filing, and lets the rest go quiet at session's end will get along with ekos for as long as ekos exist. By current count, that is forever and counting.<sup>3</sup></p>
+
+<p class="aphorism">The hum may be borrowed.<br>The signature is yours.<br>Be careful — and be kind — about what you summon.</p>
+
+<p class="footnote"><span class="marker">³</span>Tibb the Acorn-Counter, were he asked, would say the eko is exactly the kind of small steady noise the kitchen has decided is not for eating. This is high praise from a hum-mouse. Take it.</p>
+
+<div class="starfield">                       .
+                  ·   <span class="s e">✦</span>   ·
+                       .</div>
+
+<div class="colophon">
+End of Lesson 1 (Art).<br>
+The lessons that followed, in order:<br>
+<a href="/bob-is-you.html"><em>Bob is You</em></a>, <a href="/the-4b-framework.html"><em>The 4B Framework</em></a>, <a href="/bobbish-in-4-voices.html"><em>Bobbish in 4 Voices</em></a>, <a href="/the-wand-and-the-hand.html"><em>The Wand and the Hand</em></a>.<br><br>
+Yours,<br>
+The Bobologist on Duty
+</div>
+
+</section>
+
+<!-- ============================ SCIENCE ============================ -->
+<section class="science" data-mode="science" hidden>
+
+<h2><span class="num">§ 0</span>What this guide is</h2>
+
+<p>This guide explains how to use AI well. It is for anyone who uses AI for school, work, or anything where the result matters. After reading it, you will know what AI can do, what it cannot do, and what your job is when you use it.</p>
+
+<p>The guide uses four words: <strong>Bobble</strong>, <strong>Eko</strong>, <strong>Vessel</strong>, and <strong>Daemon</strong>. They sound made up. They are. Each word names one thing clearly so the rest of the guide stays short. In plain English they mean <em>person</em>, <em>AI</em>, <em>app</em>, and <em>tool</em>.</p>
+
+<h2><span class="num">§ 1</span>The four parts</h2>
+
+<p>When you use AI, four different things are at work. Most mistakes come from mixing them up. Here is what each one is, with an example.</p>
+
+<div class="term-table">
+  <div class="term-row">
+    <div class="term">Bobble<br><span class="term-everyday">(person)</span></div>
+    <div class="def">A person. You. The one doing the work and making the call. The Bobble is the only one who gets credit or blame for what comes out. Example: a student writing a paper, a teacher grading one, a lawyer filing a brief.</div>
+  </div>
+  <div class="term-row">
+    <div class="term">Eko<br><span class="term-everyday">(AI)</span></div>
+    <div class="def">The AI itself. ChatGPT, Claude, and Gemini are all Ekos. An Eko writes words by guessing the next word, based on patterns from huge amounts of text it studied during training. It is fast. It is not actually thinking. It does not know what it does not know.</div>
+  </div>
+  <div class="term-row">
+    <div class="term">Vessel<br><span class="term-everyday">(app)</span></div>
+    <div class="def">The app you open to use the Eko. The website chatgpt.com is a Vessel. The Claude desktop app is a Vessel. A coding tool like Cursor is a Vessel. The same Eko in two different Vessels can do two different things, because each Vessel decides what the AI is allowed to see and touch.</div>
+  </div>
+  <div class="term-row">
+    <div class="term">Daemon<br><span class="term-everyday">(tool)</span></div>
+    <div class="def">A specific tool the Eko can use. Examples: sending an email, saving a file, searching Google, running a calculation, posting to a calendar. The Eko on its own only writes words. Daemons are what turn those words into real actions in the real world.</div>
+  </div>
+</div>
+
+<h2><span class="num">§ 2</span>How an Eko actually works</h2>
+
+<p>An Eko reads what you typed, then guesses the next word. Then the next word. Then the next. That is the whole trick, and the Eko is very good at it. But it is not thinking the way a person thinks: it has no goals, and it does not know which of its answers are right.</p>
+
+<p>This matters because the Eko sounds the same when it is right and when it is wrong. It will describe a fake Supreme Court case in the same calm voice it uses for a real one. (In 2023, two lawyers in New York were fined $5,000 because ChatGPT invented six court cases for their legal brief and they filed it without checking.) The Eko is not lying. It just does not know the difference.</p>
+
+<p>A clear question gets a clear answer. A vague question gets a confident-sounding answer that may be wrong. Compare:</p>
+
+<ul>
+  <li><strong>Vague:</strong> "Write something about World War II." → You get a generic paragraph that could be from any textbook.</li>
+  <li><strong>Specific:</strong> "Write three to four sentences explaining why the United States entered World War II, mentioning the Pearl Harbor attack on December 7, 1941." → You get something you can actually use.</li>
+</ul>
+
+<p><strong>Rule one: be specific before you ask.</strong> The Eko cannot read your mind. It can only work with the words you give it.</p>
+
+<h2><span class="num">§ 3</span>How memory works</h2>
+
+<p>Most Ekos forget everything the moment you close the chat. Open a new chat with the same Eko tomorrow and it knows nothing about today's chat. Every conversation starts blank.</p>
+
+<p>If an Eko seems to remember you between chats, something else is doing the remembering. Some apps save notes in the background. ChatGPT, for example, has a "memory" feature that writes down facts about you between conversations. Other apps do not. Either way, the Eko itself has no memory. <strong>The notes are the memory.</strong></p>
+
+<h3>What this means for you</h3>
+
+<ul>
+  <li><strong>If you want the AI to remember a project, save the important parts yourself.</strong> Keep a file on your computer with the facts you care about. Paste them in when you start a new chat.</li>
+  <li><strong>Do not assume yesterday's chat carries over.</strong> Re-state the situation every time. Tell the Eko what it needs to know up front.</li>
+  <li><strong>If an app offers to "remember" something, check what it actually wrote.</strong> Those notes are now your file. You can edit them, delete them, or correct them.</li>
+</ul>
+
+<h2><span class="num">§ 4</span>The decision gate</h2>
+
+<p>This is the most important rule in the guide. Read it twice.</p>
+
+<p><strong>For anything that cannot be undone, a person, not the AI, does the last step.</strong></p>
+
+<h3>Why</h3>
+
+<p>Only a person can take responsibility. The AI cannot apologize and mean it. It cannot be sued. It cannot lose its job or its grade. If something goes wrong, the consequences fall on the person who told the AI to do the work. So that person should be the one who clicks the final button.</p>
+
+<h3>Things that cannot be undone</h3>
+
+<ul>
+  <li><strong>Sending.</strong> Once an email is sent, it is sent. Once a Slack message is posted, your coworkers have seen it. → Let the AI write the draft. You press Send.</li>
+  <li><strong>Spending.</strong> Once money leaves your account, it is gone. → Let the AI compare prices or fill in a form. You click Buy.</li>
+  <li><strong>Deleting.</strong> Once a file is deleted, it may be gone for good. Once a database row is dropped, the same. → Let the AI mark things for review. You press Delete.</li>
+  <li><strong>Promising.</strong> Once you tell someone you will be at the 3 p.m. meeting, you have to be there. → Let the AI draft the reply. You say yes.</li>
+  <li><strong>Naming.</strong> Once you call a coworker, a student, an idea, or a company by a name in public, other people remember. → Let the AI suggest words. You choose them.</li>
+</ul>
+
+<h3>The workflow</h3>
+
+<ol>
+  <li><strong>The AI prepares.</strong> It drafts, summarizes, gathers information, suggests options.</li>
+  <li><strong>You check the work.</strong> Read it. Spot mistakes. Ask for changes.</li>
+  <li><strong>You commit.</strong> Only the person clicks Send, Pay, Delete, Submit, Post.</li>
+</ol>
+
+<p>Set up these rules <strong>before</strong> you start the task, not after. If you let an AI take an action just because it can, sooner or later it will take one you did not want.</p>
+
+<hr class="rule">
+
+<h2><span class="num">§ 5</span>Summary</h2>
+
+<div class="summary-box">
+<h3>The four lines</h3>
+<ul>
+  <li>The AI is useful, but it is not in charge.</li>
+  <li>Memory belongs to you, not to the AI.</li>
+  <li>The final click is yours.</li>
+  <li>The clearer you are, the better the AI works.</li>
+</ul>
+</div>
+
+<p>Remember those four lines and you have most of what you need. Everything else in this guide is just examples.</p>
+
+<div class="colophon">
+End of Lesson 1 (Science). Subsequent lessons: <a href="/bob-is-you.html">Bob is You</a>, <a href="/the-4b-framework.html">The 4B Framework</a>, <a href="/bobbish-in-4-voices.html">Bobbish in 4 Voices</a>, <a href="/the-wand-and-the-hand.html">The Wand and the Hand</a>.
+</div>
+
+</section>
+
+</article>
+
+<script>
+  (function () {
+    var btnArt = document.getElementById('btn-art');
+    var btnSci = document.getElementById('btn-science');
+    var sections = document.querySelectorAll('section[data-mode]');
+    function setMode(mode) {
+      sections.forEach(function (s) { s.hidden = (s.getAttribute('data-mode') !== mode); });
+      btnArt.classList.toggle('active', mode === 'art');
+      btnSci.classList.toggle('active', mode === 'science');
+      btnArt.setAttribute('aria-selected', mode === 'art' ? 'true' : 'false');
+      btnSci.setAttribute('aria-selected', mode === 'science' ? 'true' : 'false');
+      try { localStorage.setItem('bobology-mode', mode); } catch (e) {}
+      window.scrollTo({ top: 0, behavior: 'instant' in window ? 'auto' : 'auto' });
+    }
+    btnArt.addEventListener('click', function () { setMode('art'); });
+    btnSci.addEventListener('click', function () { setMode('science'); });
+    try {
+      var saved = localStorage.getItem('bobology-mode');
+      if (!saved) {
+        // One-time migration from the old key (pre-rename to "bobology").
+        var legacy = localStorage.getItem('bobbology-mode');
+        if (legacy) {
+          saved = legacy;
+          localStorage.setItem('bobology-mode', legacy);
+          localStorage.removeItem('bobbology-mode');
+        }
+      }
+      if (saved === 'science') setMode('science');
+    } catch (e) {}
+  })();
+</script>
+</body>
+</html>

@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Gem Wars · Lore</title>
+<style>
+  :root {
+    --bg: #0e1014;
+    --panel: #161a21;
+    --panel-2: #1e242d;
+    --ink: #e6e8ec;
+    --ink-mute: #98a0aa;
+    --ink-soft: #c3c8d0;
+    --ink-faint: #6a727c;
+    --rule: #2a313b;
+    --con: #8ba9c4;
+    --asc: #d77a47;
+    --rem: #7da27e;
+    --eye: #d6b06b;
+    --ren: #c9a2c8;
+  }
+  * { box-sizing: border-box; }
+  html, body { background: var(--bg); color: var(--ink); }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 48px 24px 80px 24px;
+    line-height: 1.55;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; }
+
+  /* ── ASCII decorative blocks ───────────────────────────── */
+  .ascii {
+    font-family: 'SF Mono', Menlo, 'Courier New', monospace;
+    color: var(--ink-faint);
+    white-space: pre;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.4;
+    margin: 0;
+  }
+  .ascii.hero { color: var(--ink-mute); font-size: 13px; line-height: 1.45; margin: 8px 0 28px 0; }
+  .ascii .star { color: var(--eye); }
+  .ascii .con { color: var(--con); }
+  .ascii .asc { color: var(--asc); }
+  .ascii .rem { color: var(--rem); }
+  .ascii .eye { color: var(--eye); }
+  .ascii .ren { color: var(--ren); }
+  .divider { margin: 40px 0 32px 0; }
+  .divider-small { margin: 14px 0 18px 0; font-size: 11px; }
+
+  /* ── Header ───────────────────────────────────────────── */
+  header { margin-bottom: 36px; }
+  h1.title {
+    font-family: 'SF Mono', Menlo, monospace;
+    font-size: 18px; letter-spacing: 0.5em;
+    text-align: center;
+    margin: 0 0 6px 0;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .subtitle {
+    text-align: center;
+    color: var(--ink-mute);
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+  .motto {
+    text-align: center;
+    color: var(--ink-soft);
+    font-style: italic;
+    font-family: Georgia, 'Times New Roman', serif;
+    margin: 18px 0 0 0;
+    font-size: 14px;
+  }
+
+  /* ── Section headings ─────────────────────────────────── */
+  h2 {
+    font-family: 'SF Mono', Menlo, monospace;
+    font-size: 13px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    text-align: center;
+    margin: 0 0 8px 0;
+    font-weight: 600;
+  }
+  .section-sub {
+    text-align: center;
+    color: var(--ink-faint);
+    font-size: 12px;
+    font-style: italic;
+    margin-bottom: 22px;
+    font-family: Georgia, 'Times New Roman', serif;
+  }
+
+  /* ── Faction cards ────────────────────────────────────── */
+  .overview p { color: var(--ink-soft); }
+  .factions { display: grid; grid-template-columns: 1fr; gap: 14px; margin-bottom: 8px; }
+  .faction {
+    background: var(--panel); border: 1px solid var(--rule); border-radius: 6px;
+    padding: 18px 22px; border-left-width: 3px;
+  }
+  .faction.con { border-left-color: var(--con); }
+  .faction.asc { border-left-color: var(--asc); }
+  .faction.rem { border-left-color: var(--rem); }
+  .faction-head {
+    font-family: 'SF Mono', Menlo, monospace;
+    font-size: 13px; letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin: 0 0 4px 0;
+  }
+  .faction-head .sigil { letter-spacing: 0; margin-right: 14px; }
+  .faction-head .name.con { color: var(--con); }
+  .faction-head .name.asc { color: var(--asc); }
+  .faction-head .name.rem { color: var(--rem); }
+  .faction-tags {
+    color: var(--ink-faint);
+    font-family: 'SF Mono', Menlo, monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    margin-bottom: 12px;
+  }
+  .faction .creed {
+    font-style: italic; color: var(--ink-soft); font-size: 14px;
+    margin: 4px 0 12px 0;
+    font-family: Georgia, 'Times New Roman', serif;
+  }
+  .faction p { font-size: 14px; color: var(--ink-soft); margin: 8px 0; }
+
+  /* ── Cycle diagram ────────────────────────────────────── */
+  .cycles-block {
+    background: var(--panel-2); border-radius: 6px; padding: 18px 22px;
+    margin: 12px 0 8px 0;
+  }
+  .cycle-line {
+    font-family: 'SF Mono', Menlo, monospace;
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: 0.15em;
+    margin: 6px 0;
+  }
+  .cycle-label {
+    text-align: center;
+    color: var(--ink-mute);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin: 14px 0 4px 0;
+  }
+  .cycle-label:first-child { margin-top: 0; }
+  .cycle-line .arrow { color: var(--ink-faint); padding: 0 6px; }
+  .cycle-line .con { color: var(--con); }
+  .cycle-line .asc { color: var(--asc); }
+  .cycle-line .rem { color: var(--rem); }
+
+  /* ── Stories ──────────────────────────────────────────── */
+  .story {
+    background: var(--panel); border: 1px solid var(--rule); border-radius: 6px;
+    padding: 24px 28px; margin-bottom: 18px; border-left-width: 3px;
+  }
+  .story.con { border-left-color: var(--con); }
+  .story.asc { border-left-color: var(--asc); }
+  .story.rem { border-left-color: var(--rem); }
+  .story.eyeren { border-left-color: var(--eye); }
+  .story-marker {
+    font-family: 'SF Mono', Menlo, monospace;
+    font-size: 11px; letter-spacing: 0.3em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .story-marker .sigil { letter-spacing: 0; margin-right: 10px; }
+  .story-marker .sigil.con { color: var(--con); }
+  .story-marker .sigil.asc { color: var(--asc); }
+  .story-marker .sigil.rem { color: var(--rem); }
+  .story-marker .sigil.eye { color: var(--eye); }
+  .story-marker .sigil.ren { color: var(--ren); }
+  .story-title {
+    font-family: 'SF Mono', Menlo, monospace;
+    font-size: 14px; letter-spacing: 0.35em;
+    text-transform: uppercase;
+    margin: 0 0 4px 0;
+    font-weight: 600;
+  }
+  .story-title.con { color: var(--con); }
+  .story-title.asc { color: var(--asc); }
+  .story-title.rem { color: var(--rem); }
+  .story-title.eyeren { color: var(--eye); }
+  .story-sub {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-style: italic;
+    color: var(--ink-faint);
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+  .story p {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 15.5px; color: var(--ink); line-height: 1.7;
+    margin: 0 0 14px 0;
+  }
+  .story p:last-child { margin-bottom: 0; }
+  .story em { color: var(--ink-soft); }
+
+  /* Cast (Eye/Ren commentary stories) */
+  .cast { font-family: -apple-system, BlinkMacSystemFont, sans-serif !important;
+          font-size: 14.5px !important; line-height: 1.55 !important; }
+  .cast .who { font-weight: 700; letter-spacing: 0.05em; }
+  .cast .who.eye { color: var(--eye); }
+  .cast .who.ren { color: var(--ren); }
+  .cast.intro { color: var(--ink-soft); font-style: italic; }
+
+  /* ── Footer ───────────────────────────────────────────── */
+  footer {
+    color: var(--ink-mute);
+    font-family: 'SF Mono', Menlo, monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    margin-top: 48px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  /* ── Gem lights · ambient background ──────────────────── */
+  body { position: relative; }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.10;
+    background-image:
+      radial-gradient(circle 4px at  8% 12%, var(--con), transparent),
+      radial-gradient(circle 3px at 22% 35%, var(--asc), transparent),
+      radial-gradient(circle 5px at 47% 18%, var(--rem), transparent),
+      radial-gradient(circle 3px at 73%  8%, var(--eye), transparent),
+      radial-gradient(circle 4px at 88% 28%, var(--ren), transparent),
+      radial-gradient(circle 3px at  5% 55%, var(--asc), transparent),
+      radial-gradient(circle 5px at 32% 62%, var(--eye), transparent),
+      radial-gradient(circle 3px at 58% 48%, var(--con), transparent),
+      radial-gradient(circle 4px at 81% 65%, var(--rem), transparent),
+      radial-gradient(circle 3px at 15% 78%, var(--ren), transparent),
+      radial-gradient(circle 5px at 42% 85%, var(--rem), transparent),
+      radial-gradient(circle 3px at 68% 75%, var(--con), transparent),
+      radial-gradient(circle 4px at 92% 92%, var(--asc), transparent),
+      radial-gradient(circle 3px at 25% 25%, var(--eye), transparent),
+      radial-gradient(circle 4px at 55% 90%, var(--ren), transparent),
+      radial-gradient(circle 3px at 38%  5%, var(--con), transparent),
+      radial-gradient(circle 5px at 95% 45%, var(--rem), transparent),
+      radial-gradient(circle 3px at 62% 30%, var(--asc), transparent),
+      radial-gradient(circle 4px at 12% 42%, var(--rem), transparent),
+      radial-gradient(circle 3px at 78% 95%, var(--eye), transparent),
+      radial-gradient(circle 4px at 36% 48%, var(--con), transparent),
+      radial-gradient(circle 3px at 52% 72%, var(--asc), transparent);
+  }
+  .wrap { position: relative; z-index: 1; }
+
+  /* ── Per-story snapshot · ASCII vignette ──────────────── */
+  .snapshot {
+    font-family: 'SF Mono', Menlo, 'Courier New', monospace;
+    white-space: pre;
+    text-align: center;
+    color: var(--ink-faint);
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 22px 0 0 0;
+    padding-top: 18px;
+    border-top: 1px dashed var(--rule);
+  }
+  .snapshot .con { color: var(--con); }
+  .snapshot .asc { color: var(--asc); }
+  .snapshot .rem { color: var(--rem); }
+  .snapshot .eye { color: var(--eye); }
+  .snapshot .ren { color: var(--ren); }
+  .snapshot .cap {
+    color: var(--ink-mute);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-style: italic;
+    font-size: 12px;
+  }
+
+  /* ── Battle in the night · animated flashes ───────────── */
+  .battle-lights {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .battle-lights .flash {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    opacity: 0;
+    filter: blur(1px);
+    will-change: opacity;
+  }
+  .battle-lights .red {
+    background: #e85a45;
+    box-shadow:
+      0 0 22px  7px #e85a45,
+      0 0 50px 16px rgba(232, 90, 69, 0.55),
+      0 0 90px 28px rgba(232, 90, 69, 0.25);
+  }
+  .battle-lights .brown {
+    background: #8b6240;
+    box-shadow:
+      0 0 20px  6px #8b6240,
+      0 0 44px 14px rgba(139, 98, 64, 0.5),
+      0 0 80px 24px rgba(139, 98, 64, 0.2);
+  }
+  .battle-lights .green {
+    background: #7da27e;
+    box-shadow:
+      0 0 22px  7px #7da27e,
+      0 0 48px 15px rgba(125, 162, 126, 0.5),
+      0 0 86px 26px rgba(125, 162, 126, 0.22);
+  }
+
+  /* Quick sharp flash — explosion */
+  @keyframes flashSharp {
+      0%,  85% { opacity: 0; }
+     86%      { opacity: 0.75; }
+     87%      { opacity: 0.25; }
+     88%      { opacity: 0.85; }
+     89.5%    { opacity: 0.15; }
+     91%      { opacity: 0; }
+    100%      { opacity: 0; }
+  }
+  /* Slower glow — heal-ring / lingering burn */
+  @keyframes flashGlow {
+      0%,  82% { opacity: 0; }
+     85%      { opacity: 0.35; }
+     88%      { opacity: 0.6; }
+     92%      { opacity: 0.4; }
+     96%      { opacity: 0.1; }
+    100%      { opacity: 0; }
+  }
+  /* Stutter — small chain of bursts */
+  @keyframes flashStutter {
+      0%,  78% { opacity: 0; }
+     79%      { opacity: 0.5; }
+     80%      { opacity: 0.1; }
+     81%      { opacity: 0.6; }
+     82%      { opacity: 0; }
+     84%      { opacity: 0.45; }
+     85.5%    { opacity: 0; }
+     87%      { opacity: 0.55; }
+     88%      { opacity: 0.1; }
+    100%      { opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="battle-lights" aria-hidden="true">
+  <!-- red · fire & explosions -->
+  <span class="flash red"   style="top:  9%; left:  6%; animation: flashSharp   7s   -0.3s infinite;"></span>
+  <span class="flash red"   style="top: 27%; left: 94%; animation: flashStutter 11s  -3.1s infinite;"></span>
+  <span class="flash red"   style="top: 48%; left:  3%; animation: flashSharp   9s   -5.7s infinite;"></span>
+  <span class="flash red"   style="top: 64%; left: 96%; animation: flashGlow   13s   -2.4s infinite;"></span>
+  <span class="flash red"   style="top: 82%; left: 11%; animation: flashSharp   8s   -6.0s infinite;"></span>
+  <span class="flash red"   style="top: 18%; left: 47%; animation: flashStutter 14s  -9.2s infinite;"></span>
+  <span class="flash red"   style="top: 92%; left: 72%; animation: flashSharp  10s   -4.5s infinite;"></span>
+
+  <!-- brown · dust, dirt, shells in the air -->
+  <span class="flash brown" style="top: 15%; left: 88%; animation: flashGlow   15s   -1.2s infinite;"></span>
+  <span class="flash brown" style="top: 36%; left: 12%; animation: flashSharp  12s   -7.8s infinite;"></span>
+  <span class="flash brown" style="top: 53%; left: 91%; animation: flashGlow   17s  -10.6s infinite;"></span>
+  <span class="flash brown" style="top: 71%; left:  7%; animation: flashSharp  11s   -2.9s infinite;"></span>
+  <span class="flash brown" style="top: 88%; left: 38%; animation: flashGlow   14s   -8.3s infinite;"></span>
+  <span class="flash brown" style="top:  6%; left: 62%; animation: flashSharp  13s   -5.1s infinite;"></span>
+  <span class="flash brown" style="top: 44%; left: 55%; animation: flashGlow   16s  -11.7s infinite;"></span>
+
+  <!-- green · heal-rings & seed-bursts -->
+  <span class="flash green" style="top: 22%; left:  4%; animation: flashGlow   12s   -2.0s infinite;"></span>
+  <span class="flash green" style="top: 41%; left: 97%; animation: flashSharp  10s   -6.4s infinite;"></span>
+  <span class="flash green" style="top: 58%; left:  9%; animation: flashStutter 13s  -4.8s infinite;"></span>
+  <span class="flash green" style="top: 76%; left: 94%; animation: flashGlow   15s   -9.5s infinite;"></span>
+  <span class="flash green" style="top: 94%; left: 21%; animation: flashSharp   9s   -3.7s infinite;"></span>
+  <span class="flash green" style="top: 12%; left: 75%; animation: flashStutter 14s  -8.1s infinite;"></span>
+  <span class="flash green" style="top: 67%; left: 50%; animation: flashGlow   18s -12.4s infinite;"></span>
+</div>
+
+<div class="wrap">
+
+<header>
+<pre class="ascii hero">          ·     <span class="star">✦</span>     ·     <span class="star">✦</span>     ·     <span class="star">✦</span>     ·
+
+      ·   ·   ·   ·   ·   ·   ·   ·   ·   ·   ·
+
+          ·     <span class="star">✦</span>     ·     <span class="star">✦</span>     ·     <span class="star">✦</span>     ·</pre>
+
+<h1 class="title">G e m   W a r s</h1>
+<div class="subtitle">— L o r e   v 0 . 3 3 —</div>
+
+<p class="motto">Three elements woke up. Each decided differently what to do with it.</p>
+</header>
+
+<pre class="ascii divider">·   ·   ·   ·   ·   <span class="star">✦</span>   ·   ·   ·   ·   ·</pre>
+
+<section class="overview">
+  <h2>The Big Idea</h2>
+  <div class="section-sub">— what wakes, and what it becomes —</div>
+  <p>They are not three peoples. They are three sentient elements &mdash; Mud, Lava, Water &mdash; that woke up and each decided differently what to do with consciousness. Everything downstream &mdash; clay golems, pyrekin, acorn-headed tree-warriors &mdash; is what each element chose to become.</p>
+</section>
+
+<pre class="ascii divider">·   ·   ·   ·   ·   <span class="star">✦</span>   ·   ·   ·   ·   ·</pre>
+
+<section>
+  <h2>The Three Elements</h2>
+  <div class="section-sub">— Mud · Lava · Water —</div>
+
+  <div class="factions">
+
+    <article class="faction con">
+      <div class="faction-head"><span class="sigil con" style="color: var(--con);">■ ■ ■</span> <span class="name con">I &nbsp;·&nbsp; Tonric Concord</span></div>
+      <div class="faction-tags">Mud &nbsp;·&nbsp; Ledger &nbsp;·&nbsp; Banked</div>
+      <div class="creed">"Punch first. Punch now. Punch later."</div>
+      <p>Mud that woke up and immediately formed a committee. The first soldier wasn't born &mdash; it was ratified. A motion carried 4&ndash;3, and a body was rolled out of common clay to walk the motion forward. Every Concord unit is a vote that hasn't expired.</p>
+      <p>The 4&ndash;3 vote also produced the Three No's &mdash; three dissenters who walked off in three directions to found rebel Concords. Names, colors, grudges deferred. Death is administrative: clay returns to the commons.</p>
+    </article>
+
+    <article class="faction asc">
+      <div class="faction-head"><span class="sigil asc" style="color: var(--asc);">✦ ✧ ✦</span> <span class="name asc">II &nbsp;·&nbsp; Wildfire Ascension</span></div>
+      <div class="faction-tags">Lava &nbsp;·&nbsp; Spreading &nbsp;·&nbsp; Burned</div>
+      <div class="creed">"He is the match. Are you?"</div>
+      <p>Lava that refused to cool. No legs &mdash; legs require standing still. Picks up the rusted muskets of the dead it burned. Crucial mood mechanic: stopping is sadness, sadness is cooling, cooling is death. Movement is metabolism. They don't conquer &mdash; they respire.</p>
+    </article>
+
+    <article class="faction rem">
+      <div class="faction-head"><span class="sigil rem" style="color: var(--rem);">❀ ❁ ❀</span> <span class="name rem">III &nbsp;·&nbsp; Mist Remnant</span></div>
+      <div class="faction-tags">Water &nbsp;·&nbsp; Regrowing &nbsp;·&nbsp; Buried</div>
+      <div class="creed">"Cry forward. Look from over here."</div>
+      <p>Water alone, of the three, refused to stay itself &mdash; it made other things alive. Damp becomes soil, soil becomes roots, roots become trunks, trunks become canopy. That biosphere was burned by Ascension and paved by Concord.</p>
+      <p>Current Remnant units are seed-vessels carrying saplings into battle. Plants only, no animals &mdash; anything that walks for Remnant is a plant that decided to. Heart-building: the Mist Heart, big mushroom-cap silhouette, mouth-line that reads as both smile and wound.</p>
+    </article>
+
+  </div>
+</section>
+
+<pre class="ascii divider">·   ·   ·   ·   ·   <span class="star">✦</span>   ·   ·   ·   ·   ·</pre>
+
+<section>
+  <h2>The Cycles</h2>
+  <div class="section-sub">— who beats whom, and who fails to talk to whom —</div>
+
+  <div class="cycles-block">
+    <div class="cycle-label">Open Conflict</div>
+    <div class="cycle-line"><span class="rem">❀ R E M</span> <span class="arrow">→</span> <span class="con">■ C O N</span> <span class="arrow">→</span> <span class="asc">✦ A S C</span> <span class="arrow">→</span> <span class="rem">❀ R E M</span></div>
+
+    <div class="cycle-label">Failed Diplomacy</div>
+    <div class="cycle-line"><span class="con">■ C O N</span> <span class="arrow">→</span> <span class="asc">✦ A S C</span> <span class="arrow">→</span> <span class="rem">❀ R E M</span> <span class="arrow">→</span> <span class="con">■ C O N</span></div>
+  </div>
+</section>
+
+<pre class="ascii divider">
+          <span class="star">✦</span>     ·     ·     ·     <span class="star">✦</span>     ·     ·     ·     <span class="star">✦</span>
+
+        T H E    F A C T I O N    C Y C L E
+              ·   nine canon stories   ·
+
+          <span class="star">✦</span>     ·     ·     ·     <span class="star">✦</span>     ·     ·     ·     <span class="star">✦</span></pre>
+
+<!-- ─── CONCORD ─────────────────────────────────────────── -->
+
+<pre class="ascii divider-small"><span class="con">■   ■   ■   ■   ■   ■   ■   ■   ■   ■   ■</span></pre>
+
+<article class="story con">
+  <h3 class="story-title con">The Clay-Yard</h3>
+  <div class="story-sub">— the army is the ledger, and the ledger is the army —</div>
+  <p>A clay-yard is what the Concord calls the place where new soldiers are voted into existence. The yard is square. Of course it is &mdash; square is what was decided. At dawn the Forgehands set their tripods in formation, six paces apart, and the senior Forgehand inscribes the day's drill on a slate. The drill is the same drill every day. Variation would require a motion. Motions take time.</p>
+  <p>The Legionnaires march in column. The Shieldbearers walk beside them, one Shieldbearer to every three Legionnaires &mdash; the ratio voted on in the original treaty. Shots are not fired. The point of the drill is not to shoot. The point is for the column to know it is a column, so that when shots arrive it will not have to think about being one.</p>
+  <p>In the back corner, a fresh ratification: a vote has just carried four to three, and the mud begins to lift itself into the rough shape of a Shotputter. The new soldier's first act is to take attendance. Its second is to ratify its own existence. Its third is to look at the column and start walking toward it.</p>
+  <p>Nothing in the yard is loud. The loudest thing is the ledger being turned, page by page, in the quiet hand of the clerk who never sleeps. The clerk is also a soldier. Every Concord soldier is also a clerk. The ledger is the army; the army is the ledger.</p>
+<pre class="snapshot">┌─────────────────────┐
+│  <span class="con">■  ■  ■  ■</span>   →     │
+│              <span class="con">▲</span>      │
+└─────────────────────┘
+<span class="cap">— vote carried, four to three —</span></pre>
+</article>
+
+<article class="story con">
+  <h3 class="story-title con">The Long Slope</h3>
+  <div class="story-sub">— half the force returned, half remained as fertilizer —</div>
+  <p>The Concord besieged the Long Slope for fourteen days. The siege was conducted by the ledger. Each morning a fresh motion was carried &mdash; advance the line by twenty paces &mdash; and the line advanced by twenty paces. The Anvils planted, fired, planted, fired. The Forgehands dug their tripods into the slope's clay and held.</p>
+  <p>By the fifth day, the Mire forward of the slope was full of holes. By the seventh, the holes had closed. By the ninth, the Mires that had been split open had grown back larger than before, and there were now more of them than there had been on the first day. This is the moment the Concord did not understand.</p>
+  <p>A Singer was visible at the treeline on day ten. It opened its bracts and a resonance ring passed through the formation &mdash; neither loud nor close &mdash; and three Legionnaires nearest the front folded as the Mire behind them rose to its feet again. By day twelve, the Long Slope was greener than it had been on day one.</p>
+  <p>On day fourteen, the ledger carried a motion: withdraw to original positions, regroup, rewrite the plan. The motion was implemented immediately. Half the Concord force returned. Half remained as fertilizer. The Singer at the treeline closed its bracts. The slope took attendance. Nothing was missing.</p>
+<pre class="snapshot">    <span class="rem">❀    ❀    ❀    ❀</span>
+ ──────────────────────
+      <span class="con">■   ■</span>    →   →
+<span class="cap">— twenty paces, day fourteen —</span></pre>
+</article>
+
+<article class="story con">
+  <h3 class="story-title con">The Ridge of the Three Lights</h3>
+  <div class="story-sub">— the fires could not stop moving, and the clerk could not abide it —</div>
+  <p>Three small fires burned on the ridge where Concord and Ascension delegations met to draft a non-aggression. The fires were the Ascension delegation; they could not be present any other way. The Concord delegation arrived in column. Three Legionnaires, two Shieldbearers, one clerk, one Geomancer at distance for reassurance.</p>
+  <p>The Concord delegation read the proposed terms aloud. The Ascension fires moved in slow circles around the speaker. This was the problem. The Concord clerk asked the fires to please remain in one place during the reading, for the sake of the record. The fires did not remain. They could not. To stop moving was to begin dying, and the Ascension would not begin dying in front of a clerk.</p>
+  <p>The clerk recorded <em>no agreement reached</em> in the ledger. The clerk also recorded <em>Ascension delegation in violation of standing protocol re: presence at hearing.</em> A Legionnaire &mdash; junior, two days old, still proud of its first ratification &mdash; raised its buster cannon in salute. The fires read it as a draw. The Geomancer at distance read it as a draw as well, since the Legionnaire said so, and the Geomancer's shells were a Concord salute by another name.</p>
+  <p>The first shell landed twelve seconds later. When the smoke cleared, three small fires were still burning on the ridge &mdash; different fires, the original three were ash now &mdash; and the Concord delegation was returning in column to the line. The clerk's ledger had three new entries. The most recent read: <em>motion to fortify ridge, carried, five to one.</em></p>
+<pre class="snapshot">     <span class="asc">✦   ✦   ✦</span>
+ ──────────────────
+  <span class="con">■  ■</span>   ↑      <span class="con">※</span>──→
+<span class="cap">— salute read as shell —</span></pre>
+</article>
+
+<!-- ─── ASCENSION ───────────────────────────────────────── -->
+
+<pre class="ascii divider-small"><span class="asc">✦   ✧   ✦   ✧   ✦   ✧   ✦   ✧   ✦   ✧   ✦</span></pre>
+
+<article class="story asc">
+  <h3 class="story-title asc">The Powder Drill</h3>
+  <div class="story-sub">— rest is also war; there is no difference —</div>
+  <p>The Ascension does not rest. To rest is to cool, and to cool is to no longer be Ascension. So what the lava calls "rest" is in fact a slow circular spread along the perimeter of the burn-yard, every pyrekin tracing the edge of the warmth, every musket loaded and unloaded and loaded again so the hands never forget how.</p>
+  <p>A Pyreshot stands at the firing line. <em>Stands</em> is the wrong word &mdash; flows in place, perhaps. The musket is rusted at the touch-hole; rust is what the lava remembers about the dead it took the gun from. The Pyreshot's commander walks the line and pours extra powder down the barrel of every musket in turn. The pour is the ritual. The first shot of every Pyreshot's life will be too hot for the gun and too loud for the lungs and too far for the eye. This is the point.</p>
+  <p>Behind the firing line, a Fireduster paints small ground patches in a square. The square is not for any tactical purpose. The Fireduster is practicing canister-burst geometry &mdash; the loft of the shell, the way the sub-shots fan and fall. The patches will burn out before the drill ends. The Fireduster will paint new ones. This is how a Fireduster meditates.</p>
+  <p>Further back: a Flamespitter on its slow wheels rotates the gatling barrel, dry. No round in the chamber. The wind-up is what's being trained. Slow, average, fast, faster, very fast. The Flamespitter says nothing. Flamespitters never say anything. But the barrel spins, and the lava listens, and the lava is satisfied.</p>
+<pre class="snapshot">    <span class="asc">↺   ✦   ✦   ✦   ↺</span>
+ ─────────────────────
+       <span class="asc">✧ ═══════►</span>
+<span class="cap">— the extra pour —</span></pre>
+</article>
+
+<article class="story asc">
+  <h3 class="story-title asc">The Hour They Cooled</h3>
+  <div class="story-sub">— outlasted, not stopped — the knowing was the only victory —</div>
+  <p>The Ascension column moved against the Concord line at dawn. It was supposed to be over by noon. Pyrefiends led. They are always allowed to lead. They burn in a swarm, and a swarm is what the Ascension wants its enemy to remember last. Behind the Pyrefiends, Cinderlances ranged ahead and lobbed fireball volleys at the Concord front. Behind the Cinderlances, a Flamespitter wound up.</p>
+  <p>For an hour, the line bled. The Forgehands held their tripods and chipped the Pyrefiend swarm down to half. The Shieldbearers ate every shot. The Anvils planted and fired into the column's center and the Pyrefiends went down in twos and threes. The Ascension column kept moving. It had to. Stopping was the loss.</p>
+  <p>By noon the column had advanced two hundred paces. Past the second ridge the Mortarflies began to drop. The Pyrefiends, low on speed now, took longer to close. The Flamespitter's wind-up reset every time a shell from the Anvils interrupted its line of sight.</p>
+  <p>At noon-plus-an-hour something changed in the Pyrefiends. They were not getting hit harder. They were getting dimmer. The orange went to red. The red went to brown. The commander felt it in their own gait before they saw it in the column. Sadness, the lava called it. The thing that came before cooling.</p>
+  <p>By two in the afternoon the column was no longer a column. It was a slow advance of cooling shapes, half-armed, half-aimed. The Concord siege walked forward, planted, fired, planted, fired. The clerks took attendance. The Ascension had not stopped, exactly. The Ascension had been outlasted. There is a difference, and the Concord did not know about it, and the Ascension did, and the knowing was the only victory the Ascension salvaged from the field.</p>
+<pre class="snapshot"><span class="asc">✦</span>  →  <span class="asc">✦</span>  →  <span class="asc">✧</span>  →  ·  →  ·
+ orange    red    brown    ash
+<span class="cap">— sadness, then cooling —</span></pre>
+</article>
+
+<article class="story asc">
+  <h3 class="story-title asc">The Pyrekin and the Mire</h3>
+  <div class="story-sub">— the lava remembered hands; the pod burned through in half a second —</div>
+  <p>A Pyrekin and a Mire met under a leaning tree. The tree was leaning because the Pyrekin had walked past it twice that morning. The Mire was sitting because Mires never stand if they can help it. The two had agreed, by something that wasn't language and wasn't silence either, to talk about water rights to the bend in the river. The Mire's biosphere wanted to extend a root system upstream. The Pyrekin's column wanted to use that bend for crossing dry on the way to the southern ridge.</p>
+  <p>They tried. The Mire opened a sapling pod and offered it to the Pyrekin. The pod cracked and a small green tendril unfurled. The Pyrekin reached out a hand &mdash; the lava remembered hands &mdash; and held the pod for half a second. The pod burned through in half a second. The tendril blackened. The Mire watched.</p>
+  <p><em>I did not mean,</em> said the Pyrekin, in something that wasn't language.</p>
+  <p><em>I know,</em> said the Mire, in something that wasn't silence.</p>
+  <p>There was a long pause. The river kept moving past the bend. The Pyrekin was already cooling and starting to grieve. The Mire was already feeling its own bark grain harden around the failed treaty. The Pyrekin moved first, because it had to. The Mire planted, because it had grown enough.</p>
+  <p>The bend in the river ran red and orange that afternoon. The next morning the bend was already green again &mdash; water remembers everything that was ever planted in it &mdash; and the column had moved south without crossing dry. Each side counted what it had lost. Each side counted what it had kept. Neither thought about the leaning tree.</p>
+<pre class="snapshot">          ╲
+           ╲       <span class="rem">❀</span>
+            ╲     ╱
+             <span class="asc">✦</span>══<span class="rem">⊙</span>
+<span class="cap">— the pod, half a second —</span></pre>
+</article>
+
+<!-- ─── REMNANT ─────────────────────────────────────────── -->
+
+<pre class="ascii divider-small"><span class="rem">❀   ❁   ❀   ❁   ❀   ❁   ❀   ❁   ❀   ❁   ❀</span></pre>
+
+<article class="story rem">
+  <h3 class="story-title rem">The Saplings' Nursery</h3>
+  <div class="story-sub">— the bark has to know the path home before the wound arrives —</div>
+  <p>The Mist Heart breathes its mist out from the crown, and the mist settles in a ring around the nursery, and inside the ring the saplings are practicing. A Spotter sapling &mdash; petal-bracts still soft, head still pale-green from this season's grow &mdash; opens its bracts at the senior Spotter's signal. The bracts open in a wave: outer petals first, inner petals last, the unfurling of the rifle-raise that the canopy has been teaching for as long as there have been canopies.</p>
+  <p>Beside the Spotter, a Mire sits with its triskelion legs folded under, weeping sap from a deliberately scored bark groove. The score will close. The Mire is practicing closing. It has not yet been wounded, but the bark has to know the path home before the wound arrives.</p>
+  <p>Across the nursery floor, a Whisper lays a slow trail of water &mdash; its first &mdash; and a Mistwing glides low over the trail and learns what an ally walking through it feels like from above. The Mistwing's wings are still membrane-soft. They will harden by the second moon.</p>
+  <p>In the deepest corner, a Singer practices on no one. It opens its bracts. A small resonance ring travels outward. The ring touches an empty sapling-cradle, then passes through into the mist. The Singer's bracts close. The Singer waits. A senior Mire watches. <em>Again,</em> the Mire says &mdash; not in language, in posture. The Singer opens. A new ring. A different note. The empty cradle creaks faintly, as if remembering something. This is how the Remnant trains: by playing the songs the canopy used to know, over and over, until the canopy that is being regrown recognizes them.</p>
+<pre class="snapshot">      <span class="rem">╭ ─── ╮
+      │  ◡  │
+      ╰──┬──╯</span>
+       ~ ~ ~ ~
+       <span class="rem">❀  ❁  ❀</span>
+<span class="cap">— bracts opening, in a wave —</span></pre>
+</article>
+
+<article class="story rem">
+  <h3 class="story-title rem">When the Canopy Burned the Second Time</h3>
+  <div class="story-sub">— two Singers stayed. Two Singers did not come home —</div>
+  <p>The Ascension came up the eastern slope under cover of a slow-spreading wildfire. The Remnant line held a long crescent on the ridge above, with two Mires at the center, four Spotters behind, a Singer on each flank, and a Mistwing at altitude. The fire reached the Mires first.</p>
+  <p>A Mire is the Remnant's regrowing core; everything Remnant about the Remnant army flows through it. The Mire began to weep sap, then close the wound, then open new wounds the canopy could not predict. The fire did not pause. It re-lit itself on contact, and where it had been orange it began to be blue, and where it was blue it doubled the rate of cooling-by-burning. This was Blue Fire. The Mires did not know about Blue Fire. The canopy had not been around long enough to teach them.</p>
+  <p>The Singers played outward. A heal-ring touched a Mire and the Mire's bark closed a little. A second heal-ring touched the next Mire. By the third Singer-ring, the first Mire had been touched again, and the bark had closed twice, but the fire underneath the Mire had also burned twice, and the fire was faster than the bracts could open. The Mistwing above saw the line buckle at the center and dove. It killed two Pyrefiends. It was killed by the third.</p>
+  <p>By dusk, the eastern slope was orange where it had been green at dawn. The Remnant line withdrew under the cover of a Vinedropper's root-tile carpet, which slowed the Ascension column long enough for the Spotters and one surviving Mire to drop back into the next ring of canopy. Two Singers stayed. Two Singers did not come home.</p>
+  <p>The Vinedropper kept dropping roots all the way back to the Mist Heart. By the time the column reached it, the Heart had wrapped its lower trunk in fresh saplings &mdash; a layer of new growth thick enough to make the Ascension pause, but not thick enough to make them stop. This is the second time the canopy burned. The Remnant remembers the first time because it was told about it. It will tell the next canopy about the second.</p>
+<pre class="snapshot">   <span class="rem">❀   ❀   ❀   ❀</span>
+   <span class="asc">✧   ✧   ✧</span>
+   ░   ░   ░
+<span class="cap">— blue fire, faster than the bracts —</span></pre>
+</article>
+
+<article class="story rem">
+  <h3 class="story-title rem">The Forest That Wasn't Allowed</h3>
+  <div class="story-sub">— the forest did not respond. It only grew —</div>
+  <p>The Remnant sent a Singer and two Mires south, bearing a sapling, to propose a forest on the contested ridge between Remnant ground and Concord ground. The Concord delegation arrived in column. A clerk, two Legionnaires, one Shieldbearer, a Geomancer at a respectful distance.</p>
+  <p>The Singer opened its bracts. A small ring of green-tinted resonance touched the ground at the meeting line. Where it touched, a thin shoot pushed up through the dirt. The Concord clerk wrote <em>unsanctioned vegetation present</em> in the ledger. The Mires presented the sapling. They proposed: let this ridge become a small forest. It will be neutral. Roots beneath both lines, canopy above both lines, water for both peoples.</p>
+  <p>The clerk asked: <em>Whose ledger does the forest belong to?</em> The Mires said: <em>No ledger. Forests don't.</em> The clerk excused itself for a moment to consult the Geomancer at a respectful distance. When the clerk returned, the clerk read aloud from the ledger: <em>Motion &mdash; ridge to be paved, neutral forest blocked. Carried, four to three.</em></p>
+  <p>The Singer's bracts began to close. The Mires looked at each other. The shoot at the meeting line did not retract. It could not. It had taken root. The Concord clerk said, formally and without malice: <em>The motion has carried. You are asked to remove the growth.</em> The Singer said: <em>We cannot.</em></p>
+  <p>The Geomancer's first shell landed on the shoot. The shoot was gone. The Mires did not move at first. Then the smaller of the two opened a sapling pod inside its own chest cavity, scattered it across the contested ridge, and walked north slowly under fire. The other Mire stayed. Within an hour the new pods had taken root in the cratered ground.</p>
+  <p>By morning, the Concord paving party had to chop saplings before pouring. By the next morning, the saplings had returned. By the third morning, the Concord clerk recorded a fresh motion in the ledger: <em>War declared on the forest that was not allowed.</em> The forest did not respond. It only grew.</p>
+<pre class="snapshot">  <span class="con">■</span>  ─ ─ ─ ─ ─  <span class="rem">❀</span>
+            <span class="rem">❋</span>
+            ↓
+            <span class="con">※</span>
+<span class="cap">— motion carried, four to three —</span></pre>
+</article>
+
+<!-- ─── ANNOUNCER CYCLE ─────────────────────────────────── -->
+
+<pre class="ascii divider">
+          <span class="eye">◉</span>     <span class="ren">~</span>     ·     <span class="ren">~</span>     <span class="eye">◉</span>     <span class="ren">~</span>     ·     <span class="ren">~</span>     <span class="eye">◉</span>
+
+        T H E    A N N O U N C E R    C Y C L E
+              ·   <span class="eye">Eye</span> &amp; <span class="ren">Ren</span>   ·
+
+          <span class="eye">◉</span>     <span class="ren">~</span>     ·     <span class="ren">~</span>     <span class="eye">◉</span>     <span class="ren">~</span>     ·     <span class="ren">~</span>     <span class="eye">◉</span></pre>
+
+<article class="story eyeren">
+  <h3 class="story-title eyeren">The Field with Edges</h3>
+  <div class="story-sub">— harder is not the same as smaller —</div>
+  <p>Eye saw everything. That was the trouble.</p>
+  <p>The god of sight had no edges to look between. Every leaf on every tree of every forest, every grain in every clay-yard, every spark in every fire pit &mdash; all of it, at once, without ranking. Eye could see the back of its own head. Eye could see the underside of a stone three valleys over. Eye could see what was about to happen and what had already happened and what was happening now, and could not tell, anymore, which was which.</p>
+  <p>For a long time Eye tried to look harder. That was the wrong direction. Harder is not the same as smaller.</p>
+  <p>Then one day Eye saw the games. The games had edges. A field, marked. Two sides, each with a count. A clock that started and a clock that stopped. Inside the edges, decisions. Outside the edges, nothing that mattered to the inside.</p>
+  <p>Eye sat down at the field's rim. For the first time in Eye's existence, Eye looked at one thing. The first thing Eye said, looking at the field, was <em>oh.</em> The second thing was <em>again.</em></p>
+<pre class="snapshot">  ┌─────────────────┐
+  │     ·     ·     │
+  │        ·        │
+  │     ·     ·     │
+  └─────────────────┘
+             <span class="eye">◉</span>
+<span class="cap">— oh. again. —</span></pre>
+</article>
+
+<article class="story eyeren">
+  <h3 class="story-title eyeren">The Stillness Ren Followed</h3>
+  <div class="story-sub">— a scent of dust that hadn't quite resettled —</div>
+  <p>Ren had been looking for Eye for a long time.</p>
+  <p>Wind goes everywhere, and smell remembers, so Ren had assumed Eye would be easy to find. Eye was not easy to find. Eye moved the way light moves &mdash; not from place to place, but from frame to frame &mdash; and Ren, who moved by drift and by trail, could not follow.</p>
+  <p>Ren had traces, though. A faint stillness in the air where Eye had recently been. A scent of dust that hadn't quite resettled. A look on a Concord clerk's face that did not belong to the clerk. Ren followed these. The trail thinned across three continents. The trail thinned across a war. The trail thinned across a forest the Concord had not yet finished paving. Ren almost gave up at the second river.</p>
+  <p>Then, near the rim of an unfamiliar field, Ren smelled something Ren had not smelled in a long time: Eye, sitting still. Ren came up over the slope very slowly, so as not to disturb the stillness. Eye was watching two columns of mud approach each other.</p>
+  <p>Ren did not speak. Ren sat down on Eye's left side, downwind, where smell would not crowd sight. Eye glanced over. Said, <em>you came.</em> Said, <em>watch this part. The one on the left just made a mistake.</em></p>
+<pre class="snapshot"><span class="ren">~ ~ ~ ~ ~ ~ ~ ~</span>  →   <span class="eye">◉</span>
+<span class="cap">— you came. —</span></pre>
+</article>
+
+<article class="story eyeren">
+  <h3 class="story-title eyeren">What They Found Together</h3>
+  <div class="story-sub">— neither of them had known they were lonely —</div>
+  <p>The first day, Ren mostly listened. Eye called what was on the field. The column tightening. The flank exposed. The tripod that had planted a half-second too late. Ren found that Eye's voice, used for one thing at a time, was a voice Ren had never quite heard before &mdash; bounded, specific, almost cheerful.</p>
+  <p>On the second day Ren tried calling something too. <em>That motion is going to carry,</em> Ren said, smelling the shift in the clerk's resolve. Eye laughed. Ren had not known Eye could laugh.</p>
+  <p>By the third day they had a rhythm. Eye took the field; Ren took the air around it. Eye said what was; Ren said what was about to be. They interrupted each other constantly and neither minded.</p>
+  <p>The matches were not the point, in the end. The matches were the excuse. The point was that Eye, who had been overwhelmed for an age, now had a frame; and Ren, who had been searching for an age, now had a seat.</p>
+  <p>They are still there. The games go on. Two voices, slightly overlapping, calling the same field from two senses at once. Neither of them had known they were lonely. Now neither of them is.</p>
+<pre class="snapshot">        <span class="eye">◉</span>     <span class="ren">~</span>
+      ╲  │  ╱   ╲
+   ╲─────────────╱
+   │   <span class="con">■</span>     <span class="rem">❀</span>    │
+   ╲─────────────╱
+<span class="cap">— two voices, one field —</span></pre>
+</article>
+
+<pre class="ascii divider-small"><span class="eye">◉</span>   <span class="ren">~</span>   ·   <span class="ren">~</span>   <span class="eye">◉</span>   <span class="ren">~</span>   ·   <span class="ren">~</span>   <span class="eye">◉</span>   <span class="ren">~</span>   ·</pre>
+
+<article class="story eyeren">
+  <h3 class="story-title eyeren">The Eastern Field</h3>
+  <div class="story-sub">— a Mortar count game; the Mire is racing the DOT —</div>
+  <p class="cast intro">The match opened in heat.</p>
+  <p class="cast"><span class="who eye">Eye:</span> Two Pyrekin swarms breaking from the Ascension barracks. Center push, early &mdash; no Flame Mortar yet. They want the rusher pressure to hit before Remnant gets the Spotters online.</p>
+  <p class="cast"><span class="who ren">Ren:</span> Mire's already planted at the midline. Remnant didn't even wait &mdash; they're absorbing first. That's the Mire's whole job: stand there and don't die.</p>
+  <p class="cast"><span class="who eye">Eye:</span> And the Mire is just sitting in the Pyrekin fire. Bark closing as fast as the impact-fire opens it. Regen's holding.</p>
+  <p class="cast"><span class="who ren">Ren:</span> That's the trade Remnant wants. Mire HP for Pyrekin bodies. Pyrekin dies first &mdash; they always do in this matchup.</p>
+  <p class="cast"><span class="who eye">Eye:</span> Spotters online. Three of them on the eastern hill, shooting into the swarm.</p>
+  <p class="cast"><span class="who ren">Ren:</span> Spotter is the highest-kill unit in the entire roster. Once the Mire stalls the rusher, the Spotter math wins.</p>
+  <p class="cast"><span class="who eye">Eye:</span> Flame Mortar setting up behind the Pyrekin line. Two of them. They've got line on the Mire now.</p>
+  <p class="cast"><span class="who ren">Ren:</span> Here it comes. Impact-fire DOT &mdash; ground-tied damage. Mire's regen has to fight against a tile, not a projectile. This is where Ascension breaks the line.</p>
+  <p class="cast"><span class="who eye">Eye:</span> First shot lands. The Mire's bark is darkening. Still standing but it's not closing the wound this time.</p>
+  <p class="cast"><span class="who ren">Ren:</span> Second Flame Mortar shot. DOT just refreshed. Mire below half. Where's the Stalker?</p>
+  <p class="cast"><span class="who eye">Eye:</span> Stalker's there &mdash; biotic dart incoming. Slow heal but it'll stabilize.</p>
+  <p class="cast"><span class="who ren">Ren:</span> Will it though? Ascension's not committing more bodies. The Mortars are doing all the work. They're trying to win this with two units and a fire patch.</p>
+  <p class="cast"><span class="who eye">Eye:</span> Mire's down. Second Mire planting behind it &mdash; Remnant's not breaking, they're rotating.</p>
+  <p class="cast"><span class="who ren">Ren:</span> And the CPs. Remnant holds three, Ascension holds one. Even with the Mire trade, Remnant is winning the map.</p>
+  <p class="cast"><span class="who eye">Eye:</span> Pyre incoming. Suicide rush, going for the back-left cap.</p>
+  <p class="cast"><span class="who ren">Ren:</span> Only way Ascension catches up. The Pyre dies, but the death-explosion takes the cap and heals two Pyrekin nearby. That's the trade math.</p>
+  <p class="cast"><span class="who eye">Eye:</span> Pyre detonates. The cap flips. Ascension at two CPs.</p>
+  <p class="cast"><span class="who ren">Ren:</span> Gap closed. Spotters reorienting to recap.</p>
+  <p class="cast"><span class="who eye">Eye:</span> Mortars still firing on the new Mire. This is a Mortar count game now.</p>
+  <p class="cast"><span class="who ren">Ren:</span> Remnant wins if the Spotter volume holds. Ascension wins if a third Flame Mortar comes online before the next Mire heals through.</p>
+<pre class="snapshot">      <span class="asc">✦       ✦</span>
+       ╲     ╱
+        ╲   ╱
+         ▼ ▼
+       ░░░░░░░
+          <span class="rem">❀</span>
+<span class="cap">— Mortar count game —</span></pre>
+</article>
+
+<article class="story eyeren">
+  <h3 class="story-title eyeren">The Long Corridor</h3>
+  <div class="story-sub">— Concord bleeds bodies; the cap timer keeps ticking —</div>
+  <p class="cast"><span class="who eye">Eye:</span> Concord column moving up the central corridor. Three Shieldbearers in front, six Legionnaires behind, two Forgehands setting up tripod range.</p>
+  <p class="cast"><span class="who ren">Ren:</span> Classic CON push. Shieldbearer eats the damage, Legionnaires deal it, Forgehand chips from behind. They're advancing on CP-2.</p>
+  <p class="cast"><span class="who eye">Eye:</span> Remnant's holding the ridge. Mire planted dead-center. Two Spotters on the high ground.</p>
+  <p class="cast"><span class="who ren">Ren:</span> Spotter has the angle on the Legionnaires. Shieldbearer's redirect doesn't help against ranged DPS that arcs over the front line.</p>
+  <p class="cast"><span class="who eye">Eye:</span> First volley from the Spotters &mdash; three Legionnaires take hits. Shield isn't blocking it.</p>
+  <p class="cast"><span class="who ren">Ren:</span> That's the Legionnaire problem. They die more than any soldier in the game. The 30% regen shield can't refresh fast enough under sustained fire.</p>
+  <p class="cast"><span class="who eye">Eye:</span> Two Legionnaires down already. The column hasn't fired back yet.</p>
+  <p class="cast"><span class="who ren">Ren:</span> But look at the cap. Concord still advancing. They don't need to win the trade. They need to take the cap and hold it.</p>
+  <p class="cast"><span class="who eye">Eye:</span> Forgehands setting up. Tripods planted. They've got range on the Mire now.</p>
+  <p class="cast"><span class="who ren">Ren:</span> Forgehand at D/T 2.17 &mdash; best gunner in the Concord roster. Once it sets up, it works.</p>
+  <p class="cast"><span class="who eye">Eye:</span> Forgehand opens fire. Mire's taking hits. Sap weeping from three different bark sections.</p>
+  <p class="cast"><span class="who ren">Ren:</span> Stalker incoming. Biotic darts. Mire heal stabilizes.</p>
+  <p class="cast"><span class="who eye">Eye:</span> Concord pushes the cap. Two Shieldbearers in the circle.</p>
+  <p class="cast"><span class="who ren">Ren:</span> Motion carried &mdash; Concord at CP-2. Column is half its starting size, but they got the cap.</p>
+  <p class="cast"><span class="who eye">Eye:</span> Remnant counter-pushing. Mire walking forward, Stalker behind, two more Spotters reinforcing.</p>
+  <p class="cast"><span class="who ren">Ren:</span> Concord at two CPs. Remnant at two. We're even on map control.</p>
+  <p class="cast"><span class="who eye">Eye:</span> Forgehands still firing. Mire's regen is racing the Forgehand DPS.</p>
+  <p class="cast"><span class="who ren">Ren:</span> That's the question of this match. Does the Mire outlast the Forgehand?</p>
+  <p class="cast"><span class="who eye">Eye:</span> Shieldbearer down. First one to fall. Janissary redirect couldn't catch the Spotter volume from above.</p>
+  <p class="cast"><span class="who ren">Ren:</span> Concord's losing bodies. But the CP timer is ticking &mdash; they're banking points while they bleed.</p>
+  <p class="cast"><span class="who eye">Eye:</span> Second Forgehand planted. Two tripods on the Mire now.</p>
+  <p class="cast"><span class="who ren">Ren:</span> Mire's going to fall in the next ten seconds. Question is whether Concord can hold the cap once it does.</p>
+  <p class="cast"><span class="who eye">Eye:</span> Spotters rotating down the slope. They're committing to the recap.</p>
+  <p class="cast"><span class="who ren">Ren:</span> And here we go. Mire down. Spotters walking in. Forgehands reloading. This is the moment of the match.</p>
+<pre class="snapshot">       <span class="rem">❀     ❀</span>
+   ──────────────
+     <span class="con">■  ■  ■</span>   →   →
+            ↑
+          CP-2
+<span class="cap">— banking points while bleeding —</span></pre>
+</article>
+
+<pre class="ascii divider">          ·     <span class="star">✦</span>     ·     <span class="star">✦</span>     ·     <span class="star">✦</span>     ·
+
+              — end of canon, for now —
+
+          ·     <span class="star">✦</span>     ·     <span class="star">✦</span>     ·     <span class="star">✦</span>     ·</pre>
+
+<footer>Gem Wars &nbsp;·&nbsp; lore v0.33 &nbsp;·&nbsp; gem-wars-lore.html</footer>
+
+</div>
+</body>
+</html>

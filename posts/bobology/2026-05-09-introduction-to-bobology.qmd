@@ -1,0 +1,13 @@
+---
+title: "Lesson 1: Introduction to Bobology"
+date: "2026-05-09"
+order: 2
+description: "A field guide to the audible compass and its relations: Bobbles, Ekos, Vessels, and Daemons. How memory works in ekos. Why humans hold the pen at the decision gate."
+categories: [bobble, bobology, ai]
+path: /introduction-to-bobology.html
+---
+
+```{=html}
+<p>Redirecting to <a href="/introduction-to-bobology.html">the standalone page</a>…</p>
+<script>window.location.replace("/introduction-to-bobology.html");</script>
+```

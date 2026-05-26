@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sinatra et al. 2016 — three-page memo</title>
+<style>
+  :root {
+    --paper: #fbfaf3;
+    --ink: #1a1a1a;
+    --muted: #5a5752;
+    --rule: #e3dccb;
+    --accent: #1e3a5f;
+    --soft: #f0ecdf;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14161a;
+      --ink: #e8e6dd;
+      --muted: #9b988e;
+      --rule: #2e313a;
+      --accent: #8eb4e3;
+      --soft: #1c1f25;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); }
+  body {
+    font-family: "Charter", "Iowan Old Style", Georgia, "Times New Roman", serif;
+    font-size: 13.5pt;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 56px 60px;
+  }
+  header.memo {
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 18px;
+    margin-bottom: 22px;
+  }
+  header.memo .label {
+    font-family: "SF Mono", ui-monospace, Menlo, monospace;
+    font-size: 10pt;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 6px;
+  }
+  header.memo h1 {
+    margin: 0 0 6px;
+    font-size: 22pt;
+    line-height: 1.2;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+  }
+  header.memo .sub {
+    color: var(--muted);
+    font-style: italic;
+    margin: 0;
+    font-size: 12pt;
+  }
+  .meta-grid {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: 4px 14px;
+    font-size: 10.5pt;
+    color: var(--muted);
+    margin-top: 14px;
+  }
+  .meta-grid b {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .lede {
+    background: var(--soft);
+    border-left: 3px solid var(--accent);
+    padding: 14px 18px;
+    margin: 22px 0 28px;
+    font-size: 13pt;
+    line-height: 1.55;
+  }
+  h2 {
+    font-size: 15pt;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 30px 0 10px;
+    line-height: 1.3;
+  }
+  h3 {
+    font-size: 12.5pt;
+    font-weight: 600;
+    margin: 18px 0 6px;
+  }
+  p { margin: 0 0 12px; }
+  p + p { text-indent: 1.5em; }
+  ul { margin: 8px 0 14px 0; padding-left: 22px; }
+  li { margin-bottom: 6px; }
+  blockquote {
+    margin: 14px 22px;
+    padding: 0 0 0 14px;
+    border-left: 2px solid var(--rule);
+    color: var(--muted);
+    font-style: italic;
+  }
+  code {
+    font-family: "SF Mono", ui-monospace, Menlo, monospace;
+    font-size: 0.9em;
+    background: var(--soft);
+    padding: 1px 5px;
+    border-radius: 3px;
+  }
+  .callout {
+    background: var(--soft);
+    border-radius: 5px;
+    padding: 12px 16px;
+    margin: 18px 0;
+    font-size: 12pt;
+  }
+  .callout-title {
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 4px;
+    font-size: 11pt;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  footer.memo {
+    margin-top: 36px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+    color: var(--muted);
+    font-size: 10.5pt;
+  }
+  footer.memo a { color: var(--accent); }
+
+  @media print {
+    body { background: white; color: black; font-size: 11pt; }
+    .page { padding: 32px 40px; max-width: none; }
+    .lede, .callout { background: #f3f1e8; }
+    h2 { break-after: avoid; }
+    p { orphans: 3; widows: 3; }
+  }
+</style>
+</head>
+<body>
+
+<article class="page">
+
+  <header class="memo">
+    <p class="label">Memo · Reading note</p>
+    <h1>Sinatra et al. 2016 — Quantifying the evolution of individual scientific impact</h1>
+    <p class="sub">A three-page summary, with implications for the Coffee Shop project</p>
+    <div class="meta-grid">
+      <span>Authors</span><span><b>Roberta Sinatra</b>, Dashun Wang, Pierre Deville, Chaoming Song, Albert-László Barabási</span>
+      <span>Venue</span><span>Science, vol. 354, issue 6312, aaf5239 (4 November 2016)</span>
+      <span>DOI</span><span>10.1126/science.aaf5239</span>
+      <span>Memo date</span><span>2026-05-12</span>
+    </div>
+  </header>
+
+  <p class="lede">
+    The paper offers a remarkably simple model of scientific careers — what they call the <b>Q-model</b> — that separates a scientist's productivity (how often they publish) from their ability to recognize and develop important ideas (a personal constant they call <b>Q</b>). On top of this model they prove a finding that has consequences for how academic careers are evaluated: the <b>random impact rule</b>, which says the timing of a scientist's biggest hit within their career is statistically indistinguishable from random. The methodological appendix introduces a co-authorship-asymmetry rule for inferring training relationships from publication data — the rule that drives most of the lines you see in the Coffee Shop.
+  </p>
+
+  <h2>What the paper actually does</h2>
+
+  <p>
+    Sinatra and colleagues assemble publication histories for 2,887 physicists with careers of at least twenty years, supplemented by smaller samples across seven additional disciplines. For each scientist they compute the citation impact <i>c<sub>10</sub></i> of every paper — the number of citations accumulated in the ten years after publication — and ask three questions. How does productivity vary over a career? How does individual impact vary across scientists? And, most consequentially: where in a career do the highest-impact papers tend to land?
+  </p>
+
+  <p>
+    The first two questions have been asked before; this paper's contribution is the third. Conventional wisdom in academic hiring and funding rests on a strong intuition that great scientists hit their stride early, that there is a "creative peak" somewhere in the late twenties or early thirties for physics, and that careers can be predicted from a few early papers. Sinatra et al. test this intuition empirically — and reject it.
+  </p>
+
+  <h2>The Q-model</h2>
+
+  <p>
+    They propose that a scientist's publication record is generated by three quantities. <i>N</i> is total productivity, the count of papers a scientist will publish. <i>p</i> is a "luck of the draw" potential drawn for each individual paper from a discipline-wide distribution — it is what the field's collective attention would assign that idea if a generic colleague had written it. And <i>Q</i> is a personal multiplier: a scientist's ability to recognize a good idea, to execute on it, to present it well enough that the citation engine takes notice. The model says the realized impact of paper <i>i</i> is <code>c<sub>10,i</sub> = Q · p<sub>i</sub></code>.
+  </p>
+
+  <p>
+    The crucial structural claim is that <b>Q is a personal constant</b>. A scientist's first paper, their middle paper, and their last paper all draw the same <i>Q</i>; what changes from one paper to the next is the random <i>p</i> draw. The authors test this assumption directly by looking at within-career impact variance: a scientist's biggest paper and smallest paper should differ by orders of magnitude (because <i>p</i> ranges over orders of magnitude), but their typical paper should track <i>Q</i> closely. The data fit cleanly.
+  </p>
+
+  <div class="callout">
+    <p class="callout-title">Why this matters</p>
+    <p style="margin: 0;">If <i>Q</i> is fixed, then "where in the career did you do your best work" carries no information about what your typical work looks like — your typical work is your typical work, and the highest-cited paper is the one that happened to draw a lucky <i>p</i>. Career stage is irrelevant to <i>Q</i>; productivity multiplies <i>Q</i> only by giving more chances for a high-<i>p</i> draw to happen.</p>
+  </div>
+
+  <h2>The random impact rule</h2>
+
+  <p>
+    From the Q-model, Sinatra et al. derive a counterintuitive prediction. If you ask <i>where in a scientist's publication sequence their most-cited paper sits</i>, the answer should be: anywhere, with equal probability. The model contains no creative peak, no late-career slowdown of judgment, no early-career fumbling. It contains only <i>Q</i> and a stochastic <i>p</i>.
+  </p>
+
+  <p>
+    The empirical test is straightforward. For each scientist, identify the position of their most-cited paper within their numbered sequence of publications. Normalize by total productivity. If the random impact rule holds, the distribution of these normalized positions should be uniform on [0, 1]. The data are statistically indistinguishable from uniform for physics; the same pattern holds across the other seven disciplines they test, including economics and computer science. Whatever drives a scientist's biggest hit, the position of that hit in the career sequence carries no information about its existence. <b>The career does not have a peak.</b>
+  </p>
+
+  <h2>Implications the paper draws out</h2>
+
+  <p>
+    The authors are careful — they do not argue that all scientists are equal. <i>Q</i> varies across people by orders of magnitude, and this variance is what makes some careers consequential and others not. What they argue is that productivity and <i>Q</i> jointly determine career impact, while the timing of impact is structurally unpredictable.
+  </p>
+
+  <p>
+    Three policy-flavored conclusions follow naturally and the authors press them in the discussion. First, evaluating tenure cases on the timing of a candidate's hits — was their best work recent, or has it been a decade? — is misguided; the timing tells you nothing about future productivity at the same <i>Q</i>. Second, retirement policies and grant cutoffs predicated on creative decline have no support in the data; what declines with age is productivity (publication rate), not <i>Q</i>. Third, predicting a scientist's future impact requires modeling <i>Q</i> directly rather than extrapolating from past hits; a hot early career and a hot late career are equally likely from the same <i>Q</i>.
+  </p>
+
+  <h2>The methodological appendix that the Coffee Shop uses</h2>
+
+  <p>
+    Buried in the supplementary materials is the inference rule that powers most of the lines in the Coffee Shop visualization. To validate that the Q-model works on training relationships specifically — to ask whether a scientist's <i>Q</i> is correlated with their adviser's <i>Q</i> — the authors needed to identify training pairs from publication data alone. They could not require ProQuest dissertation records or hand-curated CVs at the scale of their sample. So they used what they call a <b>co-authorship asymmetry rule</b>:
+  </p>
+
+  <blockquote>
+    Two scientists, A and B, count as a likely training pair if (i) they have co-authored at least one paper, (ii) A's first publication is at least five years earlier than B's, and (iii) the joint paper falls in B's first decade of publication.
+  </blockquote>
+
+  <p>
+    The reasoning: a senior scientist who publishes alone for years and then suddenly co-authors with a brand-new junior is much more likely to be in a mentor relationship with that junior than to be a sudden peer collaborator. The five-year gap rules out coincidental near-cohort partnerships; the early-career joint paper rules out late-career peer collaboration. They tested the rule against a subset of training relationships verifiable through dissertation records and found that the false-positive rate is acceptable for the kind of population-scale analysis they were doing.
+  </p>
+
+  <p>
+    The Coffee Shop pipeline implements exactly this rule. For every co-author pair in our universe of US sociology and political-science authors — about 88,892 master-master pairs after the most recent crawl — we ask whether the asymmetry conditions hold, score the resulting edge by an influence function that combines the joint-paper count, the year gap, and how early in the junior's career the joint paper occurred, and keep the edges above a threshold. About 50,000 edges pass. These are the thin gray lines in the viz; the bolder purple lines are the Wikipedia-verified gold-standard subset where we can corroborate the inference against an external record.
+  </p>
+
+  <h2>Caveats and where the rule shows its seams</h2>
+
+  <p>
+    The asymmetry rule is high-recall but imperfect. The standard failure modes:
+  </p>
+
+  <ul>
+    <li><b>Co-author isn't an adviser.</b> A senior scientist might collaborate with a junior who is not their student — a postdoc from another lab, a visiting scholar, a junior colleague hired separately. The rule cannot distinguish these from genuine training pairs.</li>
+    <li><b>Co-authorship-absent training.</b> Some senior scientists train students without ever co-authoring with them. Coleman, Granovetter, and Tilly are classic examples — their advisees learned to think like them by reading their solo work. The rule has zero recall on these relationships.</li>
+    <li><b>Year-of-first-publication noise.</b> OpenAlex's notion of "first year" is the earliest indexed publication, which can be confounded by retroactively-added preprints, joint-author papers from prior degrees, or the indexing's coverage of older journals. The rule treats the year-of-first-pub as ground truth.</li>
+  </ul>
+
+  <p>
+    These limitations are visible in the Coffee Shop. Famous mentors with thin co-authorship records appear smaller in the graph than they should. Cross-discipline collaborators sometimes appear as advisees of their senior co-author when they were peers. The viz's "citation vs genealogy" callouts — surfaced when you click a famous-but-childless dot — are an explicit acknowledgment of where the asymmetry rule under-counts.
+  </p>
+
+  <h2>Why the paper still matters here</h2>
+
+  <p>
+    Two reasons. First, the asymmetry rule is the only known way to infer training relationships at scale from publication data alone, and it remains the methodological backbone of every empirical mentorship-network paper that has come after it. The Coffee Shop is a direct application: about 99% of its inferred edges trace back to Sinatra et al.'s rule. Second, the random impact rule reframes what a mentor graph is good for. If career timing is uninformative, the question "who trained whom" becomes more interesting than "who was hot when," because mentor-mentee structure persists across the random variation in hit timing. The Coffee Shop is, in this sense, a way of looking at the part of academic genealogy that the Q-model says is durable.
+  </p>
+
+  <h2>Suggested follow-up reading</h2>
+
+  <ul>
+    <li><b>Ke, Q. et al. (2015).</b> "Defining and identifying Sleeping Beauties in science." PNAS. — A complementary paper on temporal patterns of citation; sharpens what "impact" means.</li>
+    <li><b>Wang, D., Song, C., &amp; Barabási, A.-L. (2013).</b> "Quantifying long-term scientific impact." Science 342. — The earlier paper that motivates the impact-model framing; shows how citation accumulation can be predicted from a paper's first few years.</li>
+    <li><b>Liu, L. et al. (2018).</b> "Hot streaks in artistic, cultural, and scientific careers." Nature 559. — A friendly rebuttal: argues there <i>are</i> identifiable hot streaks, but they happen at random points in careers. Tightens the random-timing claim further.</li>
+    <li><b>Sekara, V. et al. (2018).</b> "The chaperone effect in scientific publishing." PNAS. — On the role of senior co-authors in lifting junior scientists' impact. Speaks directly to the mechanism behind the asymmetry rule.</li>
+  </ul>
+
+  <footer class="memo">
+    Memo prepared for the Coffee Shop project, 2026-05-12. The full paper is open at <a href="https://www.science.org/doi/10.1126/science.aaf5239">science.org</a>. Comments welcome via the site feedback bubble.
+  </footer>
+
+</article>
+
+</body>
+</html>

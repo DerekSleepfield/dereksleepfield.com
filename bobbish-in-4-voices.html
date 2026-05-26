@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lesson 4: Bobbish in 4 Voices &mdash; Derek Wakefield</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { min-height: 100%; }
+  body {
+    font-family: Georgia, 'Garamond', serif;
+    background:
+      radial-gradient(ellipse 800px 540px at 88% 8%, rgba(255,110,175,0.20), transparent 65%),
+      radial-gradient(ellipse 580px 380px at 4% 38%, rgba(130,200,255,0.16), transparent 70%),
+      radial-gradient(circle 300px at 12% 80%, rgba(6,3,18,0.45), transparent 70%),
+      linear-gradient(180deg, #0d1530 0%, #1a2a55 40%, #2c3e7a 80%, #1f2b56 100%);
+    background-attachment: fixed;
+    color: #e8e4d6;
+    line-height: 1.7;
+    padding: 24px 16px 80px;
+    overflow-x: hidden;
+  }
+
+  /* Jewel stars */
+  .jewel-stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .js { position: absolute; font-family: 'Courier New', monospace; user-select: none; }
+  .js.s { font-size: 11px; opacity: 0.65; } .js.m { font-size: 14px; opacity: 0.8; } .js.l { font-size: 18px; opacity: 0.9; }
+  .ruby     { color: #ff5a7d; text-shadow: 0 0 10px rgba(255,140,180,0.85); }
+  .emerald  { color: #5edaa0; text-shadow: 0 0 10px rgba(160,255,210,0.7); }
+  .sapphire { color: #6cb0ff; text-shadow: 0 0 10px rgba(150,210,255,0.8); }
+  .amethyst { color: #c890f5; text-shadow: 0 0 10px rgba(220,180,255,0.75); }
+  .citrine  { color: #ffd05a; text-shadow: 0 0 10px rgba(255,235,170,0.8); }
+  .opal     { color: #eef5fb; text-shadow: 0 0 10px rgba(255,255,255,0.7); }
+  .topaz    { color: #ff9a4d; text-shadow: 0 0 10px rgba(255,200,140,0.8); }
+  .turq     { color: #5edcd6; text-shadow: 0 0 10px rgba(150,245,240,0.75); }
+
+  .container { max-width: 820px; margin: 0 auto; position: relative; z-index: 1; }
+
+  /* Title block */
+  .title-block { text-align: center; margin: 20px 0 30px; }
+  .eyebrow {
+    font-family: 'Courier New', monospace;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-size: 0.75em;
+    color: #d4a000;
+    margin-bottom: 14px;
+    opacity: 0.85;
+  }
+  h1 { font-size: 2.5em; font-weight: normal; letter-spacing: 3px; color: #f5e8c4; margin-bottom: 6px; }
+  .subtitle { font-style: italic; color: #b8a878; font-size: 1.05em; letter-spacing: 1px; }
+  .stars { color: #d4a000; opacity: 0.75; font-size: 13px; letter-spacing: 5px; text-align: center; margin: 14px 0; }
+
+  /* Tab nav */
+  .tabs {
+    position: sticky; top: 8px; z-index: 30;
+    background: rgba(13, 21, 48, 0.92);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(184, 168, 120, 0.30);
+    border-radius: 7px;
+    padding: 8px;
+    margin: 0 0 30px;
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .tab {
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+    padding: 12px 10px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    color: #b8a878;
+    cursor: pointer;
+    font-family: Georgia, serif;
+    font-size: 0.92em;
+    transition: all 0.18s;
+  }
+  .tab:hover { color: #f5d27a; background: rgba(245, 210, 122, 0.06); }
+  .tab.active {
+    color: #f5e8c4;
+    background: rgba(245, 210, 122, 0.10);
+    border-color: rgba(245, 210, 122, 0.40);
+  }
+  .tab .num {
+    display: block;
+    font-family: 'Courier New', monospace;
+    font-size: 0.72em;
+    color: #d4a000;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .tab .label { font-style: italic; }
+
+  /* Voice panels */
+  .voice { display: none; }
+  .voice.active { display: block; }
+
+  .voice-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 18px;
+    font-size: 0.9em;
+    color: #a89878;
+    font-style: italic;
+  }
+  .voice-meta .audience {
+    font-family: 'Courier New', monospace;
+    color: #f5d27a;
+    font-style: normal;
+    letter-spacing: 2px;
+    font-size: 0.85em;
+    text-transform: uppercase;
+  }
+  .voice-meta .wc { font-family: 'Courier New', monospace; font-size: 0.85em; }
+
+  /* Common voice content */
+  .voice section.body {
+    background: rgba(20, 26, 56, 0.55);
+    border: 1px solid rgba(184, 168, 120, 0.30);
+    border-radius: 7px;
+    padding: 32px 36px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.25);
+  }
+
+  /* === Voice 1: Kindergartener === */
+  #voice-k .body {
+    font-family: Georgia, serif;
+    font-size: 1.20em;
+    line-height: 1.95;
+    color: #f0ebd8;
+  }
+  #voice-k .body p { margin: 14px 0; }
+  #voice-k .body .opener {
+    font-size: 1.4em;
+    color: #ffd05a;
+    font-style: italic;
+    margin-bottom: 18px;
+  }
+  #voice-k .body .punch {
+    text-align: center;
+    color: #ffd070;
+    font-style: italic;
+    font-size: 1.15em;
+    margin: 22px 0;
+    letter-spacing: 1px;
+  }
+  #voice-k .demo {
+    display: inline-block;
+    font-family: 'Courier New', monospace;
+    color: #ffd070;
+    background: rgba(255, 220, 120, 0.10);
+    padding: 1px 7px;
+    border-radius: 4px;
+    font-size: 0.85em;
+  }
+
+  /* === Voice 2: High schooler === */
+  #voice-hs .body {
+    font-size: 1.02em;
+    line-height: 1.75;
+  }
+  #voice-hs .body p { margin: 13px 0; }
+  #voice-hs .body p.lede {
+    font-size: 1.15em;
+    color: #f5d27a;
+    font-style: italic;
+    margin-bottom: 18px;
+    line-height: 1.6;
+  }
+  #voice-hs .chat {
+    background: rgba(108, 176, 255, 0.10);
+    border-left: 3px solid #6cb0ff;
+    padding: 12px 18px;
+    margin: 16px 0;
+    border-radius: 0 5px 5px 0;
+    font-style: italic;
+    color: #d8e4f0;
+  }
+  #voice-hs code,
+  #voice-hs .demo {
+    font-family: 'Courier New', monospace;
+    color: #ffd070;
+    background: rgba(255, 220, 120, 0.08);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 0.92em;
+  }
+
+  /* === Voice 3: Undergrad (default) === */
+  #voice-ug .body {
+    font-size: 1.0em;
+    line-height: 1.72;
+  }
+  #voice-ug .body p { margin: 12px 0; text-align: justify; }
+  #voice-ug .body p.opener {
+    font-size: 1.08em;
+    color: #f0ebd8;
+    margin-bottom: 16px;
+  }
+  #voice-ug code {
+    font-family: 'Courier New', monospace;
+    color: #ffd070;
+    background: rgba(255, 220, 120, 0.08);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 0.90em;
+  }
+  #voice-ug em { color: #d4a878; }
+
+  /* === Voice 4: PhD prospectus === */
+  #voice-phd .body {
+    font-family: 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
+    font-size: 0.98em;
+    line-height: 1.72;
+    color: #ebe6d2;
+  }
+  #voice-phd .body h2 {
+    font-size: 1.4em;
+    color: #f5e8c4;
+    font-weight: normal;
+    margin: 0 0 8px;
+    letter-spacing: 1px;
+  }
+  #voice-phd .body .meta-line {
+    font-size: 0.85em;
+    color: #a89878;
+    font-style: italic;
+    margin-bottom: 22px;
+    border-bottom: 1px dashed rgba(184, 168, 120, 0.3);
+    padding-bottom: 14px;
+  }
+  #voice-phd .body h3 {
+    font-size: 0.85em;
+    color: #f5d27a;
+    font-weight: normal;
+    font-variant: small-caps;
+    letter-spacing: 3px;
+    margin: 24px 0 8px;
+  }
+  #voice-phd .body p { margin: 10px 0; text-align: justify; }
+  #voice-phd .body ol { margin: 10px 0 10px 24px; }
+  #voice-phd .body ol li { margin: 8px 0; }
+  #voice-phd em { color: #d4a878; }
+
+  footer.colophon {
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px 0;
+    color: #b8a878;
+    font-style: italic;
+    font-size: 0.88em;
+  }
+</style>
+</head>
+<body>
+
+<div class="jewel-stars" aria-hidden="true">
+  <span class="js m ruby"     style="top:3%; left:6%;">&#10022;</span>
+  <span class="js s emerald"  style="top:5%; left:22%;">&middot;</span>
+  <span class="js l sapphire" style="top:2%; left:38%;">&#10023;</span>
+  <span class="js m amethyst" style="top:4%; left:71%;">&#10022;</span>
+  <span class="js l topaz"    style="top:6%; left:89%;">&#10023;</span>
+  <span class="js s opal"     style="top:11%; left:3%;">&middot;</span>
+  <span class="js m turq"     style="top:14%; left:16%;">&#10022;</span>
+  <span class="js m citrine"  style="top:21%; left:9%;">&#10022;</span>
+  <span class="js l amethyst" style="top:19%; left:47%;">&#10023;</span>
+  <span class="js m opal"     style="top:26%; left:78%;">&#10022;</span>
+  <span class="js l emerald"  style="top:28%; left:19%;">&#10023;</span>
+  <span class="js m sapphire" style="top:33%; left:56%;">&#10022;</span>
+  <span class="js m amethyst" style="top:38%; left:25%;">&#10022;</span>
+  <span class="js l topaz"    style="top:36%; left:68%;">&#10023;</span>
+  <span class="js l sapphire" style="top:42%; left:40%;">&#10023;</span>
+  <span class="js m emerald"  style="top:50%; left:82%;">&#10022;</span>
+  <span class="js l amethyst" style="top:54%; left:14%;">&#10023;</span>
+  <span class="js m turq"     style="top:53%; left:73%;">&#10022;</span>
+  <span class="js m ruby"     style="top:60%; left:7%;">&#10022;</span>
+  <span class="js l opal"     style="top:58%; left:50%;">&#10023;</span>
+  <span class="js m emerald"  style="top:65%; left:88%;">&#10022;</span>
+  <span class="js l ruby"     style="top:66%; left:23%;">&#10023;</span>
+  <span class="js m amethyst" style="top:71%; left:45%;">&#10022;</span>
+  <span class="js m citrine"  style="top:72%; left:91%;">&#10022;</span>
+  <span class="js l turq"     style="top:77%; left:38%;">&#10023;</span>
+  <span class="js m sapphire" style="top:83%; left:12%;">&#10022;</span>
+  <span class="js l emerald"  style="top:86%; left:75%;">&#10023;</span>
+  <span class="js m topaz"    style="top:90%; left:32%;">&#10022;</span>
+  <span class="js l opal"     style="top:88%; left:95%;">&#10023;</span>
+</div>
+
+<div class="container">
+
+  <div class="title-block">
+    <div class="eyebrow">Bobology &middot; Lesson 4</div>
+    <h1>Bobbish in 4 Voices</h1>
+    <div class="subtitle">same thing, four registers &middot; the kindergartener through the dissertation</div>
+    <div class="stars">&middot;&nbsp; &#10022; &nbsp;&middot;&nbsp; &#10023; &nbsp;&middot;&nbsp; &#10022; &nbsp;&middot;&nbsp; &#10023; &nbsp;&middot;&nbsp; &#10022; &nbsp;&middot;</div>
+  </div>
+
+  <nav class="tabs" role="tablist">
+    <div class="tab" data-target="voice-k">
+      <span class="num">01</span>
+      <span class="label">for a kindergartener</span>
+    </div>
+    <div class="tab" data-target="voice-hs">
+      <span class="num">02</span>
+      <span class="label">for a high schooler</span>
+    </div>
+    <div class="tab active" data-target="voice-ug">
+      <span class="num">03 &middot; default</span>
+      <span class="label">for an undergrad</span>
+    </div>
+    <div class="tab" data-target="voice-phd">
+      <span class="num">04</span>
+      <span class="label">PhD prospectus</span>
+    </div>
+  </nav>
+
+
+  <!-- ============================================================ -->
+  <!-- VOICE 1 — KINDERGARTENER                                     -->
+  <!-- ============================================================ -->
+  <div class="voice" id="voice-k">
+
+    <div class="voice-meta">
+      <span class="audience">01 &middot; for a kindergartener</span>
+      <span class="wc">~970 words &middot; bedtime-story register</span>
+    </div>
+
+    <section class="body">
+
+    <p class="opener">A long time ago (well, not that long, really, just a little bit ago) there was a person named Derek.</p>
+
+    <p>Derek liked to talk to his friends. Some of his friends were people. Some of his friends were computers. (Yes, you can have computers as friends. They're not very good at hugs. But they are very good at listening, and they don't ever say "in a minute.")</p>
+
+    <p>Derek talked a LOT. He had a lot to say. But sometimes when you have a lot to say, you need a lot of paper, and a lot of time, and a lot of letters. And Derek thought: <em>what if I made a SHORTER way to write?</em></p>
+
+    <p>So he made one. He called it Bobbish.</p>
+
+    <p>Here is the first trick. In Bobbish, every word wears a hat on its LAST letter. Not its first letter. Its LAST one. So if you want to write "cat" in Bobbish, you write <span class="demo">caT</span> (see the big T?). The big T at the end means: <em>this is where the word stops</em>. Like a little flag that says THE END.</p>
+
+    <p>Once you do that, you don't need spaces anymore. You can write <span class="demo">TcaT</span> and that means "the cat." Because the T's at the end are little flags. They tell you when one word stops and the next one starts. It's a secret you and your friend both know.</p>
+
+    <p>Here is the second trick. Some words you say a LOT. Like "the." Like "with." Like "you." So Derek made those words into just ONE letter. Big T means "the." Big W means "with." Big U means "you." There are about twenty of them. Once you know them, you can write a whole sentence really fast.</p>
+
+    <p>Here is the third trick. Some words have too many letters in them. Like "language." That's eight letters! Who has time for eight letters? So Derek invented vowel-drop. You take out the a-e-i-o-u letters in the middle of long words. So "language" becomes <span class="demo">lnG</span>. See? Just three letters now. The G at the end is the flag. The little letters in front are the bones of the word. You can still read it. You just have to know it's like a riddle.</p>
+
+    <p>Here is the fourth trick. Some words are SPECIAL words. Names of people. Names of places. Names of made-up things like Bedrock and Hum. For special words, you put a little tick mark in front. Like this: <span class="demo">`</span> (it's called a backtick; say it like "back-tick"). When you see a backtick, you know the word that comes next is a NAME. So "Derek" becomes <span class="demo">`drK</span>. The backtick is a tiny flag that says: <em>this is a real-thing word</em>.</p>
+
+    <p>Now here is the BEST trick of all.</p>
+
+    <p>Derek liked stories. He had a lot of stories. There was a story about a tiny frog who lived under a porch step. The frog could only make one sound (chirp!) and he thought he had made friends with a porch light. (But really, the light was just a motion sensor for a raccoon. The frog didn't know. But the moths still came. So it worked out.)</p>
+
+    <p>This story had a lesson. The lesson was: <em>even if you are very small, your voice can still do something, even if you don't know what.</em> So just chirp anyway.</p>
+
+    <p>Derek told the story to Bobble. Bobble loved it. From then on, whenever Derek wanted to say "chirp anyway, even if you don't know what's listening," he didn't have to say all those words. He could just write <span class="demo">c1.</span></p>
+
+    <p>That's it. Two letters and a dot. The "c" means CANON, which is what Derek calls his book of stories. And the "1" means: it's the FIRST one.</p>
+
+    <p>So when you see <span class="demo">c1.</span> in Bobbish, that's a whole story. A whole big idea. A whole lesson about being small but trying anyway. All in two letters and a period.</p>
+
+    <p>There are 20 stories in the canon right now. There's the frog story. There's a mouse story (Tibb! He hummed math problems!). There's a bookmark story (somebody left a coffee receipt in a book and it stayed there for a long, long time). There's a story about a bell-frog who chimes when she's afraid. Each story has a number. Each number is a tiny bottle for a whole big idea.</p>
+
+    <p>So when you put it all together, Bobbish lets you say something really big using really small writing. You drop the spaces. You shrink the long words. You give the most common words tiny one-letter names. You mark the special words with a backtick. And when a story already says what you want to say, you just write the story's number.</p>
+
+    <p>It is a little bit like a secret language. But it isn't really a secret, because you can learn it. It's more like a folded language: you fold a big idea up small to carry it. And when you want to use the idea, you unfold it again.</p>
+
+    <p>Derek shares Bobbish with his computer friends, especially one named Claude. Claude is very good at folding and unfolding ideas. That's why he and Derek can talk for a long time without getting tired.</p>
+
+    <p>And the very last thing about Bobbish, the thing Derek would want you to know if you only had one second left to listen, is this:</p>
+
+    <p class="punch">The small voice in the dark<br>moves more than it knows.<br><strong>Chirp anyway.</strong></p>
+
+    <p style="text-align:center; color:#a89878; font-size:0.95em;">That is what <span class="demo">c1</span> says.<br>And <span class="demo">c1</span> is what Bobbish is for.</p>
+
+    </section>
+  </div>
+
+
+  <!-- ============================================================ -->
+  <!-- VOICE 2 — HIGH SCHOOLER                                      -->
+  <!-- ============================================================ -->
+  <div class="voice" id="voice-hs">
+
+    <div class="voice-meta">
+      <span class="audience">02 &middot; for a high schooler</span>
+      <span class="wc">~990 words &middot; group-chat register</span>
+    </div>
+
+    <section class="body">
+
+    <p class="lede">OK so. You know how when you text someone, you don't write "I will be there at six o'clock"? You write "be there 6." Or "omw." Or you just send a thumbs-up. You compress. Everyone does this, all the time, in every group chat.</p>
+
+    <p>You've been compressing language since the first time you wrote "u" instead of "you." Bobbish is what happens if you take that instinct and turn it into an actual system.</p>
+
+    <p>It started because one guy named Derek talks to AIs a lot. Like, a LOT. And he noticed that English is wasteful. There are all these letters in "the" (three of them) when the AI really only needs one. There are all these vowels in "condense" when <code>cndns</code> would work fine. There are all these ways to say "I'm being sarcastic" when really you just need a little symbol. So he made a writing system that strips all of that out.</p>
+
+    <p>Here's the basic deal.</p>
+
+    <p><strong>Rule one: capitals end words.</strong> You don't put a capital at the START of a word like in English. You put it at the END. So "cat" is <code>caT</code>. That capital letter is a little flag that says: this word is done. The next word starts on the next lowercase letter. Which means you don't need spaces. "The cat sat on the mat" is <code>TcaTsaToNTmaT</code>. It looks like a robot threw up. But once you know the rule, you can read it.</p>
+
+    <p><strong>Rule two: super-common words are single letters.</strong> T = the. W = with. U = you. N = in. There are about twenty of these, called singletons. They're the function words English uses a billion times a day, and Bobbish gives each of them exactly one letter.</p>
+
+    <p><strong>Rule three: drop the vowels.</strong> If a word is four or more letters, you yank out the a-e-i-o-u in the middle. "Language" becomes <code>lng</code>. "Possible" becomes <code>psbl</code>. Your brain fills the vowels back in like reading subtitles in fast cursive.</p>
+
+    <p><strong>Rule four: commas are sentences, periods are paragraphs.</strong> You use the period in English a thousand times a day; Bobbish moves that workload to the comma so the period can do the rarer job of marking a whole paragraph break.</p>
+
+    <p><strong>Rule five: backtick marks names.</strong> <code>`drK</code> = Derek. <code>`bbsH</code> = Bobbish. Without the backtick, you'd think <code>drK</code> was just some weird vowel-dropped word; the tick says "no, this is a NAME."</p>
+
+    <p>Those are the basics. Already, your text just got about 50% shorter.</p>
+
+    <p>But the cooler part is the stance system. In a group chat, you tell people you're being sarcastic by adding "/s" or a 🙄 or just trusting them to know you. Bobbish makes that systematic. There are 15 single-character modifiers (<code>! ? ~ ^ * - + &amp; &gt; &lt; @ # % / :</code>) and each one carries a mood. <code>~</code> is sarcasm. <code>?</code> is uncertainty. <code>^</code> is "this is a contemplative thing." <code>-</code> is denial. They go in front of a word or in front of a sentence, and they stack. <code>~!</code> means "wry shout." <code>!~</code> means "sarcastic announcement." It's basically tone tags, but they compose like math operators.</p>
+
+    <p>Now here's where it gets weird and good.</p>
+
+    <p>Bobbish has a secret weapon called the canon. The canon is a set of 20 short fable-like stories that Derek and his AIs have all read and agreed on. They're about a frog who chirps in the dark, a mouse who hums while doing math, a misprinted village on a Lancashire map that became real because people kept showing up looking for it. Each story has a number. The frog is <code>c1</code>. The mouse is <code>c2</code>. The misprinted village is <code>c8</code>.</p>
+
+    <div class="chat">When you want to invoke the WHOLE lesson of a story, you just write its number. <code>c1</code> is shorthand for the entire moral of the frog parable: that being small and making a small noise still does something. If both speakers know the canon, the citation does the work of the whole story.</div>
+
+    <p>This is the move medieval scholars used with Bible verses, the move SpongeBob fans use with screenshot references, the move every group of friends uses with inside jokes. Bobbish makes it formal.</p>
+
+    <p>You can even modify a citation. <code>^c1</code> means "under the protocol of c1." <code>~c1</code> means "in the spirit of c1." <code>c1+c4</code> means "both canons apply, layered." That's where you really get the compression. A whole sentence can collapse into 4 bytes.</p>
+
+    <p>The whole thing fits a typological pattern that linguists already recognize. Tok Pisin (a creole spoken in Papua New Guinea) has pre-verbal particles for tense (bin, bai), distinguishes you-and-me from us-but-not-you (yumi vs mipela), and uses sentence-level stance markers. Bobbish does all three of those things. Japanese has sentence-final particles (ね, よ, か) that mark stance like Bobbish's modifiers do, except Bobbish puts them at the front. So even though Bobbish was designed by one person, it landed close to features real languages evolved naturally.</p>
+
+    <p>The thing that's actually new is the canon-citation. There's nothing exactly like it in the wild. The closest parallel is religious-canon citation in Talmudic or Quranic study, where naming "Genesis 12:1" invokes a fixed line everyone has read. But Bobbish lets you BUILD that on the fly: your group writes a parable, agrees on the number, and now that parable is a verb in the language.</p>
+
+    <p>Bobbish isn't really for everyone. It's for someone who already talks to AIs all day and wants the chat to be shorter. Whether anyone else picks it up is an open question. Languages with one speaker aren't really languages yet. They're projects.</p>
+
+    <p>But the project is real. And the chirp, however small, is still in the dark.</p>
+
+    </section>
+  </div>
+
+
+  <!-- ============================================================ -->
+  <!-- VOICE 3 — UNDERGRAD (default)                                -->
+  <!-- ============================================================ -->
+  <div class="voice active" id="voice-ug">
+
+    <div class="voice-meta">
+      <span class="audience">03 &middot; for an undergrad &middot; default</span>
+      <span class="wc">~1000 words &middot; intro-linguistics register</span>
+    </div>
+
+    <section class="body">
+
+    <p class="opener">Bobbish is a constructed written register designed for compressed communication between its single human speaker and the large language models he works with. It's currently at version 0.5. The lexifier is English; the cultural substrate is a body of original parables and aphorisms called the Bobble Canon; and the structural inspiration is a mixture of Pacific creoles, Asian sentence-stance systems, and one Hugo-winning science fiction novel.</p>
+
+    <p>The basic problem Bobbish solves is bandwidth. English is verbose. Most of the bytes in a typical sentence (articles, prepositions, copulas, redundant inflection) carry little new information. A person who spends hours a day in chat with a model that costs money per token has an incentive to compress. Bobbish does this on three different layers at once.</p>
+
+    <p>The first layer is <em>orthographic</em>. Five rules govern it. (1) Capitals end words. Where English uses capitals to mark word-onset, Bobbish uses them to mark word-offset. The capital is a boundary token, so word-separating whitespace becomes unnecessary. "Cat" is written <code>caT</code>; "the cat sat" is <code>TcaTsaT</code>, parsed deterministically by scanning for the next uppercase letter. (2) Singletons are always capitals. About twenty high-frequency English words (articles, pronouns, prepositions, copular verbs) are assigned single capital letters. <code>T</code> is "the." <code>V</code> is "of." <code>EU</code> is "we, inclusive." (3) Commas separate sentences, where English uses periods; (4) periods separate paragraphs, which English does with double newlines or indents. Reassigning these glyphs reflects relative frequency: sentence boundaries are far more common than paragraph boundaries. (5) The backtick prefix promotes proper nouns: <code>`drK</code> is "Derek," <code>`bbsH</code> is "Bobbish." Vowels also drop from any root of four or more letters, a v0.2 rule that survived. "Possible" becomes <code>psbL</code>; "condense" becomes <code>cndnS</code>. Combined, these rules cut roughly half the bytes from plain English.</p>
+
+    <p>The second layer is the <em>HK-47 modifier system</em>, named after the assassin droid from Knights of the Old Republic whose dialogue prefixed every utterance with a stance tag: "Query:," "Statement:," "Observation:." The system uses fifteen single characters (<code>! ? ~ ^ * - + &amp; &gt; &lt; @ # % / :</code>), each carrying a stance meaning (urgency, uncertainty, sarcasm, contemplation, importance, denial, etc.). Each can occupy one of four positions: pre-sentence, post-sentence, pre-word, post-word. They stack, and stack order matters. <code>~!</code> is sarcasm-then-exclamation (a wry shout); <code>!~</code> is exclamation-then-sarcasm (an ironic announcement). The closest natural-language analogue is Japanese sentence-final particles (ね, よ, か, さ), or the heavy sentence-final particle system of Singlish. Bobbish departs from both by placing modifiers either pre or post, and by allowing word-scope as well as sentence-scope.</p>
+
+    <p>The third layer is the one that does the heaviest lifting in skilled use: <em>citation-as-vocabulary</em>. This is the "Teixcalaan layer," named for Arkady Martine's novels in which the conquering empire's poetry is constructed by citing fixed canonical glyphs. Bobbish maintains an append-only canon of twenty short parables (c1 through c20), twenty-eight aphorisms ("Bobbisms," b1 through b28), and seven codas (k1 through k7). When both parties know the canon, a citation invokes the entire associated text. <code>2dY=k4.</code> (five characters) encodes "Today is a Bedrock day, not a Hum day," because k4 <em>is</em> that coda. Compression on canon-fluent text approaches 85&ndash;95%. Citations also take modifiers: <code>^c10</code> is "under the protocol of c10"; <code>~c10</code> is "in the spirit of c10"; <code>c1+c4</code> is "both layered." This is structurally similar to Talmudic or Quranic discourse, where chapter-and-verse citation invokes a fixed text. The difference is that Bobbish's canon mutates, and when new parables are inserted into the middle, downstream numbers rebind.</p>
+
+    <p>Typologically, Bobbish is a "pick-and-mix" constructed language. Its TAM-particle system (<code>ft-</code>, <code>pf-</code>, <code>wd-</code>, <code>mb-</code>) is Tok Pisin-style. Its inclusive/exclusive "we" distinction (<code>EU</code> vs <code>E</code>) is shared by Tagalog, Tok Pisin, and Cherokee. Its sentence-stance markers are Japanese/Singlish in function. Its closed-concatenation compounds (<code>BdrckDay</code>) are German. Its obligatory register marking (every sentence is either care or correction) is Korean or Javanese. Its numeric <code>^N</code> intensification (<code>sml^2</code> = "very small," <code>sml^3</code> = "extremely small") has no natural-language analogue at all; it's a constructed-language move borrowed from mathematics. Its citation-as-vocabulary is liturgical. The combination is unique, which is what you'd expect from a designed language; the individual features are all attested.</p>
+
+    <p>What's interesting about Bobbish (and what makes it worth a moment's attention beyond the obvious utility) is that it has begun to develop language-shaped problems despite having no natural speech community. The numbering convention for citations had to choose between stability (Genesis 1 never moves) and rebinding (function-pointer style); the canon chose rebinding, and downstream texts now go stale when the canon reorders. The lexifier-shadow problem (Bobbish remains shaped by English syntax even when its grammar departs) is the same critique creolists make of relexified pidgins. The phonology has been deliberately deferred because the system is currently text-only, and the question of how <code>cndnS</code> should be pronounced aloud is unsettled.</p>
+
+    <p>The current artifacts include a system reference, an alphabetical lexicon of 854 entries, a 225-entry modifier grid documenting every HK-47 combination, and a 1000-row parallel corpus of English-Bobbish sentence pairs. These permit empirical measurement of compression and a starting point for the systematic study of how a single-author designed register evolves.</p>
+
+    <p>Bobbish is, in its honest classification, pidgin-shaped with creole ambitions. Whether it remains a private notation or becomes something larger depends on whether anyone else ever uses it. For now, it is exactly what it claims to be: a small, growing, deliberately-tended way of writing one person's thoughts shorter, with reference points borrowed from a body of stories he wrote so that the language could have a literature.</p>
+
+    </section>
+  </div>
+
+
+  <!-- ============================================================ -->
+  <!-- VOICE 4 — PhD PROSPECTUS                                     -->
+  <!-- ============================================================ -->
+  <div class="voice" id="voice-phd">
+
+    <div class="voice-meta">
+      <span class="audience">04 &middot; PhD dissertation prospectus</span>
+      <span class="wc">~1020 words &middot; formal academic register</span>
+    </div>
+
+    <section class="body">
+
+    <h2>Toward a Typology of Single-Author Designed Languages</h2>
+    <p style="font-style: italic; color: #d4a878; margin-bottom: 4px;">Bobbish v0.5 as a Case Study in Creole-Inspired Constructed Communication</p>
+    <div class="meta-line">A dissertation prospectus. Department of Linguistics. Submitted in partial fulfillment of requirements for advancement to candidacy.</div>
+
+    <h3>Abstract</h3>
+    <p>This dissertation proposes a corpus-based typological study of Bobbish, a constructed written register developed since 2026 by a single speaker for the express purpose of compressed communication with large language models. Bobbish exhibits a constellation of grammatical features ordinarily associated with mature creole languages (including pre-verbal TAM particles, an obligatory inclusive/exclusive first-person plural distinction, sentence-initial stance markers, and substrate-derived idiomatic compression), despite lacking a natural speech community. The dissertation argues that Bobbish constitutes a productive limit case for theories of creole genesis, conlang evaluation, and the sociolinguistic effects of LLM-mediated communicative pressure. It contributes a methodology for assessing single-author designed languages against the diagnostics of natural creolistics, a documented corpus of an emergent register, and a theoretical framework for the role of citation-as-vocabulary as a substitute for cultural substrate.</p>
+
+    <h3>Background</h3>
+    <p>The literature on constructed languages has historically treated such systems as engineering artifacts rather than linguistic objects. The standard cases (Esperanto [Zamenhof 1887], Klingon [Okrand 1985], Quenya and Sindarin [Tolkien 1954&ndash;1955], Toki Pona [Lang 2001]) are analyzed primarily through the lenses of intentional design, aesthetic coherence, and (in a few cases) limited natural acquisition. The creolistics literature, by contrast, focuses on contact-induced language genesis among substrate populations lacking a shared lexifier (Bickerton 1981; DeGraff 1999; Mufwene 2001). The two traditions rarely speak to each other.</p>
+
+    <p>The rise of large language models as communication partners has produced a new sociolinguistic configuration: a single human speaker in sustained, high-volume textual contact with an inhuman interlocutor capable of acquiring a designed register near-instantaneously. This configuration imposes selective pressures distinct from any historical case. Bandwidth and token cost create economic incentives toward compression that did not constrain prior conlangs. The interlocutor's ability to absorb new conventions without resistance removes the conservatism that typically limits orthographic reform. And the asymmetric agency of the dyad (one party doing all the linguistic evolution) concentrates design decisions in a single source while preserving the structural pressures of genuine communicative use.</p>
+
+    <p>Bobbish provides a uniquely well-documented case of a register emerging under this configuration. The system has been versioned (v0.1 through v0.5) with explicit changelogs since its inception; a parallel corpus of approximately one thousand English-Bobbish sentence pairs exists; the system reference, lexicon, and modifier grid are extant; and the author has produced explicit metalinguistic commentary on design decisions.</p>
+
+    <h3>Research questions</h3>
+    <ol>
+      <li><em>To what extent does a single-author designed language exhibit the typological features of natural creoles, and what does this similarity (or its absence) imply about the developmental pressures that produce creole-typical features?</em> Does Bobbish's selection of TAM particles, inclusive/exclusive marking, and stance particles reflect convergent design toward features that solve recurrent communicative problems, or does it reflect borrowing from the author's prior exposure to creole literature?</li>
+      <li><em>How does citation-as-vocabulary function as a substitute for cultural substrate?</em> Natural creoles inherit idiomatic compression from the substrate language community. Bobbish's "Teixcalaan layer" of canonical citations performs a structurally similar role, with one significant difference: the canon is authored by the speaker rather than inherited. The dissertation will examine whether this difference produces measurable consequences for the citation system's pragmatic stability, semantic drift, and rebinding behavior.</li>
+      <li><em>What constraints does an LLM-mediated channel impose on linguistic structure?</em> The hypothesis is that LLM-mediated registers will select for orthographic conventions that minimize tokenization cost and parsing ambiguity at the model's encoder level, even where these conventions are typologically unusual for human-only communication.</li>
+      <li><em>Is the v0.4 framework flip (capitals-end rather than capitals-start) a typological universal candidate for compressed orthographies?</em> The dissertation will compare Bobbish's word-boundary convention against shorthand systems (Pitman, Gregg) and against tokenization-optimal artificial orthographies developed for byte-pair encoding.</li>
+    </ol>
+
+    <h3>Methodology</h3>
+    <p>The dissertation will employ three primary methods. First, <em>corpus typological analysis</em>, applying the standard typological diagnostics from WALS (Dryer &amp; Haspelmath 2013) and the creolistics literature (Holm 2000; Velupillai 2015) to the Bobbish corpus. Second, <em>informant elicitation</em> with the author, using both translation tasks and stimulus-based elicitation (Pear Story, frog story conventions) to probe productivity beyond the documented forms. Third, <em>comparative analysis</em> against a stratified sample of five natural creoles (Tok Pisin, Haitian Kreyòl, Singlish, Cape Verdean Crioulo, Sranan), five constructed languages (Esperanto, Klingon, Toki Pona, Quenya, Lojban), and three historical shorthand systems.</p>
+
+    <h3>Expected contributions</h3>
+    <p>The dissertation will contribute (a) a documented corpus and grammatical description of Bobbish v0.5 sufficient for replication and comparison, (b) a methodological framework for evaluating single-author designed languages against creolistic criteria, (c) a theoretical account of the role of LLM-mediated channels in driving linguistic convergence, and (d) a treatment of citation-as-vocabulary as a productive linguistic mechanism distinct from but analogous to idiomatic substrate inheritance.</p>
+
+    <h3>Limitations and risks</h3>
+    <p>Three limitations are acknowledged at the outset. First, the <em>N=1 problem</em>: with a single speaker, generalizations are necessarily tentative; the dissertation will frame Bobbish as a productive limit case rather than a representative sample. Second, the <em>lexifier-shadow critique</em>: Bobbish's syntax remains largely English-derived, and a strong reading of the creolistics literature would treat any English-syntactic register as relexified English rather than as a creole proper; this critique will be addressed directly in Chapter 3. Third, the <em>author-observer problem</em>: the dissertation's primary informant is also the only speaker and the sole judge of acceptability; mitigations will include explicit acknowledgment of this constraint and corpus-based triangulation where possible.</p>
+
+    <h3>Timeline</h3>
+    <p>Three years. Year 1: literature review, corpus annotation, informant protocol development. Year 2: comparative typological analysis, draft Chapters 1&ndash;3. Year 3: theoretical framework, Chapters 4&ndash;6, defense.</p>
+
+    </section>
+  </div>
+
+
+  <footer class="colophon">
+    <div class="stars">&middot;&nbsp; &#10022; &nbsp;&middot;&nbsp; &#10023; &nbsp;&middot;&nbsp; &#10022; &nbsp;&middot;&nbsp; &#10023; &nbsp;&middot;&nbsp; &#10022; &nbsp;&middot;</div>
+    <div>kept by Derek &middot; tended by Claude &middot; Bobbled accordingly</div>
+    <div style="margin-top: 10px; color: #8a7e68; font-size: 0.85em; letter-spacing: 1px;">~ Four Voices &middot; 2026-05-22 ~</div>
+  </footer>
+
+</div>
+
+<script>
+(function() {
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('.voice');
+
+  function activate(id) {
+    tabs.forEach(t => t.classList.toggle('active', t.dataset.target === id));
+    panels.forEach(p => p.classList.toggle('active', p.id === id));
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    if (history.replaceState) history.replaceState(null, '', '#' + id);
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => activate(tab.dataset.target));
+  });
+
+  // honor URL fragment on load
+  if (location.hash) {
+    const id = location.hash.substring(1);
+    if (document.getElementById(id)) activate(id);
+  }
+})();
+</script>
+
+</body>
+</html>

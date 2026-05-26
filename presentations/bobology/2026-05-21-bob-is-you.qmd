@@ -1,0 +1,13 @@
+---
+title: "Lecture 2: Bob is You"
+date: "2026-05-21"
+order: 2
+description: "A 21-slide companion to the integrated-health article: five dimensions, five integration loops (Walker, Ratey, Holt-Lunstad, Hill & Turiano, van der Kolk), and a radar-plot reveal. Also available as an [HTML article](/bob-is-you.html)."
+categories: [presentation, bobble, bobology, health, integration]
+path: /assets/bob-is-you.pdf
+---
+
+```{=html}
+<p>Opening <a href="/assets/bob-is-you.pdf">the slide deck (PDF)</a>… or switch to the <a href="/bob-is-you.html">HTML article</a>.</p>
+<script>window.location.replace("/assets/bob-is-you.pdf");</script>
+```

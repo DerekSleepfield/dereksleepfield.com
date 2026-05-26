@@ -1,0 +1,12 @@
+---
+title: "Mind Palace"
+date: "2026-05-09"
+description: "A self-contained HTML visualization — CES data exploration with a paired Python pipeline, distilled into one page that runs anywhere."
+categories: [project, visualization, data]
+path: /mind-palace.html
+---
+
+```{=html}
+<p>Redirecting to <a href="/mind-palace.html" target="_blank" rel="noopener">the standalone page</a>…</p>
+<script>window.location.replace("/mind-palace.html");</script>
+```
