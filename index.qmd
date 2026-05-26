@@ -28,4 +28,52 @@ whatever else wants a home.</p>
 <p class="shelf-small">New things appear when there is something to appear.
 No newsletter. No schedule. Bake when you can.</p>
 
+<pre class="resident-cat cat-lost-bookmark">
+      ／¯\_／¯\＿___
+     (  ‿     ‿       )
+      \_____________／
+   the bookmark cat — cream-and-tan ragdoll
+</pre>
+
+<pre class="resident-cat cat-porch-light">
+       ／\_／\
+      (  ◉   ◉ )
+       )  ω  (
+       │  │  │  │
+   the porch cat — charcoal shorthair, paws on the screen door
+</pre>
+
+<pre class="resident-cat cat-wildflower">
+        ⚘    ⚘
+       ／\_／\
+      (  ◔   ◕ )⚘
+        \   ω   /
+   the meadow cat — cream calico in tall grass
+</pre>
+
+<pre class="resident-cat cat-frozen-wood">
+      ＝❄=/\＿/\=❄＝
+     ／  (  ◉   ◉  )  \
+    ／    )   ω   (    \
+       ▔▔▔▔▔▔▔▔
+   the frost cat — white Siberian, frost-tipped fur
+</pre>
+
+<pre class="resident-cat cat-highway-diner">
+       ／\_／\
+      (  ◎   ◎ )
+       )  ⌣  (
+       ▔▔▔▔▔▔
+   the counter cat — pink-eared cream, two a.m. regular
+</pre>
+
+<pre class="resident-cat cat-crones-cottage">
+        ✦
+       ／\_／\
+      (  ◉   ◉ )
+       )  ω  (
+       ▔▔▔▔▔
+   the cottage cat — black-and-silver tortoiseshell, witch-familiar
+</pre>
+
 :::

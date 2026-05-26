@@ -1,54 +1,204 @@
 /* =========================================================================
-   The Shelf — Quiet Library theme
-   Layered on top of Quarto's base theme (cosmo light, darkly dark).
-   Palette: parchment + warm ink + sepia accents.
+   The Shelf — Themes
+   Six selectable styles. Default = Lost Bookmark.
+   Switch via data-theme="..." attribute on <html>, controlled by
+   theme-switcher.html injected via _quarto.yml's include-after-body.
+
+   Each theme defines:
+     - palette via CSS variables
+     - a twinkling background (radial-gradient stars/motes + slow drift)
+     - a resident ASCII cat (shown only when that theme is active)
    ========================================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Crimson+Pro:ital,wght@0,400;0,500;1,400&family=VT323&display=swap');
 
-/* ---- Light (default) palette ---- */
+/* ────────────────────────────────────────────────────────────
+   Default theme: Lost Bookmark (coffee-shop receipt cream)
+   ──────────────────────────────────────────────────────────── */
 :root {
-  --shelf-bg: #f4ecd8;            /* parchment */
-  --shelf-bg-soft: #faf5e8;       /* lighter parchment for cards/inputs */
-  --shelf-ink: #2b2520;           /* warm near-black */
-  --shelf-ink-soft: #4a3f30;      /* slightly lighter ink */
-  --shelf-sepia: #7a6549;         /* aged brown */
-  --shelf-rule: #c9b890;          /* faded ornament line */
-  --shelf-accent: #5a3a24;        /* deeper sepia for links/hover */
-  --shelf-selection: #d9c490;
+  --shelf-bg:          #f3eadc;
+  --shelf-bg-soft:     #faf2e2;
+  --shelf-ink:         #2b2520;
+  --shelf-ink-soft:    #5a4b35;
+  --shelf-sepia:       #7a6549;
+  --shelf-rule:        #c9b890;
+  --shelf-accent:      #c7935a;
+  --shelf-secondary:   #7a3a3a;
+  --shelf-selection:   #d9c490;
+  --shelf-body-font:   'EB Garamond', 'Iowan Old Style', 'Palatino', 'Georgia', serif;
+  --shelf-twinkle-color:  rgba(122, 101, 73, 0.45);
+  --shelf-twinkle-size:   2px;
 }
 
-/* ---- Dark palette ---- */
-.quarto-dark {
-  --shelf-bg: #1a1612;
-  --shelf-bg-soft: #221c16;
-  --shelf-ink: #e8dcc4;
-  --shelf-ink-soft: #c0b395;
-  --shelf-sepia: #b09472;
-  --shelf-rule: #4a3f2c;
-  --shelf-accent: #d9b87a;
-  --shelf-selection: #4a3f2c;
+/* ────────────────────────────────────────────────────────────
+   Theme: Porch Light (Canon I — yellow bulb in deep night)
+   ──────────────────────────────────────────────────────────── */
+html[data-theme="porch-light"] {
+  --shelf-bg:          #0c1419;
+  --shelf-bg-soft:     #14202a;
+  --shelf-ink:         #f5d56a;
+  --shelf-ink-soft:    #c9a960;
+  --shelf-sepia:       #8a7c4a;
+  --shelf-rule:        #3a4f5a;
+  --shelf-accent:      #f5d56a;
+  --shelf-secondary:   #c9a960;
+  --shelf-selection:   #3a4f5a;
+  --shelf-body-font:   'Crimson Pro', 'Crimson Text', Cambria, Georgia, serif;
+  --shelf-twinkle-color:  rgba(245, 213, 106, 0.45);
+  --shelf-twinkle-size:   1.5px;
 }
 
-/* ---- Body & typography ---- */
-body {
+/* ────────────────────────────────────────────────────────────
+   Theme: Wildflower (bee meadow — yellow + lavender)
+   ──────────────────────────────────────────────────────────── */
+html[data-theme="wildflower"] {
+  --shelf-bg:          #f5edc0;
+  --shelf-bg-soft:     #fdf7d8;
+  --shelf-ink:         #3a4a2a;
+  --shelf-ink-soft:    #5a6a3a;
+  --shelf-sepia:       #6a5a3a;
+  --shelf-rule:        #c9a8d0;
+  --shelf-accent:      #9a6abc;
+  --shelf-secondary:   #c8a83a;
+  --shelf-selection:   #d9c8f0;
+  --shelf-body-font:   'EB Garamond', 'Iowan Old Style', 'Palatino', Georgia, serif;
+  --shelf-twinkle-color:  rgba(154, 106, 188, 0.55);
+  --shelf-twinkle-size:   2px;
+}
+
+/* ────────────────────────────────────────────────────────────
+   Theme: Frozen Wood (pale ice blue, silent)
+   ──────────────────────────────────────────────────────────── */
+html[data-theme="frozen-wood"] {
+  --shelf-bg:          #e6eef3;
+  --shelf-bg-soft:     #f2f6f9;
+  --shelf-ink:         #1a2a3a;
+  --shelf-ink-soft:    #3a4a5a;
+  --shelf-sepia:       #5a6a7a;
+  --shelf-rule:        #a8c0c8;
+  --shelf-accent:      #3a6a8a;
+  --shelf-secondary:   #7a8a9a;
+  --shelf-selection:   #c8e0e8;
+  --shelf-body-font:   'EB Garamond', 'Iowan Old Style', 'Palatino', Georgia, serif;
+  --shelf-twinkle-color:  rgba(58, 106, 138, 0.40);
+  --shelf-twinkle-size:   2.5px;
+}
+
+/* ────────────────────────────────────────────────────────────
+   Theme: Highway Diner (neon pink + cyan on near-black)
+   ──────────────────────────────────────────────────────────── */
+html[data-theme="highway-diner"] {
+  --shelf-bg:          #0a0a0e;
+  --shelf-bg-soft:     #14141a;
+  --shelf-ink:         #f5f0e8;
+  --shelf-ink-soft:    #d8d0c0;
+  --shelf-sepia:       #5acfe8;
+  --shelf-rule:        #ff3a7a;
+  --shelf-accent:      #ff3a7a;
+  --shelf-secondary:   #5acfe8;
+  --shelf-selection:   #ff3a7a;
+  --shelf-body-font:   'VT323', 'Courier New', monospace;
+  --shelf-twinkle-color:  rgba(90, 207, 232, 0.55);
+  --shelf-twinkle-size:   2px;
+}
+
+/* ────────────────────────────────────────────────────────────
+   Theme: Crone's Cottage (moss + herb-purple, witch-familiar)
+   ──────────────────────────────────────────────────────────── */
+html[data-theme="crones-cottage"] {
+  --shelf-bg:          #1f2a1a;
+  --shelf-bg-soft:     #2a3424;
+  --shelf-ink:         #d8c8a8;
+  --shelf-ink-soft:    #a8a070;
+  --shelf-sepia:       #c8a870;
+  --shelf-rule:        #5a3a5a;
+  --shelf-accent:      #c89a3a;
+  --shelf-secondary:   #9a7abc;
+  --shelf-selection:   #5a3a5a;
+  --shelf-body-font:   'EB Garamond', 'Iowan Old Style', 'Palatino', Georgia, serif;
+  --shelf-twinkle-color:  rgba(154, 122, 188, 0.55);
+  --shelf-twinkle-size:   2px;
+}
+
+/* =========================================================================
+   Structural styles — apply across themes via variables
+   ========================================================================= */
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
   background: var(--shelf-bg) !important;
   color: var(--shelf-ink) !important;
-  font-family: 'EB Garamond', 'Iowan Old Style', 'Palatino', 'Georgia', serif !important;
+  font-family: var(--shelf-body-font) !important;
   font-size: 19px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  transition: background-color 320ms ease, color 320ms ease;
 }
 
 main, .content, .quarto-container {
   background: transparent !important;
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- Twinkling background — universal scaffold ---- */
+body::before {
+  content: '';
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 1;
+  background-image:
+    radial-gradient(var(--shelf-twinkle-size) var(--shelf-twinkle-size) at 12% 18%, var(--shelf-twinkle-color), transparent 60%),
+    radial-gradient(var(--shelf-twinkle-size) var(--shelf-twinkle-size) at 34% 7%,  var(--shelf-twinkle-color), transparent 60%),
+    radial-gradient(var(--shelf-twinkle-size) var(--shelf-twinkle-size) at 58% 22%, var(--shelf-twinkle-color), transparent 60%),
+    radial-gradient(var(--shelf-twinkle-size) var(--shelf-twinkle-size) at 73% 14%, var(--shelf-twinkle-color), transparent 60%),
+    radial-gradient(var(--shelf-twinkle-size) var(--shelf-twinkle-size) at 89% 28%, var(--shelf-twinkle-color), transparent 60%),
+    radial-gradient(var(--shelf-twinkle-size) var(--shelf-twinkle-size) at 8%  44%, var(--shelf-twinkle-color), transparent 60%),
+    radial-gradient(var(--shelf-twinkle-size) var(--shelf-twinkle-size) at 25% 52%, var(--shelf-twinkle-color), transparent 60%),
+    radial-gradient(var(--shelf-twinkle-size) var(--shelf-twinkle-size) at 49% 38%, var(--shelf-twinkle-color), transparent 60%),
+    radial-gradient(var(--shelf-twinkle-size) var(--shelf-twinkle-size) at 68% 47%, var(--shelf-twinkle-color), transparent 60%),
+    radial-gradient(var(--shelf-twinkle-size) var(--shelf-twinkle-size) at 85% 56%, var(--shelf-twinkle-color), transparent 60%),
+    radial-gradient(var(--shelf-twinkle-size) var(--shelf-twinkle-size) at 13% 71%, var(--shelf-twinkle-color), transparent 60%),
+    radial-gradient(var(--shelf-twinkle-size) var(--shelf-twinkle-size) at 38% 78%, var(--shelf-twinkle-color), transparent 60%),
+    radial-gradient(var(--shelf-twinkle-size) var(--shelf-twinkle-size) at 61% 86%, var(--shelf-twinkle-color), transparent 60%),
+    radial-gradient(var(--shelf-twinkle-size) var(--shelf-twinkle-size) at 78% 92%, var(--shelf-twinkle-color), transparent 60%),
+    radial-gradient(var(--shelf-twinkle-size) var(--shelf-twinkle-size) at 94% 74%, var(--shelf-twinkle-color), transparent 60%);
+  background-size: 100% 100%;
+  animation: shelfDrift 60s linear infinite;
+}
+
+@keyframes shelfDrift {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50px, -90px, 0); }
+}
+
+/* Faster sparkle for neon */
+html[data-theme="highway-diner"] body::before {
+  animation: shelfDrift 30s linear infinite, neonFlicker 1.6s steps(6) infinite;
+}
+@keyframes neonFlicker {
+  0%, 92%, 100% { opacity: 1; }
+  93% { opacity: 0.6; }
+  95% { opacity: 0.9; }
+}
+
+/* Slower, more deliberate for Frozen Wood */
+html[data-theme="frozen-wood"] body::before {
+  animation: shelfDrift 120s linear infinite;
 }
 
 /* ---- Headings ---- */
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'EB Garamond', serif !important;
+  font-family: var(--shelf-body-font) !important;
   color: var(--shelf-ink) !important;
   font-weight: 500;
   letter-spacing: -0.005em;
@@ -64,19 +214,31 @@ h2 {
 }
 h3 { font-size: 1.25rem; font-weight: 500; }
 
+/* Highway Diner: bigger, all-caps headers for the neon vibe */
+html[data-theme="highway-diner"] h1,
+html[data-theme="highway-diner"] h2,
+html[data-theme="highway-diner"] h3 {
+  font-family: 'VT323', monospace !important;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 400;
+  color: var(--shelf-accent) !important;
+  text-shadow: 0 0 8px var(--shelf-accent);
+}
+
 /* ---- Links ---- */
 a, a:visited {
   color: var(--shelf-accent) !important;
   text-decoration: none !important;
   border-bottom: 1px solid var(--shelf-rule);
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, color 0.2s ease;
 }
 
 a:hover {
   border-bottom-color: var(--shelf-accent) !important;
+  color: var(--shelf-secondary) !important;
 }
 
-/* No underline noise on nav/footer/listing links */
 .navbar a, .nav-footer a, .quarto-listing a {
   border-bottom: none !important;
 }
@@ -85,13 +247,12 @@ a:hover {
   color: var(--shelf-accent) !important;
 }
 
-/* ---- Selection ---- */
 ::selection {
   background: var(--shelf-selection);
   color: var(--shelf-ink);
 }
 
-/* ---- Navbar (Quarto override) ---- */
+/* ---- Navbar ---- */
 .navbar {
   background: var(--shelf-bg) !important;
   border-bottom: 1px solid var(--shelf-rule) !important;
@@ -99,9 +260,8 @@ a:hover {
   padding-bottom: 0.6rem;
 }
 
-.navbar-brand,
-.navbar .nav-link {
-  font-family: 'EB Garamond', serif !important;
+.navbar-brand, .navbar .nav-link {
+  font-family: var(--shelf-body-font) !important;
   font-size: 1.05rem !important;
   color: var(--shelf-ink-soft) !important;
   letter-spacing: 0.02em;
@@ -109,8 +269,7 @@ a:hover {
   text-transform: lowercase;
 }
 
-.navbar .nav-link:hover,
-.navbar .nav-link.active {
+.navbar .nav-link:hover, .navbar .nav-link.active {
   color: var(--shelf-accent) !important;
 }
 
@@ -120,6 +279,15 @@ a:hover {
   font-variant: normal;
   text-transform: none;
   letter-spacing: -0.005em;
+}
+
+html[data-theme="highway-diner"] .navbar-brand,
+html[data-theme="highway-diner"] .navbar .nav-link {
+  font-family: 'VT323', monospace !important;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 1.1rem !important;
+  font-variant: normal;
 }
 
 /* ---- Footer ---- */
@@ -135,7 +303,7 @@ a:hover {
   color: var(--shelf-sepia) !important;
 }
 
-/* ---- Sidebar TOC (when present) ---- */
+/* ---- TOC ---- */
 #TOC, .sidebar-title, #toc-title {
   color: var(--shelf-sepia) !important;
   font-variant: small-caps;
@@ -152,12 +320,9 @@ a:hover {
   color: var(--shelf-accent) !important;
 }
 
-/* ---- Listing pages (Writing, Presentations, Apps, Games) ---- */
-.quarto-listing {
-  margin-top: 1.5em;
-}
+/* ---- Listing pages ---- */
+.quarto-listing { margin-top: 1.5em; }
 
-.quarto-listing-default .listing-item,
 .list .quarto-post {
   border-bottom: 1px solid var(--shelf-rule);
   padding: 1.4rem 0;
@@ -193,7 +358,7 @@ a:hover {
   border-radius: 2px;
 }
 
-/* ---- Blockquote (parable cadence) ---- */
+/* ---- Blockquote ---- */
 blockquote {
   border-left: 2px solid var(--shelf-rule);
   padding-left: 1.2em;
@@ -210,11 +375,13 @@ hr {
   max-width: 4em;
 }
 
-/* ---- Landing page (index.qmd) ---- */
+/* ---- Landing page ---- */
 .shelf-landing {
   max-width: 36rem;
   margin: 0 auto;
   padding: 6rem 1rem 4rem;
+  position: relative;
+  z-index: 1;
 }
 
 .shelf-title {
@@ -226,15 +393,13 @@ hr {
   line-height: 1.05;
 }
 
-.shelf-lede {
-  font-size: 1.2rem;
-  line-height: 1.55;
-  margin-bottom: 1.4em;
+html[data-theme="highway-diner"] .shelf-title {
+  font-style: normal;
+  text-shadow: 0 0 12px var(--shelf-accent), 0 0 20px var(--shelf-accent);
 }
 
-.shelf-para {
-  margin-bottom: 1.4em;
-}
+.shelf-lede { font-size: 1.2rem; line-height: 1.55; margin-bottom: 1.4em; }
+.shelf-para { margin-bottom: 1.4em; }
 
 .shelf-ornament {
   text-align: center;
@@ -251,7 +416,43 @@ hr {
   font-style: italic;
 }
 
-/* ---- Code blocks (kept readable but quiet) ---- */
+/* ---- Resident Cat ---- */
+/* Each theme has its own cat in index.qmd; all are hidden by default.
+   Only the cat matching the current data-theme shows. */
+.resident-cat {
+  display: none;
+  font-family: 'JetBrains Mono', 'Menlo', 'Consolas', 'Courier New', monospace !important;
+  font-size: 0.9rem;
+  line-height: 1.2;
+  text-align: center;
+  color: var(--shelf-sepia) !important;
+  margin: 3rem auto 2rem;
+  white-space: pre;
+  opacity: 0.85;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* Default theme = Lost Bookmark cat */
+.resident-cat.cat-lost-bookmark { display: block; }
+
+html[data-theme="porch-light"] .resident-cat { display: none; }
+html[data-theme="porch-light"] .resident-cat.cat-porch-light { display: block; }
+
+html[data-theme="wildflower"] .resident-cat { display: none; }
+html[data-theme="wildflower"] .resident-cat.cat-wildflower { display: block; }
+
+html[data-theme="frozen-wood"] .resident-cat { display: none; }
+html[data-theme="frozen-wood"] .resident-cat.cat-frozen-wood { display: block; }
+
+html[data-theme="highway-diner"] .resident-cat { display: none; }
+html[data-theme="highway-diner"] .resident-cat.cat-highway-diner { display: block; }
+
+html[data-theme="crones-cottage"] .resident-cat { display: none; }
+html[data-theme="crones-cottage"] .resident-cat.cat-crones-cottage { display: block; }
+
+/* ---- Code blocks ---- */
 pre, code {
   font-family: 'JetBrains Mono', 'Menlo', 'Consolas', monospace;
   font-size: 0.9rem;
@@ -275,9 +476,80 @@ pre code {
   background: transparent !important;
 }
 
+/* =========================================================================
+   Theme switcher widget (markup lives in theme-switcher.html)
+   ========================================================================= */
+.shelf-theme-switcher {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  z-index: 1000;
+  font-family: var(--shelf-body-font);
+  font-size: 0.85rem;
+}
+
+.shelf-theme-toggle {
+  background: var(--shelf-bg-soft);
+  color: var(--shelf-ink-soft);
+  border: 1px solid var(--shelf-rule);
+  border-radius: 18px;
+  padding: 0.45em 0.9em;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-family: inherit;
+  font-size: inherit;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: background 200ms ease, transform 200ms ease;
+}
+
+.shelf-theme-toggle:hover { transform: translateY(-1px); }
+
+.shelf-swatch {
+  display: inline-block;
+  width: 0.85em;
+  height: 0.85em;
+  border-radius: 50%;
+  border: 1px solid var(--shelf-rule);
+}
+
+.shelf-chevron { font-size: 0.7em; opacity: 0.6; }
+
+.shelf-theme-panel {
+  display: none;
+  position: absolute;
+  bottom: calc(100% + 0.5rem);
+  right: 0;
+  background: var(--shelf-bg-soft);
+  border: 1px solid var(--shelf-rule);
+  border-radius: 8px;
+  padding: 0.5em 0;
+  min-width: 16rem;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+
+.shelf-theme-panel.open { display: block; }
+
+.shelf-theme-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  transition: background 150ms ease;
+}
+
+.shelf-theme-item:hover { background: var(--shelf-bg); }
+.shelf-theme-item.active { background: var(--shelf-bg); color: var(--shelf-accent); }
+
+.shelf-theme-item .shelf-name { font-weight: 500; }
+.shelf-theme-item .shelf-tagline { color: var(--shelf-sepia); font-size: 0.85em; margin-left: auto; font-style: italic; }
+
 /* ---- Responsive ---- */
 @media (max-width: 600px) {
   body { font-size: 17px; }
   .shelf-landing { padding: 3rem 1rem; }
   .shelf-title { font-size: 2.4rem !important; }
+  .shelf-theme-switcher { bottom: 0.6rem; right: 0.6rem; }
 }

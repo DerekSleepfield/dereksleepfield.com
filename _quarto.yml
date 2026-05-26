@@ -45,6 +45,8 @@ website:
 
 format:
   html:
+    include-after-body:
+      - theme-switcher.html
     theme: cosmo
     css:
       - themes.css
