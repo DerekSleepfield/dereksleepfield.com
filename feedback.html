@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Feedback Chirp · dereksleepfield.com</title>
+<meta name="description" content="Leave a small chirp about something on the shelf.">
+<!-- Cloudflare Turnstile (optional spam protection — works without if the worker doesn't require it) -->
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<style>
+  :root {
+    --paper: #f3eadc;
+    --paper-soft: #faf2e2;
+    --ink: #2b2520;
+    --ink-soft: #5a4b35;
+    --soft: #7a6549;
+    --rule: #c9b890;
+    --accent: #c7935a;
+    --hum-good: #2c7a3a;
+    --hum-bad: #b4540e;
+    --hum-false: #7f3fbf;
+    --shadow: 0 1px 2px rgba(60,40,10,0.06);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'EB Garamond', 'Iowan Old Style', 'Palatino', Georgia, serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { color: var(--ink-soft); }
+  .wrap { max-width: 700px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+  .top-back {
+    font-size: 0.85rem;
+    color: var(--soft);
+    margin-bottom: 1rem;
+    display: inline-block;
+  }
+  .constellation {
+    text-align: center;
+    color: var(--soft);
+    font-size: 0.85rem;
+    letter-spacing: 0.3em;
+    margin: 0 0 0.4rem;
+    user-select: none;
+  }
+  h1 {
+    font-size: 2rem;
+    margin: 0.2rem 0 0.3rem;
+    font-weight: 500;
+    font-style: italic;
+    letter-spacing: -0.005em;
+  }
+  .sub {
+    color: var(--soft);
+    font-size: 0.95rem;
+    margin: 0 0 1.6rem;
+    font-style: italic;
+  }
+  hr.thin { border: none; border-top: 1px solid var(--rule); margin: 1.2rem 0; }
+  fieldset { border: none; padding: 0; margin: 0 0 1.2rem; }
+  legend {
+    font-size: 0.78rem;
+    color: var(--soft);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.5rem;
+  }
+  .cats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.65rem;
+  }
+  .cats label {
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 0.85rem 0.85rem 0.7rem;
+    cursor: pointer;
+    transition: 0.15s ease;
+    box-shadow: var(--shadow);
+    position: relative;
+  }
+  .cats label:hover { background: var(--paper-soft); }
+  .cats input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .cats input:checked + .cat-body { color: #fff; }
+  .cats label:has(input:checked) {
+    border-color: transparent;
+    box-shadow: 0 3px 10px rgba(60,40,10,0.18);
+  }
+  .cats label.cat-positive:has(input:checked) { background: var(--hum-good); }
+  .cats label.cat-negative:has(input:checked) { background: var(--hum-bad); }
+  .cats label.cat-false:has(input:checked) { background: var(--hum-false); }
+  .cat-mark {
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+  .cat-title { font-weight: 500; font-size: 1rem; }
+  .cat-hint { font-size: 0.78rem; color: var(--soft); margin-top: 0.15rem; font-style: italic; }
+  .cats input:checked + .cat-body .cat-hint { color: rgba(255,255,255,0.85); }
+
+  label.field { display: block; margin-bottom: 0.9rem; }
+  label.field span.lbl {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--soft);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 0.4rem;
+  }
+  input[type=text], input[type=url], textarea, select {
+    width: 100%;
+    background: #fff;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 0.55rem 0.7rem;
+    font: inherit;
+    color: var(--ink);
+    font-size: 0.95rem;
+  }
+  textarea { min-height: 9rem; resize: vertical; line-height: 1.5; }
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--ink);
+    box-shadow: 0 0 0 3px rgba(60,40,10,0.08);
+  }
+  .row { display: grid; grid-template-columns: 2fr 1fr; gap: 0.75rem; }
+  @media (max-width: 540px) { .row { grid-template-columns: 1fr; } }
+
+  .severity-only { display: none; }
+  body.is-false .severity-only { display: block; }
+
+  .turnstile-row { margin: 1.2rem 0 0.4rem; min-height: 65px; }
+
+  button.submit {
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    padding: 0.7rem 1.4rem;
+    font: inherit;
+    font-size: 0.98rem;
+    border-radius: 7px;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    box-shadow: var(--shadow);
+  }
+  button.submit:hover { background: var(--ink-soft); }
+  button.submit:disabled { opacity: 0.4; cursor: not-allowed; }
+  #status {
+    font-size: 0.85rem;
+    color: var(--soft);
+    margin-left: 0.85rem;
+    font-style: italic;
+  }
+  .status-ok { color: var(--hum-good) !important; }
+  .status-err { color: var(--hum-bad) !important; }
+  .footnote {
+    margin-top: 1.6rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--rule);
+    color: var(--soft);
+    font-size: 0.78rem;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <a href="/" class="top-back">← back to the shelf</a>
+
+  <div class="constellation">·   ✦   ·   ★   ·   ✧   ·</div>
+  <h1>Feedback Chirp</h1>
+  <p class="sub">a small porch where a hum from the shelf gets adjusted.<br>
+     three categories. one chirp per visit.</p>
+  <hr class="thin">
+
+  <form id="bob-form" autocomplete="off">
+
+    <fieldset>
+      <legend>Category</legend>
+      <div class="cats">
+        <label class="cat-positive">
+          <input type="radio" name="category" value="positive" required>
+          <div class="cat-body">
+            <span class="cat-mark">+ chirp</span>
+            <div class="cat-title">Positive</div>
+            <div class="cat-hint">a hum that landed</div>
+          </div>
+        </label>
+        <label class="cat-negative">
+          <input type="radio" name="category" value="negative">
+          <div class="cat-body">
+            <span class="cat-mark">- chirp</span>
+            <div class="cat-title">Negative</div>
+            <div class="cat-hint">a hum that didn't</div>
+          </div>
+        </label>
+        <label class="cat-false">
+          <input type="radio" name="category" value="hallucination">
+          <div class="cat-body">
+            <span class="cat-mark">? chirp</span>
+            <div class="cat-title">Hallucination</div>
+            <div class="cat-hint">something wrong</div>
+          </div>
+        </label>
+      </div>
+    </fieldset>
+
+    <label class="field">
+      <span class="lbl">Subject</span>
+      <input type="text" name="subject" maxlength="120" placeholder="A short headline for the chirp" required>
+    </label>
+
+    <label class="field">
+      <span class="lbl">Body</span>
+      <textarea name="body" maxlength="4000" placeholder="What's the hum?" required></textarea>
+    </label>
+
+    <div class="row">
+      <label class="field">
+        <span class="lbl">Context URL (optional)</span>
+        <input type="url" name="context_url" placeholder="https://dereksleepfield.com/...">
+      </label>
+      <label class="field severity-only">
+        <span class="lbl">Severity</span>
+        <select name="severity">
+          <option value="">—</option>
+          <option value="minor">minor</option>
+          <option value="moderate">moderate</option>
+          <option value="major">major</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="turnstile-row">
+      <!-- Reuses the academic site's Turnstile site key. Optional — submission proceeds without it. -->
+      <div class="cf-turnstile" data-sitekey="0x4AAAAAAA6_AjEXfgQz04eq" data-theme="light"></div>
+    </div>
+
+    <div>
+      <button type="submit" class="submit" id="btn">Send hum</button>
+      <span id="status"></span>
+    </div>
+
+    <div class="footnote">
+      Submissions land in Derek's feedback folder. Future Claude sessions
+      can read the accumulated hum to remember what didn't land last time.
+      If the submission can't reach the worker, your default mail client
+      will open as a fallback.
+    </div>
+  </form>
+</div>
+
+<script>
+  // Same Cloudflare Worker as the academic site. New `site` field
+  // distinguishes chirps from dereksleepfield.com vs derekwakefield.com.
+  const WORKER_URL = "https://bobble-feedback.deewake.workers.dev/api/submit";
+  const MAILTO     = "dw043@bucknell.edu";
+
+  const form = document.getElementById("bob-form");
+  const status = document.getElementById("status");
+  const btn = document.getElementById("btn");
+
+  form.addEventListener("change", (e) => {
+    if (e.target.name === "category") {
+      document.body.classList.toggle("is-false", e.target.value === "hallucination");
+    }
+  });
+
+  function mailtoFallback(payload) {
+    const subject = encodeURIComponent("[Chirp · " + payload.category + "] " + (payload.subject || ""));
+    const lines = [
+      "Category: " + payload.category,
+      "Subject:  " + (payload.subject || ""),
+      "Context:  " + (payload.context_url || "(none)"),
+      "Severity: " + (payload.severity || "(n/a)"),
+      "Site:     " + payload.site,
+      "Time:     " + payload.submitted_at,
+      "",
+      "----",
+      "",
+      payload.body || "",
+    ];
+    const body = encodeURIComponent(lines.join("\n"));
+    window.location.href = "mailto:" + MAILTO + "?subject=" + subject + "&body=" + body;
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    status.className = "";
+    status.textContent = "humming…";
+    btn.disabled = true;
+
+    const fd = new FormData(form);
+    const payload = {
+      category:        fd.get("category"),
+      subject:         fd.get("subject"),
+      body:            fd.get("body"),
+      context_url:     fd.get("context_url") || "",
+      severity:        fd.get("severity") || "",
+      turnstile_token: fd.get("cf-turnstile-response") || "",
+      site:            "dereksleepfield.com",
+      submitted_at:    new Date().toISOString(),
+    };
+
+    try {
+      const r = await fetch(WORKER_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const out = await r.json().catch(() => ({}));
+      if (r.ok && out.ok) {
+        status.className = "status-ok";
+        status.textContent = "absorbed. thank you.";
+        form.reset();
+        document.body.classList.remove("is-false");
+        if (window.turnstile) window.turnstile.reset();
+      } else {
+        // Worker returned non-ok — fall back to email
+        status.className = "status-err";
+        status.textContent = "couldn't reach the worker — opening email";
+        setTimeout(() => mailtoFallback(payload), 400);
+      }
+    } catch (err) {
+      // Network/CORS error — fall back to email
+      status.className = "status-err";
+      status.textContent = "network blocked — opening email";
+      setTimeout(() => mailtoFallback(payload), 400);
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
