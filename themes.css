@@ -385,6 +385,114 @@ hr {
 }
 
 /* ===========================================================================
+   Fixed outline column (left margin).
+   Same trick as the ASCII column on the right — pinned in the left
+   margin so it doesn't touch Quarto's layout. Body parable stays
+   centered between the two.
+   =========================================================================== */
+.shelf-outline-fixed {
+  position: fixed;
+  top: 5.5rem;
+  left: 1.5rem;
+  width: 16rem;
+  max-height: calc(100vh - 9rem);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1rem 1.1rem;
+  z-index: 10;
+  background: var(--shelf-bg-soft);
+  border: 1px solid var(--shelf-rule);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  font-size: 0.88rem;
+  line-height: 1.4;
+  color: var(--shelf-ink-soft);
+}
+
+.shelf-outline-title {
+  font-variant: small-caps;
+  letter-spacing: 0.15em;
+  color: var(--shelf-sepia);
+  font-size: 0.78rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid var(--shelf-rule);
+  padding-bottom: 0.35rem;
+}
+
+.shelf-outline-section { margin-bottom: 1.1rem; }
+
+.shelf-outline-header {
+  font-style: italic;
+  color: var(--shelf-ink);
+  font-size: 0.92rem;
+  margin-bottom: 0.3rem;
+}
+
+.shelf-outline-fixed ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.shelf-outline-fixed li {
+  margin: 0.18rem 0;
+  padding-left: 0.55rem;
+  border-left: 1px solid var(--shelf-rule);
+}
+
+.shelf-outline-fixed a {
+  color: var(--shelf-ink-soft) !important;
+  border-bottom: none !important;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.shelf-outline-fixed a:hover,
+.shelf-outline-fixed a.current {
+  color: var(--shelf-accent) !important;
+}
+
+.shelf-outline-current { font-style: italic; }
+
+/* Nested canon list (40 entries under "The Bobble Canon") */
+.shelf-canon-list {
+  margin-top: 0.3rem !important;
+  font-size: 0.8rem;
+  max-height: 12rem;
+  overflow-y: auto;
+}
+
+.shelf-canon-list li {
+  padding-left: 0.5rem !important;
+  border-left: 1px dotted var(--shelf-rule) !important;
+}
+
+.shelf-canon-link {
+  display: block;
+  padding: 0.08rem 0;
+  cursor: pointer;
+}
+
+.shelf-canon-num {
+  display: inline-block;
+  min-width: 2.4em;
+  color: var(--shelf-sepia);
+  font-variant: small-caps;
+  font-size: 0.92em;
+}
+
+.shelf-canon-link.current {
+  color: var(--shelf-accent) !important;
+  font-weight: 500;
+}
+
+/* Hide the outline on viewports too narrow for it to fit
+   next to the centered parable. */
+@media (max-width: 1080px) {
+  .shelf-outline-fixed { display: none; }
+}
+
+/* ===========================================================================
    Fixed ASCII scene column.
    Pinned to the right margin of the viewport so it doesn't touch
    Quarto's layout at all. The parable card stays centered in the body;
