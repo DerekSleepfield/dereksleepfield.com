@@ -154,6 +154,51 @@ ul.task-list li input[type="checkbox"] {
 <a href="#" id="shelfAnotherStory">↻ another parable</a> &nbsp;·&nbsp; <a href="./bobble-canon.html">read all forty →</a>
 </p>
 </div>
+<aside id="shelfOutline" class="shelf-outline-fixed" aria-label="Writing outline">
+  <div class="shelf-outline-title">Writing</div>
+
+  <div class="shelf-outline-section">
+    <div class="shelf-outline-header">Personal</div>
+    <ul>
+      <li><a href="./posts/personal/2026-05-14-a-voice-that-listens.html">A Voice That Listens</a></li>
+      <li><a href="./posts/personal/2026-05-19-friends-we-find.html">Friends We Find</a></li>
+      <li><a href="./posts/personal/2026-05-22-where-the-anthill-was.html">Where the Anthill Was</a></li>
+      <li><a href="./posts/personal/2026-05-24-on-cognitive-capture.html">On Cognitive Capture</a></li>
+      <li><a href="./posts/personal/2026-05-24-when-anthills-decay.html">When Anthills Decay</a></li>
+    </ul>
+  </div>
+
+  <div class="shelf-outline-section">
+    <div class="shelf-outline-header">Bobology</div>
+    <ul>
+      <li><a href="./bobble-canon.html" class="shelf-outline-current">The Bobble Canon</a>
+        <ul class="shelf-canon-list" id="shelfCanonList"></ul>
+      </li>
+      <li><a href="./introduction-to-bobology.html">Introduction to Bobology</a></li>
+      <li><a href="./bob-is-you.html">Bob is You</a></li>
+      <li><a href="./the-4b-framework.html">The 4B Framework</a></li>
+      <li><a href="./bobbish-in-4-voices.html">Bobbish in 4 Voices</a></li>
+      <li><a href="./the-wand-and-the-hand.html">The Wand and the Hand</a></li>
+    </ul>
+  </div>
+
+  <div class="shelf-outline-section">
+    <div class="shelf-outline-header">Short Stories</div>
+    <ul>
+      <li><a href="./posts/short-stories/2026-05-26-the-bread-speaks.html">The Bread Speaks</a></li>
+      <li><a href="./posts/short-stories/2026-05-26-the-lichen-quarrel.html">The Lichen Quarrel</a></li>
+    </ul>
+  </div>
+
+  <div class="shelf-outline-section">
+    <div class="shelf-outline-header">Notes &amp; Misc</div>
+    <ul>
+      <li><a href="./sinatra-2016-memo.html">Sinatra et al. 2016 — three-page memo</a></li>
+      <li><a href="./gem-wars-lore.html">Gem Wars: Lore</a></li>
+    </ul>
+  </div>
+</aside>
+
 <aside id="shelfScene" class="shelf-scene-fixed" aria-label="Scene for the current parable">
   <div class="shelf-scene-label" id="shelfSceneLabel">scene</div>
   <pre class="shelf-scene-art" id="shelfSceneArt">     fetching…</pre>
@@ -204,27 +249,66 @@ ul.task-list li input[type="checkbox"] {
     art.textContent = ascii || ("\n  (no scene yet for Canon " + num + ")\n");
   }
 
+  function highlightOutline(num) {
+    var list = document.getElementById("shelfCanonList");
+    if (!list) return;
+    list.querySelectorAll("a").forEach(function (a) {
+      a.classList.toggle("current", a.getAttribute("data-canon-num") === num);
+    });
+  }
+
+  function populateCanonList() {
+    var list = document.getElementById("shelfCanonList");
+    var stories = window.SHELF_STORIES || [];
+    if (!list || !stories.length) return;
+    list.innerHTML = stories.map(function (s) {
+      return '<li><a href="#" data-canon-num="' + escapeHtml(s.num) +
+        '" class="shelf-canon-link"><span class="shelf-canon-num">' +
+        escapeHtml(s.num) + '</span> ' + escapeHtml(s.name) + '</a></li>';
+    }).join("");
+  }
+
   var currentNum = null;
-  function showRandom() {
-    var s = pickStory(currentNum);
+  function showStory(s) {
     if (!s) return;
     currentNum = s.num;
     document.getElementById("shelfFeaturedParable").innerHTML = renderStory(s);
     updateScene(s.num);
+    highlightOutline(s.num);
+  }
+
+  function showRandom() { showStory(pickStory(currentNum)); }
+
+  function showByNum(num) {
+    var s = (window.SHELF_STORIES || []).find(function (x) { return x.num === num; });
+    if (s) showStory(s);
+  }
+
+  function init() {
+    populateCanonList();
+    showRandom();
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", showRandom);
+    document.addEventListener("DOMContentLoaded", init);
   } else {
-    showRandom();
+    init();
   }
 
   document.addEventListener("click", function (e) {
-    var a = e.target.closest("#shelfAnotherStory");
-    if (!a) return;
-    e.preventDefault();
-    showRandom();
-    document.getElementById("shelfFeaturedParable").scrollIntoView({ behavior: "smooth", block: "start" });
+    var another = e.target.closest("#shelfAnotherStory");
+    if (another) {
+      e.preventDefault();
+      showRandom();
+      document.getElementById("shelfFeaturedParable").scrollIntoView({ behavior: "smooth", block: "start" });
+      return;
+    }
+    var canonLink = e.target.closest(".shelf-canon-link");
+    if (canonLink) {
+      e.preventDefault();
+      showByNum(canonLink.getAttribute("data-canon-num"));
+      document.getElementById("shelfFeaturedParable").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   });
 })();
 </script>
