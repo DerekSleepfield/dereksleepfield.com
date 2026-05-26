@@ -160,11 +160,124 @@ Parables, codas, essays — whatever else wants a home.
 <p class="shelf-small">
 New things appear when there is something to appear. No newsletter. No schedule. Bake when you can.
 </p>
+<pre class="resident-cat cat-lost-bookmark">      ／¯\_／¯\＿___
+     (  ‿     ‿       )
+      \_____________／
+   the bookmark cat — cream-and-tan ragdoll
+</pre>
+<pre class="resident-cat cat-porch-light">       ／\_／\
+      (  ◉   ◉ )
+       )  ω  (
+       │  │  │  │
+   the porch cat — charcoal shorthair, paws on the screen door
+</pre>
+<pre class="resident-cat cat-wildflower">        ⚘    ⚘
+       ／\_／\
+      (  ◔   ◕ )⚘
+        \   ω   /
+   the meadow cat — cream calico in tall grass
+</pre>
+<pre class="resident-cat cat-frozen-wood">      ＝❄=/\＿/\=❄＝
+     ／  (  ◉   ◉  )  \
+    ／    )   ω   (    \
+       ▔▔▔▔▔▔▔▔
+   the frost cat — white Siberian, frost-tipped fur
+</pre>
+<pre class="resident-cat cat-highway-diner">       ／\_／\
+      (  ◎   ◎ )
+       )  ⌣  (
+       ▔▔▔▔▔▔
+   the counter cat — pink-eared cream, two a.m. regular
+</pre>
+<pre class="resident-cat cat-crones-cottage">        ✦
+       ／\_／\
+      (  ◉   ◉ )
+       )  ω  (
+       ▔▔▔▔▔
+   the cottage cat — black-and-silver tortoiseshell, witch-familiar
+</pre>
 </div>
 
 
 
 </main> <!-- /main -->
+<!-- dereksleepfield.com — theme switcher widget
+     Injected site-wide via `include-after-body` in _quarto.yml.
+     CSS lives in themes.css; this file is markup + small script. -->
+<div class="shelf-theme-switcher" id="shelfThemeSwitcher" aria-label="Style">
+  <button type="button" class="shelf-theme-toggle" id="shelfThemeToggle" aria-haspopup="listbox" aria-expanded="false">
+    <span class="shelf-swatch" id="shelfToggleSwatch" style="background:#c7935a"></span>
+    <span id="shelfToggleLabel">Lost Bookmark</span>
+    <span class="shelf-chevron">▾</span>
+  </button>
+  <div class="shelf-theme-panel" id="shelfThemePanel" role="listbox"></div>
+</div>
+
+<script>
+(function () {
+  var THEMES = [
+    { id: "default",         name: "Lost Bookmark",   tagline: "library cream",   swatch: "#c7935a" },
+    { id: "porch-light",     name: "Porch Light",     tagline: "yellow on deep",  swatch: "#f5d56a" },
+    { id: "wildflower",      name: "Wildflower",      tagline: "bee meadow",      swatch: "#9a6abc" },
+    { id: "frozen-wood",     name: "Frozen Wood",     tagline: "frost silence",   swatch: "#3a6a8a" },
+    { id: "highway-diner",   name: "Highway Diner",   tagline: "neon at 2 am",    swatch: "#ff3a7a" },
+    { id: "crones-cottage",  name: "Crone's Cottage", tagline: "moss & herb",     swatch: "#9a7abc" }
+  ];
+  var STORAGE_KEY = "shelf-theme";
+
+  var panel = document.getElementById("shelfThemePanel");
+  THEMES.forEach(function (t) {
+    var item = document.createElement("div");
+    item.className = "shelf-theme-item";
+    item.setAttribute("data-theme-id", t.id);
+    item.setAttribute("role", "option");
+    item.innerHTML =
+      '<span class="shelf-swatch" style="background:' + t.swatch + '"></span>' +
+      '<span class="shelf-name">' + t.name + '</span>' +
+      '<span class="shelf-tagline">' + t.tagline + '</span>';
+    panel.appendChild(item);
+  });
+
+  function applyTheme(id) {
+    var t = THEMES.find(function (x) { return x.id === id; }) || THEMES[0];
+    if (t.id === "default") {
+      document.documentElement.removeAttribute("data-theme");
+    } else {
+      document.documentElement.setAttribute("data-theme", t.id);
+    }
+    document.getElementById("shelfToggleLabel").textContent = t.name;
+    document.getElementById("shelfToggleSwatch").style.background = t.swatch;
+    panel.querySelectorAll(".shelf-theme-item").forEach(function (el) {
+      el.classList.toggle("active", el.getAttribute("data-theme-id") === t.id);
+    });
+    try { localStorage.setItem(STORAGE_KEY, t.id); } catch (e) {}
+  }
+
+  var initial = "default";
+  try { initial = localStorage.getItem(STORAGE_KEY) || "default"; } catch (e) {}
+  applyTheme(initial);
+
+  var btn = document.getElementById("shelfThemeToggle");
+  function openPanel() { panel.classList.add("open"); btn.setAttribute("aria-expanded", "true"); }
+  function closePanel() { panel.classList.remove("open"); btn.setAttribute("aria-expanded", "false"); }
+  btn.addEventListener("click", function (e) {
+    e.stopPropagation();
+    panel.classList.contains("open") ? closePanel() : openPanel();
+  });
+
+  panel.addEventListener("click", function (e) {
+    var item = e.target.closest(".shelf-theme-item");
+    if (!item) return;
+    applyTheme(item.getAttribute("data-theme-id"));
+    closePanel();
+  });
+
+  document.addEventListener("click", function () { closePanel(); });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closePanel();
+  });
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
