@@ -11,125 +11,120 @@ format:
           <style>
             #title-block-header { display: none; }
             main.content, .content { padding: 0 !important; margin: 0 !important; max-width: 100% !important; }
-            body > .page-columns { display: block !important; }
           </style>
 ---
 
 ```{=html}
-<div class="shelf-three-col">
+<aside class="shelf-side shelf-side-left" id="shelfOutline" aria-label="Writing outline">
+<div class="shelf-side-inner">
+  <div class="shelf-outline-title">Writing</div>
 
-<aside class="shelf-outline" aria-label="Writing outline">
-<div class="shelf-outline-title">Writing</div>
+  <div class="shelf-outline-section">
+    <div class="shelf-outline-header">Personal</div>
+    <ul>
+      <li><a href="/posts/personal/2026-05-14-a-voice-that-listens.html">A Voice That Listens</a></li>
+      <li><a href="/posts/personal/2026-05-19-friends-we-find.html">Friends We Find</a></li>
+      <li><a href="/posts/personal/2026-05-22-where-the-anthill-was.html">Where the Anthill Was</a></li>
+      <li><a href="/posts/personal/2026-05-24-on-cognitive-capture.html">On Cognitive Capture</a></li>
+      <li><a href="/posts/personal/2026-05-24-when-anthills-decay.html">When Anthills Decay</a></li>
+    </ul>
+  </div>
 
-<div class="shelf-outline-section">
-<div class="shelf-outline-header">Personal</div>
-<ul>
-<li><a href="/posts/personal/2026-05-14-a-voice-that-listens.html">A Voice That Listens</a></li>
-<li><a href="/posts/personal/2026-05-19-friends-we-find.html">Friends We Find</a></li>
-<li><a href="/posts/personal/2026-05-22-where-the-anthill-was.html">Where the Anthill Was</a></li>
-<li><a href="/posts/personal/2026-05-24-on-cognitive-capture.html">On Cognitive Capture</a></li>
-<li><a href="/posts/personal/2026-05-24-when-anthills-decay.html">When Anthills Decay</a></li>
-</ul>
-</div>
+  <div class="shelf-outline-section">
+    <div class="shelf-outline-header">Bobology</div>
+    <ul>
+      <li><a href="/bobble-canon.html" class="shelf-outline-current">The Bobble Canon</a>
+        <ul class="shelf-canon-list" id="shelfCanonList"></ul>
+      </li>
+      <li><a href="/introduction-to-bobology.html">Introduction to Bobology</a></li>
+      <li><a href="/bob-is-you.html">Bob is You</a></li>
+      <li><a href="/the-4b-framework.html">The 4B Framework</a></li>
+      <li><a href="/bobbish-in-4-voices.html">Bobbish in 4 Voices</a></li>
+      <li><a href="/the-wand-and-the-hand.html">The Wand and the Hand</a></li>
+    </ul>
+  </div>
 
-<div class="shelf-outline-section">
-<div class="shelf-outline-header">Bobology</div>
-<ul>
-<li><a href="/bobble-canon.html" class="shelf-outline-current">The Bobble Canon</a>
-<ul class="shelf-canon-list" id="shelfCanonList"></ul>
-</li>
-<li><a href="/introduction-to-bobology.html">Introduction to Bobology</a></li>
-<li><a href="/bob-is-you.html">Bob is You</a></li>
-<li><a href="/the-4b-framework.html">The 4B Framework</a></li>
-<li><a href="/bobbish-in-4-voices.html">Bobbish in 4 Voices</a></li>
-<li><a href="/the-wand-and-the-hand.html">The Wand and the Hand</a></li>
-</ul>
-</div>
+  <div class="shelf-outline-section">
+    <div class="shelf-outline-header">Short Stories</div>
+    <ul>
+      <li><a href="/posts/short-stories/2026-05-26-the-bread-speaks.html">The Bread Speaks</a></li>
+      <li><a href="/posts/short-stories/2026-05-26-the-lichen-quarrel.html">The Lichen Quarrel</a></li>
+    </ul>
+  </div>
 
-<div class="shelf-outline-section">
-<div class="shelf-outline-header">Short Stories</div>
-<ul>
-<li><a href="/posts/short-stories/2026-05-26-the-bread-speaks.html">The Bread Speaks</a></li>
-<li><a href="/posts/short-stories/2026-05-26-the-lichen-quarrel.html">The Lichen Quarrel</a></li>
-</ul>
-</div>
-
-<div class="shelf-outline-section">
-<div class="shelf-outline-header">Notes &amp; Misc</div>
-<ul>
-<li><a href="/sinatra-2016-memo.html">Sinatra et al. 2016 &mdash; three-page memo</a></li>
-<li><a href="/gem-wars-lore.html">Gem Wars: Lore</a></li>
-</ul>
+  <div class="shelf-outline-section">
+    <div class="shelf-outline-header">Notes &amp; Misc</div>
+    <ul>
+      <li><a href="/sinatra-2016-memo.html">Sinatra et al. 2016 &mdash; three-page memo</a></li>
+      <li><a href="/gem-wars-lore.html">Gem Wars: Lore</a></li>
+    </ul>
+  </div>
 </div>
 </aside>
 
-<main class="shelf-center">
+<main class="shelf-middle" id="shelfMiddle">
+<div class="shelf-middle-inner">
 
-<h1 class="shelf-title">The shelf.</h1>
+  <h1 class="shelf-title">The shelf.</h1>
 
-<p class="shelf-lede">A small library of not-academic writing
-by Derek Wakefield. Kept here quietly.</p>
+  <p class="shelf-lede">A small library of not-academic writing
+  by Derek Wakefield. Kept here quietly.</p>
 
-<p class="shelf-para">Parables, codas, essays &mdash;
-whatever else wants a home.</p>
+  <p class="shelf-para">Parables, codas, essays &mdash;
+  whatever else wants a home.</p>
 
-<div class="shelf-ornament">&#x2756;&#x2756;&#x2756;</div>
+  <div class="shelf-ornament">&#x2756;&#x2756;&#x2756;</div>
 
-<div id="shelfFeaturedParable" class="shelf-featured" aria-live="polite">
-<p class="shelf-featured-loading"><em>fetching a parable&hellip;</em></p>
-</div>
+  <div id="shelfFeaturedParable" class="shelf-featured" aria-live="polite">
+    <p class="shelf-featured-loading"><em>fetching a parable&hellip;</em></p>
+  </div>
 
-<p class="shelf-featured-actions">
-<a href="#" id="shelfAnotherStory">&#x21bb; another parable</a>
-&nbsp;&middot;&nbsp;
-<a href="/bobble-canon.html">read all forty &rarr;</a>
-</p>
+  <p class="shelf-featured-actions">
+    <a href="#" id="shelfAnotherStory">&#x21bb; another parable</a>
+    &nbsp;&middot;&nbsp;
+    <a href="/bobble-canon.html">read all forty &rarr;</a>
+  </p>
 
-<div class="shelf-ornament">&#x2756;&#x2756;&#x2756;</div>
+  <div class="shelf-ornament">&#x2756;&#x2756;&#x2756;</div>
 
-<p class="shelf-small">New things appear when there is something to appear.
-No newsletter. No schedule. Bake when you can.</p>
+  <p class="shelf-small">New things appear when there is something to appear.
+  No newsletter. No schedule. Bake when you can.</p>
 
-<pre class="resident-cat cat-lost-bookmark">
+  <pre class="resident-cat cat-lost-bookmark">
       ／¯\_／¯\＿___
      (  ‿     ‿       )
       \_____________／
    the bookmark cat — cream-and-tan ragdoll
 </pre>
-
-<pre class="resident-cat cat-porch-light">
+  <pre class="resident-cat cat-porch-light">
        ／\_／\
       (  ◉   ◉ )
        )  ω  (
        │  │  │  │
    the porch cat — charcoal shorthair, paws on the screen door
 </pre>
-
-<pre class="resident-cat cat-wildflower">
+  <pre class="resident-cat cat-wildflower">
         ⚘    ⚘
        ／\_／\
       (  ◔   ◕ )⚘
         \   ω   /
    the meadow cat — cream calico in tall grass
 </pre>
-
-<pre class="resident-cat cat-frozen-wood">
+  <pre class="resident-cat cat-frozen-wood">
       ＝❄=/\＿/\=❄＝
      ／  (  ◉   ◉  )  \
     ／    )   ω   (    \
        ▔▔▔▔▔▔▔▔
    the frost cat — white Siberian, frost-tipped fur
 </pre>
-
-<pre class="resident-cat cat-highway-diner">
+  <pre class="resident-cat cat-highway-diner">
        ／\_／\
       (  ◎   ◎ )
        )  ⌣  (
        ▔▔▔▔▔▔
    the counter cat — pink-eared cream, two a.m. regular
 </pre>
-
-<pre class="resident-cat cat-crones-cottage">
+  <pre class="resident-cat cat-crones-cottage">
         ✦
        ／\_／\
       (  ◉   ◉ )
@@ -138,14 +133,15 @@ No newsletter. No schedule. Bake when you can.</p>
    the cottage cat — black-and-silver tortoiseshell, witch-familiar
 </pre>
 
+</div>
 </main>
 
-<aside class="shelf-scene" aria-label="Scene for the current parable">
-<div class="shelf-scene-label" id="shelfSceneLabel">scene</div>
-<pre class="shelf-scene-art" id="shelfSceneArt">     fetching&hellip;</pre>
-</aside>
-
+<aside class="shelf-side shelf-side-right" id="shelfScene" aria-label="Scene for the current parable">
+<div class="shelf-side-inner">
+  <div class="shelf-scene-label" id="shelfSceneLabel">scene</div>
+  <pre class="shelf-scene-art" id="shelfSceneArt">     fetching&hellip;</pre>
 </div>
+</aside>
 
 <script src="/stories.js"></script>
 <script src="/parable-ascii.js"></script>
@@ -224,10 +220,7 @@ No newsletter. No schedule. Bake when you can.</p>
     highlightOutline(s.num);
   }
 
-  function showRandom() {
-    var s = pickStory(currentNum);
-    showStory(s);
-  }
+  function showRandom() { showStory(pickStory(currentNum)); }
 
   function showByNum(num) {
     var s = (window.SHELF_STORIES || []).find(function (x) { return x.num === num; });
