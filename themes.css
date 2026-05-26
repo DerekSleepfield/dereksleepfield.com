@@ -384,8 +384,63 @@ hr {
   z-index: 1;
 }
 
-/* Landing is just the random parable — no sidebars, no outline, no ASCII art.
-   The featured-parable rules below handle the visual treatment. */
+/* ===========================================================================
+   Fixed ASCII scene column.
+   Pinned to the right margin of the viewport so it doesn't touch
+   Quarto's layout at all. The parable card stays centered in the body;
+   this floats independently to its right. Hidden on narrow viewports.
+   =========================================================================== */
+.shelf-scene-fixed {
+  position: fixed;
+  top: 5.5rem;
+  right: 1.5rem;
+  width: 19rem;
+  max-height: calc(100vh - 9rem);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 1rem 1.1rem;
+  z-index: 10;
+  background: var(--shelf-bg-soft);
+  border: 1px solid var(--shelf-rule);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.shelf-scene-label {
+  font-variant: small-caps;
+  letter-spacing: 0.15em;
+  color: var(--shelf-sepia);
+  font-size: 0.78rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--shelf-rule);
+  padding-bottom: 0.35rem;
+}
+
+.shelf-scene-art {
+  font-family: 'JetBrains Mono', 'Menlo', 'Consolas', 'Courier New', monospace !important;
+  font-size: 0.74rem;
+  line-height: 1.2;
+  color: var(--shelf-ink-soft) !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+html[data-theme="highway-diner"] .shelf-scene-art {
+  font-family: 'VT323', monospace !important;
+  font-size: 0.95rem;
+  color: var(--shelf-secondary) !important;
+  text-shadow: 0 0 4px var(--shelf-secondary);
+}
+
+/* Hide on viewports too narrow to comfortably fit the column
+   next to the centered parable card. */
+@media (max-width: 1240px) {
+  .shelf-scene-fixed { display: none; }
+}
 
 .shelf-title {
   font-size: 3.2rem !important;

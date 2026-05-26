@@ -139,7 +139,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content page-columns page-full" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
 
 
@@ -154,7 +154,12 @@ ul.task-list li input[type="checkbox"] {
 <a href="#" id="shelfAnotherStory">↻ another parable</a> &nbsp;·&nbsp; <a href="./bobble-canon.html">read all forty →</a>
 </p>
 </div>
+<aside id="shelfScene" class="shelf-scene-fixed" aria-label="Scene for the current parable">
+  <div class="shelf-scene-label" id="shelfSceneLabel">scene</div>
+  <pre class="shelf-scene-art" id="shelfSceneArt">     fetching…</pre>
+</aside>
 <script src="./stories.js"></script>
+<script src="./parable-ascii.js"></script>
 <script>
 (function () {
   function pickStory(excludeNum) {
@@ -190,12 +195,22 @@ ul.task-list li input[type="checkbox"] {
     );
   }
 
+  function updateScene(num) {
+    var label = document.getElementById("shelfSceneLabel");
+    var art   = document.getElementById("shelfSceneArt");
+    if (!label || !art) return;
+    var ascii = (window.SHELF_ASCII || {})[num];
+    label.textContent = "Canon " + num;
+    art.textContent = ascii || ("\n  (no scene yet for Canon " + num + ")\n");
+  }
+
   var currentNum = null;
   function showRandom() {
     var s = pickStory(currentNum);
     if (!s) return;
     currentNum = s.num;
     document.getElementById("shelfFeaturedParable").innerHTML = renderStory(s);
+    updateScene(s.num);
   }
 
   if (document.readyState === "loading") {
