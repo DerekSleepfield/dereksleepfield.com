@@ -143,7 +143,9 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<aside class="shelf-side shelf-side-left" id="shelfOutline" aria-label="Writing outline">
+<div class="shelf-layout">
+
+<aside class="shelf-side-left" aria-label="Writing outline">
 <div class="shelf-side-inner">
   <div class="shelf-outline-title">Writing</div>
 
@@ -190,8 +192,8 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </aside>
 
-<main class="shelf-middle" id="shelfMiddle"><header id="title-block-header" class="quarto-title-block"><h1 class="shelf-title title display-7">The shelf.</h1></header>
-<div class="shelf-middle-inner">
+<main class="shelf-main"><header id="title-block-header" class="quarto-title-block"><h1 class="shelf-title title display-7">The shelf.</h1></header>
+<div class="shelf-main-inner">
 
   
 
@@ -218,55 +220,12 @@ ul.task-list li input[type="checkbox"] {
   <p class="shelf-small">New things appear when there is something to appear.
   No newsletter. No schedule. Bake when you can.</p>
 
-  <pre class="resident-cat cat-lost-bookmark">      ／¯\_／¯\＿___
-     (  ‿     ‿       )
-      \_____________／
-   the bookmark cat — cream-and-tan ragdoll
-</pre>
-  <pre class="resident-cat cat-porch-light">       ／\_／\
-      (  ◉   ◉ )
-       )  ω  (
-       │  │  │  │
-   the porch cat — charcoal shorthair, paws on the screen door
-</pre>
-  <pre class="resident-cat cat-wildflower">        ⚘    ⚘
-       ／\_／\
-      (  ◔   ◕ )⚘
-        \   ω   /
-   the meadow cat — cream calico in tall grass
-</pre>
-  <pre class="resident-cat cat-frozen-wood">      ＝❄=/\＿/\=❄＝
-     ／  (  ◉   ◉  )  \
-    ／    )   ω   (    \
-       ▔▔▔▔▔▔▔▔
-   the frost cat — white Siberian, frost-tipped fur
-</pre>
-  <pre class="resident-cat cat-highway-diner">       ／\_／\
-      (  ◎   ◎ )
-       )  ⌣  (
-       ▔▔▔▔▔▔
-   the counter cat — pink-eared cream, two a.m. regular
-</pre>
-  <pre class="resident-cat cat-crones-cottage">        ✦
-       ／\_／\
-      (  ◉   ◉ )
-       )  ω  (
-       ▔▔▔▔▔
-   the cottage cat — black-and-silver tortoiseshell, witch-familiar
-</pre>
-
 </div>
 </main>
 
-<aside class="shelf-side shelf-side-right" id="shelfScene" aria-label="Scene for the current parable">
-<div class="shelf-side-inner">
-  <div class="shelf-scene-label" id="shelfSceneLabel">scene</div>
-  <pre class="shelf-scene-art" id="shelfSceneArt">     fetching…</pre>
 </div>
-</aside>
 
 <script src="./stories.js"></script>
-<script src="./parable-ascii.js"></script>
 <script>
 (function () {
   function pickStory(excludeNum) {
@@ -302,18 +261,6 @@ ul.task-list li input[type="checkbox"] {
     );
   }
 
-  function updateScene(num) {
-    var label = document.getElementById("shelfSceneLabel");
-    var art   = document.getElementById("shelfSceneArt");
-    var ascii = (window.SHELF_ASCII || {})[num];
-    label.textContent = "Canon " + num;
-    if (ascii) {
-      art.textContent = ascii;
-    } else {
-      art.textContent = "\n  (no scene yet for Canon " + num + ")\n";
-    }
-  }
-
   function highlightOutline(num) {
     var list = document.getElementById("shelfCanonList");
     if (!list) return;
@@ -338,7 +285,6 @@ ul.task-list li input[type="checkbox"] {
     if (!s) return;
     currentNum = s.num;
     document.getElementById("shelfFeaturedParable").innerHTML = renderStory(s);
-    updateScene(s.num);
     highlightOutline(s.num);
   }
 
