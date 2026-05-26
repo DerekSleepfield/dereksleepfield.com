@@ -416,6 +416,103 @@ html[data-theme="highway-diner"] .shelf-title {
   font-style: italic;
 }
 
+/* ---- Featured Parable (random Canon entry on landing) ---- */
+.shelf-featured {
+  margin: 2.5rem 0 1rem;
+  padding: 2rem 1.5rem;
+  background: var(--shelf-bg-soft);
+  border-top: 1px solid var(--shelf-rule);
+  border-bottom: 1px solid var(--shelf-rule);
+  border-radius: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.shelf-featured-loading {
+  text-align: center;
+  color: var(--shelf-sepia);
+  font-style: italic;
+  margin: 0;
+}
+
+.shelf-featured-title {
+  font-size: 1.5rem !important;
+  font-style: italic;
+  font-weight: 500;
+  margin: 0 0 1.5rem !important;
+  border-bottom: none !important;
+  padding-bottom: 0 !important;
+  line-height: 1.25;
+  color: var(--shelf-ink) !important;
+}
+
+.shelf-featured-num {
+  font-variant: small-caps;
+  font-style: normal;
+  letter-spacing: 0.06em;
+  color: var(--shelf-sepia);
+  font-size: 0.85em;
+}
+
+.shelf-featured-name {
+  font-style: italic;
+  color: var(--shelf-ink);
+}
+
+.shelf-featured-body p {
+  margin: 0 0 1em;
+  line-height: 1.65;
+}
+
+.shelf-featured-coda {
+  margin-top: 1.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--shelf-rule);
+  text-align: center;
+  font-style: italic;
+  color: var(--shelf-ink-soft);
+}
+
+.shelf-featured-coda p {
+  margin: 0.2em 0;
+  line-height: 1.5;
+}
+
+.shelf-featured-actions {
+  text-align: center;
+  font-size: 0.92rem;
+  margin: 1rem 0 0;
+  color: var(--shelf-sepia);
+}
+
+.shelf-featured-actions a {
+  color: var(--shelf-sepia) !important;
+  border-bottom: 1px dotted var(--shelf-rule) !important;
+}
+
+.shelf-featured-actions a:hover {
+  color: var(--shelf-accent) !important;
+  border-bottom-color: var(--shelf-accent) !important;
+}
+
+/* Highway Diner: parable card gets the neon treatment */
+html[data-theme="highway-diner"] .shelf-featured {
+  border-top-color: var(--shelf-accent);
+  border-bottom-color: var(--shelf-secondary);
+  background: var(--shelf-bg-soft);
+}
+
+html[data-theme="highway-diner"] .shelf-featured-title {
+  font-family: 'VT323', monospace !important;
+  text-transform: uppercase;
+  font-style: normal;
+  letter-spacing: 0.04em;
+}
+
+html[data-theme="highway-diner"] .shelf-featured-name {
+  font-style: normal;
+}
+
 /* ---- Resident Cat ---- */
 /* Each theme has its own cat in index.qmd; all are hidden by default.
    Only the cat matching the current data-theme shows. */

@@ -8,6 +8,7 @@ project:
     # (Quarto treats `_*` as ignored in resources).
     - "*.html"
     - themes.css
+    - stories.js
     - assets
 
 website:
