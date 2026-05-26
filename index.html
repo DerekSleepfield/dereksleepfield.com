@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-7c1695f22d174b016ce82d9ba9150449.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-b39f9b0807e93e8ab5cf7d8de3275687.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -73,7 +73,8 @@ ul.task-list li input[type="checkbox"] {
 <style>html{ scroll-behavior: smooth; }</style>
 <style>
   #title-block-header { display: none; }
-  main.content { padding: 0; margin: 0; max-width: 100%; }
+  main.content, .content { padding: 0 !important; margin: 0 !important; max-width: 100% !important; }
+  body > .page-columns { display: block !important; }
 </style>
 
 
@@ -84,7 +85,7 @@ ul.task-list li input[type="checkbox"] {
 <meta name="twitter:card" content="summary">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -135,17 +136,15 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-layout-custom page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
 <!-- main -->
-<main class="content page-columns page-full column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><h1 class="shelf-title title display-7">The shelf.</h1></header>
 
 
 
 
-<div class="shelf-three-col page-columns page-full">
+<div class="shelf-three-col">
 
 <aside class="shelf-outline" aria-label="Writing outline">
 <div class="shelf-outline-title">Writing</div>
@@ -192,9 +191,9 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </aside>
 
-<main class="shelf-center">
+<main class="shelf-center"><header id="title-block-header" class="quarto-title-block"></header>
 
-
+<h1 class="shelf-title">The shelf.</h1>
 
 <p class="shelf-lede">A small library of not-academic writing
 by Derek Wakefield. Kept here quietly.</p>
@@ -388,7 +387,7 @@ No newsletter. No schedule. Bake when you can.</p>
 
 
 
-</main> <!-- /main -->
+
 <!--
   Feedback Chirp button — bottom-left, site-wide.
   Included via _quarto.yml -> format.html.include-after-body.
