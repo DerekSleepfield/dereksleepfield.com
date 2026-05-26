@@ -45,9 +45,7 @@ website:
 
 format:
   html:
-    theme:
-      light: [cosmo, themes.css]
-      dark: [darkly, themes.css]
+    theme: cosmo
     css:
       - themes.css
     toc: true
