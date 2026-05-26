@@ -157,6 +157,22 @@ Parables, codas, essays — whatever else wants a home.
 <div class="shelf-ornament">
 ❖❖❖
 </div>
+<!-- =======================================================================
+     Featured parable — a random Canon entry each visit.
+     Data lives in stories.js, populated at site build by extracting
+     all <section class="canon-block"> blocks from bobble-canon.html.
+     ======================================================================= -->
+<div id="shelfFeaturedParable" class="shelf-featured" aria-live="polite">
+<p class="shelf-featured-loading">
+<em>fetching a parable…</em>
+</p>
+</div>
+<p class="shelf-featured-actions">
+<a href="#" id="shelfAnotherStory">↻ another parable</a> &nbsp;·&nbsp; <a href="./bobble-canon.html">read all forty →</a>
+</p>
+<div class="shelf-ornament">
+❖❖❖
+</div>
 <p class="shelf-small">
 New things appear when there is something to appear. No newsletter. No schedule. Bake when you can.
 </p>
@@ -197,6 +213,75 @@ New things appear when there is something to appear. No newsletter. No schedule.
    the cottage cat — black-and-silver tortoiseshell, witch-familiar
 </pre>
 </div>
+<script src="./stories.js"></script>
+<script>
+(function () {
+  function pickStory(excludeNum) {
+    var stories = window.SHELF_STORIES || [];
+    if (!stories.length) return null;
+    if (stories.length === 1) return stories[0];
+    var s, attempts = 0;
+    do {
+      s = stories[Math.floor(Math.random() * stories.length)];
+      attempts++;
+    } while (excludeNum && s.num === excludeNum && attempts < 20);
+    return s;
+  }
+
+  function escapeHtml(s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+  // Body paragraphs already contain HTML entities decoded properly upstream;
+  // we render them as-is (no further escape) so em-dashes etc. survive.
+  function renderStory(s) {
+    var bodyHtml = s.body.map(function (p) {
+      return '<p>' + p + '</p>';
+    }).join('\n');
+    var codaHtml = s.coda.length
+      ? '<div class="shelf-featured-coda">' +
+          s.coda.map(function (line) { return '<p>' + line + '</p>'; }).join('') +
+        '</div>'
+      : '';
+    return (
+      '<h2 class="shelf-featured-title">' +
+        '<span class="shelf-featured-num">Canon ' + escapeHtml(s.num) + '</span>' +
+        '<span class="shelf-featured-name"> &mdash; ' + escapeHtml(s.name) + '</span>' +
+      '</h2>' +
+      '<div class="shelf-featured-body">' + bodyHtml + '</div>' +
+      codaHtml
+    );
+  }
+
+  var currentNum = null;
+  function showRandom() {
+    var s = pickStory(currentNum);
+    var container = document.getElementById("shelfFeaturedParable");
+    if (!s) {
+      container.innerHTML = '<p><em>No parables loaded.</em></p>';
+      return;
+    }
+    currentNum = s.num;
+    container.innerHTML = renderStory(s);
+  }
+
+  // Initial pick on load
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", showRandom);
+  } else {
+    showRandom();
+  }
+
+  // "Another parable" button
+  document.addEventListener("click", function (e) {
+    var a = e.target.closest("#shelfAnotherStory");
+    if (!a) return;
+    e.preventDefault();
+    showRandom();
+    // Smooth scroll to the parable so users don't lose place
+    document.getElementById("shelfFeaturedParable").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+})();
+</script>
 
 
 
