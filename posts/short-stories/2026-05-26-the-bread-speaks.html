@@ -198,6 +198,78 @@ ul.task-list li input[type="checkbox"] {
 
 
 </main> <!-- /main -->
+<!--
+  Feedback Chirp button — bottom-left, site-wide.
+  Included via _quarto.yml -> format.html.include-after-body.
+  Inherits theme colors from themes.css CSS variables.
+-->
+<a class="shelf-chirp" href="../../feedback.html" aria-label="Leave a Feedback Chirp">
+  <span class="shelf-chirp-mark">✦</span>
+  <span class="shelf-chirp-label">Feedback Chirp</span>
+</a>
+<style>
+  .shelf-chirp {
+    position: fixed;
+    bottom: 1.25rem;
+    left: 1.25rem;
+    z-index: 999;
+    background: var(--shelf-bg-soft, #faf2e2);
+    border: 1px solid var(--shelf-rule, #c9b890);
+    border-radius: 18px;
+    padding: 0.45em 0.95em 0.45em 0.8em;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    font-family: var(--shelf-body-font, 'EB Garamond', serif);
+    font-size: 0.85rem;
+    color: var(--shelf-ink-soft, #5a4b35) !important;
+    text-decoration: none !important;
+    border-bottom: none !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  }
+  .shelf-chirp:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    background: var(--shelf-bg, #f3eadc);
+    color: var(--shelf-accent, #c7935a) !important;
+    border-bottom: none !important;
+  }
+  .shelf-chirp:focus-visible {
+    outline: 2px solid var(--shelf-accent, #c7935a);
+    outline-offset: 3px;
+  }
+  .shelf-chirp-mark {
+    color: var(--shelf-accent, #c7935a);
+    font-size: 1.05em;
+    line-height: 1;
+  }
+  .shelf-chirp-label {
+    letter-spacing: 0.03em;
+  }
+  /* Highway Diner: make the chirp neon */
+  html[data-theme="highway-diner"] .shelf-chirp {
+    font-family: 'VT323', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  html[data-theme="highway-diner"] .shelf-chirp-mark {
+    text-shadow: 0 0 6px var(--shelf-accent);
+  }
+  /* Don't print */
+  @media print {
+    .shelf-chirp { display: none; }
+  }
+  /* Mobile: smaller, tucked tighter */
+  @media (max-width: 480px) {
+    .shelf-chirp {
+      bottom: 0.6rem;
+      left: 0.6rem;
+      padding: 0.35em 0.75em 0.35em 0.65em;
+      font-size: 0.78rem;
+    }
+  }
+</style>
 <!-- dereksleepfield.com — theme switcher widget
      Injected site-wide via `include-after-body` in _quarto.yml.
      CSS lives in themes.css; this file is markup + small script. -->
