@@ -3,14 +3,15 @@ title: ""
 pagetitle: "Derek Sleepfield"
 description-meta: "A small library of not-academic writing by Derek Wakefield."
 toc: false
-page-layout: full
+page-layout: custom
 format:
   html:
     include-in-header:
       - text: |
           <style>
             #title-block-header { display: none; }
-            main.content { padding: 0; margin: 0; max-width: 100%; }
+            main.content, .content { padding: 0 !important; margin: 0 !important; max-width: 100% !important; }
+            body > .page-columns { display: block !important; }
           </style>
 ---
 
