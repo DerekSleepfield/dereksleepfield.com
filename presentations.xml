@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Derek Sleepfield</title>
+<link>https://dereksleepfield.com/presentations.html</link>
+<atom:link href="https://dereksleepfield.com/presentations.xml" rel="self" type="application/rss+xml"/>
+<description>A small library of not-academic writing by Derek Wakefield.</description>
+<generator>quarto-1.9.38</generator>
+<lastBuildDate>Fri, 22 May 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>Lecture 4: Bobbish</title>
+  <link>https://dereksleepfield.com/presentations/bobology/2026-05-22-bobbish.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Opening <a href="../../assets/bobbish.pdf">the slide deck (PDF)</a>… or switch to the <a href="../../bobbish-in-4-voices.html">long-form lecture (4 voices)</a>.</p>
+<script>window.location.replace("/assets/bobbish.pdf");</script>
+
+
+
+ ]]></description>
+  <category>presentation</category>
+  <category>bobble</category>
+  <category>bobology</category>
+  <category>language</category>
+  <category>bobbish</category>
+  <guid>https://dereksleepfield.com/presentations/bobology/2026-05-22-bobbish.html</guid>
+  <pubDate>Fri, 22 May 2026 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Lecture 2: Bob is You</title>
+  <link>https://dereksleepfield.com/presentations/bobology/2026-05-21-bob-is-you.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Opening <a href="../../assets/bob-is-you.pdf">the slide deck (PDF)</a>… or switch to the <a href="../../bob-is-you.html">HTML article</a>.</p>
+<script>window.location.replace("/assets/bob-is-you.pdf");</script>
+
+
+
+ ]]></description>
+  <category>presentation</category>
+  <category>bobble</category>
+  <category>bobology</category>
+  <category>health</category>
+  <category>integration</category>
+  <guid>https://dereksleepfield.com/presentations/bobology/2026-05-21-bob-is-you.html</guid>
+  <pubDate>Thu, 21 May 2026 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Lecture 3: The 4B Framework</title>
+  <link>https://dereksleepfield.com/presentations/bobology/2026-05-21-the-4b-framework.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Opening <a href="../../assets/the-4b-framework.pdf">the slide deck (PDF)</a>… or switch to the <a href="../../the-4b-framework.html">long-form lecture</a>.</p>
+<script>window.location.replace("/assets/the-4b-framework.pdf");</script>
+
+
+
+ ]]></description>
+  <category>presentation</category>
+  <category>bobble</category>
+  <category>bobology</category>
+  <category>framework</category>
+  <guid>https://dereksleepfield.com/presentations/bobology/2026-05-21-the-4b-framework.html</guid>
+  <pubDate>Thu, 21 May 2026 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Lecture 5: The Wand and the Hand</title>
+  <link>https://dereksleepfield.com/presentations/bobology/2026-05-19-wand-and-hand.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Opening <a href="../../assets/the-wand-and-the-hand.pdf">the slide deck (PDF)</a>… or switch to the <a href="../../the-wand-and-the-hand.html">written article</a>.</p>
+<script>window.location.replace("/assets/the-wand-and-the-hand.pdf");</script>
+
+
+
+ ]]></description>
+  <category>presentation</category>
+  <category>bobble</category>
+  <category>bobology</category>
+  <category>ai literacy</category>
+  <category>canon</category>
+  <guid>https://dereksleepfield.com/presentations/bobology/2026-05-19-wand-and-hand.html</guid>
+  <pubDate>Tue, 19 May 2026 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>How to Engage in Politics as Faculty</title>
+  <link>https://dereksleepfield.com/presentations/other/2026-05-19-how-to-engage-in-politics-as-faculty.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Opening <a href="../../assets/how-to-engage-in-politics-as-faculty.pdf">the slide deck (PDF)</a>…</p>
+<script>window.location.replace("/assets/how-to-engage-in-politics-as-faculty.pdf");</script>
+
+
+
+ ]]></description>
+  <category>presentation</category>
+  <category>faculty</category>
+  <category>politics</category>
+  <category>campus connect</category>
+  <guid>https://dereksleepfield.com/presentations/other/2026-05-19-how-to-engage-in-politics-as-faculty.html</guid>
+  <pubDate>Tue, 19 May 2026 00:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Lecture 1: Introduction to Bobology</title>
+  <link>https://dereksleepfield.com/presentations/bobology/2026-05-09-introduction-to-bobology.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>Opening <a href="../../assets/introduction-to-bobology.pdf">the slide deck (PDF)</a>… or switch to the <a href="../../introduction-to-bobology.html">long-form lecture</a>.</p>
+<script>window.location.replace("/assets/introduction-to-bobology.pdf");</script>
+
+
+
+ ]]></description>
+  <category>presentation</category>
+  <category>bobble</category>
+  <category>bobology</category>
+  <guid>https://dereksleepfield.com/presentations/bobology/2026-05-09-introduction-to-bobology.html</guid>
+  <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>

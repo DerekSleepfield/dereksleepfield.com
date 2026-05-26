@@ -1,9 +1,0 @@
----
-title: "Games"
-listing:
-  contents: games
-  type: default
-  sort: "date desc"
-  fields: [date, title, description]
-  feed: true
----

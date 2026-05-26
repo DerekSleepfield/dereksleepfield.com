@@ -1,9 +1,0 @@
----
-title: "Apps"
-listing:
-  contents: apps
-  type: default
-  sort: "date desc"
-  fields: [date, title, description]
-  feed: true
----
