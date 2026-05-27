@@ -42,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-7c1695f22d174b016ce82d9ba9150449.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-b39f9b0807e93e8ab5cf7d8de3275687.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -393,8 +393,8 @@ ul.task-list li input[type="checkbox"] {
      CSS lives in themes.css; this file is markup + small script. -->
 <div class="shelf-theme-switcher" id="shelfThemeSwitcher" aria-label="Style">
   <button type="button" class="shelf-theme-toggle" id="shelfThemeToggle" aria-haspopup="listbox" aria-expanded="false">
-    <span class="shelf-swatch" id="shelfToggleSwatch" style="background:#c7935a"></span>
-    <span id="shelfToggleLabel">Lost Bookmark</span>
+    <span class="shelf-swatch" id="shelfToggleSwatch" style="background:#fde487"></span>
+    <span id="shelfToggleLabel">Starry Night</span>
     <span class="shelf-chevron">▾</span>
   </button>
   <div class="shelf-theme-panel" id="shelfThemePanel" role="listbox"></div>
@@ -408,7 +408,8 @@ ul.task-list li input[type="checkbox"] {
     { id: "wildflower",      name: "Wildflower",      tagline: "bee meadow",      swatch: "#9a6abc" },
     { id: "frozen-wood",     name: "Frozen Wood",     tagline: "frost silence",   swatch: "#3a6a8a" },
     { id: "highway-diner",   name: "Highway Diner",   tagline: "neon at 2 am",    swatch: "#ff3a7a" },
-    { id: "crones-cottage",  name: "Crone's Cottage", tagline: "moss & herb",     swatch: "#9a7abc" }
+    { id: "crones-cottage",  name: "Crone's Cottage", tagline: "moss & herb",     swatch: "#9a7abc" },
+    { id: "starry-night",    name: "Starry Night",    tagline: "midnight + stars", swatch: "#fde487" }
   ];
   var STORAGE_KEY = "shelf-theme";
 
@@ -440,8 +441,8 @@ ul.task-list li input[type="checkbox"] {
     try { localStorage.setItem(STORAGE_KEY, t.id); } catch (e) {}
   }
 
-  var initial = "default";
-  try { initial = localStorage.getItem(STORAGE_KEY) || "default"; } catch (e) {}
+  var initial = "starry-night";
+  try { initial = localStorage.getItem(STORAGE_KEY) || "starry-night"; } catch (e) {}
   applyTheme(initial);
 
   var btn = document.getElementById("shelfThemeToggle");
