@@ -3,8 +3,8 @@
      CSS lives in themes.css; this file is markup + small script. -->
 <div class="shelf-theme-switcher" id="shelfThemeSwitcher" aria-label="Style">
   <button type="button" class="shelf-theme-toggle" id="shelfThemeToggle" aria-haspopup="listbox" aria-expanded="false">
-    <span class="shelf-swatch" id="shelfToggleSwatch" style="background:#c7935a"></span>
-    <span id="shelfToggleLabel">Lost Bookmark</span>
+    <span class="shelf-swatch" id="shelfToggleSwatch" style="background:#fde487"></span>
+    <span id="shelfToggleLabel">Starry Night</span>
     <span class="shelf-chevron">▾</span>
   </button>
   <div class="shelf-theme-panel" id="shelfThemePanel" role="listbox"></div>
@@ -18,7 +18,8 @@
     { id: "wildflower",      name: "Wildflower",      tagline: "bee meadow",      swatch: "#9a6abc" },
     { id: "frozen-wood",     name: "Frozen Wood",     tagline: "frost silence",   swatch: "#3a6a8a" },
     { id: "highway-diner",   name: "Highway Diner",   tagline: "neon at 2 am",    swatch: "#ff3a7a" },
-    { id: "crones-cottage",  name: "Crone's Cottage", tagline: "moss & herb",     swatch: "#9a7abc" }
+    { id: "crones-cottage",  name: "Crone's Cottage", tagline: "moss & herb",     swatch: "#9a7abc" },
+    { id: "starry-night",    name: "Starry Night",    tagline: "midnight + stars", swatch: "#fde487" }
   ];
   var STORAGE_KEY = "shelf-theme";
 
@@ -50,8 +51,8 @@
     try { localStorage.setItem(STORAGE_KEY, t.id); } catch (e) {}
   }
 
-  var initial = "default";
-  try { initial = localStorage.getItem(STORAGE_KEY) || "default"; } catch (e) {}
+  var initial = "starry-night";
+  try { initial = localStorage.getItem(STORAGE_KEY) || "starry-night"; } catch (e) {}
   applyTheme(initial);
 
   var btn = document.getElementById("shelfThemeToggle");
