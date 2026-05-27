@@ -10,10 +10,11 @@
      - a resident ASCII cat (shown only when that theme is active)
    ========================================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Crimson+Pro:ital,wght@0,400;0,500;1,400&family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Crimson+Pro:ital,wght@0,400;0,500;1,400&family=Cormorant:wght@400;500;600&family=Domine:wght@400;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=IM+Fell+English:ital@0;1&family=VT323&display=swap');
 
 /* ────────────────────────────────────────────────────────────
    Default theme: Lost Bookmark (coffee-shop receipt cream)
+   sleepfield-specific identity; the rest mirror derekwakefield.com.
    ──────────────────────────────────────────────────────────── */
 :root {
   --shelf-bg:          #f3eadc;
@@ -31,93 +32,224 @@
 }
 
 /* ────────────────────────────────────────────────────────────
-   Theme: Porch Light (Canon I — yellow bulb in deep night)
+   1 · Porch Light (warm cream + brass)
    ──────────────────────────────────────────────────────────── */
 html[data-theme="porch-light"] {
-  --shelf-bg:          #0c1419;
-  --shelf-bg-soft:     #14202a;
-  --shelf-ink:         #f5d56a;
-  --shelf-ink-soft:    #c9a960;
-  --shelf-sepia:       #8a7c4a;
-  --shelf-rule:        #3a4f5a;
-  --shelf-accent:      #f5d56a;
-  --shelf-secondary:   #c9a960;
-  --shelf-selection:   #3a4f5a;
-  --shelf-body-font:   'Crimson Pro', 'Crimson Text', Cambria, Georgia, serif;
-  --shelf-twinkle-color:  rgba(245, 213, 106, 0.45);
+  --shelf-bg:          #faf8f3;
+  --shelf-bg-soft:     #ffffff;
+  --shelf-ink:         #2a2a2a;
+  --shelf-ink-soft:    #5b5340;
+  --shelf-sepia:       #8a7e60;
+  --shelf-rule:        #e5dec4;
+  --shelf-accent:      #c9a96e;
+  --shelf-secondary:   #5b5340;
+  --shelf-selection:   #e5dec4;
+  --shelf-body-font:   'Iowan Old Style', 'Palatino', Georgia, serif;
+  --shelf-twinkle-color:  rgba(201, 169, 110, 0.30);
   --shelf-twinkle-size:   1.5px;
 }
 
 /* ────────────────────────────────────────────────────────────
-   Theme: Wildflower (bee meadow — yellow + lavender)
+   2 · Star Chart (night sky + soft yellow)
    ──────────────────────────────────────────────────────────── */
-html[data-theme="wildflower"] {
-  --shelf-bg:          #f5edc0;
-  --shelf-bg-soft:     #fdf7d8;
-  --shelf-ink:         #3a4a2a;
-  --shelf-ink-soft:    #5a6a3a;
-  --shelf-sepia:       #6a5a3a;
-  --shelf-rule:        #c9a8d0;
-  --shelf-accent:      #9a6abc;
-  --shelf-secondary:   #c8a83a;
-  --shelf-selection:   #d9c8f0;
-  --shelf-body-font:   'EB Garamond', 'Iowan Old Style', 'Palatino', Georgia, serif;
-  --shelf-twinkle-color:  rgba(154, 106, 188, 0.55);
-  --shelf-twinkle-size:   2px;
-}
-
-/* ────────────────────────────────────────────────────────────
-   Theme: Frozen Wood (pale ice blue, silent)
-   ──────────────────────────────────────────────────────────── */
-html[data-theme="frozen-wood"] {
-  --shelf-bg:          #e6eef3;
-  --shelf-bg-soft:     #f2f6f9;
-  --shelf-ink:         #1a2a3a;
-  --shelf-ink-soft:    #3a4a5a;
-  --shelf-sepia:       #5a6a7a;
-  --shelf-rule:        #a8c0c8;
-  --shelf-accent:      #3a6a8a;
-  --shelf-secondary:   #7a8a9a;
-  --shelf-selection:   #c8e0e8;
-  --shelf-body-font:   'EB Garamond', 'Iowan Old Style', 'Palatino', Georgia, serif;
-  --shelf-twinkle-color:  rgba(58, 106, 138, 0.40);
+html[data-theme="star-chart"] {
+  --shelf-bg:          #0a1428;
+  --shelf-bg-soft:     #112042;
+  --shelf-ink:         #d8d0b8;
+  --shelf-ink-soft:    #a89868;
+  --shelf-sepia:       #a89868;
+  --shelf-rule:        #2a3458;
+  --shelf-accent:      #fde487;
+  --shelf-secondary:   #a89868;
+  --shelf-selection:   #3a4670;
+  --shelf-body-font:   'Crimson Pro', 'Crimson Text', Cambria, Georgia, serif;
+  --shelf-twinkle-color:  rgba(253, 228, 135, 0.85);
   --shelf-twinkle-size:   2.5px;
 }
 
-/* ────────────────────────────────────────────────────────────
-   Theme: Highway Diner (neon pink + cyan on near-black)
-   ──────────────────────────────────────────────────────────── */
-html[data-theme="highway-diner"] {
-  --shelf-bg:          #0a0a0e;
-  --shelf-bg-soft:     #14141a;
-  --shelf-ink:         #f5f0e8;
-  --shelf-ink-soft:    #d8d0c0;
-  --shelf-sepia:       #5acfe8;
-  --shelf-rule:        #ff3a7a;
-  --shelf-accent:      #ff3a7a;
-  --shelf-secondary:   #5acfe8;
-  --shelf-selection:   #ff3a7a;
-  --shelf-body-font:   'VT323', 'Courier New', monospace;
-  --shelf-twinkle-color:  rgba(90, 207, 232, 0.55);
-  --shelf-twinkle-size:   2px;
+/* Star Chart: radial-gradient backdrop + pulsing twinkle */
+html[data-theme="star-chart"] body {
+  background:
+    radial-gradient(ellipse at 30% 20%, #1a2440 0%, #0a1428 65%) fixed !important;
+}
+html[data-theme="star-chart"] body::before {
+  animation: shelfDrift 90s linear infinite, starryTwinkle 3.4s ease-in-out infinite alternate;
+}
+@keyframes starryTwinkle {
+  from { opacity: 0.55; }
+  to   { opacity: 1;    }
+}
+html[data-theme="star-chart"] .navbar .nav-link,
+html[data-theme="star-chart"] .navbar-brand {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.9em;
 }
 
 /* ────────────────────────────────────────────────────────────
-   Theme: Crone's Cottage (moss + herb-purple, witch-familiar)
+   3 · Bedrock (geological — deep blue + sand)
    ──────────────────────────────────────────────────────────── */
-html[data-theme="crones-cottage"] {
-  --shelf-bg:          #1f2a1a;
-  --shelf-bg-soft:     #2a3424;
-  --shelf-ink:         #d8c8a8;
-  --shelf-ink-soft:    #a8a070;
-  --shelf-sepia:       #c8a870;
-  --shelf-rule:        #5a3a5a;
-  --shelf-accent:      #c89a3a;
-  --shelf-secondary:   #9a7abc;
-  --shelf-selection:   #5a3a5a;
-  --shelf-body-font:   'EB Garamond', 'Iowan Old Style', 'Palatino', Georgia, serif;
-  --shelf-twinkle-color:  rgba(154, 122, 188, 0.55);
+html[data-theme="bedrock"] {
+  --shelf-bg:          #1a2840;
+  --shelf-bg-soft:     #223354;
+  --shelf-ink:         #e8e2d1;
+  --shelf-ink-soft:    #d4a574;
+  --shelf-sepia:       #b08a5a;
+  --shelf-rule:        #2c3d5c;
+  --shelf-accent:      #d4a574;
+  --shelf-secondary:   #fff8e8;
+  --shelf-selection:   #2c3d5c;
+  --shelf-body-font:   'Domine', 'Cambria', Georgia, serif;
+  --shelf-twinkle-color:  rgba(212, 165, 116, 0.35);
   --shelf-twinkle-size:   2px;
+}
+html[data-theme="bedrock"] h1,
+html[data-theme="bedrock"] h2,
+html[data-theme="bedrock"] h3,
+html[data-theme="bedrock"] .shelf-title,
+html[data-theme="bedrock"] .shelf-featured-title {
+  color: #fff8e8 !important;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+html[data-theme="bedrock"] .navbar .nav-link,
+html[data-theme="bedrock"] .navbar-brand {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  font-size: 0.85em;
+}
+
+/* ────────────────────────────────────────────────────────────
+   4 · Hum (soft peach + dusty purple)
+   ──────────────────────────────────────────────────────────── */
+html[data-theme="hum"] {
+  --shelf-bg:          #f4ebe1;
+  --shelf-bg-soft:     #f9f1e8;
+  --shelf-ink:         #3a2e2e;
+  --shelf-ink-soft:    #5d4f4f;
+  --shelf-sepia:       #7a6868;
+  --shelf-rule:        #e3d4c9;
+  --shelf-accent:      #8a6b8a;
+  --shelf-secondary:   #5d4f4f;
+  --shelf-selection:   #e3d4c9;
+  --shelf-body-font:   'Cormorant', 'Cormorant Garamond', Georgia, serif;
+  --shelf-twinkle-color:  rgba(138, 107, 138, 0.35);
+  --shelf-twinkle-size:   2px;
+}
+html[data-theme="hum"] body { font-size: 1.05em; }
+
+/* ────────────────────────────────────────────────────────────
+   5 · Bobblesphere (orbital — deep slate + bright orange)
+   ──────────────────────────────────────────────────────────── */
+html[data-theme="bobblesphere"] {
+  --shelf-bg:          #0f1419;
+  --shelf-bg-soft:     #161c24;
+  --shelf-ink:         #d8cfb4;
+  --shelf-ink-soft:    #f7eccb;
+  --shelf-sepia:       #a89a78;
+  --shelf-rule:        #2a3140;
+  --shelf-accent:      #ff9d3c;
+  --shelf-secondary:   #fff5d0;
+  --shelf-selection:   #2a3140;
+  --shelf-body-font:   'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --shelf-twinkle-color:  rgba(255, 157, 60, 0.40);
+  --shelf-twinkle-size:   2px;
+}
+html[data-theme="bobblesphere"] h1,
+html[data-theme="bobblesphere"] h2,
+html[data-theme="bobblesphere"] h3,
+html[data-theme="bobblesphere"] .shelf-title,
+html[data-theme="bobblesphere"] .shelf-featured-title {
+  color: #fff5d0 !important;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+html[data-theme="bobblesphere"] .navbar .nav-link,
+html[data-theme="bobblesphere"] .navbar-brand {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.85em;
+}
+
+/* ────────────────────────────────────────────────────────────
+   6 · Library Bookmark (card catalog — monospace + crimson)
+   ──────────────────────────────────────────────────────────── */
+html[data-theme="library-bookmark"] {
+  --shelf-bg:          #f9f6ed;
+  --shelf-bg-soft:     #fffdf5;
+  --shelf-ink:         #2d2519;
+  --shelf-ink-soft:    #2d2519;
+  --shelf-sepia:       #6a5a3a;
+  --shelf-rule:        #d4c8a8;
+  --shelf-accent:      #8b1a1a;
+  --shelf-secondary:   #2d2519;
+  --shelf-selection:   #d4c8a8;
+  --shelf-body-font:   'IBM Plex Mono', 'Courier New', monospace;
+  --shelf-twinkle-color:  rgba(139, 26, 26, 0.20);
+  --shelf-twinkle-size:   1.5px;
+}
+html[data-theme="library-bookmark"] body { font-size: 0.96em; }
+html[data-theme="library-bookmark"] h1,
+html[data-theme="library-bookmark"] h2,
+html[data-theme="library-bookmark"] h3,
+html[data-theme="library-bookmark"] .shelf-title,
+html[data-theme="library-bookmark"] .shelf-featured-title {
+  font-weight: 700;
+  letter-spacing: -0.005em;
+}
+html[data-theme="library-bookmark"] .navbar {
+  border-bottom: 1.5px dashed #2d2519 !important;
+}
+html[data-theme="library-bookmark"] .navbar .nav-link,
+html[data-theme="library-bookmark"] .navbar-brand {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.85em;
+}
+
+/* ────────────────────────────────────────────────────────────
+   7 · Mind Palace Map (antique atlas — parchment + russet)
+   ──────────────────────────────────────────────────────────── */
+html[data-theme="mind-palace-map"] {
+  --shelf-bg:          #efe5d0;
+  --shelf-bg-soft:     #f5ecd8;
+  --shelf-ink:         #2a1f0e;
+  --shelf-ink-soft:    #2a1f0e;
+  --shelf-sepia:       #7a5a2a;
+  --shelf-rule:        #c4b58c;
+  --shelf-accent:      #993322;
+  --shelf-secondary:   #2a1f0e;
+  --shelf-selection:   #c4b58c;
+  --shelf-body-font:   'IM Fell English', 'Spectral', Georgia, serif;
+  --shelf-twinkle-color:  rgba(153, 51, 34, 0.25);
+  --shelf-twinkle-size:   2px;
+}
+html[data-theme="mind-palace-map"] h1,
+html[data-theme="mind-palace-map"] h2,
+html[data-theme="mind-palace-map"] h3,
+html[data-theme="mind-palace-map"] .shelf-title,
+html[data-theme="mind-palace-map"] .shelf-featured-title {
+  font-variant: small-caps;
+  letter-spacing: 0.04em;
+}
+html[data-theme="mind-palace-map"] .navbar {
+  border-bottom: 1px double #2a1f0e !important;
+}
+html[data-theme="mind-palace-map"] .navbar .nav-link,
+html[data-theme="mind-palace-map"] .navbar-brand {
+  font-variant: small-caps;
+  letter-spacing: 0.08em;
+}
+
+/* Star Chart: bright-yellow headings glow softly against the midnight blue */
+html[data-theme="star-chart"] h1,
+html[data-theme="star-chart"] h2,
+html[data-theme="star-chart"] h3,
+html[data-theme="star-chart"] .shelf-title,
+html[data-theme="star-chart"] .shelf-featured-title {
+  color: var(--shelf-accent) !important;
+  text-shadow: 0 0 8px rgba(253, 228, 135, 0.25);
 }
 
 /* =========================================================================
@@ -181,20 +313,6 @@ body::before {
   to   { transform: translate3d(-50px, -90px, 0); }
 }
 
-/* Faster sparkle for neon */
-html[data-theme="highway-diner"] body::before {
-  animation: shelfDrift 30s linear infinite, neonFlicker 1.6s steps(6) infinite;
-}
-@keyframes neonFlicker {
-  0%, 92%, 100% { opacity: 1; }
-  93% { opacity: 0.6; }
-  95% { opacity: 0.9; }
-}
-
-/* Slower, more deliberate for Frozen Wood */
-html[data-theme="frozen-wood"] body::before {
-  animation: shelfDrift 120s linear infinite;
-}
 
 /* ---- Headings ---- */
 h1, h2, h3, h4, h5, h6 {
@@ -213,18 +331,6 @@ h2 {
   margin-top: 2.5em;
 }
 h3 { font-size: 1.25rem; font-weight: 500; }
-
-/* Highway Diner: bigger, all-caps headers for the neon vibe */
-html[data-theme="highway-diner"] h1,
-html[data-theme="highway-diner"] h2,
-html[data-theme="highway-diner"] h3 {
-  font-family: 'VT323', monospace !important;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 400;
-  color: var(--shelf-accent) !important;
-  text-shadow: 0 0 8px var(--shelf-accent);
-}
 
 /* ---- Links ---- */
 a, a:visited {
@@ -279,15 +385,6 @@ a:hover {
   font-variant: normal;
   text-transform: none;
   letter-spacing: -0.005em;
-}
-
-html[data-theme="highway-diner"] .navbar-brand,
-html[data-theme="highway-diner"] .navbar .nav-link {
-  font-family: 'VT323', monospace !important;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-size: 1.1rem !important;
-  font-variant: normal;
 }
 
 /* ---- Footer ---- */
@@ -539,13 +636,6 @@ hr {
   text-align: left;
 }
 
-html[data-theme="highway-diner"] .shelf-scene-art {
-  font-family: 'VT323', monospace !important;
-  font-size: 1rem;
-  color: var(--shelf-secondary) !important;
-  text-shadow: 0 0 4px var(--shelf-secondary);
-}
-
 /* Hide on viewports too narrow to fit outline + parable + scene side-by-side */
 @media (max-width: 1320px) {
   .shelf-scene-fixed { display: none; }
@@ -558,11 +648,6 @@ html[data-theme="highway-diner"] .shelf-scene-art {
   margin: 0 0 2.5rem !important;
   border-bottom: none !important;
   line-height: 1.05;
-}
-
-html[data-theme="highway-diner"] .shelf-title {
-  font-style: normal;
-  text-shadow: 0 0 12px var(--shelf-accent), 0 0 20px var(--shelf-accent);
 }
 
 .shelf-lede { font-size: 1.2rem; line-height: 1.55; margin-bottom: 1.4em; }
@@ -661,60 +746,6 @@ html[data-theme="highway-diner"] .shelf-title {
   color: var(--shelf-accent) !important;
   border-bottom-color: var(--shelf-accent) !important;
 }
-
-/* Highway Diner: parable card gets the neon treatment */
-html[data-theme="highway-diner"] .shelf-featured {
-  border-top-color: var(--shelf-accent);
-  border-bottom-color: var(--shelf-secondary);
-  background: var(--shelf-bg-soft);
-}
-
-html[data-theme="highway-diner"] .shelf-featured-title {
-  font-family: 'VT323', monospace !important;
-  text-transform: uppercase;
-  font-style: normal;
-  letter-spacing: 0.04em;
-}
-
-html[data-theme="highway-diner"] .shelf-featured-name {
-  font-style: normal;
-}
-
-/* ---- Resident Cat ---- */
-/* Each theme has its own cat in index.qmd; all are hidden by default.
-   Only the cat matching the current data-theme shows. */
-.resident-cat {
-  display: none;
-  font-family: 'JetBrains Mono', 'Menlo', 'Consolas', 'Courier New', monospace !important;
-  font-size: 0.9rem;
-  line-height: 1.2;
-  text-align: center;
-  color: var(--shelf-sepia) !important;
-  margin: 3rem auto 2rem;
-  white-space: pre;
-  opacity: 0.85;
-  background: transparent !important;
-  border: none !important;
-  padding: 0 !important;
-}
-
-/* Default theme = Lost Bookmark cat */
-.resident-cat.cat-lost-bookmark { display: block; }
-
-html[data-theme="porch-light"] .resident-cat { display: none; }
-html[data-theme="porch-light"] .resident-cat.cat-porch-light { display: block; }
-
-html[data-theme="wildflower"] .resident-cat { display: none; }
-html[data-theme="wildflower"] .resident-cat.cat-wildflower { display: block; }
-
-html[data-theme="frozen-wood"] .resident-cat { display: none; }
-html[data-theme="frozen-wood"] .resident-cat.cat-frozen-wood { display: block; }
-
-html[data-theme="highway-diner"] .resident-cat { display: none; }
-html[data-theme="highway-diner"] .resident-cat.cat-highway-diner { display: block; }
-
-html[data-theme="crones-cottage"] .resident-cat { display: none; }
-html[data-theme="crones-cottage"] .resident-cat.cat-crones-cottage { display: block; }
 
 /* ---- Code blocks ---- */
 pre, code {
