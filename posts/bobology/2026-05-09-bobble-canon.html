@@ -43,7 +43,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-15634bcf2e68342d4ad2dfa704d543f6.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-b39f9b0807e93e8ab5cf7d8de3275687.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-7c1695f22d174b016ce82d9ba9150449.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -261,7 +261,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="shelf-theme-switcher" id="shelfThemeSwitcher" aria-label="Style">
   <button type="button" class="shelf-theme-toggle" id="shelfThemeToggle" aria-haspopup="listbox" aria-expanded="false">
     <span class="shelf-swatch" id="shelfToggleSwatch" style="background:#fde487"></span>
-    <span id="shelfToggleLabel">Starry Night</span>
+    <span id="shelfToggleLabel">Star Chart</span>
     <span class="shelf-chevron">▾</span>
   </button>
   <div class="shelf-theme-panel" id="shelfThemePanel" role="listbox"></div>
@@ -270,13 +270,14 @@ ul.task-list li input[type="checkbox"] {
 <script>
 (function () {
   var THEMES = [
-    { id: "default",         name: "Lost Bookmark",   tagline: "library cream",   swatch: "#c7935a" },
-    { id: "porch-light",     name: "Porch Light",     tagline: "yellow on deep",  swatch: "#f5d56a" },
-    { id: "wildflower",      name: "Wildflower",      tagline: "bee meadow",      swatch: "#9a6abc" },
-    { id: "frozen-wood",     name: "Frozen Wood",     tagline: "frost silence",   swatch: "#3a6a8a" },
-    { id: "highway-diner",   name: "Highway Diner",   tagline: "neon at 2 am",    swatch: "#ff3a7a" },
-    { id: "crones-cottage",  name: "Crone's Cottage", tagline: "moss & herb",     swatch: "#9a7abc" },
-    { id: "starry-night",    name: "Starry Night",    tagline: "midnight + stars", swatch: "#fde487" }
+    { id: "default",          name: "Lost Bookmark",   tagline: "library cream",   swatch: "#c7935a" },
+    { id: "porch-light",      name: "Porch Light",     tagline: "warm cream",      swatch: "#c9a96e" },
+    { id: "star-chart",       name: "Star Chart",      tagline: "night sky",       swatch: "#fde487" },
+    { id: "bedrock",          name: "Bedrock",         tagline: "geological",      swatch: "#d4a574" },
+    { id: "hum",              name: "Hum",             tagline: "soft peach",      swatch: "#8a6b8a" },
+    { id: "bobblesphere",     name: "Bobblesphere",    tagline: "orbital",         swatch: "#ff9d3c" },
+    { id: "library-bookmark", name: "Library Bookmark",tagline: "card catalog",    swatch: "#8b1a1a" },
+    { id: "mind-palace-map",  name: "Mind Palace Map", tagline: "antique atlas",   swatch: "#993322" }
   ];
   var STORAGE_KEY = "shelf-theme";
 
@@ -308,8 +309,8 @@ ul.task-list li input[type="checkbox"] {
     try { localStorage.setItem(STORAGE_KEY, t.id); } catch (e) {}
   }
 
-  var initial = "starry-night";
-  try { initial = localStorage.getItem(STORAGE_KEY) || "starry-night"; } catch (e) {}
+  var initial = "star-chart";
+  try { initial = localStorage.getItem(STORAGE_KEY) || "star-chart"; } catch (e) {}
   applyTheme(initial);
 
   var btn = document.getElementById("shelfThemeToggle");

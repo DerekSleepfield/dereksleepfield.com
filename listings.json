@@ -1,5 +1,13 @@
 [
   {
+    "listing": "/apps.html",
+    "items": [
+      "/apps/2026-05-11-design-directions.html",
+      "/apps/2026-05-10-the-coffee-shop.html",
+      "/apps/2026-05-09-mind-palace.html"
+    ]
+  },
+  {
     "listing": "/presentations.html",
     "items": [
       "/presentations/bobology/2026-05-09-introduction-to-bobology.html",
@@ -8,6 +16,13 @@
       "/presentations/bobology/2026-05-22-bobbish.html",
       "/presentations/bobology/2026-05-19-wand-and-hand.html",
       "/presentations/other/2026-05-19-how-to-engage-in-politics-as-faculty.html"
+    ]
+  },
+  {
+    "listing": "/games.html",
+    "items": [
+      "/games/2026-05-10-wor-gems.html",
+      "/games/2026-05-09-gem-in-eyes-intro.html"
     ]
   },
   {
@@ -26,23 +41,8 @@
       "/posts/bobology/2026-05-22-the-wand-and-the-hand.html",
       "/posts/notes/2026-05-20-gem-wars-lore.html",
       "/posts/notes/2026-05-12-sinatra-2016-memo.html",
-      "/posts/short-stories/2026-05-26-the-lichen-quarrel.html",
-      "/posts/short-stories/2026-05-26-the-bread-speaks.html"
-    ]
-  },
-  {
-    "listing": "/apps.html",
-    "items": [
-      "/apps/2026-05-11-design-directions.html",
-      "/apps/2026-05-10-the-coffee-shop.html",
-      "/apps/2026-05-09-mind-palace.html"
-    ]
-  },
-  {
-    "listing": "/games.html",
-    "items": [
-      "/games/2026-05-10-wor-gems.html",
-      "/games/2026-05-09-gem-in-eyes-intro.html"
+      "/posts/short-stories/2026-05-26-the-bread-speaks.html",
+      "/posts/short-stories/2026-05-26-the-lichen-quarrel.html"
     ]
   }
 ]
