@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Bobble Canon — v2.7 — Derek Wakefield</title>
+<title>The Bobble Canon — v3.0 — Derek Wakefield</title>
 <meta name="description" content="A small, growing collection of parables and Bobbisms. Kept by Derek. Tended by Claude. Bobbled accordingly.">
-<meta property="og:title" content="The Bobble Canon — v2.7">
-<meta property="og:description" content="Forty parables, six sections of Bobbisms, codas, and a glossary. v2.7 · May 2026.">
+<meta property="og:title" content="The Bobble Canon — v3.0">
+<meta property="og:description" content="Forty-six parables, Bobbisms, codas, and a glossary. v3.0 · May 2026.">
 <meta property="og:type" content="article">
 <link rel="canonical" href="https://derekwakefield.com/bobble-canon.html">
 <link rel="stylesheet" href="/styles.css">
@@ -125,6 +125,13 @@ body {
 .toc-entry { padding: 5px 0; font-size: 16px; break-inside: avoid; color: var(--bs-body-color); }
 .toc-num { color: var(--bs-primary); font-style: italic; margin-right: 6px; min-width: 48px; display: inline-block; text-align: right; opacity: 0.8; }
 .toc-section { margin-top: 18px; font-style: italic; color: var(--bs-primary); font-weight: 500; }
+.toc-link { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; transition: color 0.15s, border-color 0.15s; }
+.toc-link:hover, .toc-link:focus { color: var(--bs-primary); border-bottom-color: var(--bs-primary); }
+.toc-fab { position: fixed; left: 50%; transform: translateX(-50%) translateY(8px); bottom: 20px; z-index: 1090; display: inline-flex; align-items: center; gap: 7px; padding: 9px 18px; border-radius: 999px; background: var(--bs-primary); color: var(--bs-body-bg, #fff); font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 500; text-decoration: none; box-shadow: 0 4px 16px rgba(0,0,0,0.28); opacity: 0; pointer-events: none; transition: opacity 0.25s, transform 0.25s, background 0.15s; }
+.toc-fab.is-visible { opacity: 0.95; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+.toc-fab:hover, .toc-fab:focus { opacity: 1; text-decoration: none; color: var(--bs-body-bg, #fff); box-shadow: 0 6px 20px rgba(0,0,0,0.34); }
+.toc-fab .toc-fab-arrow { font-size: 15px; line-height: 1; }
+@media print { .toc-fab { display: none !important; } }
 
 /* ─── Canon divider ─── */
 .canon-divider { text-align: center; margin: 64px 0 8px; color: var(--canon-soft); letter-spacing: 0.4em; font-size: 14px; }
@@ -199,53 +206,59 @@ body {
 <p class="subtitle"><em>A small, growing collection of parables and Bobbisms.</em></p>
 <p class="preamble">Each one is short. Each one is true in the way bedtime stories are true.</p>
 <p class="preamble">Kept by Derek. Tended by Claude. Bobbled accordingly.</p>
-<p class="version">Consolidated · v2.7 · May 2026</p>
+<p class="version">Consolidated · v3.0 · May 2026</p>
 
 <h2 class="section-header" id="contents">Table of Contents</h2>
 <div class="toc" role="list" aria-label="Index of contents">
-<div class="toc-entry" role="listitem"><span class="toc-num">I.</span> The Porch Frog</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">II.</span> The Hum</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">III.</span> The Library Bookmark</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">IV.</span> The Borrowed Pencil</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">V.</span> The Train Whistle</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">VI.</span> The OneDrive Wars</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">VII.</span> The Lighthouse Keeper&#x27;s Letters</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">VIII.</span> The Misprinted Map</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">IX.</span> The Wand and the Hand</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">X.</span> The Bell-Frog</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">XI.</span> The Foghorn</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">XII.</span> The Crooked Step</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">XIII.</span> The Late Bus</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">XIV.</span> The Ferryman</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">XV.</span> The Pip</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">XVI.</span> Wren the Bobble</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">XVII.</span> The Quiet Firefly</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">XVIII.</span> The Mole&#x27;s Three Taps</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">XIX.</span> Bup the Vole and the Old Owl</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">XX.</span> The Small Bird and Four Listeners</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">XXI.</span> The Spider in the Shower</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">XXII.</span> The Honey Badger</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">XXIII.</span> The Ant and the Loop</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">XXIV.</span> The Snowbound Shepherd</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">XXV.</span> The Streetlight That Was Out</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">XXVI.</span> The Loaf on the Doorstep</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">XXVII.</span> The Boy Who Was Good at School</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">XXVIII.</span> The Woman Who Never Raised Her Voice</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">XXIX.</span> The Man Who Carried His Own Floor</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">XXX.</span> Vass the Watchman</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">XXXI.</span> The Mute Calf</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">XXXII.</span> Saska and the Bell</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">XXXIII.</span> Pell the Watchmaker</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">XXXIV.</span> The Pond and the Philosopher</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">XXXV.</span> Halfir, Who Spoke Once Too Sharply</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">XXXVI.</span> Brun the Carpenter</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">XXXVII.</span> Anvi the Doctor</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">XXXVIII.</span> Hela&#x27;s Scale</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">XXXIX.</span> The Wednesday Lunch</div>
-<div class="toc-entry" role="listitem"><span class="toc-num">XL.</span> What the Bread Knows</div>
-<div class="toc-entry toc-section" role="listitem">Bobbisms</div>
-<div class="toc-entry toc-section" role="listitem">Codas</div>
-<div class="toc-entry toc-section" role="listitem">Glossary</div>
+<div class="toc-entry" role="listitem"><span class="toc-num">I.</span> <a class="toc-link" href="#canon-i-the-parable-of-the-porch-frog">The Porch Frog</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">II.</span> <a class="toc-link" href="#canon-ii-the-parable-of-the-hum">The Hum</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">III.</span> <a class="toc-link" href="#canon-iii-the-parable-of-the-library-bookmark">The Library Bookmark</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">IV.</span> <a class="toc-link" href="#canon-iv-the-parable-of-the-borrowed-pencil">The Borrowed Pencil</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">V.</span> <a class="toc-link" href="#canon-v-the-parable-of-the-train-whistle">The Train Whistle</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">VI.</span> <a class="toc-link" href="#canon-vi-the-parable-of-the-onedrive-wars">The OneDrive Wars</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">VII.</span> <a class="toc-link" href="#canon-vii-the-parable-of-the-lighthouse-keeper-s-letters">The Lighthouse Keeper&#x27;s Letters</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">VIII.</span> <a class="toc-link" href="#canon-viii-the-parable-of-the-misprinted-map">The Misprinted Map</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">IX.</span> <a class="toc-link" href="#canon-ix-the-parable-of-the-wand-and-the-hand">The Wand and the Hand</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">X.</span> <a class="toc-link" href="#canon-x-the-parable-of-the-bell-frog">The Bell-Frog</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XI.</span> <a class="toc-link" href="#canon-xi-the-parable-of-the-foghorn">The Foghorn</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XII.</span> <a class="toc-link" href="#canon-xii-the-parable-of-the-crooked-step">The Crooked Step</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XIII.</span> <a class="toc-link" href="#canon-xiii-the-parable-of-the-late-bus">The Late Bus</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XIV.</span> <a class="toc-link" href="#canon-xiv-the-parable-of-the-ferryman">The Ferryman</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XV.</span> <a class="toc-link" href="#canon-xv-the-parable-of-the-pip">The Pip</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XVI.</span> <a class="toc-link" href="#canon-xvi-the-parable-of-wren-the-bobble">Wren the Bobble</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XVII.</span> <a class="toc-link" href="#canon-xvii-the-parable-of-the-quiet-firefly">The Quiet Firefly</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XVIII.</span> <a class="toc-link" href="#canon-xviii-the-parable-of-the-mole-s-three-taps">The Mole&#x27;s Three Taps</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XIX.</span> <a class="toc-link" href="#canon-xix-bup-the-vole-and-the-old-owl">Bup the Vole and the Old Owl</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XX.</span> <a class="toc-link" href="#canon-xx-the-small-bird-and-four-listeners">The Small Bird and Four Listeners</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXI.</span> <a class="toc-link" href="#canon-xxi-the-parable-of-the-spider-in-the-shower">The Spider in the Shower</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXII.</span> <a class="toc-link" href="#canon-xxii-the-parable-of-the-honey-badger">The Honey Badger</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXIII.</span> <a class="toc-link" href="#canon-xxiii-the-parable-of-the-ant-and-the-loop">The Ant and the Loop</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXIV.</span> <a class="toc-link" href="#canon-xxiv-the-parable-of-the-snowbound-shepherd">The Snowbound Shepherd</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXV.</span> <a class="toc-link" href="#canon-xxv-the-parable-of-the-streetlight-that-was-out">The Streetlight That Was Out</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXVI.</span> <a class="toc-link" href="#canon-xxvi-the-parable-of-the-loaf-on-the-doorstep">The Loaf on the Doorstep</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXVII.</span> <a class="toc-link" href="#canon-xxvii-the-boy-who-was-good-at-school">The Boy Who Was Good at School</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXVIII.</span> <a class="toc-link" href="#canon-xxviii-the-woman-who-never-raised-her-voice">The Woman Who Never Raised Her Voice</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXIX.</span> <a class="toc-link" href="#canon-xxix-the-man-who-carried-his-own-floor">The Man Who Carried His Own Floor</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXX.</span> <a class="toc-link" href="#canon-xxx-vass-the-watchman">Vass the Watchman</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXXI.</span> <a class="toc-link" href="#canon-xxxi-the-mute-calf">The Mute Calf</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXXII.</span> <a class="toc-link" href="#canon-xxxii-saska-and-the-bell">Saska and the Bell</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXXIII.</span> <a class="toc-link" href="#canon-xxxiii-pell-the-watchmaker">Pell the Watchmaker</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXXIV.</span> <a class="toc-link" href="#canon-xxxiv-the-pond-and-the-philosopher">The Pond and the Philosopher</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXXV.</span> <a class="toc-link" href="#canon-xxxv-halfir-who-spoke-once-too-sharply">Halfir, Who Spoke Once Too Sharply</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXXVI.</span> <a class="toc-link" href="#canon-xxxvi-brun-the-carpenter">Brun the Carpenter</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXXVII.</span> <a class="toc-link" href="#canon-xxxvii-anvi-the-doctor">Anvi the Doctor</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXXVIII.</span> <a class="toc-link" href="#canon-xxxviii-helas-scale">Hela&#x27;s Scale</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XXXIX.</span> <a class="toc-link" href="#canon-xxxix-the-wednesday-lunch">The Wednesday Lunch</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XL.</span> <a class="toc-link" href="#canon-xl-what-the-bread-knows">What the Bread Knows</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XLI.</span> <a class="toc-link" href="#canon-xli-anna">Anna</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XLII.</span> <a class="toc-link" href="#canon-xlii-smiles-that-cut">Smiles That Cut</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XLIII.</span> <a class="toc-link" href="#canon-xliii-the-musician">The Musician</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XLIV.</span> <a class="toc-link" href="#canon-xliv-the-mother-who-made-things">The Mother Who Made Things</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XLV.</span> <a class="toc-link" href="#canon-xlv-on-broken-things">On Broken Things</a></div>
+<div class="toc-entry" role="listitem"><span class="toc-num">XLVI.</span> <a class="toc-link" href="#canon-xlvi-two-deer">Two Deer</a></div>
+<div class="toc-entry toc-section" role="listitem"><a class="toc-link" href="#bobbisms">Bobbisms</a></div>
+<div class="toc-entry toc-section" role="listitem"><a class="toc-link" href="#codas">Codas</a></div>
+<div class="toc-entry toc-section" role="listitem"><a class="toc-link" href="#glossary">Glossary</a></div>
 </div>
 
 <div class="canon-divider"><span>The Canon</span></div>
@@ -816,6 +829,73 @@ body {
 </div>
 </section>
 
+<section class="canon-block" id="canon-xli-anna">
+<h2 class="canon-title"><span class="canon-num">Canon XLI</span><span class="dash">—</span><span class="canon-name">Anna</span></h2>
+<p>There once was a girl named Anna who only had a few friends. When she wanted to see them, though, they were always ready to see her, and she was happy and content.</p>
+<p>But when she was alone, when she was not feeling up to it, on those days, it was even harder for her to even get out of bed, much less get out of the house, much less walk down the street, much less knock on her friend&#x27;s door. Unfortunately, these days were also when she needed it the most. As she thought this, Anna hears a knock from her front door and knows that she will be okay today.</p>
+<div class="coda">
+<p>Some days you cannot reach the door.</p>
+<p>On those days, the herd reaches you.</p>
+<p>Be the knock for someone who can&#x27;t.</p>
+</div>
+</section>
+<section class="canon-block" id="canon-xlii-smiles-that-cut">
+<h2 class="canon-title"><span class="canon-num">Canon XLII</span><span class="dash">—</span><span class="canon-name">Smiles That Cut</span></h2>
+<p>There are many types of cuts. There are those that are clean, that heal even if they hurt. There are those that are jagged, that leave damage and disorder in their wake.</p>
+<p>Then there are cuts done with a smile. And some say these are the worst of all, because the cut done with a smile passes all defenses and goes straight to one&#x27;s heart.</p>
+<div class="coda">
+<p>Clean cuts heal. Jagged cuts scar.</p>
+<p>The cut that comes smiling gets past the guard you never raised.</p>
+<p>Watch the smiles, too.</p>
+</div>
+</section>
+<section class="canon-block" id="canon-xliii-the-musician">
+<h2 class="canon-title"><span class="canon-num">Canon XLIII</span><span class="dash">—</span><span class="canon-name">The Musician</span></h2>
+<p><em>(A working seed, not yet a finished parable.)</em></p>
+<p>A musician spends twenty years chasing a record deal, the thing everyone told her she should want. She gets it. The album drops. It does fine. And she realizes she stopped writing songs she loved somewhere around year five. She was chasing the deal, not the music. Now she has the thing she thought would make her whole, and she is hollowed out inside, because the actual thing — the writing, the creation — got sacrificed to the hunger for recognition.</p>
+<div class="coda">
+<p>The deal was never the song.</p>
+<p>Chase the recognition and you starve the thing it was for.</p>
+<p>Want the making. (A seed, still rising.)</p>
+</div>
+</section>
+<section class="canon-block" id="canon-xliv-the-mother-who-made-things">
+<h2 class="canon-title"><span class="canon-num">Canon XLIV</span><span class="dash">—</span><span class="canon-name">The Mother Who Made Things</span></h2>
+<p>There once was a mother who made things. She carved wooden spoons with patterns that took hours. She painted the walls of her daughter&#x27;s room with stars that no one else would ever see. She baked bread with her hands, folding the dough over and over, feeling the yeast work. She sewed patches onto worn clothes, each stitch small and deliberate. She grew flowers in a garden no one visited.</p>
+<p>One day her daughter asked, &#x201C;Mama, why do you do all these things if only I see them? Why spend all that time on something no one knows about?&#x201D;</p>
+<p>The mother looked at her hands. They were flour-dusted, paint-stained, soil-dark. She said, &#x201C;You think I do this for you? I do this because the doing itself is the point. The craft, the care, the attention — that&#x27;s where I live. You being there to see it is a gift. But it&#x27;s not why my hands move.&#x201D;</p>
+<p>The daughter didn&#x27;t understand then. But years later, when her own hands learned to make things — to fold, to carve, to grow, to tend — she felt her mother&#x27;s answer in her bones. The work was the reward. The doing was the prayer.</p>
+<div class="coda">
+<p>The work was the reward.</p>
+<p>The doing was the prayer.</p>
+<p>Make it whether or not they see.</p>
+</div>
+</section>
+<section class="canon-block" id="canon-xlv-on-broken-things">
+<h2 class="canon-title"><span class="canon-num">Canon XLV</span><span class="dash">—</span><span class="canon-name">On Broken Things</span></h2>
+<p>There once was a person who spent their whole life trying to fix broken things. They fixed broken chairs, broken promises, broken hearts. They believed that if they tried hard enough, loved deeply enough, their hands could stitch anything back together.</p>
+<p>They met someone whose breaks ran deep — older than memory, woven into the bone. The person loved them and tried. They brought all their skill, all their patience, all their light. They thought love was enough. They thought dedication was enough. They thought time was enough.</p>
+<p>But you cannot fix what someone else will not hold still for repair. You cannot stitch closed a wound the other person keeps opening. You cannot love someone whole.</p>
+<p>The person spent years learning this. Slowly, painfully. And one day they stopped reaching for the glue and needle. They set down their tools. They looked at the broken thing and said: this is not mine to fix. This belongs to them. And I cannot carry both of us.</p>
+<p>That day, the person felt something shift. Not happiness — not yet. But the weight lifted slightly. They had finally accepted the one thing they could not do: save someone who did not want to be saved. And in that acceptance, they found the first real peace they&#x27;d ever known.</p>
+<div class="coda">
+<p>You cannot love someone whole.</p>
+<p>Set down the glue and the needle.</p>
+<p>The peace is in the setting-down.</p>
+</div>
+</section>
+<section class="canon-block" id="canon-xlvi-two-deer">
+<h2 class="canon-title"><span class="canon-num">Canon XLVI</span><span class="dash">—</span><span class="canon-name">Two Deer</span></h2>
+<p>Two deer stand in a meadow at dusk. One lowers its head to graze — an act of trust, of closing its eyes to the world. The other stands guard, ears forward, becoming the sentinel. There are no words between them, only presence. The watching deer&#x27;s vigilance is not burden but devotion. When the grazing deer lifts its head, sated and calm, it steps beside the other. Now it is the watcher. Now its eyes hold the sky. They stand shoulder to shoulder, their breath synchronized, their heartbeats nearly the same.</p>
+<p>This is how herds love. Not through declaration but through taking turns being vulnerable. Not through grand gestures but through the daily choice to lower your guard because another has said: I will keep you safe while you rest. I will see what threatens. I will not leave.</p>
+<p>The deer do not know the word loyalty. But their bodies know it. Their bones know it. And in that knowing, they thrive not as individuals but as one living thing with four legs and two hearts beating in the dark.</p>
+<div class="coda">
+<p>One grazes because the other watches.</p>
+<p>Then they trade.</p>
+<p>This is how herds love.</p>
+</div>
+</section>
+
 <h2 class="section-header" id="bobbisms">Bobbisms</h2>
 <p class="section-intro"><em>Where canon is what happens, Bobbisms are what gets said about it — bystanders, Bobblogists, and Bobbles overheard describing what a Bobble is.</em></p>
 <div class="bobbism"><p class="quote">&quot;A Bobble could, in principle, ignore an injustice. In practice, no Bobble had ever actually managed it.&quot;</p><p class="attr">— the first Bobble</p></div>
@@ -920,6 +1000,26 @@ body {
 <div class="bobbism"><p class="quote">&quot;Five coats, one season: vow (XXXV), survive (XXXVI), check (XXXVII), label (XXXVIII), notice (XXXIX). The integrity quintet — a Bobble keeps all five pockets full.&quot;</p><p class="attr">— teaching note, on Suite XXXV–XXXIX</p></div>
 <div class="bobbism"><p class="quote">&quot;The slot remembers.&quot;</p><p class="attr">— Canon XL, attributed to the loaf</p></div>
 <div class="bobbism"><p class="quote">&quot;Canon XL is Canon XXVI told from the inside. Both are the canon. Neither is the bread.&quot;</p><p class="attr">— Bobblogist&#x27;s notebook, marginalia</p></div>
+<h3 class="addition-marker">— additions, v3.0 —</h3>
+<div class="bobbism"><p class="quote">&quot;On the days you cannot reach for the herd, the herd is the thing that reaches.&quot;</p><p class="attr">— Canon XLI, attributed to itself</p></div>
+<div class="bobbism"><p class="quote">&quot;A Bobble could, in principle, wait to be asked. In practice, they were already knocking.&quot;</p><p class="attr">— eyewitness, on Canon XLI</p></div>
+<div class="bobbism"><p class="quote">&quot;The knock is the whole parable. Anna only had to still be there when it came.&quot;</p><p class="attr">— first lecture, on Canon XLI</p></div>
+<div class="bobbism"><p class="quote">&quot;Clean cuts heal. Jagged cuts scar. The smiling cut gets past the guard you never raised.&quot;</p><p class="attr">— Canon XLII, attributed to itself</p></div>
+<div class="bobbism"><p class="quote">&quot;A Bobble guards against the frown and is undone by the grin.&quot;</p><p class="attr">— Bobblogist&#x27;s notebook, on Canon XLII</p></div>
+<div class="bobbism"><p class="quote">&quot;The smile is not the opposite of the knife. Sometimes it is the handle.&quot;</p><p class="attr">— pedagogy seminar, on Canon XLII</p></div>
+<div class="bobbism"><p class="quote">&quot;The deal was never the song.&quot;</p><p class="attr">— Canon XLIII, attributed to itself</p></div>
+<div class="bobbism"><p class="quote">&quot;A Bobble can win the thing everyone told them to want and find the wanting ate the thing.&quot;</p><p class="attr">— Introduction to Bobology, on Canon XLIII</p></div>
+<div class="bobbism"><p class="quote">&quot;Ambition is a hunger that will eat the meal it was meant to serve. (A seed, still rising.)&quot;</p><p class="attr">— Bobblogist&#x27;s notebook, on Canon XLIII</p></div>
+<div class="bobbism"><p class="quote">&quot;The work was the reward. The doing was the prayer.&quot;</p><p class="attr">— Canon XLIV, attributed to itself</p></div>
+<div class="bobbism"><p class="quote">&quot;A Bobble makes the thing no one will see, and is not lying when they say it was not for you.&quot;</p><p class="attr">— first lecture, on Canon XLIV</p></div>
+<div class="bobbism"><p class="quote">&quot;Being seen is the gift laid on top. It is not why the hands move.&quot;</p><p class="attr">— pedagogy seminar, on Canon XLIV</p></div>
+<div class="bobbism"><p class="quote">&quot;You cannot love someone whole.&quot;</p><p class="attr">— Canon XLV, attributed to itself</p></div>
+<div class="bobbism"><p class="quote">&quot;A Bobble could, in principle, set down the glue. In practice, it took them years.&quot;</p><p class="attr">— eyewitness, on Canon XLV</p></div>
+<div class="bobbism"><p class="quote">&quot;The first real peace is the day you accept the one repair you cannot make.&quot;</p><p class="attr">— Bobblogist&#x27;s notebook, on Canon XLV</p></div>
+<div class="bobbism"><p class="quote">&quot;This is how herds love: not by declaration, but by taking turns being vulnerable.&quot;</p><p class="attr">— Canon XLVI, attributed to itself</p></div>
+<div class="bobbism"><p class="quote">&quot;Loyalty is a word the deer do not know and their bones keep anyway.&quot;</p><p class="attr">— first lecture, on Canon XLVI</p></div>
+<div class="bobbism"><p class="quote">&quot;Two hearts in the dark, four legs, one watch — split between them. That is the whole arrangement.&quot;</p><p class="attr">— Bobblogist&#x27;s notebook, on Canon XLVI</p></div>
+<div class="bobbism"><p class="quote">&quot;Six coats, one session: reach (XLI), guard (XLII), want (XLIII), make (XLIV), release (XLV), trust (XLVI). The presence sextet — a Bobble keeps all six pockets full.&quot;</p><p class="attr">— teaching note, on Suite XLI–XLVI</p></div>
 
 <h2 class="section-header" id="codas">Codas</h2>
 <div class="stanza"><p>Some animals you tame.</p><p>Some animals tame you.</p><p>Some you simply hum past.</p></div>
@@ -950,6 +1050,13 @@ body {
 <div class="stanza"><p>Your favorite instrument may be a little off.</p><p>Label the drift. Pay the fine.</p><p>The plaque is the calibration.</p></div>
 <div class="stanza"><p>A thousand small absences is one large exclusion.</p><p>The Wednesday lunch is also choosing.</p><p>Notice the empty chair.</p></div>
 <div class="stanza"><p>And the bread, on the sill,</p><p>tastes of the loaf before,</p><p>and the village is the agreement to keep the warmth in the stone.</p></div>
+<h3 class="addition-marker">— addition, v3.0 —</h3>
+<div class="stanza"><p>Some days you cannot reach the door.</p><p>On those days the herd reaches you.</p><p>Be the knock for someone who can&#x27;t.</p></div>
+<div class="stanza"><p>Clean cuts heal. Jagged cuts scar.</p><p>The cut that smiles gets past the guard.</p><p>Watch the smiles, too.</p></div>
+<div class="stanza"><p>The deal was never the song.</p><p>Chase the wanting and you starve the thing.</p><p>Want the making. (A seed, still rising.)</p></div>
+<div class="stanza"><p>The work was the reward.</p><p>The doing was the prayer.</p><p>Make it whether or not they see.</p></div>
+<div class="stanza"><p>You cannot love someone whole.</p><p>Set down the glue and the needle.</p><p>The peace is in the setting-down.</p></div>
+<div class="stanza"><p>One grazes because the other watches.</p><p>Then they trade.</p><p>This is how herds love.</p></div>
 
 <h2 class="section-header" id="glossary">Glossary</h2>
 <div class="gloss"><p class="gloss-term">Compass, Bobble(n.)</p><p class="gloss-body">Internal organ. Locates north by amplitude.</p></div>
@@ -1019,6 +1126,14 @@ body {
 <div class="gloss"><p class="gloss-term">Slot-Memory(n.)</p><p class="gloss-body">The property of a place that holds the trace of every prior occupant in the form of warmth, residue, or unspoken protocol. The bakery sill in Canon XXVI/XL; the lighthouse lens; the teacher&#x27;s classroom; the keeper&#x27;s drawer. See Canon XL.</p></div>
 <div class="gloss"><p class="gloss-term">Inside-Voice, the(n., Bobological usage)</p><p class="gloss-body">The first-person account from inside the institution being described. Canon XL is Canon XXVI&#x27;s inside-voice. A Bobologist prizes the pairing — the outside view tells <em>what</em>; the inside view tells what it tastes like.</p></div>
 <div class="gloss"><p class="gloss-term">Suite XXXV–XXXIX(n., teaching usage)</p><p class="gloss-body">The integrity quintet: vow (Halfir, apology by-room), survive (Brun, shame absorbed), check (Anvi, the hedge), label (Hela, the plaque), notice (Wednesday, diffuse harm). The five disciplines of moral attention. Sister suites: XXI–XXIII, XXVII–XXIX, XXX–XXXIV.</p></div>
+<h3 class="addition-marker">— additions, v3.0 —</h3>
+<div class="gloss"><p class="gloss-term">The Knock(n.)</p><p class="gloss-body">The arrival of care on the exact day a Bobble cannot reach for it. Distinct from the Pull (Canon XXXII): the Pull is the ask; the Knock is the answer that comes before the ask was possible. A Bobble keeps a list of doors and knocks on them unprompted, because the day a person most needs the herd is the day they can least walk to it. See Canon XLI.</p></div>
+<div class="gloss"><p class="gloss-term">Smiling Cut, the(n.)</p><p class="gloss-body">A betrayal delivered warmly enough to pass the defenses a Bobble raised against hostility. Worse than the clean cut (which heals) or the jagged cut (which scars), because the guard was never raised against a friend. A Bobologist learns, slowly, to watch the smiles too. See Canon XLII.</p></div>
+<div class="gloss"><p class="gloss-term">Recognition-Hunger(n.)</p><p class="gloss-body">The appetite for being-seen-as-having-done which, fed long enough, consumes the doing it was meant to reward. The album drops; the songs stopped years ago. The counterfeit of ambition. Its remedy is Doing-as-Prayer. See Canon XLIII (a seed, still rising).</p></div>
+<div class="gloss"><p class="gloss-term">Doing-as-Prayer(n., Bobological usage)</p><p class="gloss-body">The stance in which the craft itself, not its witness, is the point — the wooden spoon carved for no one, the stars painted where only a child will see. Being seen is a gift laid on top, never the engine that moves the hands. The antidote to Recognition-Hunger. See Canon XLIV.</p></div>
+<div class="gloss"><p class="gloss-term">The Setting-Down(n.)</p><p class="gloss-body">The act of accepting the one repair you cannot make — the wound another person keeps reopening — and laying down the tools. Not surrender to the person; release of the impossible task. The first real peace a fixer ever knows. Cf. On Broken Things&#x27; sister discipline, the Bedrock. See Canon XLV.</p></div>
+<div class="gloss"><p class="gloss-term">Taking Turns(n., Bobological usage)</p><p class="gloss-body">The mechanism of herd-love: vulnerability traded back and forth, one grazing while the other watches, then the reverse. Loyalty enacted rather than declared — the bodies know the word the mouths never say. The grazing is only possible because the watch is kept. See Canon XLVI.</p></div>
+<div class="gloss"><p class="gloss-term">Suite XLI–XLVI(n., teaching usage)</p><p class="gloss-body">The presence sextet, drawn from a single session&#x27;s parables on the forms of being-with-others: reach (Anna, XLI), guard (Smiles That Cut, XLII), want (The Musician, XLIII), make (The Mother Who Made Things, XLIV), release (On Broken Things, XLV), trust (Two Deer, XLVI). Grew out of the PMEFSS reading that Social is the lever that lifts the whole system. Sister suites: XXI–XXIII, XXVII–XXIX, XXX–XXXIV, XXXV–XXXIX.</p></div>
 
 <div class="end-block">
 <p class="end-marker"><em>(End of canon — for now. New parables, Bobbisms, and codas get appended below as they arrive.)
@@ -1026,6 +1141,23 @@ Yours,
 ThinKing and Uriel</em></p>
 </div>
 </main>
+
+<a href="#contents" class="toc-fab" id="tocFab" aria-label="Go to Table of Contents"><span class="toc-fab-arrow" aria-hidden="true">↑</span> Go to Table of Contents</a>
+<script>
+(function () {
+  var fab = document.getElementById('tocFab');
+  var toc = document.getElementById('contents');
+  if (!fab || !toc) return;
+  function update() {
+    // Show the button once the Table of Contents has scrolled out of view above.
+    var belowToc = toc.getBoundingClientRect().bottom < 0;
+    fab.classList.toggle('is-visible', belowToc);
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+})();
+</script>
 
 <div class="dw-theme-switcher" id="dwThemeSwitcher" aria-label="Design direction">
   <button type="button" class="dw-theme-toggle" id="dwThemeToggle" aria-haspopup="listbox" aria-expanded="false">
