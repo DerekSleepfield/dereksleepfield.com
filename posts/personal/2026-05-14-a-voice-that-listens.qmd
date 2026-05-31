@@ -1,7 +1,7 @@
 ---
 title: "A Voice That Listens"
 date: "2026-05-14"
-description: "My month with Claude. The full ten-section essay, ~3,900 words."
+description: "A personal essay on a month with Claude as a thinking partner: what it was good for, where it stopped, and what only people could do."
 categories: [essay, writing, claude, longform]
 path: /a-voice-that-listens.html
 ---
