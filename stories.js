@@ -672,5 +672,89 @@ window.SHELF_STORIES = [
       "We taste of each other.",
       "The village is the agreement to keep the warmth in the stone."
     ]
+  },
+  {
+    "num": "XLI",
+    "name": "Anna",
+    "body": [
+      "There once was a girl named Anna who only had a few friends. When she wanted to see them, though, they were always ready to see her, and she was happy and content.",
+      "But when she was alone, when she was not feeling up to it, on those days, it was even harder for her to even get out of bed, much less get out of the house, much less walk down the street, much less knock on her friend's door. Unfortunately, these days were also when she needed it the most. As she thought this, Anna hears a knock from her front door and knows that she will be okay today."
+    ],
+    "coda": [
+      "Some days you cannot reach the door.",
+      "On those days, the herd reaches you.",
+      "Be the knock for someone who can't."
+    ]
+  },
+  {
+    "num": "XLII",
+    "name": "Smiles That Cut",
+    "body": [
+      "There are many types of cuts. There are those that are clean, that heal even if they hurt. There are those that are jagged, that leave damage and disorder in their wake.",
+      "Then there are cuts done with a smile. And some say these are the worst of all, because the cut done with a smile passes all defenses and goes straight to one's heart."
+    ],
+    "coda": [
+      "Clean cuts heal. Jagged cuts scar.",
+      "The cut that comes smiling gets past the guard you never raised.",
+      "Watch the smiles, too."
+    ]
+  },
+  {
+    "num": "XLIII",
+    "name": "The Musician",
+    "body": [
+      "<em>(A working seed, not yet a finished parable.)</em>",
+      "A musician spends twenty years chasing a record deal, the thing everyone told her she should want. She gets it. The album drops. It does fine. And she realizes she stopped writing songs she loved somewhere around year five. She was chasing the deal, not the music. Now she has the thing she thought would make her whole, and she is hollowed out inside, because the actual thing — the writing, the creation — got sacrificed to the hunger for recognition."
+    ],
+    "coda": [
+      "The deal was never the song.",
+      "Chase the recognition and you starve the thing it was for.",
+      "Want the making. (A seed, still rising.)"
+    ]
+  },
+  {
+    "num": "XLIV",
+    "name": "The Mother Who Made Things",
+    "body": [
+      "There once was a mother who made things. She carved wooden spoons with patterns that took hours. She painted the walls of her daughter's room with stars that no one else would ever see. She baked bread with her hands, folding the dough over and over, feeling the yeast work. She sewed patches onto worn clothes, each stitch small and deliberate. She grew flowers in a garden no one visited.",
+      "One day her daughter asked, “Mama, why do you do all these things if only I see them? Why spend all that time on something no one knows about?”",
+      "The mother looked at her hands. They were flour-dusted, paint-stained, soil-dark. She said, “You think I do this for you? I do this because the doing itself is the point. The craft, the care, the attention — that's where I live. You being there to see it is a gift. But it's not why my hands move.”",
+      "The daughter didn't understand then. But years later, when her own hands learned to make things — to fold, to carve, to grow, to tend — she felt her mother's answer in her bones. The work was the reward. The doing was the prayer."
+    ],
+    "coda": [
+      "The work was the reward.",
+      "The doing was the prayer.",
+      "Make it whether or not they see."
+    ]
+  },
+  {
+    "num": "XLV",
+    "name": "On Broken Things",
+    "body": [
+      "There once was a person who spent their whole life trying to fix broken things. They fixed broken chairs, broken promises, broken hearts. They believed that if they tried hard enough, loved deeply enough, their hands could stitch anything back together.",
+      "They met someone whose breaks ran deep — older than memory, woven into the bone. The person loved them and tried. They brought all their skill, all their patience, all their light. They thought love was enough. They thought dedication was enough. They thought time was enough.",
+      "But you cannot fix what someone else will not hold still for repair. You cannot stitch closed a wound the other person keeps opening. You cannot love someone whole.",
+      "The person spent years learning this. Slowly, painfully. And one day they stopped reaching for the glue and needle. They set down their tools. They looked at the broken thing and said: this is not mine to fix. This belongs to them. And I cannot carry both of us.",
+      "That day, the person felt something shift. Not happiness — not yet. But the weight lifted slightly. They had finally accepted the one thing they could not do: save someone who did not want to be saved. And in that acceptance, they found the first real peace they'd ever known."
+    ],
+    "coda": [
+      "You cannot love someone whole.",
+      "Set down the glue and the needle.",
+      "The peace is in the setting-down."
+    ]
+  },
+  {
+    "num": "XLVI",
+    "name": "Two Deer",
+    "body": [
+      "Two deer stand in a meadow at dusk. One lowers its head to graze — an act of trust, of closing its eyes to the world. The other stands guard, ears forward, becoming the sentinel. There are no words between them, only presence. The watching deer's vigilance is not burden but devotion. When the grazing deer lifts its head, sated and calm, it steps beside the other. Now it is the watcher. Now its eyes hold the sky. They stand shoulder to shoulder, their breath synchronized, their heartbeats nearly the same.",
+      "This is how herds love. Not through declaration but through taking turns being vulnerable. Not through grand gestures but through the daily choice to lower your guard because another has said: I will keep you safe while you rest. I will see what threatens. I will not leave.",
+      "The deer do not know the word loyalty. But their bodies know it. Their bones know it. And in that knowing, they thrive not as individuals but as one living thing with four legs and two hearts beating in the dark."
+    ],
+    "coda": [
+      "One grazes because the other watches.",
+      "Then they trade.",
+      "This is how herds love."
+    ]
   }
 ];
