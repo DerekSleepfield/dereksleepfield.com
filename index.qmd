@@ -22,7 +22,7 @@ format:
 <p class="shelf-featured-actions">
   <a href="#" id="shelfAnotherStory">&#x21bb; another parable</a>
   &nbsp;&middot;&nbsp;
-  <a href="/bobble-canon.html">read all forty &rarr;</a>
+  <a href="/bobble-canon.html">read all forty-six &rarr;</a>
 </p>
 
 :::
@@ -61,6 +61,8 @@ format:
       <li><a href="/posts/short-stories/2026-05-26-the-bread-speaks.html">The Bread Speaks</a></li>
       <li><a href="/posts/short-stories/2026-05-26-the-lichen-quarrel.html">The Lichen Quarrel</a></li>
       <li><a href="/posts/short-stories/2026-05-31-where-the-anthill-was.html">Where the Anthill Was</a></li>
+      <li><a href="/posts/short-stories/2026-05-31-the-boy-who-cried-woe.html">The Boy Who Cried Woe</a></li>
+      <li><a href="/posts/short-stories/2026-05-31-the-fog.html">The Fog</a></li>
     </ul>
   </div>
 
