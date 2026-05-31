@@ -1,13 +1,5 @@
 [
   {
-    "listing": "/apps.html",
-    "items": [
-      "/apps/2026-05-11-design-directions.html",
-      "/apps/2026-05-10-the-coffee-shop.html",
-      "/apps/2026-05-09-mind-palace.html"
-    ]
-  },
-  {
     "listing": "/presentations.html",
     "items": [
       "/presentations/bobology/2026-05-09-introduction-to-bobology.html",
@@ -19,18 +11,10 @@
     ]
   },
   {
-    "listing": "/games.html",
-    "items": [
-      "/games/2026-05-10-wor-gems.html",
-      "/games/2026-05-09-gem-in-eyes-intro.html"
-    ]
-  },
-  {
     "listing": "/writing.html",
     "items": [
       "/posts/personal/2026-05-14-a-voice-that-listens.html",
       "/posts/personal/2026-05-19-friends-we-find.html",
-      "/posts/personal/2026-05-22-where-the-anthill-was.html",
       "/posts/personal/2026-05-24-when-anthills-decay.html",
       "/posts/personal/2026-05-24-on-cognitive-capture.html",
       "/posts/bobology/2026-05-09-bobble-canon.html",
@@ -41,8 +25,24 @@
       "/posts/bobology/2026-05-22-the-wand-and-the-hand.html",
       "/posts/notes/2026-05-20-gem-wars-lore.html",
       "/posts/notes/2026-05-12-sinatra-2016-memo.html",
-      "/posts/short-stories/2026-05-26-the-bread-speaks.html",
-      "/posts/short-stories/2026-05-26-the-lichen-quarrel.html"
+      "/posts/short-stories/2026-05-31-where-the-anthill-was.html",
+      "/posts/short-stories/2026-05-26-the-lichen-quarrel.html",
+      "/posts/short-stories/2026-05-26-the-bread-speaks.html"
+    ]
+  },
+  {
+    "listing": "/apps.html",
+    "items": [
+      "/apps/2026-05-11-design-directions.html",
+      "/apps/2026-05-10-the-coffee-shop.html",
+      "/apps/2026-05-09-mind-palace.html"
+    ]
+  },
+  {
+    "listing": "/games.html",
+    "items": [
+      "/games/2026-05-10-wor-gems.html",
+      "/games/2026-05-09-gem-in-eyes-intro.html"
     ]
   }
 ]
