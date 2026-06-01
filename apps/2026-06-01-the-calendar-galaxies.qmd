@@ -1,0 +1,48 @@
+---
+title: "The Calendar, All At Once"
+description: "Forty-four ASCII galaxies stacked and screen-blended, each a different shape — spirals, rings, ellipticals, irregulars — each carrying its own woven calendar words, each turning on its own clock around a shared core. A companion to the short story 'The Computer Who Learned to Cry.'"
+date: 2026-06-01
+author: "Derek Wakefield"
+categories: ["ascii art", "generative", "creative"]
+format:
+  html:
+    page-layout: custom
+    toc: false
+    include-in-header:
+      - text: |
+          <style>
+            #title-block-header { display: none; }
+            main.content, .content { padding: 0 !important; margin: 0 !important; max-width: 100% !important; }
+            body > .page-columns { display: block; }
+          </style>
+---
+
+```{=html}
+<div class="cg-wrap">
+  <iframe class="cg-frame"
+          src="/the-calendar-layers.html"
+          title="The Calendar, All At Once — 44 stacked ASCII galaxies on different clocks"
+          loading="lazy"></iframe>
+</div>
+
+<style>
+  .cg-wrap {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 56px);
+    background: #03040a;
+    overflow: hidden;
+  }
+  .cg-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+  @media (max-width: 768px) {
+    .cg-wrap { height: calc(100vh - 48px); }
+  }
+</style>
+```
