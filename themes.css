@@ -278,6 +278,15 @@ main, .content, .quarto-container {
   z-index: 1;
 }
 
+/* Opaque reading panels: keep the background ASCII art in the margins,
+   never bleeding behind the text (body column + right-hand TOC). */
+main, .content, #quarto-document-content,
+#quarto-margin-sidebar, #TOC {
+  background: var(--shelf-bg) !important;
+  position: relative;
+  z-index: 1;
+}
+
 /* ---- Twinkling background — universal scaffold ---- */
 body::before {
   content: '';
