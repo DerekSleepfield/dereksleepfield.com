@@ -10,7 +10,18 @@
 <atom:link href="https://dereksleepfield.com/apps.xml" rel="self" type="application/rss+xml"/>
 <description>A small library of not-academic writing by Derek Wakefield.</description>
 <generator>quarto-1.9.38</generator>
-<lastBuildDate>Mon, 11 May 2026 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 01 Jun 2026 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>The Calendar, All At Once</title>
+  <dc:creator>Derek Wakefield</dc:creator>
+  <link>https://dereksleepfield.com/apps/2026-06-01-the-calendar-galaxies.html</link>
+  <description><![CDATA[ undefined ]]></description>
+  <category>ascii art</category>
+  <category>generative</category>
+  <category>creative</category>
+  <guid>https://dereksleepfield.com/apps/2026-06-01-the-calendar-galaxies.html</guid>
+  <pubDate>Mon, 01 Jun 2026 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Seven design directions</title>
   <link>https://dereksleepfield.com/apps/2026-05-11-design-directions.html</link>
