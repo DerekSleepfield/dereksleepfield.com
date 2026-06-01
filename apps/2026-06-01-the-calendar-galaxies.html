@@ -77,6 +77,12 @@ ul.task-list li input[type="checkbox"] {
   #title-block-header { display: none; }
   main.content, .content { padding: 0 !important; margin: 0 !important; max-width: 100% !important; }
   body > .page-columns { display: block; }
+  /* Keep the pinned navbar + footer on their own stable GPU layers so the
+     heavy iframe animation can't evict/repaint them out of existence. */
+  .navbar { z-index: 1030; transform: translateZ(0); will-change: transform; }
+  .nav-footer, footer.footer, .page-footer {
+    position: relative; z-index: 1030; transform: translateZ(0); will-change: transform;
+  }
 </style>
 
 
@@ -197,6 +203,11 @@ ul.task-list li input[type="checkbox"] {
     height: calc(100vh - 56px);
     background: #03040a;
     overflow: hidden;
+    /* Contain the iframe's painting/compositing to this box so its heavy
+       animation cannot trigger repaints of the navbar or footer. */
+    isolation: isolate;
+    contain: paint;
+    transform: translateZ(0);
   }
   .cg-frame {
     position: absolute;
