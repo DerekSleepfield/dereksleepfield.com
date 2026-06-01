@@ -483,8 +483,12 @@ hr {
 
 /* ---- Landing page ---- */
 .shelf-landing {
-  max-width: 36rem;
-  margin: 0 auto;
+  /* Right column of the centered [outline + 3rem gap + parable] pair.
+     Pair half-width = (16 + 3 + 36)/2 = 27.5rem; parable starts 19rem in.
+     Explicit width (not max-width) so Quarto's grid cell can't shrink it. */
+  width: 36rem;
+  max-width: 100%;
+  margin: 0 0 0 calc(50% - 8.5rem);
   padding: 6rem 1rem 4rem;
   position: relative;
   z-index: 1;
@@ -499,7 +503,7 @@ hr {
 .shelf-outline-fixed {
   position: fixed;
   top: 5.5rem;
-  left: calc(50% - 18rem - 5mm - 16rem);  /* 5mm gap left of the 36rem centre column */
+  left: calc(50% - 27.5rem);  /* left column of the centered [outline + parable] pair */
   right: auto;
   width: 16rem;
   max-height: calc(100vh - 9rem);
@@ -543,8 +547,7 @@ hr {
 
 .shelf-outline-fixed li {
   margin: 0.18rem 0;
-  padding-left: 0.55rem;
-  border-left: 1px solid var(--shelf-rule);
+  padding-left: 0;
 }
 
 .shelf-outline-fixed a {
@@ -567,11 +570,11 @@ hr {
   font-size: 0.8rem;
   max-height: 12rem;
   overflow-y: auto;
+  padding-left: 0.75rem !important;
 }
 
 .shelf-canon-list li {
-  padding-left: 0.5rem !important;
-  border-left: 1px dotted var(--shelf-rule) !important;
+  padding-left: 0 !important;
 }
 
 .shelf-canon-link {
@@ -597,6 +600,7 @@ hr {
    next to the centered parable. */
 @media (max-width: 1130px) {
   .shelf-outline-fixed { display: none; }
+  .shelf-landing { margin: 0 auto; }  /* re-center parable once the outline drops away */
 }
 
 /* ===========================================================================
