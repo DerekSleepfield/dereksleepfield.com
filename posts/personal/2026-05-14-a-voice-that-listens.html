@@ -287,8 +287,8 @@ ul.task-list li input[type="checkbox"] {
     { id: "bedrock",          name: "Bedrock",         tagline: "geological",      swatch: "#d4a574" },
     { id: "hum",              name: "Hum",             tagline: "soft peach",      swatch: "#8a6b8a" },
     { id: "bobblesphere",     name: "Bobblesphere",    tagline: "orbital",         swatch: "#ff9d3c" },
-    { id: "library-bookmark", name: "Library Bookmark",tagline: "card catalog",    swatch: "#8b1a1a" },
-    { id: "mind-palace-map",  name: "Mind Palace Map", tagline: "antique atlas",   swatch: "#993322" }
+    { id: "library-bookmark", name: "Coffee Shop",     tagline: "café counter",    swatch: "#8b1a1a" },
+    { id: "mind-palace-map",  name: "Mind Palace",     tagline: "data center",     swatch: "#5fe39a" }
   ];
   var STORAGE_KEY = "shelf-theme";
 
@@ -343,6 +343,44 @@ ul.task-list li input[type="checkbox"] {
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") closePanel();
   });
+})();
+</script>
+
+<!-- ============================================================
+     Background ASCII art layer + ASCII on/off toggle.
+     Per-theme background art (stars / floating motifs / building
+     windows) behind content; pill beside the Style picker turns it
+     on/off (persisted). Static except Star Chart / Bobblesphere
+     twinkle and the Mind Palace window glow.
+     ============================================================ -->
+<script>
+(function(){
+  var FLOAT={"default":["¶","§","†","‡","❧","*"],"porch-light":["✦","•","·","❀","✺"],"hum":["♪","♫","♩","♬","♭"],"bedrock":["•","✦","˙","°"],"library-bookmark":["~","∿","˷","•","❛"]};
+  var STAR={"star-chart":["#fde487","#ffffff","#cfe0ff"],"bobblesphere":["#f7eccb","#ff9d3c","#ffffff"]};
+  function rnd(a){return a[Math.floor(Math.random()*a.length)];}
+  var css=document.createElement('style');
+  css.textContent='.bgfx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}html.art-off .bgfx{display:none;}.bgstar{position:absolute;line-height:1;animation:bgtw 3s ease-in-out infinite;}.bgfloat{position:absolute;line-height:1;animation:bgdrift 10s ease-in-out infinite;}@keyframes bgtw{0%,100%{opacity:.2}50%{opacity:1}}@keyframes bgdrift{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg) translateY(-1px)}}.facade{position:absolute;inset:0;display:grid;grid-template-columns:repeat(14,1fr);grid-auto-rows:42px;gap:7px;padding:10px;overflow:hidden;}.win9{border:1px solid #1c3a27;border-radius:2px;background:#0b120d;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:11px;color:#2c6f48;letter-spacing:1px;}.win9.lit{background:#11331f;color:#7dffb0;box-shadow:inset 0 0 7px rgba(60,220,120,.22);}.win9.glow{animation:bgwin 8s ease-in-out infinite;}@keyframes bgwin{0%,100%{opacity:.55}50%{opacity:.95}}@media (prefers-reduced-motion:reduce){.bgstar,.bgfloat,.win9{animation:none}}#shelfThemeSwitcher{display:flex;align-items:flex-end;gap:.5rem;}#asciiPill .cap{font-variant:small-caps;letter-spacing:.08em;color:var(--shelf-sepia);}#asciiPill .sw{font-family:"JetBrains Mono",Menlo,monospace;font-size:.95em;letter-spacing:.5px;color:var(--shelf-sepia);}#asciiPill.on .sw{color:var(--shelf-accent);}#asciiPill.on .cap{color:var(--shelf-ink-soft);}#asciiPill.off{opacity:.72;}';
+  document.head.appendChild(css);
+  var bg=document.createElement('div'); bg.className='bgfx'; bg.id='bgfx'; document.body.appendChild(bg);
+  function cv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+  function build(){
+    var id=document.documentElement.getAttribute('data-theme')||'default'; bg.innerHTML='';
+    if(STAR[id]){var cols=STAR[id];for(var i=0;i<140;i++){var s=document.createElement('span');s.className='bgstar';s.textContent=Math.random()<0.16?'✦':(Math.random()<0.5?'·':'•');s.style.left=(Math.random()*100)+'%';s.style.top=(Math.random()*100)+'%';s.style.fontSize=(7+Math.random()*11)+'px';s.style.color=rnd(cols);s.style.animationDelay=(Math.random()*3).toFixed(2)+'s';s.style.animationDuration=(2+Math.random()*2.6).toFixed(2)+'s';bg.appendChild(s);}}
+    else if(id==='mind-palace-map'){var sn=['01','10','</','{}','::','//','[]','0x'];var f=document.createElement('div');f.className='facade';for(var k=0;k<182;k++){var w=document.createElement('div');w.className='win9';if(Math.random()<0.5){w.classList.add('lit');if(Math.random()<0.7)w.textContent=rnd(sn);if(Math.random()<0.4){w.classList.add('glow');w.style.animationDelay=(Math.random()*8).toFixed(2)+'s';}}f.appendChild(w);}bg.appendChild(f);}
+    else if(FLOAT[id]){var set=FLOAT[id],ac=cv('--shelf-accent'),se=cv('--shelf-sepia');for(var j=0;j<18;j++){var e=document.createElement('span');e.className='bgfloat';e.textContent=rnd(set);e.style.left=(Math.random()*100)+'%';e.style.top=(Math.random()*100)+'%';e.style.fontSize=(13+Math.random()*9)+'px';e.style.color=Math.random()<0.5?ac:se;e.style.opacity=(0.3+Math.random()*0.22).toFixed(2);e.style.animationDelay=(Math.random()*6).toFixed(2)+'s';e.style.animationDuration=(9+Math.random()*6).toFixed(2)+'s';bg.appendChild(e);}}
+  }
+  var KEY='shelf-art', on=true;
+  try{ on = localStorage.getItem(KEY)!=='off'; }catch(e){}
+  function apply(){ document.documentElement.classList.toggle('art-off', !on); }
+  function addPill(){
+    var sw=document.getElementById('shelfThemeSwitcher'); if(!sw||document.getElementById('asciiPill')) return;
+    var pill=document.createElement('button'); pill.id='asciiPill'; pill.className='shelf-theme-toggle'+(on?' on':' off'); pill.title='ASCII art on/off';
+    pill.innerHTML='<span class="cap">ascii</span> <span class="sw">'+(on?'[──●]':'[●──]')+'</span>';
+    sw.insertBefore(pill, sw.firstChild);
+    pill.addEventListener('click', function(e){ e.stopPropagation(); on=!on; apply(); pill.classList.toggle('on',on); pill.classList.toggle('off',!on); pill.querySelector('.sw').textContent= on?'[──●]':'[●──]'; try{localStorage.setItem(KEY,on?'on':'off');}catch(_){} });
+  }
+  function start(){ apply(); build(); addPill(); new MutationObserver(build).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']}); }
+  if(document.readyState==="loading"){ document.addEventListener("DOMContentLoaded", start); } else { start(); }
 })();
 </script>
 <script id="quarto-html-after-body" type="application/javascript">

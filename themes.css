@@ -173,7 +173,7 @@ html[data-theme="bobblesphere"] .navbar-brand {
 }
 
 /* ────────────────────────────────────────────────────────────
-   6 · Library Bookmark (card catalog — monospace + crimson)
+   6 · Coffee Shop (was Library Bookmark — monospace + crimson)
    ──────────────────────────────────────────────────────────── */
 html[data-theme="library-bookmark"] {
   --shelf-bg:          #f9f6ed;
@@ -209,20 +209,20 @@ html[data-theme="library-bookmark"] .navbar-brand {
 }
 
 /* ────────────────────────────────────────────────────────────
-   7 · Mind Palace Map (antique atlas — parchment + russet)
+   7 · Mind Palace (data center — dark + matrix green)
    ──────────────────────────────────────────────────────────── */
 html[data-theme="mind-palace-map"] {
-  --shelf-bg:          #efe5d0;
-  --shelf-bg-soft:     #f5ecd8;
-  --shelf-ink:         #2a1f0e;
-  --shelf-ink-soft:    #2a1f0e;
-  --shelf-sepia:       #7a5a2a;
-  --shelf-rule:        #c4b58c;
-  --shelf-accent:      #993322;
-  --shelf-secondary:   #2a1f0e;
-  --shelf-selection:   #c4b58c;
+  --shelf-bg:          #0a0f0c;
+  --shelf-bg-soft:     #121a14;
+  --shelf-ink:         #dbeede;
+  --shelf-ink-soft:    #9fc4ad;
+  --shelf-sepia:       #7a9a86;
+  --shelf-rule:        #284033;
+  --shelf-accent:      #5fe39a;
+  --shelf-secondary:   #eafff2;
+  --shelf-selection:   #1f3a2a;
   --shelf-body-font:   'IM Fell English', 'Spectral', Georgia, serif;
-  --shelf-twinkle-color:  rgba(153, 51, 34, 0.25);
+  --shelf-twinkle-color:  rgba(95, 227, 154, 0.22);
   --shelf-twinkle-size:   2px;
 }
 html[data-theme="mind-palace-map"] h1,
@@ -234,7 +234,7 @@ html[data-theme="mind-palace-map"] .shelf-featured-title {
   letter-spacing: 0.04em;
 }
 html[data-theme="mind-palace-map"] .navbar {
-  border-bottom: 1px double #2a1f0e !important;
+  border-bottom: 1px double var(--shelf-rule) !important;
 }
 html[data-theme="mind-palace-map"] .navbar .nav-link,
 html[data-theme="mind-palace-map"] .navbar-brand {
@@ -490,7 +490,8 @@ hr {
 .shelf-outline-fixed {
   position: fixed;
   top: 5.5rem;
-  left: 1.5rem;
+  left: calc(50% - 18rem - 5mm - 16rem);  /* 5mm gap left of the 36rem centre column */
+  right: auto;
   width: 16rem;
   max-height: calc(100vh - 9rem);
   overflow-y: auto;
@@ -585,7 +586,7 @@ hr {
 
 /* Hide the outline on viewports too narrow for it to fit
    next to the centered parable. */
-@media (max-width: 1080px) {
+@media (max-width: 1130px) {
   .shelf-outline-fixed { display: none; }
 }
 
