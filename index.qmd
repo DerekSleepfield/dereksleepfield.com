@@ -74,11 +74,6 @@ format:
     </ul>
   </div>
 </aside>
-
-<aside id="shelfScene" class="shelf-scene-fixed" aria-label="Scene for the current parable">
-  <div class="shelf-scene-label" id="shelfSceneLabel">scene</div>
-  <pre class="shelf-scene-art" id="shelfSceneArt">     fetching&hellip;</pre>
-</aside>
 ```
 
 <script src="/stories.js"></script>
