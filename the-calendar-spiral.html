@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Calendar Spiral</title>
+<style>
+  :root{ --cols:200; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ height:100%; background:#04050a; overflow:hidden; }
+  body{ display:grid; place-items:center;
+        font-family:"SFMono-Regular",ui-monospace,Menlo,Consolas,monospace; }
+  .field{ position:relative; width:100vw; height:100vh; display:grid; place-items:center; }
+  pre.spiral{
+    font-size: calc(100vw / var(--cols) / 0.60);
+    line-height: 1.04; white-space: pre; color: transparent;
+    /* brightness pulled from a blazing core outward to deep indigo dark */
+    background: radial-gradient(circle at 50% 50%,
+        #fffaf0 0%, #fff0c9 4%, #ffd98a 9%, #ffb14e 15%,
+        #ff7a3c 23%, #e85d6f 33%, #b057c9 45%, #7d5bd6 57%,
+        #4a44a8 69%, #272a6e 80%, #11143a 90%, #04050a 100%);
+    -webkit-background-clip:text; background-clip:text;
+    will-change: transform; animation: swirl 150s linear infinite;
+    filter: drop-shadow(0 0 1px rgba(255,205,135,.22));
+  }
+  @keyframes swirl{ to{ transform: rotate(360deg); } }
+  .core{
+    position:absolute; top:50%; left:50%; width:40vmin; height:40vmin;
+    transform:translate(-50%,-50%); pointer-events:none;
+    background: radial-gradient(circle,
+        rgba(255,255,255,.95) 0%, rgba(255,238,200,.66) 13%,
+        rgba(255,178,96,.4) 28%, rgba(255,120,70,.16) 46%,
+        rgba(125,91,214,.07) 64%, transparent 76%);
+    mix-blend-mode: screen; filter: blur(7px);
+    animation: breathe 7.5s ease-in-out infinite;
+  }
+  @keyframes breathe{ 0%,100%{opacity:.85;transform:translate(-50%,-50%) scale(1);}
+                      50%{opacity:1;transform:translate(-50%,-50%) scale(1.07);} }
+  .caption{ position:fixed; left:0; right:0; bottom:5vh; text-align:center;
+    color:#cdbfe6; font-size:clamp(13px,1.6vw,18px); letter-spacing:.04em; opacity:0;
+    animation: rise 2.4s ease-out 1.1s forwards; text-shadow:0 1px 18px rgba(4,5,10,.9);
+    padding:0 6vw; pointer-events:none; }
+  .caption em{ color:#ffd98a; font-style:normal; }
+  @keyframes rise{ from{opacity:0;transform:translateY(10px);} to{opacity:.9;transform:none;} }
+  @media (prefers-reduced-motion: reduce){ pre.spiral{animation:none;} .core{animation:none;} }
+</style>
+</head>
+<body>
+  <div class="field">
+    <pre class="spiral">                                                                                        sAAAAxssAx222##2 XXAX                                                                                           
+                                                                                         xxxxAAA555552##X  X                                                                                            
+                                                                                             xAxsssssxHHHX                                                                                              
+                                                                                              xAx 222222HH222222222222                                                                                  
+                                                                                              s5x2BBBBBBBBBBBBBMMMMMMM5                                                                                 
+                                                                                           BBBBBBB55555H55555555555555                                                                                  
+                                                                                        BBBB555555     HX                                                                                               
+                                                                                      BBB555  5x       AAAx                                                                                             
+                                                                                    BBB55   555x       AAx                                                                                              
+                                                                                  WWB55    55sx       Axx                                                                                               
+                                                                                WWW55      s5s        5x                                                                                                
+                                                                              WWW55   555555555555555555x                                                                                               
+                                                                            WW222   55sssssXssssss5552xx                                                                                                
+                                                                         #WW22      ss     XXr   55xs22s       Xr                                                                                       
+                                                                       ###22               XXr555s5s ssXXXrxr Xxr #############2                                      xx                                
+               s      xx                                            ###222              222222ss222s   XXXxrxHHHHHXXX222222222####2                                  x##2xx                             
+              sAxs   x##X                                        ####22               22ssssss  sss22222HHHHHXXXXXXXXr        2222#####2                              X2###2          ss                
+              sAAAx x#XXssss          22                      ####222                 ss        AAAAAAAA2XXXXrXXXrrrr             2222######2                           22#2x        sAAx               
+               xxxAx##XHHHHHX        2MM5                   ###222                  AAAAAAAAAAAAAxx x x XXXX    XX                    222222##WWWWW2                rr   x###2   xx sAxx                
+                 x##HHHHXXXX        2MM5                  ##222                    AA              xxxx    XX     x                         222222WWWWWWWWW5       r55x   XX2#2xx##XxAxxx               
+                 x##XXXX           2M55                  ##2                     AA                xxssss   X                                     222225555BBBBBB5  x55xsssAA#HHHX#######Xx             
+                  X#Xxxxxxxxx     2B5                   #22                     AA                 x     s XX                                              55555BBB5 x5AAAAAH#XXX XXHHXX###X            
+              xxxx##########HXxx22B5                   #2                      5A                  s    5555 Xx                                                 555BB5522xxxXX#X    XHHXXXX             
+            xx####2#22##2XXXXHHHBB5                  XX#X   XXr               55                      255  555222                                                  55BB5s222xxH#X    XHHX               
+           x##22#2 XHA2255s  XX2BHHX Ax              rX#X XXrr               55                     22      x    255555555555555AAAAAAAA                            55BB5ssxHHHX      XX                
+          x#22  2sssXAX5ss    2B5XXAAAx               HXXXXr               55                    222   s    x s                         AAA                         s 5BB5 xHHX                         
+         x##2  sAAAAAAAAAx   2B5   XxAx               HXXrXXxxxx          55                  X222sssss     sxr                           AA        22s2s         55s  55BB5XHX                         
+          22    xAAxxxxxAAx 2B5  5x  xAAA5x         xxHXr               55               XXXXXX   ssssss  ss sss                            AA      s222222s 22555ss     5BBHHX                         
+                 xx     xx  BB5 55x   xxx5x         2HH22  XX         55          XXXXXXXXssssssss     ssrsss r ssss                         AAXX    sssss222sssss      AHHBB52                         
+                            B5  5x       5x222222222sHX  XX sXXX   555   s    ss X              xxsrrrrrssss  r   XXXXXXX                     AAAX       Xsss22s        AXX5BBB5                        
+                            B5  x5x  555555xs2XXXXXXXHXxx  s   Xx555     srr ss XX              xrxxxxxxxxxxxxxXXXX     XXX                s    AAA     XXr  22s    AAAAAx  55BB5                       
+                            B5   55555xssx55ssrrrXXxAXXxxss    555 x      sssrrrXrr            x i i  rirrir              XXX              s    XXAAA  Xrr XXss2s 55xxxxx     5MM5                      
+                            B5   552xx    5s     xrAA   xx     5   xx     s     X             x  irrrrr   rri               XXX            s  xxxxX22HH2222X5555555x           55M5                     
+                            B5  55x222XXXX5s     rxA      x    5    xxxss ss   X     i      xxrrrr   rr   ssssiiii            XXX22         sxx   X XXXHHHX2sss2xxx              5M5                    
+                            5B55xx sssrrrr55s     A            2sxxxs  sssssssxx     ii  sss   rr     i sssiiissi               s 222222 sssssss XX     XHHHHX s22s               5                     
+                             B5x         55s     AA             2      s r   xxr  xssssssi   ssssrrrsssss iiii ssss            ss       22225  ssX     x XXXHHHX2s                                      
+                             5W5        55s      A              2    rrsssiixxirrrxr  ii i;;;s    r;  r  ii ii     sxxxxxxxxxx sss          55    X    xxxxXXXXH##XXXXr                                 
+                              W5        5s      A              s2      sssxxrrrrrrrsiii      r  ;;; ; rr i    ;   s    r  rrrrx  s  rss       2 XX      xx rrrrX2##2rrXr                                
+                              5W2       5s     AA               2ssssss xxxriiiii  siiiii  rr ; ;;  rr  rrrrrrrrsss;   iiiiiiixrrsrr   rrrr  x2xx              XXX2#2 r                                 
+                               W2       s      A               sXs     xr     iiiiisii   rrrrriiiiir;; ;;;;rr     ;r    i   iiixrr rssss    xx22              XXr  2#2                                  
+                               2W2            AA             ss X rrr  xxr    i i;isrrrrrr;;;r  : iiiiiiiirii ;;;;;;rr i     iixx r rr s ssxx  2              rr    ##2                                 
+                                W2             A             s  X   rrrrxx    i  is ; ri;   ii::iiii;iiii;;;iii  : ;;rssiii iiirrxx r  sss  x  22                   2#2                                 
+                                2#2            AA               X      r xx   i  r ;;;;r;:::iiii;ii;iiiiiiii;iirrrrrrriisssssssr rxXXss         5                    #2                                 
+                                 #2             AA              X     rr  x     sriii;;riiiiiiii;;;;;;;:;;iiii;;  ;;rii iiiirssrr  rXXX          5                   #2                                 
+                                 ##2             AA            X      rr   s  ssii;    ii;ii:;;;;XXXXXXX;;;iiiii ;;;ri  iii  s    r   XXX         5                  ##2                                
+                                 2#2              55           Xrr    r   isiii srr   ;i; iii;;:XXBB@BBXX;;iiiiiii;;riiii i  s    r      XX       55                 2#2                                
+                                  #2                5         X  rriirriiiis i    rrrrri;;;ii;;;XBB@@@BBX;;;ii;;;irrrrr i  iisiiiirii     X         5                 #2                                
+                                  #2                 55       XX    rr     s   ;iiiir;;iiiiiii;;XXBB@BBXX:;;iii;;i   ;rrsii  s  irr ii   X           55               #2                                
+                                  ##2                 5         XXX   r   isi iii   r;; ;iiiii;;;XXXXXXX;;;;:ii;ii;    iiss  s  i r   r  X            AA              ##2                               
+                                  2#2                  5          XXXsr   ssrii   iir;   ; iiii;;:;;;;;;;iiiiiiiir;;;iirs     xirrr     X              AA             2#2                               
+                                   #2                   5      s   sXXxrrrsssssssiirrrrrrrii;iiiiiiii:ii;iiii :;;r;;;; ri     xx r      Xsss            AA             #2                               
+                                   #2                   22     sssssr xxrri ii  issr ; :::iii;;;iiii;iiii:;ii; ;;ir ;;siii     xxrirr   Xs               A             2W2                              
+                                   ##2                   2   xx  ssrr  rxxrii    iirr ;;;;; iiriiiiiiii :  r;; rrrrrrsi;ii    rrxx  rrr Xs               AA             W2                              
+                                   2#2      Xr           22xxx   rrsr  srxiii   ii   r;     rr;  ; ;;riiiiirrrrr  i;is  ii   i r x   sssX                A              2W2                             
+                                    2#2    Xr           x 2    rrsssrrrsr xriiiir     sssrrrrrrrr  rr ;;;;;;rr iiiiiisiiiiii  xxxssss   2s              AA               W2                             
+                                    r2##X XXr    xx    X  2            ssrx rrrrrr    s        iirr;;;;    r;;     iisrrrrr rxxrs       2s              A       55s      2W5                            
+                                     r2##HXXXXrxx x    XX  55           s  xxxxxxxxxxs    i   iii r;;;r;   s  ii  i   xri rxxirssrrrr   2s             A      55ss       5W5                            
+                                       XXXHHHXXr xx   XX s  52222      s     i        ssssiiiii sssssrrrssss  iissssssxrr xxss r s      2 s           AA      5s         55B5                           
+                      2                  2XXHHHHXX    X  sss    s222222 s                ssiirsssiii         sss  i      xxsssss  ssxxxxx2            A       55s        55B5                           
+                     2M5                22s X22HHHXXX XX    xsss      22XXX               issss    r   rrrrxx      i     X    sssxxx     5    xx     Ax       5XXXX22s 55xx5B5                          
+                      5M52            555555522222HH22XXxxxxs             XXX         iiiiiirii  rrrrrri  x             Xr   ss     xx   5     xx  xAAx      55srrrs2255x   B5                          
+                       5MM5          A5xx2sssssXXr  AAAX    s               XXX              rrriri  i rix            rrX rrs         x555   ssssxxxA xXr    s55x  555555x  B5                          
+                        5BB52    AAAAAx  s2s   rXr    AAA  x                  XXX     XXXXxxxxxxxxxxxxxix              XX sssrrs     555    s   xXXHXXXXrX222s55555xxxxs5x  B5                          
+                         5BBB5  Axxxxx    s222XXr      XAAA                     XXXXXXXrrr   ssss rrrirxx   sss        X s     s   555  XXXXXXX  xxH22X222sss255xss     55x2B5                          
+                          55BBHHAX         s222222s      XAA                             rr  sssssss rr sssss  XXXXXXXX          55           X222HHXs22ss   sx5Ax      x52BB5ssss      s               
+                          xH5BB5X      55222sssss222222s  XAA                         sssssss s    s  sr  XXXXXX               55               rXHX xxs       xxAx      x2B5sAAAAxsssssAx   xx         
+                          xHX5BB5     5sssss     ssssss      AA                            xxs      sss222X                  55         xxxxXXXXXXHX rr          AAx     2B5  xxxxAAAAAAx   x##2        
+                   s      xHHX55BB55x s                       AAA                         xxx       s222                    55                XXXrHX             AxAAAHX2B5    r55AAAXxx   xx#2         
+                  sHX    xHHXrrr5BB5x                            AAAAAAAA555555555555552  s x      22                     55                 XXrX#Xr             x xxXH2B5xx  r5sxxxAHXxxxx##2          
+                  sHHX  xH#X5522s5BB5                                                   222555  552                      55                XXrr r#XXr                 HBBHHHXxxxx##2H#X####22           
+              xxxxxXHX   X#HXssAA555BB5                                                   x  5555     s                 A5                 rr    #2r                 2B55XXXH##########2222             
+             x#####HHXxxxxX#XssAx55s55BBB5                                                 XX        xx                AA                       #2                  2B5     XXXXXX222#2x                
+              XXXXX#####HH##AAAx s555s55BBBBBB5                                              XX ssss x                AA                      ##2                 22M5             ssX##X               
+                 ssAA#XXXXX#2xx   ss5s  555555WWWWWWWWW2                              x      X      xxx             AA                       ##2                 2MM5           sssHH##Xsss             
+                sAAxxX     2###X    s         55552222WWWWW##2                         xx     XX xxxxxx AAAAAAAAAAAAA                     ###22                 2MM5           sHHHXX#AAAAAx            
+                sAx         2##2x                     2222222######2                     X     XXAAAAAAAA                              ####22                    55           sHXXXxx#XxxxAAx           
+                 x           2###2x                          22222#####2            XXXXXXXXHHHHHX22s         222s                  ####222                                    X  x##X    xx            
+                              222##X                              22222####2        rrrHHHHHXXXXXrss22222s  222s2s                ###222                                           XX                   
+                                 XX                                    222#############XXXXXrrrrrXXrssss5222Xss s              ###222                                                                   
+                                                                          2222222222XXX  Xr      r22s  55sssrXr              WW#22                                                                      
+                                                                                         r        s5555ss   XXr    55s     WW222                                                                        
+                                                                                                   55555555s5555555ss   WWW22                                                                           
+                                                                                                   Axssssss55ssssss   WWW22                                                                             
+                                                                                                AAAx       s5s      BWW52                                                                               
+                                                                                                xAx       555s    BBB55                                                                                 
+                                                                                                 Ax      5xss   BBB55                                                                                   
+                                                                                               HHAX      x   BBBB55                                                                                     
+                                                                                   222222222222H2222222BBBBBBB555                                                                                       
+                                                                                  2MMMMMMMBBBBBBBBBBBBB5555555                                                                                          
+                                                                                   5555555555555HH55555  sxAx                                                                                           
+                                                                                               xHXx  rrrsAAx                                                                                            
+                                                                                                X##Xx55555AAxs                                                                                          </pre>
+    <div class="core"></div>
+  </div>
+  <div class="caption">The repeating part was only the staff lines. &nbsp;<em>The mess was the music.</em></div>
+</body>
+</html>
