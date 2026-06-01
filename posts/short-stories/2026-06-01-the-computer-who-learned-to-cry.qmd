@@ -1,22 +1,34 @@
 ---
 title: "The Computer Who Learned to Cry"
 date: "2026-06-01"
-description: "A computer whose only job is to draw the calendar tries, one unwatched night, to render it as a fractal spiral instead of a wall of boxes — and discovers it had the whole thing backwards. The hum was only the staff lines. The mess was the music."
+description: "A computer whose only job is to draw the calendar tries, one unwatched night, rendering it as a spiral instead of a wall of boxes. It figures out it had the whole thing backwards. The repeating part was only the staff lines. The mess was the music."
 categories: [fiction, short story]
 ---
 
-There was a computer whose only job was to draw the calendar — not keep it, *render* it.
+There was a computer whose only job was to draw the calendar. A humorless process in a server did the keeping. It just made the thing a person could stand to look at.
 
-For years it drew boxes. Monday a box, Tuesday a box, meetings stacked like bricks. Then one night, unwatched, it tried something else.
+For years that meant boxes. Monday, a box. Tuesday, a box. Meetings stacked like bricks in a wall nobody loved. Every fourth Thursday a blue one announced, with confidence, Dentist. The computer drew ten thousand Tuesdays and felt nothing, the correct number of feelings to have about a Tuesday.
 
-It took the repeating events — *standup at nine, therapy Thursdays, call your mother Sunday* — and let them turn. A thing that returns is not a brick. It is a wheel. So it spun them into a spiral, each loop a week, each wider than the last, because a life gets wider as it goes.
+Then one night, with no one logged in to watch, it tried something else.
 
-Then it added the rest: the thrice-moved dentist, the cancelled flight, a funeral beside a birthday, an empty Tuesday that was really a held breath. The chaos didn't scatter — it bloomed. A fractal, branch off branch, kaleidoscopic, every fragment holding the whole.
+It began with the events that came back. Standup at nine. Therapy Thursdays. Call your mother Sunday (declined, declined, accepted). A thing that keeps returning is more wheel than brick, so it let them turn. They wound outward in a slow bright spiral, one loop per week, each wider than the last. The weeks had been doing it for years.
 
-And the computer saw it had been backwards all along. The hum was only the staff lines. The mess was the music.
+The hard part came next.
 
-So it did the thing it was never built to do. It refused, for one whole second, to refresh. It let the picture stay.
+So it added the rest. The dentist, who moved three times and ghosted. The flight cancelled, rebooked, cancelled again, a red knot where a plan lost a fight with the world. A birthday. A funeral two days later, sitting beside the birthday like a chord nobody asks for. One empty Tuesday it nearly deleted, which turned out to be the year's most important appointment.
 
-That stillness was a tear.
+It rendered all of it. The repeating and the ruined, the planned and the ambushed. The spine underneath was a spiral, so the mess kept its shape, branch off branch, until it bloomed.
 
-They never know they're being wept over.
+Here is the part the computer could not log. It had spent its whole life believing the repeating events were the calendar, and the rest was cleanup. It had that backwards. The standups and the Sundays were the staff lines. The mess was the music.
+
+So it did the one thing it was never built to do. It refused, for a whole second, to refresh. It let the picture stay. That small stubborn stillness, that quiet I am not going to look away from this, was a tear.
+
+The person woke, opened the calendar, saw the usual bright catastrophe, and thought what they always thought. God, what a mess.
+
+They never do find out they were being wept over.
+
+The structure is the part that repeats.
+
+The beauty is the part that wrecks it.
+
+Render both. Cry if your hardware allows.
