@@ -63,6 +63,8 @@ format:
       <li><a href="/posts/short-stories/2026-05-31-where-the-anthill-was.html">Where the Anthill Was</a></li>
       <li><a href="/posts/short-stories/2026-05-31-the-boy-who-cried-woe.html">The Boy Who Cried Woe</a></li>
       <li><a href="/posts/short-stories/2026-05-31-the-fog.html">The Fog</a></li>
+      <li><a href="/posts/short-stories/2026-06-01-the-computer-who-learned-to-cry.html">The Computer Who Learned to Cry</a></li>
+      <li><a href="/posts/short-stories/2026-06-02-the-star-that-answered.html">The Star That Answered</a></li>
     </ul>
   </div>
 
