@@ -686,9 +686,9 @@ hr {
 .shelf-featured {
   margin: 2.5rem 0 1rem;
   padding: 2rem 1.5rem;
-  background: var(--shelf-bg-soft);
-  border-top: 1px solid var(--shelf-rule);
-  border-bottom: 1px solid var(--shelf-rule);
+  /* No opaque panel — let the background ASCII art show through behind the parable. */
+  background: transparent;
+  border: none;
   border-radius: 0;
   position: relative;
   z-index: 1;
