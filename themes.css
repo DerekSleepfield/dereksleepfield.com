@@ -287,6 +287,15 @@ main, .content, #quarto-document-content,
   z-index: 1;
 }
 
+/* Landing exception: no full-area reading panel. The background ASCII art
+   shows through everywhere; text sits on its own tight panels (the outline,
+   which hugs its text + 5mm) or directly on the art (the parable). */
+body:has(.shelf-landing) main,
+body:has(.shelf-landing) .content,
+body:has(.shelf-landing) #quarto-document-content {
+  background: transparent !important;
+}
+
 /* ---- Twinkling background — universal scaffold ---- */
 body::before {
   content: '';
@@ -509,7 +518,7 @@ hr {
   max-height: calc(100vh - 9rem);
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 1rem 1.1rem;
+  padding: 5mm;  /* textbox hugs its text with 5mm overfill */
   z-index: 10;
   background: var(--shelf-bg-soft);
   border: 1px solid var(--shelf-rule);
