@@ -12,14 +12,18 @@
 <link rel="canonical" href="https://derekwakefield.com/when-anthills-decay.html"/>
 <link href="/styles.css" rel="stylesheet"/>
 <link href="/themes.css" rel="stylesheet"/>
+<script>
+(function(){try{document.documentElement.setAttribute("data-theme","star-chart");document.documentElement.setAttribute("data-bs-theme","dark");}catch(e){}})();/* writing pinned to Starlight */
+</script>
 <style>
   :root {
-    --paper:        #f5efe0;
-    --paper-warm:   #ede4cf;
-    --ink:          #2b2620;
-    --ink-soft:     #4a4135;
-    --ink-faint:    #7a6f5e;
-    --rule:         #c9bda2;
+    /* base palette follows the site theme; starlight + gem + accents stay fixed */
+    --paper:        var(--shelf-bg);
+    --paper-warm:   var(--shelf-bg-soft);
+    --ink:          var(--shelf-ink);
+    --ink-soft:     var(--shelf-ink-soft);
+    --ink-faint:    var(--shelf-sepia);
+    --rule:         var(--shelf-rule);
 
     --starlight-deep:  #0d1a35;
     --starlight-mid:   #1e2b4f;
@@ -37,20 +41,7 @@
     --coda-bg:      rgba(245, 239, 224, 0.72);
   }
 
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --paper:        #14131a;
-      --paper-warm:   #1c1b24;
-      --ink:          #ece3d2;
-      --ink-soft:     #c2b6a0;
-      --ink-faint:    #8a7d6a;
-      --rule:         #2f2c3a;
-      --accent:       #7fc59b;
-      --accent-soft:  #2e7d4f;
-      --copper:       #d8a86b;
-      --coda-bg:      rgba(20, 19, 26, 0.72);
-    }
-  }
+  /* OS dark-mode override removed — the site theme now drives the palette. */
 
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }

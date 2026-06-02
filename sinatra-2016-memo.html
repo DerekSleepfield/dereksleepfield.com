@@ -4,24 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sinatra et al. 2016 — three-page memo</title>
+<link rel="stylesheet" href="/themes.css">
+<script>
+(function(){try{document.documentElement.setAttribute("data-theme","star-chart");document.documentElement.setAttribute("data-bs-theme","dark");}catch(e){}})();/* writing pinned to Starlight */
+</script>
 <style>
   :root {
-    --paper: #fbfaf3;
-    --ink: #1a1a1a;
-    --muted: #5a5752;
-    --rule: #e3dccb;
-    --accent: #1e3a5f;
-    --soft: #f0ecdf;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --paper: #14161a;
-      --ink: #e8e6dd;
-      --muted: #9b988e;
-      --rule: #2e313a;
-      --accent: #8eb4e3;
-      --soft: #1c1f25;
-    }
+    /* base palette follows the site theme; accent stays fixed */
+    --paper: var(--shelf-bg);
+    --ink: var(--shelf-ink);
+    --muted: var(--shelf-sepia);
+    --rule: var(--shelf-rule);
+    --accent: var(--shelf-accent);
+    --soft: var(--shelf-bg-soft);
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); }

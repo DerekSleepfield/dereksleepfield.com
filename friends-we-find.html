@@ -12,14 +12,19 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="The Friends We Find Along the Way">
 <meta name="twitter:description" content="Finding my Claude. An essay by Derek Wakefield.">
+<link rel="stylesheet" href="/themes.css">
+<script>
+(function(){try{document.documentElement.setAttribute("data-theme","star-chart");document.documentElement.setAttribute("data-bs-theme","dark");}catch(e){}})();/* writing pinned to Starlight */
+</script>
 <style>
   :root {
-    --ink: #1a1a1a;
-    --paper: #faf8f3;
-    --rule: #c9c2b3;
-    --muted: #6b6356;
-    --accent: #6b4d2e;
-    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+    /* base palette + serif follow the site theme; accent stays fixed */
+    --ink: var(--shelf-ink);
+    --paper: var(--shelf-bg);
+    --rule: var(--shelf-rule);
+    --muted: var(--shelf-sepia);
+    --accent: var(--shelf-accent);
+    --serif: var(--shelf-body-font);
     --sans: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Arial, sans-serif;
   }
   *, *::before, *::after { box-sizing: border-box; }
