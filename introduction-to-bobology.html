@@ -4,16 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lesson 1: Introduction to Bobology — Derek Wakefield</title>
+<link rel="stylesheet" href="/themes.css">
+<script>
+(function(){try{document.documentElement.setAttribute("data-theme","star-chart");document.documentElement.setAttribute("data-bs-theme","dark");}catch(e){}})();/* writing pinned to Starlight */
+</script>
 <style>
   :root {
-    --bg-top: #0e1238;
-    --bg-bottom: #04060f;
-    --fg: #f0e7c8;
-    --fg-soft: #d8cfa9;
-    --muted: rgba(240, 231, 200, 0.55);
+    /* base palette follows the site theme; gold accents stay fixed */
+    --bg-top: var(--shelf-bg-soft);
+    --bg-bottom: var(--shelf-bg);
+    --fg: var(--shelf-ink);
+    --fg-soft: var(--shelf-ink-soft);
+    --muted: var(--shelf-sepia);
     --gold: #ffd95c;
     --gold-dim: #d4a93a;
-    --rule: rgba(255, 217, 92, 0.22);
+    --rule: var(--shelf-rule);
     --quote-rule: rgba(255, 217, 92, 0.35);
   }
   * { box-sizing: border-box; }

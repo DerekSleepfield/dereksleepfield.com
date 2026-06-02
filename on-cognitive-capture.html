@@ -350,7 +350,7 @@
     { id: "library-bookmark", name: "Library Bookmark", tagline: "card catalog",   swatch: "#8b1a1a", dark: false },
     { id: "mind-palace-map",  name: "Mind Palace Map",  tagline: "antique atlas",  swatch: "#993322", dark: false }
   ];
-  var STORAGE_KEY = "dw-theme";
+  var STORAGE_KEY = "dw-theme";  /* per-doc key; writing defaults to Starlight, independent of the landing choice */
   var panel  = document.getElementById("dwThemePanel");
   var divider = panel.querySelector(".dw-divider");
   THEMES.forEach(function (t) {
@@ -380,8 +380,8 @@
       el.classList.toggle("active", el.getAttribute("data-theme-id") === t.id);
     });
   }
-  var initial = "default";
-  try { initial = localStorage.getItem(STORAGE_KEY) || "default"; } catch (e) {}
+  var initial = "star-chart";
+  try { initial = localStorage.getItem(STORAGE_KEY) || "star-chart"; } catch (e) {}
   applyTheme(initial);
   var btn = document.getElementById("dwThemeToggle");
   function openPanel() { panel.classList.add("open");  btn.setAttribute("aria-expanded", "true");  }

@@ -584,7 +584,7 @@
     { id: "library-bookmark", name: "Library Bookmark", tagline: "card catalog",   swatch: "#8b1a1a", dark: false },
     { id: "mind-palace-map",  name: "Mind Palace Map",  tagline: "antique atlas",  swatch: "#993322", dark: false }
   ];
-  var STORAGE_KEY = "dw-theme";
+  var STORAGE_KEY = "dw-theme";  /* per-doc key; writing defaults to Starlight, independent of the landing choice */
 
   // Inject items above the existing "What is this?" link
   var panel  = document.getElementById("dwThemePanel");
@@ -622,8 +622,8 @@
   }
 
   // Initial apply from localStorage
-  var initial = "default";
-  try { initial = localStorage.getItem(STORAGE_KEY) || "default"; } catch (e) {}
+  var initial = "star-chart";
+  try { initial = localStorage.getItem(STORAGE_KEY) || "star-chart"; } catch (e) {}
   applyTheme(initial);
 
   // Toggle open/close
