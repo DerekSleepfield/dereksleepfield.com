@@ -756,5 +756,70 @@ window.SHELF_STORIES = [
       "Then they trade.",
       "This is how herds love."
     ]
+  },
+  {
+    "num": "XLVII",
+    "name": "The Orchard",
+    "body": [
+      "There was a town on a slow hill, and every spring, by a custom no one remembered starting, each household planted a single fruit tree in the common orchard. The trees took fifteen years to bear, so no one ever ate from the tree they had planted. You ate instead from the trees your grandmother had knelt over, and you planted, in your turn, for some child not yet born, who might well grow up, move three towns over, and never taste a single apple. In this way strangers a hundred years apart shared one harvest and never met to mention it.",
+      "Outsiders found the arrangement inefficient, and said so, at length. The town did not really disagree. It simply kept planting, partly because the apples were extraordinary, and partly because everyone understood the alternative. Plant only for yourself, eat only what your own hands had put in the ground, and you would end up with a smaller orchard, a lonelier one, and apples that tasted of nothing much at all."
+    ],
+    "coda": [
+      "You eat from trees you did not plant.",
+      "You plant for mouths you will not meet.",
+      "Kneel in the dirt anyway."
+    ]
+  },
+  {
+    "num": "XLVIII",
+    "name": "The Stranger's Vein",
+    "body": [
+      "There was a system older than anyone still using it, a quiet arrangement by which strangers kept each other alive. A man gave a pint of blood on a Tuesday, ate the cookie they give you for it, and went back to work. Three towns over, a woman he would never meet woke from a surgery she would otherwise not have survived. When she asked how, she was told only that there had been enough on hand. She did not know his name, and he did not know she existed, and that was the whole of their acquaintance.",
+      "Years later she gave blood herself, on a Tuesday of her own, out of a gratitude that had nowhere in particular to send itself. And somewhere down the line a child she would never meet kept breathing because of it. So the debt was never really repaid. It was only ever paid forward, into the dark, on the faith that the dark was full of veins."
+    ],
+    "coda": [
+      "The gift has no return address.",
+      "The debt is paid forward, to strangers, forever.",
+      "Roll up your sleeve anyway."
+    ]
+  },
+  {
+    "num": "XLIX",
+    "name": "The Night Shift",
+    "body": [
+      "There was a city that believed it slept, and it was wrong. Every night, as the windows went dark one by one, a second city woke up underneath the first. There was the baker proving tomorrow's bread, and the nurse doing her rounds on the ward, and the dispatcher alone with the radio, and the woman out salting the black ice on the bridge before anyone had to drive across it. None of them knew the others were there. Each one thought of herself as the only soul awake in a sleeping world, doing one small thing that nobody would ever notice.",
+      "But by morning the salt had met the tires, and the bread had met the table, and the ward had met the dawn with everyone in it still breathing. Then the city woke, stretched, and took the whole of it for granted, which, if you think about it, is the highest compliment a night shift is ever paid."
+    ],
+    "coda": [
+      "The city does not sleep; it hands itself, quietly, to the few who are awake.",
+      "None of them know they are a relay.",
+      "Salt the bridge anyway."
+    ]
+  },
+  {
+    "num": "L",
+    "name": "The Common Field",
+    "body": [
+      "There was a green field that belonged to everyone in the village, and therefore to no one. Each family grazed a few sheep on it, and somehow it fed them all. Then one spring a man did a little arithmetic. One more sheep, he reasoned, would cost the field almost nothing and feed his family a great deal, and in this he was entirely correct. So he added one. His neighbor, watching him do it, ran the same numbers, got the same sound answer, and added one of his own. Soon they all had.",
+      "Every calculation was correct, and not a single man was wrong about his own sheep. And yet by the third summer the field was cropped down to mud, the sheep had gone thin on it, and the men stood along the fence agreeing, bitterly and unanimously, that someone really ought to have done something. Each of them was privately certain that the someone was not him."
+    ],
+    "coda": [
+      "Everyone was right about his own sheep.",
+      "The field died of correct decisions.",
+      "The fence is not the problem; the math is."
+    ]
+  },
+  {
+    "num": "LI",
+    "name": "The Run",
+    "body": [
+      "There was a bank that was perfectly sound, which in the end made no difference at all. It began with a rumor, the sort no one can ever trace back to a first mouth, that the bank might not be sound after all. A few careful people went and withdrew their money. They did not believe the rumor; they simply believed that other people might, and reasoned, sensibly enough, that it costs nothing to be early. Their neighbors saw the small line forming and joined it for exactly the same reason.",
+      "By noon the line ran around the block, and the bank that had opened sound that morning was insolvent by closing, because no bank in the world is sound against everyone at once. Every person in that line had done the smart thing. And together, doing the smart thing, they had built the precise catastrophe each of them was only trying to step out of the way of."
+    ],
+    "coda": [
+      "The bank was sound until everyone agreed it might not be.",
+      "A panic is a crowd being individually reasonable.",
+      "The belief, not the vault, is what breaks."
+    ]
   }
 ];

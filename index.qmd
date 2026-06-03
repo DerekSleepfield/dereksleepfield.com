@@ -22,7 +22,7 @@ format:
 <p class="shelf-featured-actions">
   <a href="#" id="shelfAnotherStory">&#x21bb; another parable</a>
   &nbsp;&middot;&nbsp;
-  <a href="/bobble-canon.html">read all forty-six &rarr;</a>
+  <a href="/bobble-canon.html">read all fifty-one &rarr;</a>
 </p>
 
 :::
