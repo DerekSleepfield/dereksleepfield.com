@@ -11,22 +11,6 @@
     ]
   },
   {
-    "listing": "/games.html",
-    "items": [
-      "/games/2026-05-10-wor-gems.html",
-      "/games/2026-05-09-gem-in-eyes-intro.html"
-    ]
-  },
-  {
-    "listing": "/apps.html",
-    "items": [
-      "/apps/2026-06-01-the-calendar-galaxies.html",
-      "/apps/2026-05-11-design-directions.html",
-      "/apps/2026-05-10-the-coffee-shop.html",
-      "/apps/2026-05-09-mind-palace.html"
-    ]
-  },
-  {
     "listing": "/writing.html",
     "items": [
       "/posts/personal/2026-05-14-a-voice-that-listens.html",
@@ -41,6 +25,7 @@
       "/posts/bobology/2026-05-22-the-wand-and-the-hand.html",
       "/posts/notes/2026-05-20-gem-wars-lore.html",
       "/posts/notes/2026-05-12-sinatra-2016-memo.html",
+      "/posts/short-stories/2026-06-03-the-blackout.html",
       "/posts/short-stories/2026-06-02-the-two-swifts.html",
       "/posts/short-stories/2026-06-02-the-star-that-answered.html",
       "/posts/short-stories/2026-06-01-the-computer-who-learned-to-cry.html",
@@ -49,6 +34,22 @@
       "/posts/short-stories/2026-05-31-where-the-anthill-was.html",
       "/posts/short-stories/2026-05-26-the-lichen-quarrel.html",
       "/posts/short-stories/2026-05-26-the-bread-speaks.html"
+    ]
+  },
+  {
+    "listing": "/apps.html",
+    "items": [
+      "/apps/2026-06-01-the-calendar-galaxies.html",
+      "/apps/2026-05-11-design-directions.html",
+      "/apps/2026-05-10-the-coffee-shop.html",
+      "/apps/2026-05-09-mind-palace.html"
+    ]
+  },
+  {
+    "listing": "/games.html",
+    "items": [
+      "/games/2026-05-10-wor-gems.html",
+      "/games/2026-05-09-gem-in-eyes-intro.html"
     ]
   }
 ]
