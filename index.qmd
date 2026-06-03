@@ -66,6 +66,7 @@ format:
       <li><a href="/posts/short-stories/2026-06-01-the-computer-who-learned-to-cry.html">The Computer Who Learned to Cry</a></li>
       <li><a href="/posts/short-stories/2026-06-02-the-star-that-answered.html">The Star That Answered</a></li>
       <li><a href="/posts/short-stories/2026-06-02-the-two-swifts.html">The Two Swifts</a></li>
+      <li><a href="/posts/short-stories/2026-06-03-the-blackout.html">The Blackout</a></li>
     </ul>
   </div>
 
