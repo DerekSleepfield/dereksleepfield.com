@@ -10,46 +10,6 @@
 <atom:link href="https://dereksleepfield.com/games.xml" rel="self" type="application/rss+xml"/>
 <description>A small library of not-academic writing by Derek Wakefield.</description>
 <generator>quarto-1.9.38</generator>
-<lastBuildDate>Sun, 10 May 2026 00:00:00 GMT</lastBuildDate>
-<item>
-  <title>Wor Gems</title>
-  <link>https://dereksleepfield.com/games/2026-05-10-wor-gems.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>Redirecting to <a href="../wor-gems.html" target="_blank" rel="noopener">the standalone page</a>…</p>
-<script>window.location.replace("/wor-gems.html");</script>
-
-
-
- ]]></description>
-  <category>project</category>
-  <category>game</category>
-  <category>visualization</category>
-  <guid>https://dereksleepfield.com/games/2026-05-10-wor-gems.html</guid>
-  <pubDate>Sun, 10 May 2026 00:00:00 GMT</pubDate>
-</item>
-<item>
-  <title>Gem in Eyes — an introduction</title>
-  <link>https://dereksleepfield.com/games/2026-05-09-gem-in-eyes-intro.html</link>
-  <description><![CDATA[ 
-
-
-
-
-<p>Redirecting to <a href="../gem-in-eyes-intro.html" target="_blank" rel="noopener">the standalone page</a>…</p>
-<script>window.location.replace("/gem-in-eyes-intro.html");</script>
-
-
-
- ]]></description>
-  <category>game</category>
-  <category>gem-in-eyes</category>
-  <category>bobble</category>
-  <guid>https://dereksleepfield.com/games/2026-05-09-gem-in-eyes-intro.html</guid>
-  <pubDate>Sat, 09 May 2026 00:00:00 GMT</pubDate>
-</item>
+<lastBuildDate>Fri, 19 Jun 2026 15:34:41 GMT</lastBuildDate>
 </channel>
 </rss>
