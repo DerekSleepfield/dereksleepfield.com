@@ -47,11 +47,6 @@ format:
       <li><a href="/bobble-canon.html" class="shelf-outline-current">The Bobble Canon</a>
         <ul class="shelf-canon-list" id="shelfCanonList"></ul>
       </li>
-      <li><a href="/introduction-to-bobology.html">Introduction to Bobology</a></li>
-      <li><a href="/bob-is-you.html">Bob is You</a></li>
-      <li><a href="/the-4b-framework.html">The 4B Framework</a></li>
-      <li><a href="/bobbish-in-4-voices.html">Bobbish in 4 Voices</a></li>
-      <li><a href="/the-wand-and-the-hand.html">The Wand and the Hand</a></li>
     </ul>
   </div>
 
@@ -67,14 +62,6 @@ format:
       <li><a href="/posts/short-stories/2026-06-02-the-star-that-answered.html">The Star That Answered</a></li>
       <li><a href="/posts/short-stories/2026-06-02-the-two-swifts.html">The Two Swifts</a></li>
       <li><a href="/posts/short-stories/2026-06-03-the-blackout.html">The Blackout</a></li>
-    </ul>
-  </div>
-
-  <div class="shelf-outline-section">
-    <div class="shelf-outline-header">Notes &amp; Misc</div>
-    <ul>
-      <li><a href="/sinatra-2016-memo.html">Sinatra et al. 2016 &mdash; three-page memo</a></li>
-      <li><a href="/gem-wars-lore.html">Gem Wars: Lore</a></li>
     </ul>
   </div>
 </aside>

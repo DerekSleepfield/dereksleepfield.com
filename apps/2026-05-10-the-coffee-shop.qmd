@@ -81,7 +81,7 @@ format:
           <dt>Authors + citations + journals</dt>
           <dd>OpenAlex Works API; curated 87-journal whitelist, top-cited works 1950–2025.</dd>
           <dt>Inferred mentor edges</dt>
-          <dd>OpenAlex co-author pairs in same whitelist; Sinatra-style asymmetry rule (≥5yr first-pub gap, early-career joint paper). <a href="/sinatra-2016-memo.html">Methodology memo →</a></dd>
+          <dd>OpenAlex co-author pairs in same whitelist; Sinatra-style asymmetry rule (≥5yr first-pub gap, early-career joint paper).</dd>
           <dt>Verified mentor edges</dt>
           <dd>Wikipedia infobox fields (<code>doctoral_students</code>, <code>doctoral_advisor</code>, <code>notable_students</code>) on top-500 authors.</dd>
           <dt>CV-verified edges (rolling)</dt>
@@ -154,10 +154,7 @@ format:
   </button>
 
   <div class="cs-viz-wrap">
-    <iframe class="cs-viz"
-            src="/citation-timeline.html"
-            title="Coffee-shop network: sociology & political science genealogy, 1950–2025"
-            loading="lazy"></iframe>
+    <p class="cs-viz-placeholder" style="margin:auto;color:var(--cs-muted);text-align:center;padding:2rem;">The interactive network visualization has been retired.</p>
   </div>
 </div>
 

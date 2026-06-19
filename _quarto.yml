@@ -32,9 +32,6 @@ website:
         href: apps.qmd
       - text: "Games"
         href: games.qmd
-    right:
-      - text: "Academic site →"
-        href: https://derekwakefield.com
   page-footer:
     left: "© 2026 Derek Wakefield · kept here quietly"
     right:
@@ -42,14 +39,13 @@ website:
         href: mailto:dw043@bucknell.edu
       - icon: github
         href: https://github.com/DerekSleepfield
-      - text: "Academic site →"
-        href: https://derekwakefield.com
 
 format:
   html:
     include-after-body:
       - feedback-bubble.html
       - theme-switcher.html
+      - analytics.html
     theme: cosmo
     css:
       - themes.css
